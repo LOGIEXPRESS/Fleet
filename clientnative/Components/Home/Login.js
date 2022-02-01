@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import { useNavigation } from "@react-navigation/core";
 import {
   Text,
   ScrollView,
@@ -14,8 +14,13 @@ import {
   Modal
 } from "react-native";
 
-const Login = ({ navigation }) => {
+const Login = () => {
 
+  const navigation = useNavigation();
+
+  const navegar = () =>{
+    navigation.navigate("SingUp")
+  }
     const [log, setLog] = useState({
         mail: "",
         contraseña: "",
@@ -37,7 +42,7 @@ const Login = ({ navigation }) => {
 
 return (
     //Container Start
-    <ScrollView
+    <View
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
@@ -70,7 +75,7 @@ return (
             value={log.mail}
             onChangeText={(name) => handelChangeMail(name)}
             name="mail"
-            placeholder="Dirección de Mail / Teléfono*"
+            placeholder="Dirección de Mail*"
             style={styles.TextInput}
           ></TextInput>
           <TextInput
@@ -91,11 +96,11 @@ return (
           <Text style={styles.pregunta}>No tienes una cuenta? </Text>
         </View>
 
-        <TouchableOpacity style={styles.TextButton} >
+        <TouchableOpacity style={styles.TextButton}  onPress={navegar}>
           <Text style={styles.SingUpText}>Registrate Ahora</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View> 
     // Container End
   );
 };
@@ -151,6 +156,8 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    shadowOpacity: 80,
+    elevation: 15,
   },
   ButtonText: {
     fontWeight: "bold",

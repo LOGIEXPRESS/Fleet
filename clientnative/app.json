@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "Fleet",
+    "slug": "Fleet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon2.png",
     "splash": {
-      "image": "./Components/logo.png",
+      "image": "./Components/Home/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon2.png",
         "backgroundColor": "#FFFFFF"
       }
     },
