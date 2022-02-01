@@ -3,7 +3,7 @@ import { Response, Request, Router } from 'express';
 import config from '../../config/config';
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { SingUp } from '../models/Signup';
+import { Signup } from '../models/Signup';
 
 
 const router = Router()
@@ -19,7 +19,7 @@ function createToken(payload: any) {
 router.post('/login', async (req: Request, res: Response) => {
 	const { eMail, password } = req.body
 
-	const user = await SingUp.findAll({ where: { eMail: eMail } })
+	const user = await Signup.findAll({ where: { eMail: eMail } })
 
 	if (user.length > 0) {
 

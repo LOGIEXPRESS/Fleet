@@ -1,6 +1,6 @@
 
 import { Model, Column, Table, CreatedAt, UpdatedAt, PrimaryKey, IsUUID, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { SingUp } from './Signup';
+import { Signup } from './Signup';
 
 @Table
 export class Carrier extends Model{
@@ -27,10 +27,10 @@ export class Carrier extends Model{
     @Column
     capacity!: number
  
-    @BelongsTo(()=>SingUp)
-    carrier!:SingUp
+    @BelongsTo(()=>Signup)
+    carrier!:Signup
    
-   @ForeignKey(()=>SingUp)
+   @ForeignKey(()=>Signup)
    CarrierId!:string
 
 }

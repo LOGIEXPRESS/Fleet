@@ -6,7 +6,7 @@ import { Travel } from './Travel';
 import { Service } from 'ts-node';
 
 @Table
-export class ServiceAlert extends Model{
+export class Alert extends Model{
 
     @AutoIncrement
     @Column({ primaryKey: true })

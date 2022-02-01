@@ -4,14 +4,14 @@ import { Carrier } from './Carrier'
 import { Admin } from './Admin'
 
 
-export interface IUser extends SingUp {
+export interface IUser extends Signup {
     eMail: string,
     password: string
 }
 
 
 @Table
-export class SingUp extends Model {
+export class Signup extends Model {
 
     @IsUUID(4)
     @Column({ primaryKey: true })

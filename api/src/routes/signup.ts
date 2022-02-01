@@ -1,7 +1,7 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { uuid } from 'uuidv4';
 import passport from 'passport';
-import { SingUp } from '../models/Signup';
+import { Signup } from '../models/Signup';
 // import { User } from '../models/User';
 // import { Carrier } from '../models/Carrier';
 import jwt from 'jsonwebtoken'
@@ -12,7 +12,7 @@ const router = Router()
 
 router.get('/user', passport.authenticate("jwt", { session: false }), async (req: Request, res: Response, next: NextFunction) => {
     try {
-        let user = await SingUp.findAll()
+        let user = await Signup.findAll()
         console.log("AQUI", req.user)
         if (user.length > 0) {
             return res.send(user)
@@ -28,7 +28,7 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
     const { token } = req.body;
     try {
         const decoded: any = jwt.verify(token, config.jwtSecret)
-        const dataUser = await SingUp.findByPk(decoded.id)
+        const dataUser = await Signup.findByPk(decoded.id)
         if (dataUser) {
 
             const payload = {
@@ -75,7 +75,7 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
         role
     }
     try {
-        const [user/*usuario creado o excistente */, created/*boolean true->lo creo false->no lo creo pq exciste */] = await SingUp.findOrCreate({//crea un usuario si no excisiste 
+        const [user/*usuario creado o excistente */, created/*boolean true->lo creo false->no lo creo pq exciste */] = await Signup.findOrCreate({//crea un usuario si no excisiste 
             where: { eMail: eMail },
             defaults: payload,
         })
