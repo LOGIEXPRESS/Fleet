@@ -1,0 +1,54 @@
+import { Model, Column, Table, IsUUID, HasOne, ForeignKey } from 'sequelize-typescript'
+
+import { Carrier } from './carrier'
+import { Admin } from './admin'
+
+
+export interface IUser extends SingUp {
+    eMail: string,
+    password: string
+}
+
+
+@Table
+export class SingUp extends Model {
+
+    @IsUUID(4)
+    @Column({ primaryKey: true })
+    id!: string
+
+    @HasOne(() => Carrier)
+    carrier!: Carrier
+
+    @HasOne(() => Admin)
+    admin!: Admin
+
+    @Column
+    name!: string
+
+    @Column
+    lastName!: string
+    
+    @Column
+    identification!: number
+
+    @Column
+    photo!: string
+    
+    @Column
+    phone!: string
+    
+    @Column
+    eMail!: string
+
+    @Column
+    password!: string
+
+    @Column
+    terminosCondiciones!: boolean
+
+    @Column
+    role!: boolean
+
+
+}
