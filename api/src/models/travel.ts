@@ -1,7 +1,7 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, HasOne, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Carrier } from './carrier';
+import { Carrier } from './Carrier';
 // import { Review } from './Review';
-import { Admin } from './admin';
+import { Admin } from './Admin';
 
 @Table
 export class Travel extends Model{
@@ -27,9 +27,6 @@ export class Travel extends Model{
     
     @Column
     finishedTravel!: string
-
-    // @HasOne(() => Review)
-    // rewiew!: Review
 
     @CreatedAt
     @Column

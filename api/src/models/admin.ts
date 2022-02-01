@@ -1,6 +1,6 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, BelongsTo, PrimaryKey, ForeignKey, HasMany } from 'sequelize-typescript'
-import { Travel } from './travel'
-import { SingUp } from './signup'
+import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, BelongsTo, PrimaryKey, ForeignKey, HasMany, DataType} from 'sequelize-typescript'
+import { Travel } from './Travel'
+import { Signup } from './Signup'
 
 @Table
 export class Admin extends Model {
@@ -11,13 +11,13 @@ export class Admin extends Model {
     @Column
     company!: string
 
-    @Column
-    eMail!: Array<string>
+    @Column(DataType.ARRAY(DataType.STRING))
+    eMail!:string
 
-    @BelongsTo(()=>SingUp)
+    @BelongsTo(()=>Signup)
     user_Reg!: string
 
-    @ForeignKey(()=>SingUp)
+    @ForeignKey(()=>Signup)
     idUserReg!:string
 
     @HasMany(()=>Travel)

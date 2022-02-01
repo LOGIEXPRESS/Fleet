@@ -1,11 +1,12 @@
 import {AutoIncrement, Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, HasOne, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Carrier } from './carrier';
+import { Carrier } from './Carrier';
 // import { Review } from './Review';
-import { Admin } from './admin';
-import { Travel } from './travel';
+import { Admin } from './Admin';
+import { Travel } from './Travel';
+import { Service } from 'ts-node';
 
 @Table
-export class ServiceAlert extends Model {
+export class Alert extends Model{
 
     @AutoIncrement
     @Column({ primaryKey: true })
