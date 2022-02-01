@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
 import {
@@ -13,10 +14,13 @@ import {
   Button,
   Modal
 } from "react-native";
+import { logiar } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const navegar = () =>{
     navigation.navigate("SingUp")
@@ -37,6 +41,38 @@ const Login = () => {
           ...log,
           contraseña: pass,
         });
+      };
+      
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // en un objeto pongo lo que tengo en el estado inicial
+        const obj = {
+          eMail: log.mail,
+          password: log.contraseña,
+        };
+    
+        //Validaciones:
+    
+        // if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
+        //   changeModalVisible5(true)
+        //   return;
+        // }
+        // if (!obj.password) {
+        //   changeModalVisible6(true)
+        //   return;
+        // }
+    
+        dispatch(logiarUsuario(obj));
+        console.log("Estoy enviado", obj);
+        setLog({
+          mail: "",
+          contraseña: "",
+        });
+    
+        //cuando se cumpla que respuesta != null
+        //haga un console.log(respuesta)
+    
+      
       };
 
 
@@ -87,7 +123,7 @@ return (
             style={styles.TextInput}
           ></TextInput>
           <TouchableOpacity style={styles.Button}>
-            <Text style={styles.ButtonText} >
+            <Text style={styles.ButtonText} onPress={handleSubmit}>
               Iniciar Sesión
             </Text>
           </TouchableOpacity>

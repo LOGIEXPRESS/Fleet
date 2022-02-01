@@ -13,7 +13,7 @@ interface error {
 
 
 sequelize
-    .sync({ force: false, logging: false })
+    .sync({ force: true, logging: false })
 
     .then(() => {
         console.log('base de datos conectada! :D')
