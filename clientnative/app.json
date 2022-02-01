@@ -4,9 +4,9 @@
     "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon2.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./Components/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
