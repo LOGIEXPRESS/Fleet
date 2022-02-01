@@ -1,7 +1,7 @@
 import { Model, Column, Table, IsUUID, HasOne, ForeignKey } from 'sequelize-typescript'
 
-import { Carrier } from './carrier'
-import { Admin } from './admin'
+import { Carrier } from './Carrier'
+import { Admin } from './Admin'
 
 
 export interface IUser extends SingUp {

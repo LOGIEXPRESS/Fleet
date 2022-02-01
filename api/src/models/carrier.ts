@@ -1,6 +1,6 @@
 
 import { Model, Column, Table, CreatedAt, UpdatedAt, PrimaryKey, IsUUID, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { SingUp } from '../models/signup';
+import { SingUp } from './Signup';
 
 @Table
 export class Carrier extends Model{
