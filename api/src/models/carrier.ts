@@ -31,6 +31,6 @@ export class Carrier extends Model{
     carrier!:Signup
    
    @ForeignKey(()=>Signup)
-   CarrierId!:string
+   SignupId!:string
 
 }

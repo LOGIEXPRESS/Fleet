@@ -15,10 +15,10 @@ export class Admin extends Model {
     eMail!:string
 
     @BelongsTo(()=>Signup)
-    user_Reg!: string
+   admin!: Signup
 
     @ForeignKey(()=>Signup)
-    idUserReg!:string
+    SignupId!:string
 
     @HasMany(()=>Travel)
     travel!:Travel
