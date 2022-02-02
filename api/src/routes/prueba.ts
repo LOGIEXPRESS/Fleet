@@ -1,5 +1,7 @@
 import { Response, Request, Router, NextFunction } from 'express';
 
+import { v4 } from "uuid";
+
 import nodemailer from 'nodemailer'
 
 
@@ -62,5 +64,9 @@ router.post('/sendEmail',async(req:Request,res:Response,next:NextFunction)=>{
 
 
 })
+router.get('/id',(req:Request,res:Response)=>{
 
+    res.send(`id:${v4()}`)
+
+})
 export default router
