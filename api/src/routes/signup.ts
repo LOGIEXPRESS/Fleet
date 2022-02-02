@@ -85,7 +85,8 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
         photo,
         secret,
         identification,
-        business
+        business,
+        role: true
     }
     console.log(payload);
     
