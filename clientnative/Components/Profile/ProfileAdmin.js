@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
 // import { requestPermisse, deletePermisse } from "./../actions/index";
 import { useSelector, useDispatch } from "react-redux";
+import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
 import {
   widthPercentageToDP as wp,
@@ -50,12 +51,15 @@ const ProfileAdmin = () => {
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white' }}>
+       <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("10%") }}>
+          <View style={{ marginTop: wp("7%") }}>
             <Image
             resizeMode="contain"
               source={{

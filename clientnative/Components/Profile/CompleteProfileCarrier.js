@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
+import HeaderBar from "../Utils/HeaderBar";
 // import { completeProfileCarrier } from "../../actions/index.js";
 // import SimpleModal from "./SimpleModal.js";
 // import SimpleModal10 from "../AlertasComplete/SimpleModaldni.js";
@@ -337,15 +338,19 @@ const CompleteProfileCarrier = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
       <ScrollView
         style={{ backgroundColor: "white" }}
         showsVerticalScrollIndicator={false}
       >
+        
         <Text
           style={{
             fontWeight: "bold",
             marginLeft: 15,
-            marginTop: 30,
+            marginTop: hp("-0.7%"),
             fontSize: 23,
             color: "#151f27",
             marginBottom: 15,
@@ -387,23 +392,17 @@ const CompleteProfileCarrier = () => {
               </Text>
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
-                <TextInput
-                  value={carrier.location}
-                  onChangeText={(location) => handleChangeLocation(location)}
-                  placeholder="Nombre"
-                  name="name"
-                  style={styles.textPlaceholder}
-                />
+                <Text style={{ fontSize: 18, marginLeft: 15 }}>
+                  Santiago
+                  {/* {datosCarrier.eMail} */}
+                </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
-                <TextInput
-                  value={carrier.location}
-                  onChangeText={(location) => handleChangeLocation(location)}
-                  placeholder="Apellido"
-                  name="lastName"
-                  style={styles.textPlaceholder}
-                />
+                <Text style={{ fontSize: 18, marginLeft: 15 }}>
+                  Varela
+                  {/* {datosCarrier.eMail} */}
+                </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="mail-outline"  style={styles.icons} />
@@ -434,7 +433,7 @@ const CompleteProfileCarrier = () => {
                   name="documentID"
                   style={styles.textPlaceholder}
                   onChangeText={(documentID) =>
-                    handleChangeDocumentID(documentID)
+                    handleChangePhone(documentID)
                   }
                   keyboardType="decimal-pad"
                 />
@@ -457,6 +456,19 @@ const CompleteProfileCarrier = () => {
                   placeholder="¿Cuál es tu color favorito?"
                   name="secret"
                   style={styles.textPlaceholder}
+                />
+              </View>
+              <View style={styles.viewsInputs}>
+                <Icon name="reader-outline"  style={styles.icons} />
+                <TextInput
+                  value={carrier.cbu}
+                  placeholder="Número de CBU"
+                  name="cbu"
+                  style={styles.textPlaceholder}
+                  onChangeText={(cbu) =>
+                    handleChangeCbu(cbu)
+                  }
+                  keyboardType="decimal-pad"
                 />
               </View>
 
