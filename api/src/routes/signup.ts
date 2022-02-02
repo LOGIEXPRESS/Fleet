@@ -10,6 +10,15 @@ const bcrypt = require("bcryptjs");
 
 const router = Router()
 
+router.get('/prueba', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.send('ESTO ES UNA PRUEBA')
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
 router.get('/user', passport.authenticate("jwt", { session: false }), async (req: Request, res: Response, next: NextFunction) => {
     try {
         let user = await Signup.findAll()
@@ -58,8 +67,12 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
-    const { name, lastName, eMail,  password, phone, photo, secret , business  } = req.body
+    
+    
 
+    const { name, lastName, eMail,  password, phone, photo, secret , identification, business  } = req.body
+
+    
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
@@ -71,15 +84,17 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
         phone,
         photo,
         secret,
-        business,
-        role : true
+        identification,
+        business
     }
+    console.log(payload);
+    
     try {
         const [user/*usuario creado o excistente */, created/*boolean true->lo creo false->no lo creo pq exciste */] = await Signup.findOrCreate({//crea un usuario si no excisiste 
             where: { eMail: eMail },
             defaults: payload,
         })
-
+        
         if (!created) {
             const payload = {
                 role: 1,
