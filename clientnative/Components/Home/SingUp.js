@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState, useEffect } from "react";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Text,
@@ -9,6 +10,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ScrollView,
   ImageBackground,
   Dimensions,
@@ -313,16 +315,56 @@ const SignUp = () => {
     });
   };
 
-  const [chooseData, setchooseData] = useState("Seleccionar Perfil...");
-  const [isModalVisible, setisModalVisible] = useState(false);
+   ////--> IMAGE PICKER <-- ////
+   const [selectedImage, setSelectedImage] = useState(null);
 
-  const changeModalVisibility = (bool) => {
-    setisModalVisible(bool);
-  };
+   let openImagePickerAsync = async () => {
+     let permissionResult =
+       await ImagePicker.requestMediaLibraryPermissionsAsync();
+ 
+     if (permissionResult.granted === false) {
+       alert("Se requiere el permiso para acceder a la cámara");
+       return;
+     }
+ 
+     //Si es true va a venir a pickerResult
+     const pickerResult = await ImagePicker.launchImageLibraryAsync({
+       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+       allowsEditing: true,
+       aspect: [4, 3],
+       quality: 1,
+     });
+ 
+     if (pickerResult.cancelled !== true) {
+       let newFile = {
+         uri: pickerResult.uri,
+         type: `logi/${pickerResult.uri.split(".")[1]}`,
+         name: `logi.${pickerResult.uri.split(".")[1]}`,
+       };
+       handleUpload(newFile);
+     }
+   };
+ 
+   const handleUpload = (image) => {
+     const data = new FormData();
+     data.append("file", image);
+     data.append("upload_preset", "logiexpress");
+     data.append("cloud_name", "elialvarez");
+ 
+     fetch("https://api.cloudinary.com/v1_1/elialvarez/image/upload", {
+       method: "post",
+       body: data,
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         //console.log(data)
+         setSelectedImage(data.url);
+       });
+   };
 
-  const setData = (option) => {
-    setchooseData(option);
-  };
+
+
+
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
@@ -407,6 +449,31 @@ const SignUp = () => {
             placeholder="Color favorito*"
             style={styles.TextInput}
           ></TextInput>
+
+<View style={{ alignItems: "center" }}>
+          <Image
+          resizeMode="contain"
+            source={{
+              uri:
+                selectedImage !== null
+                  ? selectedImage
+                  : 
+                  "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+                  // "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
+            }}
+            style={styles.imgPerfil}
+          />
+
+          <View style={styles.add}>
+            <TouchableWithoutFeedback onPress={openImagePickerAsync}>
+              <Image
+                source={require("./add-image.png")}
+                style={styles.imgAdd}
+              />
+            </TouchableWithoutFeedback>
+
+            </View>
+            </View>
 
 
           <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("ProfileAdmin")}>
@@ -530,5 +597,23 @@ const styles = StyleSheet.create({
   },
   checkboxx: {
     marginTop: 15,
+  },
+  imgPerfil: {
+    width: wp("100%"),
+    height: hp('30%'),
+    // borderRadius: 100,
+    borderColor: "black",
+    borderWidth: wp('0.6%'),
+    marginTop: hp('6%'),
+    backgroundColor:"#e1e1e1"
+  },
+  imgAdd: {
+    width: wp("20%"),
+    height: wp("20%"),
+    marginLeft: wp("75%"),
+    marginTop: hp('-11%'),
+    borderWidth: 4,
+    borderColor: "#D5D5D5",
+    borderRadius: 50,
   },
 });
