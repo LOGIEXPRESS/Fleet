@@ -390,6 +390,30 @@ const SignUp = () => {
           <Text style={{ color: "#151f27", fontSize: 34,fontWeight: '600', marginTop: hp("-5%") }}>
             Ingresa a Fleet
           </Text>
+          <View style={{ alignItems: "center" }}>
+          <Image
+          resizeMode="contain"
+            source={{
+              uri:
+                selectedImage !== null
+                  ? selectedImage
+                  : 
+                  "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+                  // "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
+            }}
+            style={styles.imgPerfil}
+          />
+
+          <View style={styles.add}>
+            <TouchableWithoutFeedback onPress={openImagePickerAsync}>
+              <Image
+                source={require("./add-image.png")}
+                style={styles.imgAdd}
+              />
+            </TouchableWithoutFeedback>
+
+            </View>
+            </View>
         </View>
         {/* inputs */}
         <View style={styles.FormView}>
@@ -450,30 +474,7 @@ const SignUp = () => {
             style={styles.TextInput}
           ></TextInput>
 
-<View style={{ alignItems: "center" }}>
-          <Image
-          resizeMode="contain"
-            source={{
-              uri:
-                selectedImage !== null
-                  ? selectedImage
-                  : 
-                  "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
-                  // "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
-            }}
-            style={styles.imgPerfil}
-          />
 
-          <View style={styles.add}>
-            <TouchableWithoutFeedback onPress={openImagePickerAsync}>
-              <Image
-                source={require("./add-image.png")}
-                style={styles.imgAdd}
-              />
-            </TouchableWithoutFeedback>
-
-            </View>
-            </View>
 
 
           <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("ProfileAdmin")}>
@@ -602,7 +603,7 @@ const styles = StyleSheet.create({
     width: wp("100%"),
     height: hp('30%'),
     // borderRadius: 100,
-    borderColor: "black",
+    borderColor: "#ff1c49",
     borderWidth: wp('0.6%'),
     marginTop: hp('6%'),
     backgroundColor:"#e1e1e1"

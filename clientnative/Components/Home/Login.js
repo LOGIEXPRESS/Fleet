@@ -129,11 +129,11 @@ return (
           </TouchableOpacity>
         </View>
         <View style={styles.preg}>
-          <Text style={styles.pregunta}>No tienes una cuenta? </Text>
+          <Text style={styles.pregunta}>Olvidaste tu contraseña? </Text>
         </View>
 
         <TouchableOpacity style={styles.TextButton}  onPress={navegar}>
-          <Text style={styles.SingUpText}>Registrate Ahora</Text>
+          <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
     </View> 

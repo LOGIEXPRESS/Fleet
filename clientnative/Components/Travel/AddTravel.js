@@ -419,7 +419,7 @@ const AddTravel = (props) => {
 const styles = StyleSheet.create({
 
     title: {
-        marginTop: 2,
+        marginTop: hp("1%"),
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
@@ -487,17 +487,17 @@ const styles = StyleSheet.create({
     textPlaceholder2: {
         marginLeft: wp("3%"),
         fontSize: 15,
-        marginTop: hp("1%"),
+        marginTop: hp("1.5%"),
 
     },
     btnEditar: {
         backgroundColor: "#ff1c49",
         borderRadius: 10,
-        width: 150,
+        width: hp("22%"),
         height: 50,
         alignSelf: "center",
         marginTop: hp("0.7%"),
-        marginRight: wp("13%"),
+        marginRight: wp("15%"),
         shadowOpacity: 80,
         elevation: 16,
         marginLeft:wp("-2.5%")
