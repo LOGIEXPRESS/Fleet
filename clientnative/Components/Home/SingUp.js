@@ -400,6 +400,13 @@ const SignUp = () => {
             placeholder="Nombre de la Empresa*"
             style={styles.TextInput}
           ></TextInput>
+          <TextInput
+            value={reg.secret}
+            onChangeText={(secret) => handelChangeSecretMail(secret)}
+            name="secret"
+            placeholder="Color favorito*"
+            style={styles.TextInput}
+          ></TextInput>
 
 
           <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("ProfileAdmin")}>
