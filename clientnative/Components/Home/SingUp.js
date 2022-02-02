@@ -18,6 +18,7 @@ import {
   Modal,
   Button,
 } from "react-native";
+import HeaderBar from "../Utils/HeaderBar";
 // import SimpleModal1 from "./AlertasReg/SimpleModalok.js";
 // import SimpleModal2 from "./AlertasReg/SimpleModalok2.js";
 // import SimpleModal3 from "./AlertasReg/SimpleModalname.js";
@@ -366,18 +367,22 @@ const SignUp = () => {
 
 
   return (
+    <View style={{ flex: 1,  backgroundColor: 'white'  }}>
+      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("0%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
     <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
-      <SafeAreaView>
+      
       {/* Brand View */}
       <ImageBackground
         source={require("./logo.png")}
         resizeMode= "contain"
         style={{
             display:'flex',
-            marginTop:  hp('-13%'),
+            marginTop:  hp('-18%'),
           height: hp('60%') ,
           width: wp('110%') ,
           alignSelf: "center",
@@ -400,10 +405,16 @@ const SignUp = () => {
                   ? selectedImage
                   : 
                   "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+            
                   // "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
             }}
             style={styles.imgPerfil}
           />
+          <View>
+            <Text style={{fontSize:hp("2.5%"), color:"#8a9096"}}>
+              Foto de la empresa
+            </Text>
+          </View>
 
           <View style={styles.add}>
             <TouchableWithoutFeedback onPress={openImagePickerAsync}>
@@ -488,8 +499,8 @@ const SignUp = () => {
 
         
       </View>
-      </SafeAreaView>
     </ScrollView>
+    </View>
   );
 };
 
