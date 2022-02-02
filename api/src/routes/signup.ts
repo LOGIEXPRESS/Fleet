@@ -54,7 +54,7 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
 });
 
 
-router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/adminregister', async (req: Request, res: Response, next: NextFunction) => {
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
@@ -94,7 +94,5 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
         next(err)
     }
 });
-
-
 
 export default router
