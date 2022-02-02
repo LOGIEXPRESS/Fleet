@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState, useEffect } from "react";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Text,
@@ -9,6 +10,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ScrollView,
   ImageBackground,
   Dimensions,
@@ -16,6 +18,7 @@ import {
   Modal,
   Button,
 } from "react-native";
+import HeaderBar from "../Utils/HeaderBar";
 // import SimpleModal1 from "./AlertasReg/SimpleModalok.js";
 // import SimpleModal2 from "./AlertasReg/SimpleModalok2.js";
 // import SimpleModal3 from "./AlertasReg/SimpleModalname.js";
@@ -313,28 +316,73 @@ const SignUp = () => {
     });
   };
 
-  const [chooseData, setchooseData] = useState("Seleccionar Perfil...");
-  const [isModalVisible, setisModalVisible] = useState(false);
+   ////--> IMAGE PICKER <-- ////
+   const [selectedImage, setSelectedImage] = useState(null);
 
-  const changeModalVisibility = (bool) => {
-    setisModalVisible(bool);
-  };
+   let openImagePickerAsync = async () => {
+     let permissionResult =
+       await ImagePicker.requestMediaLibraryPermissionsAsync();
+ 
+     if (permissionResult.granted === false) {
+       alert("Se requiere el permiso para acceder a la cámara");
+       return;
+     }
+ 
+     //Si es true va a venir a pickerResult
+     const pickerResult = await ImagePicker.launchImageLibraryAsync({
+       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+       allowsEditing: true,
+       aspect: [4, 3],
+       quality: 1,
+     });
+ 
+     if (pickerResult.cancelled !== true) {
+       let newFile = {
+         uri: pickerResult.uri,
+         type: `logi/${pickerResult.uri.split(".")[1]}`,
+         name: `logi.${pickerResult.uri.split(".")[1]}`,
+       };
+       handleUpload(newFile);
+     }
+   };
+ 
+   const handleUpload = (image) => {
+     const data = new FormData();
+     data.append("file", image);
+     data.append("upload_preset", "logiexpress");
+     data.append("cloud_name", "elialvarez");
+ 
+     fetch("https://api.cloudinary.com/v1_1/elialvarez/image/upload", {
+       method: "post",
+       body: data,
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         //console.log(data)
+         setSelectedImage(data.url);
+       });
+   };
 
-  const setData = (option) => {
-    setchooseData(option);
-  };
+
+
+
   return (
+    <View style={{ flex: 1,  backgroundColor: 'white'  }}>
+      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("0%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
     <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
+      
       {/* Brand View */}
       <ImageBackground
         source={require("./logo.png")}
         resizeMode= "contain"
         style={{
             display:'flex',
-            marginTop:  hp('-13%'),
+            marginTop:  hp('-18%'),
           height: hp('60%') ,
           width: wp('110%') ,
           alignSelf: "center",
@@ -348,6 +396,36 @@ const SignUp = () => {
           <Text style={{ color: "#151f27", fontSize: 34,fontWeight: '600', marginTop: hp("-5%") }}>
             Ingresa a Fleet
           </Text>
+          <View style={{ alignItems: "center" }}>
+          <Image
+          resizeMode="contain"
+            source={{
+              uri:
+                selectedImage !== null
+                  ? selectedImage
+                  : 
+                  "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+            
+                  // "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
+            }}
+            style={styles.imgPerfil}
+          />
+          <View>
+            <Text style={{fontSize:hp("2.5%"), color:"#8a9096"}}>
+              Foto de la empresa
+            </Text>
+          </View>
+
+          <View style={styles.add}>
+            <TouchableWithoutFeedback onPress={openImagePickerAsync}>
+              <Image
+                source={require("./add-image.png")}
+                style={styles.imgAdd}
+              />
+            </TouchableWithoutFeedback>
+
+            </View>
+            </View>
         </View>
         {/* inputs */}
         <View style={styles.FormView}>
@@ -400,6 +478,15 @@ const SignUp = () => {
             placeholder="Nombre de la Empresa*"
             style={styles.TextInput}
           ></TextInput>
+          <TextInput
+            value={reg.secret}
+            onChangeText={(secret) => handelChangeSecretMail(secret)}
+            name="secret"
+            placeholder="Color favorito*"
+            style={styles.TextInput}
+          ></TextInput>
+
+
 
 
           <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("ProfileAdmin")}>
@@ -413,6 +500,7 @@ const SignUp = () => {
         
       </View>
     </ScrollView>
+    </View>
   );
 };
 
@@ -523,5 +611,23 @@ const styles = StyleSheet.create({
   },
   checkboxx: {
     marginTop: 15,
+  },
+  imgPerfil: {
+    width: wp("100%"),
+    height: hp('30%'),
+    // borderRadius: 100,
+    borderColor: "#ff1c49",
+    borderWidth: wp('0.6%'),
+    marginTop: hp('6%'),
+    backgroundColor:"#e1e1e1"
+  },
+  imgAdd: {
+    width: wp("20%"),
+    height: wp("20%"),
+    marginLeft: wp("75%"),
+    marginTop: hp('-11%'),
+    borderWidth: 4,
+    borderColor: "#D5D5D5",
+    borderRadius: 50,
   },
 });
