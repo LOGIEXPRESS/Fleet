@@ -9,6 +9,7 @@ import SingUp from "./Components/Home/SingUp";
 import ProfileCarrier from "./Components/Profile/ProfileCarrier";
 import ProfileAdmin from  "./Components/Profile/ProfileAdmin";
 import CompleteProfileCarrier from  "./Components/Profile/CompleteProfileCarrier";
+import AddTravel from  "./Components/Travel/AddTravel";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -42,6 +43,11 @@ const App = () => {
             <Stack.Screen
               name="CompleteProfileCarrier"
               component={CompleteProfileCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AddTravel"
+              component={AddTravel}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

@@ -34,7 +34,7 @@ import {
 
 const CompleteProfileCarrier = () => {
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   const datosCarrier = useSelector((store) => store.responseReg);
 
   // // validaciones dni
@@ -532,7 +532,7 @@ const CompleteProfileCarrier = () => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.btnEditar}>
+              <TouchableOpacity style={styles.btnEditar} onPress={() => navigation.navigate("AddTravel")}>
                 <Text style={styles.textBtn}>Finalizar</Text>
                 {/* MODAL */}
                 
