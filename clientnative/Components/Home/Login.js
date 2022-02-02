@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import { useNavigation } from "@react-navigation/core";
 import {
   Text,
   ScrollView,
@@ -14,23 +14,17 @@ import {
   Button,
   Modal
 } from "react-native";
-
-import { logiarUsuario } from "../actions";
-
-
+import { logiar } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
+const Login = () => {
 
-
-
-
-
-
-
-
-const Login = ({ navigation }) => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const navegar = () =>{
+    navigation.navigate("SingUp")
+  }
     const [log, setLog] = useState({
         mail: "",
         contraseña: "",
@@ -68,7 +62,7 @@ const Login = ({ navigation }) => {
         //   return;
         // }
     
-        dispatch(logiarUsuario(obj));
+        dispatch(logiar(obj));
         console.log("Estoy enviado", obj);
         setLog({
           mail: "",
@@ -84,7 +78,7 @@ const Login = ({ navigation }) => {
 
 return (
     //Container Start
-    <ScrollView
+    <View
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
@@ -117,7 +111,7 @@ return (
             value={log.mail}
             onChangeText={(name) => handelChangeMail(name)}
             name="mail"
-            placeholder="Dirección de Mail / Teléfono*"
+            placeholder="Dirección de Mail*"
             style={styles.TextInput}
           ></TextInput>
           <TextInput
@@ -138,11 +132,11 @@ return (
           <Text style={styles.pregunta}>No tienes una cuenta? </Text>
         </View>
 
-        <TouchableOpacity style={styles.TextButton} >
+        <TouchableOpacity style={styles.TextButton}  onPress={navegar}>
           <Text style={styles.SingUpText}>Registrate Ahora</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View> 
     // Container End
   );
 };
@@ -198,6 +192,8 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    shadowOpacity: 80,
+    elevation: 15,
   },
   ButtonText: {
     fontWeight: "bold",

@@ -2,14 +2,14 @@ import axios from "axios";
 import { API_URLS} from "@env"
 
 
-export function logiarUsuario(payload) {
+export function logiar(payload) {
     return async function (dispatch) {
       try {
         console.log(API_URLS)
         const response = await axios.post(`${API_URLS}/api/login`, payload)
         .then((r) => {
             dispatch({
-                type: "LOGEOO",
+                type: "LOGEO",
                 payload: r.data.payload,
                 token: r.data.token,
             });

@@ -4,7 +4,7 @@ import axios from "axios";
 
 const initialState = {
   //hago un estado inicial
-  logiarUsuario: null,
+  login: null,
 
 };
 
@@ -15,7 +15,7 @@ export default function rootReducer(state = initialState, action) {
     case "LOGEO":
       return {
         ...state,
-        logiarUsuario: action.payload, //en registrarusuario meteme el action.payload
+        login: action.payload, //en registrarusuario meteme el action.payload
       };
     
     default:
