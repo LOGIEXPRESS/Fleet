@@ -1456,7 +1456,7 @@
     "hoist-non-react-statics" "^3.3.2"
     "react-native-safe-area-view" "^0.14.9"
 
-"@react-navigation/native@^6.0.0":
+"@react-navigation/native@^6.0.0", "@react-navigation/native@^6.0.7":
   "integrity" "sha512-TOLSVLU3BbqkSgaXDtxSIBEOLnKP54KMlu+D3KKfn2mmCGyBDChPIwqMKFMnkmR+N/URugicG8h7p0Hu21hA5A=="
   "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-6.0.7.tgz"
   "version" "6.0.7"
@@ -1473,7 +1473,7 @@
   dependencies:
     "nanoid" "^3.1.23"
 
-"@react-navigation/stack@^6.0.11":
+"@react-navigation/stack@^6.1.0":
   "integrity" "sha512-CHDeB6ntCK0efjB8ibxxyENPPHtudcs67bPhoRkMuPUvm397TcTEn37OqhbhpiqAlwEVAH3Q+pD7TjgmbPJPPg=="
   "resolved" "https://registry.npmjs.org/@react-navigation/stack/-/stack-6.1.0.tgz"
   "version" "6.1.0"
@@ -5210,7 +5210,7 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-"react-native@*", "react-native@>= 0.51", "react-native@>= 0.59", "react-native@>=0.35", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.3":
+"react-native@*", "react-native@^0.64.3", "react-native@>= 0.51", "react-native@>= 0.59", "react-native@>=0.35", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.64.0-rc.0 || 0.0.0-*":
   "integrity" "sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
   "version" "0.64.3"
