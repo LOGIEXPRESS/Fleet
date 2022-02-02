@@ -28,7 +28,7 @@ import { LogBox } from 'react-native';
 // import SimpleModal21 from "./AlertasTravel/SimpleModaldest";
 // import SimpleModal22 from "./AlertasTravel/SimpleModalweight";
 // import SimpleModal23 from "./AlertasTravel/SimpleModalprice";
-// import HeaderBar from "./Utils/HeaderBar.js";
+import HeaderBar from "../Utils/HeaderBar";
 import { APIKEY_GOOGLE } from "@env"
 
 
@@ -235,10 +235,13 @@ const AddTravel = (props) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
             <ScrollView keyboardShouldPersistTaps={'handled'}>
+            <View style={{marginTop:hp("-5%"),marginLeft:wp("0%"),marginBottom:hp("-3%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
                 <View style={{ alignItems: "center", }}>
-                {/* <HeaderBar  screen={'null'} /> */}
+                
                     <View style={styles.title}>
-                        <Text style={{ fontWeight: "bold", fontSize: 30, marginBottom: 5, color:'white', marginTop:hp("0.8%"),}}>
+                        <Text style={{ fontWeight: "bold", fontSize: 30, marginBottom: 0, color:'white', marginTop:hp("0.9%"), height:hp("7%")}}>
                             Agregar Viaje
                         </Text>
                     </View>
@@ -280,7 +283,7 @@ const AddTravel = (props) => {
                                     }}
                                 />
                             </ScrollView>
-                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: -1, textAlign: "center" }}>
+                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: -1, textAlign: "center", marginTop:hp("-2.5%") }}>
                                 Destino
                             </Text>
                             <ScrollView keyboardShouldPersistTaps={'handled'} style={{ flex: 1 }}>
@@ -317,7 +320,7 @@ const AddTravel = (props) => {
 
                                 />
                             </ScrollView>
-                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: hp("1%"), marginTop: hp("-1.5%"), textAlign: "center" }}>
+                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: hp("1%"), marginTop: hp("-2.5%"), textAlign: "center", }}>
                                 Peso
                             </Text>
                             <View style={styles.viewsInputs}>
@@ -330,7 +333,7 @@ const AddTravel = (props) => {
                                     onChangeText={(text) => setWeight(text)}
                                 />
                             </View>
-                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: hp("1%"), textAlign: "center" }}>
+                            <Text style={{ fontWeight: "bold", fontSize: 25, marginBottom: hp("1%"), textAlign: "center",marginTop:hp("-1.5%") }}>
                                 Precio
                             </Text>
                             <View style={styles.viewsInputs}>
@@ -423,7 +426,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        padding: 8,
+        // padding: 8,
         backgroundColor:"#ff1c49",
         width:wp("100%"),
         

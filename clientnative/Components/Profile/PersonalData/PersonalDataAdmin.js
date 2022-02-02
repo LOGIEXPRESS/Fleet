@@ -12,10 +12,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
-const PersonalDataCarrier = () => {
+
+const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
-  const rating = 4;
 
   // async function save(key, value) {
   //   //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
@@ -34,29 +34,32 @@ const PersonalDataCarrier = () => {
   return (
     <View style={styles.container}>
       <View showsVerticalScrollIndicator={false}>
-      <View style={{marginTop:hp("-1%"),marginLeft:wp("-5%"),marginBottom:hp("-3%")}}>
+        <View style={{marginTop:hp("-4%"),}}>
       <HeaderBar  screen={'null'} />
       </View>
       <View>
+        
       {/* <HeaderBar  screen={'null'}/> */}
         <Text style={styles.perfilTex}>Datos personales</Text>
       </View>
         
         <View    
           style={{
-            flexDirection: "row",
+            flexDirection: "column",
             alignContent: "flex-start",
-            marginLeft: wp('5%'),
+            // marginLeft: wp('5%'),
           }}
         >
-          <View style={{ marginTop: wp('5%') }}>
+          <View style={{ }}>
             <Image
+            resizeMode="contain"
               source={{
                 uri:
                   // data.photo !== null
                   //   ? data.photo
                   //   : 
-                    "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+                    // "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
               }}
               style={styles.userImg}
             />
@@ -66,14 +69,6 @@ const PersonalDataCarrier = () => {
               Matias Vila
               {/* {data.name} {data.lastname} */}
             </Text>
-            <Text style={{ fontSize: hp('2.75%') }}>
-              {/* {data.eMail} */}
-              asd@.com
-              </Text>
-            <Text style={{ fontSize: hp('2.75%') }}>
-              Buenos Aires
-              {/* {data.location} */}
-              </Text>
           </View>
         </View>
         <View style={styles.botones}>
@@ -83,17 +78,9 @@ const PersonalDataCarrier = () => {
           >
             <Text style={styles.textBtn}>Editar perfil</Text>
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.btn}
             onPress
-          >
-            <Text style={styles.textBtn}>Editar Vehículo</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("PersonalDataAdmin")}
           >
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
           </TouchableOpacity>
@@ -107,7 +94,7 @@ const PersonalDataCarrier = () => {
   );
 };
 
-export default PersonalDataCarrier;
+export default PersonalDataAdmin;
 
 const styles = StyleSheet.create({
   container: { 
@@ -118,28 +105,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
    },
   perfilTex: {
+    marginTop:hp("-2%"),
     alignSelf:'center',
     fontSize: hp("5.8%"),
     fontWeight: "bold",
-    marginTop: 12,
   },
   userImg: {
-    marginTop: 12,
-    marginStart:wp("-5%"),
-    height: 110,
-    width: 110,
-    borderRadius: 55,
-    borderWidth: 5,
-    borderColor: "#ff1c49",
+    height: hp('30%'),
+    width: wp('100%'),
+    // borderRadius: wp('3%'),
+    borderWidth: wp('0.9%'),
+    borderColor: "black",
   },
   userName: {
-    fontSize: hp('3.75%'),
+    fontSize: hp('4%'),
     fontWeight: "bold",
     marginBottom: 1,
   },
   boxDatos: {
     flexDirection: "column",
-    marginTop: 40,
+    alignSelf:'center',
+    marginTop: hp("1%"),
     marginLeft: 20,
     
   },
@@ -151,7 +137,7 @@ const styles = StyleSheet.create({
   botones: {
     alignContent: "center",
     alignItems: "center",
-   marginTop : wp('15%')
+   marginTop : wp('8%')
   },
   btn: {
     borderWidth: 4,
