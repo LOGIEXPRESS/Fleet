@@ -17,7 +17,7 @@ sequelize
 
     .then(() => {
         console.log('base de datos conectada! :D')
-        server.listen(3001, function () {
+        server.listen( process.env.PORT || 3001, function () {
             console.log('App is listening on port 3001!');
         });
     })
