@@ -3,6 +3,10 @@ import { Response, Request, Router, NextFunction } from 'express';
 import { v4 } from "uuid";
 
 import nodemailer from 'nodemailer'
+import { Travel } from '../models/Travel';
+import { Op } from 'sequelize';
+
+
 
 
 const router = Router()
@@ -69,4 +73,62 @@ router.get('/id',(req:Request,res:Response)=>{
     res.send(`id:${v4()}`)
 
 })
+
+router.get('/filterByEstate/:estate',async(req:Request,res:Response,next:NextFunction)=>{
+
+    const{estate}=req.params
+
+   
+    try{
+
+        let travels= await Travel.findAll({
+            where:{
+                finishedTravel:estate
+            },
+                   
+            })
+        if(travels.length){
+            return res.send(travels)
+        }
+        return res.json({menssage:`Not found travels with estate ${estate}`})
+
+    }catch(err){
+        next(err)
+    }
+})
+
+// weight
+
+router.get('/filterByWigth/:maxWigth',async(req:Request,res:Response,next:NextFunction)=>{
+
+    const{maxWigth}=req.params
+
+    try{
+
+        let travels= await Travel.findAll({
+            where:{
+                weigth:{
+                    [Op.gte]:Number(maxWigth)
+                }
+            },
+            order:[['weigth','ASC']]
+        })
+        if(travels.length){
+
+            return res.send(travels)
+        }
+        return res.json({menssage:`Not fouend travels with ${maxWigth}`})
+
+    }catch(err){
+        next(err)
+    }
+
+
+
+})
+
+
 export default router
+
+
+
