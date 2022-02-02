@@ -370,6 +370,7 @@ const SignUp = () => {
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
+      <SafeAreaView>
       {/* Brand View */}
       <ImageBackground
         source={require("./logo.png")}
@@ -487,6 +488,7 @@ const SignUp = () => {
 
         
       </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };

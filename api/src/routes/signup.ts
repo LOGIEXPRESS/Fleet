@@ -54,11 +54,11 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
 });
 
 
-router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/adminregister', async (req: Request, res: Response, next: NextFunction) => {
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
-    const { name, lastName, phone, password, eMail, terminosCondiciones, role, photo, identification} = req.body
+    const { name, lastName, eMail,  password, phone, photo, secret , business  } = req.body
 
     let passwordHash = await bcrypt.hash(password, 8)
 
@@ -66,13 +66,13 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
         id: uuid(),
         name,
         lastName,
+        eMail,
         password: passwordHash,
         phone,
         photo,
-        identification, 
-        terminosCondiciones,
-        eMail,
-        role
+        secret,
+        business,
+        role : true
     }
     try {
         const [user/*usuario creado o excistente */, created/*boolean true->lo creo false->no lo creo pq exciste */] = await Signup.findOrCreate({//crea un usuario si no excisiste 
@@ -87,7 +87,7 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
             return res.json({ payload, mensaje: 'eMail usado' })//podria ser un boolean 
         }
         return res.json({
-            mensaje: 'Usuario creado', payload
+            mensaje: 'Usuario creado'
         }).status(300);
     }
     catch (err) {
