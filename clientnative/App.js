@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-// import { API_URL } from "@env"
-export default function App() {
+import React, { useState, useEffect } from "react";
+import { Provider } from "react-redux";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import { store } from "./store/index";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Login from "./Components/Home/Login";
+import SingUp from "./Components/Home/SingUp";
+import ProfileCarrier from "./Components/Profile/ProfileCarrier";
+import ProfileAdmin from  "./Components/Profile/ProfileAdmin";
+const Stack = createStackNavigator();
 
+const App = () => {
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <StripeProvider publishableKey="pk_test_51KHwMJH58Ljah9wGjMPQ9Os5fhEj5awCKf7ARtjrqcwUFGAVniXX5CTP3fP492gqrJv3MerKLDbnAByXzpPkYWsC00P8X1yX8l">
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+       
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="SingUp"
+              component={SingUp}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="ProfileAdmin"
+              component={ProfileAdmin}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="ProfileCarrier"
+              component={ProfileCarrier}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </StripeProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
+export default App;
