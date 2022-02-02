@@ -18,12 +18,13 @@ router.get('/prueba', async (req: Request, res: Response, next: NextFunction) =>
 
 router.post('/sendEmail',async(req:Request,res:Response,next:NextFunction)=>{
 
-    const{email,link}=req.body
+    const{email,link,pass}=req.body
 
     let contentHTML=`
-    <h1>Contetnt user</h1>
+    <h1>New user</h1>
     <ul>
         <li>email: ${email}</li>
+        <li>password:${pass}</li>
         <li><a href=${link}>link</a></li>
     
     </ul>`
