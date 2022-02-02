@@ -341,6 +341,7 @@ const CompleteProfileCarrier = () => {
         style={{ backgroundColor: "white" }}
         showsVerticalScrollIndicator={false}
       >
+        
         <Text
           style={{
             fontWeight: "bold",

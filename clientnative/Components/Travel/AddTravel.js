@@ -358,7 +358,7 @@ const AddTravel = (props) => {
                                 <TouchableOpacity style={styles.btnEditar} onPress={handleQuote}>
                                     <Text style={styles.textBtn}>Cotizar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.btnEditar} onPress>
+                                <TouchableOpacity style={styles.btnEditar} onPress={() => navigation.navigate("PersonalDataCarrier")}>
                                     <Text style={styles.textBtn}>Agregar</Text>
                                     {/* validaciones */}
                                     {/* <Modal

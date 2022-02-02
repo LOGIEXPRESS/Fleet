@@ -370,6 +370,7 @@ const SignUp = () => {
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
+      
       {/* Brand View */}
       <ImageBackground
         source={require("./logo.png")}
