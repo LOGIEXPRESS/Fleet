@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: hp('3.5%'),
-    height: hp('8%'),
+    height: hp('9.5%'),
     fontWeight: '700',
   },
   userBtnTxt3: {
