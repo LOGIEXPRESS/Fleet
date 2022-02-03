@@ -131,4 +131,12 @@ router.get('/filterByWigth/:maxWigth',async(req:Request,res:Response,next:NextFu
 export default router
 
 
+//generador de contraseñas
+// var randomstring = Math.random().toString(36).slice(-8);
 
+
+// console.log(randomstring)
+
+
+//   var randPassword = Array(5).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('').toLocaleLowerCase();
+//   console.log(randPassword)
