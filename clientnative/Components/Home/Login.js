@@ -16,20 +16,42 @@ import {
 } from "react-native";
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
-
+import * as SecureStore from "expo-secure-store";
 const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const login = useSelector((store) => store.login);
 
+  
   useEffect(() => {
-    if (login !== "") {
+    if (login !== null) {
+      console.log(login,"login")
+      if(login.role === true){
+        navigation.navigate("ProfileAdmin");
+      }else{
+        navigation.navigate("ProfileCarrier");
+      }
       
-      navigation.navigate("ProfileAdmin");
     
     }
   }, [login]);
+
+  async function save(key, value) {
+    //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
+    try{
+      await SecureStore.setItemAsync(key, value);
+    } catch(error){
+      console.log('error', error.response)
+    }
+    }  
+  const nuevotoken = useSelector((store) => store.token);
+  useEffect(() => {
+    /* console.log("verificando, que se envia", nuevotoken); */
+    save("token", nuevotoken);
+    console.log("se guarda el token?", nuevotoken)
+  }, [nuevotoken]);
+
   
 
   const navegar = () =>{

@@ -7,6 +7,9 @@ const initialState = {
   login: null,
   token: "",
   respAddCarrier: null,
+  responseLog: null,
+  respToken: null,
+  adminreg: null,
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -24,6 +27,18 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         respAddCarrier: action.payload
       }
+      case "TOKEN":
+      return {
+        ...state,
+        respToken: action.payload,
+        responseLog: action.payload,
+      };
+      case "GET_ADMINREG":
+      return {
+        ...state,
+        adminreg: action.payload,
+      };
+    
     default:
       return state;
   }
