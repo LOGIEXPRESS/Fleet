@@ -5,7 +5,7 @@ import axios from "axios";
 const initialState = {
   //hago un estado inicial
   login: null,
-
+  token: "",
 };
 
 
@@ -16,6 +16,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         login: action.payload, //en registrarusuario meteme el action.payload
+        token: action.token
       };
     
     default:
