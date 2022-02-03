@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, HasOne, BelongsTo, ForeignKey } from 'sequelize-typescript'
 import { Carrier } from './Carrier';
-// import { Review } from './Review';
+import { Review } from './Review';
 import { Admin } from './Admin';
 
 @Table
@@ -47,6 +47,9 @@ export class Travel extends Model{
 
     @ForeignKey(() => Carrier)
     carrierId!: string
+
+    @HasOne(() => Review)
+    rewiew!: Review
 
 
 
