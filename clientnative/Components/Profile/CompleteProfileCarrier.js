@@ -386,7 +386,7 @@ const CompleteProfileCarrier = () => {
               onSubmit={(e) => handleSubmit(e)}
             >
               <Text
-                style={{ fontSize:21, fontWeight: "bold", marginBottom: 20, alignSelf:'center', color:"e81d42" }}
+                style={{ fontSize:21, fontWeight: "bold", marginBottom: 20, alignSelf:'center', color:"#e81d42" }}
               >
                 Datos personales
               </Text>
