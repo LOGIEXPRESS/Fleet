@@ -14,7 +14,7 @@ import {
   Button,
   Modal
 } from "react-native";
-import { logiar } from "../../actions/index";
+import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
