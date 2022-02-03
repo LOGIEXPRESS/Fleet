@@ -86,7 +86,7 @@ const PersonalDataCarrier = () => {
 
           <TouchableOpacity
             style={styles.btn}
-            onPress
+            onPress={() => navigation.navigate("EditVehicule")}
           >
             <Text style={styles.textBtn}>Editar Vehículo</Text>
           </TouchableOpacity>

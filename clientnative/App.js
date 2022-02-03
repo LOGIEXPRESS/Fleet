@@ -14,6 +14,8 @@ import PersonalDataCarrier from "./Components/Profile/PersonalData/PersonalDataC
 import PersonalDataAdmin from "./Components/Profile/PersonalData/PersonalDataAdmin";
 import QuotTravel from "./Components/Travel/QuotTravel";
 import ChangePassword from "./Components/Profile/Edit/ChangePassword";
+import EditProfileCarrier from './Components/Profile/Edit/EditProfileCarrier';
+import EditVehicule from './Components/Profile/Edit/EditVehicule';
 
 const Stack = createStackNavigator();
 
@@ -73,6 +75,16 @@ const App = () => {
             <Stack.Screen
               name="ChangePassword"
               component={ChangePassword}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="EditVehicule"
+              component={EditVehicule}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditProfileCarrier"
+              component={EditProfileCarrier}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
