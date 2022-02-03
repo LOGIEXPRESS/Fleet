@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from 'react-native'
 import {
     widthPercentageToDP as wp,
@@ -7,45 +7,50 @@ import {
 import HeaderBar from "../Utils/HeaderBar";
 import Icon from "react-native-vector-icons/Ionicons";
 import { TextInput, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-
+import { addCarrier } from '../../Redux/actions/index.js'
+import { useSelector, useDispatch } from "react-redux";
+import { set } from "react-native-reanimated";
 
 
 
 const NewCarrier = () => {
 
 
-
-    function checkEmail(e_mail) {
+    const respAddCarrier = useSelector((store) => store.respAddCarrier)
+    function checkEmail(eMail) {
         var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-        var check = expReg.test(e_mail)
-        if (check) {
-            return console.log('EMAIL VALIDO')
-        } else {
-            return console.log('EMAIL NO VALIDO')
-        }
+        var check = expReg.test(eMail)
+        return check;
     }
-
-
+    const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
-    const [e_mail, setE_mail] = useState('')
+    const [eMail, setEMail] = useState('')
+
+
+    useEffect(() => {
+        console.log("ESTO SERIA LA RESPUESTAAAAAAAAAA", respAddCarrier)
+    
+    
+    }, [respAddCarrier]);
+    
+    
+    
 
     const handleSubmit = () => {
         const data = {
             name: name,
-            lastname: lastname,
-            e_mail: e_mail,
+            lastName: lastname,
+            eMail: eMail,
         }
-        console.log("ESTO ES DATA", data)
-        checkEmail(data.e_mail)
-    }
-
-
-
-
-
-
-
+       const check = checkEmail(data.eMail)
+        if(check) {
+            dispatch(addCarrier(data))
+        } else {
+            alert('EL E-MAIL INGRESADO NO ES VALIDO')
+        }
+    }   
+    
 
     return (
         <View style={{ backgroundColor: "white", flex: 1 }}>
@@ -127,7 +132,7 @@ const NewCarrier = () => {
                                     name='e-mail'
                                     placeholder="Ingrese e-mail del transportista"
                                     style={styles.textPlaceholder}
-                                    onChangeText={(e) => setE_mail(e)}
+                                    onChangeText={(e) => setEMail(e)}
                                 />
                             </View>
                             <View>
