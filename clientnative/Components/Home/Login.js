@@ -12,7 +12,8 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
-  Modal
+  Modal,
+  Alert
 } from "react-native";
 import { logiar } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +32,10 @@ const Login = () => {
         navigation.navigate("ProfileAdmin");
       }else{
         navigation.navigate("ProfileCarrier");
+      }
+      if(login.role===1){
+        Alert.alert('deve ingresar datos')
+        navigation.navigate('Login')
       }
       
     
