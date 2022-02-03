@@ -21,6 +21,16 @@ const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const login = useSelector((store) => store.login);
+
+  useEffect(() => {
+    if (login !== "") {
+      
+      navigation.navigate("ProfileAdmin");
+    
+    }
+  }, [login]);
+  
 
   const navegar = () =>{
     navigation.navigate("SingUp")
@@ -74,7 +84,6 @@ const Login = () => {
     
       
       };
-
 
 return (
     //Container Start
