@@ -17,15 +17,15 @@ const PersonalDataCarrier = () => {
   const navigation = useNavigation();
   const rating = 4;
 
-  // async function save(key, value) {
-  //   //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
-  //   await SecureStore.setItemAsync(key, value);
-  // }
+  async function save(key, value) {
+    //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
+    await SecureStore.setItemAsync(key, value);
+  }
 
-  // const cerrarsesion = () =>{
-  //   save("token", '')
-  //   navigation.navigate('singIn')
-  // }
+  const cerrarsesion = () =>{
+    save("token", "(result)")
+    navigation.navigate('Login')
+  }
 
   // useEffect(() => {
   //   //console.log("data", data)
@@ -98,7 +98,7 @@ const PersonalDataCarrier = () => {
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress>
+          <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
             <Text style={styles.textBtn}>Cerrar sesión</Text>
           </TouchableOpacity>
         </View>

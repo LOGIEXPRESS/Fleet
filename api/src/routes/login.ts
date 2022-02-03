@@ -1,4 +1,4 @@
-import { Response, Request, Router } from 'express';
+import { Response, Request, Router, NextFunction } from 'express';
 
 import config from '../../config/config';
 import bcryptjs from 'bcryptjs'
@@ -8,7 +8,7 @@ import { Signup } from '../models/Signup';
 
 const router = Router()
 
-
+// funcion que crea el token
 function createToken(payload: any) {
 
     return jwt.sign({ id: payload.id, email: payload.eMail }, config.jwtSecret, {
@@ -38,7 +38,7 @@ router.post('/login', async (req: Request, res: Response) => {
 			};
 
 			return res.json({
-				token: createToken(payload),
+				token: createToken(payload), // se crea el token
 				mensaje: 'Autenticación correcta', payload
 			}).status(200);
 
@@ -66,6 +66,24 @@ router.post('/login', async (req: Request, res: Response) => {
 		return res.json({ payload, mensaje: "usuario y mail ingresados son invalidos" }).status(301)
 	}
 });
+
+router.get('/adminExist',async(req:Request,res:Response,next:NextFunction)=>{
+
+    try{
+        let admin= await Signup.findOne({
+            where:{
+                role:true
+            }
+        })
+        if(admin){
+            return res.send(true)
+        }
+        return res.send(false)
+
+    }catch(err){
+        next(err)
+    }
+})
 
 
 export default router;	
