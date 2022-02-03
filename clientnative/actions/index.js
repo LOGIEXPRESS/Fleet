@@ -23,9 +23,9 @@ export function logiar(payload) {
         console.log(error.response);
       }
     };
-  }
+}
 
-  export function adminregister(payload) {
+export function adminregister(payload) {
     return async function () {
       try {
         console.log(API_URLS)
@@ -39,9 +39,9 @@ export function logiar(payload) {
         console.log(error.response);
       }
     };
-  }
+}
 
-  export function enviarToken(payload) {
+export function enviarToken(payload) {
     return async function (dispatch) {
       try {
         const response = await axios
@@ -61,9 +61,9 @@ export function logiar(payload) {
         console.log(error.response);
       }
     };
-  }
+}
 
-  export function consultReg() {
+export function consultReg() {
     return async function (dispatch) {
       try {
         var json = await axios(`${API_URLS}/api/adminExist`);
@@ -76,4 +76,23 @@ export function logiar(payload) {
         console.log(error);
       }
     };
-  }
+}
+
+
+export function completeProfileCarrier(payload) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.post(
+          `${API_URL}/api/carrierProfile`,
+          payload
+        );
+        // console.log('Soy el console.log de response', response)
+        return dispatch({
+          type: "COMPLETE_PROFILE_CARRIER",
+          payload: response.data,
+        });
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+}
