@@ -233,7 +233,10 @@ const SignUp = () => {
       eMail: reg.mail,
       identification: reg.identification,
       phone: reg.telefono,
-      password: reg.contraseña
+      photo:reg.photo,
+      password: reg.contraseña,
+      business:reg.business,
+      secret:reg.secret,
     };
 
     //validaciones 
@@ -284,9 +287,9 @@ dispatch(adminregister(obj));
       secret:"",
       photo:"URL"
     });
-
+navigation.navigate("Login")
 //     console.log(obj);
-  };
+};
 
   //funciones para cambiar e.value de los inputs
 
@@ -503,7 +506,7 @@ dispatch(adminregister(obj));
             style={styles.TextInput}
           ></TextInput>
 
-          <TouchableOpacity style={styles.Button} onPress={handleSubmit}>
+          <TouchableOpacity style={styles.Button} onPress={handleSubmit } >
             <Text style={styles.ButtonText} >
               Registrarme!
             </Text>
