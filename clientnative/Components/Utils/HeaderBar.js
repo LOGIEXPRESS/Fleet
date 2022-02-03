@@ -21,7 +21,7 @@ const HeaderBar = (props) => {
                 }}
                 onPress={ screen === 'null' ? () => navigation.goBack() : () => navigation.navigate(`${screen}`)  }
                 >
-                <Icon name="arrow-back" size={27} />
+                <Icon name="arrow-back" size={27} style={{color:"#ff1c49"}}/>
                 {/* <Text style={{marginLeft: 5, fontSize: 19, fontWeight: 'bold', marginBottom: 3}}>Volver</Text> */}
                 </TouchableOpacity>
             </View>

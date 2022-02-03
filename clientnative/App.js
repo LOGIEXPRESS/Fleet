@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./Components/Home/Login";
 import SingUp from "./Components/Home/SingUp";
 import ProfileCarrier from "./Components/Profile/ProfileCarrier";
+<<<<<<< HEAD
 import ProfileAdmin from "./Components/Profile/ProfileAdmin";
 import ViewFleet from "./Components/Historial de viaje/ViewFleet"
 import NewCarrier from "./Components/Añadir Transportista/NewCarrier.js";
@@ -16,6 +17,13 @@ LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 ]);
 
+=======
+import ProfileAdmin from  "./Components/Profile/ProfileAdmin";
+import CompleteProfileCarrier from  "./Components/Profile/CompleteProfileCarrier";
+import AddTravel from  "./Components/Travel/AddTravel";
+import PersonalDataCarrier from "./Components/Profile/PersonalData/PersonalDataCarrier";
+import PersonalDataAdmin from "./Components/Profile/PersonalData/PersonalDataAdmin";
+>>>>>>> 978034adde94d639e602c5e950d50494d615f312
 
 
 const Stack = createStackNavigator();
@@ -59,6 +67,26 @@ const App = () => {
         {/*       <Stack.Screen
               name="NewCarrier"
               component={NewCarrier}
+              options={{ headerShown: false }}
+            /> */}
+      {/*       <Stack.Screen
+              name="CompleteProfileCarrier"
+              component={CompleteProfileCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AddTravel"
+              component={AddTravel}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="PersonalDataCarrier"
+              component={PersonalDataCarrier}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="PersonalDataAdmin"
+              component={PersonalDataAdmin}
               options={{ headerShown: false }}
             /> */}
           </Stack.Navigator>

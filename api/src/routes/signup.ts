@@ -10,6 +10,15 @@ const bcrypt = require("bcryptjs");
 
 const router = Router()
 
+router.get('/prueba', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.send('ESTO ES UNA PRUEBA')
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
 router.get('/user', passport.authenticate("jwt", { session: false }), async (req: Request, res: Response, next: NextFunction) => {
     try {
         let user = await Signup.findAll()
@@ -54,32 +63,39 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
 });
 
 
-router.post('/user', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/adminregister', async (req: Request, res: Response, next: NextFunction) => {
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
-    const { name, lastName, phone, password, eMail, terminosCondiciones, role, photo, identification} = req.body
+    
+    
 
+    const { name, lastName, eMail,  password, phone, photo, secret , identification, business  } = req.body
+
+    
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
         id: uuid(),
         name,
         lastName,
+        eMail,
         password: passwordHash,
         phone,
         photo,
-        identification, 
-        terminosCondiciones,
-        eMail,
-        role
+        secret,
+        identification,
+        business,
+        role: true
     }
+    console.log(payload);
+    
     try {
         const [user/*usuario creado o excistente */, created/*boolean true->lo creo false->no lo creo pq exciste */] = await Signup.findOrCreate({//crea un usuario si no excisiste 
             where: { eMail: eMail },
             defaults: payload,
         })
-
+        
         if (!created) {
             const payload = {
                 role: 1,
@@ -87,14 +103,12 @@ router.post('/user', async (req: Request, res: Response, next: NextFunction) => 
             return res.json({ payload, mensaje: 'eMail usado' })//podria ser un boolean 
         }
         return res.json({
-            mensaje: 'Usuario creado', payload
+            mensaje: 'Usuario creado'
         }).status(300);
     }
     catch (err) {
         next(err)
     }
 });
-
-
 
 export default router
