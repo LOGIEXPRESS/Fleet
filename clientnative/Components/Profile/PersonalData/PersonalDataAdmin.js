@@ -80,7 +80,7 @@ const PersonalDataAdmin = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
-            onPress
+            onPress={() => navigation.navigate("ChangePassword")}
           >
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
           </TouchableOpacity>

@@ -86,14 +86,14 @@ const PersonalDataCarrier = () => {
 
           <TouchableOpacity
             style={styles.btn}
-            onPress
+            onPress={() => navigation.navigate("EditVehicule")}
           >
             <Text style={styles.textBtn}>Editar Vehículo</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.navigate("PersonalDataAdmin")}
+            onPress={() => navigation.navigate("ChangePassword")}
           >
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
           </TouchableOpacity>
