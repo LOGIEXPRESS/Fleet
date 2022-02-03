@@ -1,4 +1,4 @@
-import { Response, Request, Router } from 'express';
+import { Response, Request, Router, NextFunction } from 'express';
 
 import config from '../../config/config';
 import bcryptjs from 'bcryptjs'
@@ -66,6 +66,24 @@ router.post('/login', async (req: Request, res: Response) => {
 		return res.json({ payload, mensaje: "usuario y mail ingresados son invalidos" }).status(301)
 	}
 });
+
+router.get('/adminExist',async(req:Request,res:Response,next:NextFunction)=>{
+
+	try{
+		let admin= await Signup.findOne({
+			where:{
+				role:true
+			}
+		})
+		if(admin){
+			return res.send(true)
+		}
+		return res.send(false)
+
+	}catch(err){
+		next(err)
+	}
+})
 
 
 export default router;	
