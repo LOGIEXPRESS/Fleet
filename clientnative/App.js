@@ -8,6 +8,12 @@ import Login from "./Components/Home/Login";
 import SingUp from "./Components/Home/SingUp";
 import ProfileCarrier from "./Components/Profile/ProfileCarrier";
 import ProfileAdmin from  "./Components/Profile/ProfileAdmin";
+import CompleteProfileCarrier from  "./Components/Profile/CompleteProfileCarrier";
+import AddTravel from  "./Components/Travel/AddTravel";
+import PersonalDataCarrier from "./Components/Profile/PersonalData/PersonalDataCarrier";
+import PersonalDataAdmin from "./Components/Profile/PersonalData/PersonalDataAdmin";
+
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -36,6 +42,26 @@ const App = () => {
               <Stack.Screen
               name="ProfileCarrier"
               component={ProfileCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CompleteProfileCarrier"
+              component={CompleteProfileCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AddTravel"
+              component={AddTravel}
+              options={{ headerShown: false }}
+            />
+             <Stack.Screen
+              name="PersonalDataCarrier"
+              component={PersonalDataCarrier}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="PersonalDataAdmin"
+              component={PersonalDataAdmin}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

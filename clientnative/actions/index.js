@@ -24,3 +24,19 @@ export function logiar(payload) {
       }
     };
   }
+
+  export function adminregister(payload) {
+    return async function () {
+      try {
+        console.log(API_URLS)
+        const response = await axios.post(`${API_URLS}/api/adminregister`, payload)
+        .then((r) => {
+          console.log(r.data.mensaje);
+        });
+       
+      }catch(error){
+
+        console.log(error.response);
+      }
+    };
+  }
