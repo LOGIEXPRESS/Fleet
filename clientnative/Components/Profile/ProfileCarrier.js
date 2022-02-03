@@ -17,6 +17,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import HeaderBar from "../Utils/HeaderBar";
 
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
@@ -32,11 +33,14 @@ const ProfileCarrier = () => {
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white'  }}>
+      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-           <View style={{ marginTop: wp("10%")  }}>
+           <View style={{ marginTop: wp("3%")  }}>
             
             <Image
               source={{
@@ -65,8 +69,7 @@ const ProfileCarrier = () => {
         <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"),  }}>
           <TouchableOpacity
             style={styles.btnText}
-            // onPress={() => {
-            //   navigation.navigate("DatosPersonalesCarrier");
+            onPress={() => navigation.navigate("PersonalDataCarrier")}
             // }}
           >
             <Icon name="person-circle-outline" style={styles.icons} />
@@ -86,7 +89,7 @@ const ProfileCarrier = () => {
 
           <TouchableOpacity
             style={styles.btnText}
-            // onPress={() => navigation.navigate("CotizarViaje")}
+            onPress={() => navigation.navigate("QuotTravel")}
           >
             <Icon name="calculator-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
@@ -96,6 +99,7 @@ const ProfileCarrier = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => navigation.navigate("ScreenMap")}
+            onPress={() => navigation.navigate("CompleteProfileCarrier")}
           >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginTop: hp("3%"),
-    marginBottom: hp("-1%"),
+    marginBottom: hp("-3%"),
 
   },
   userBtnTxt: {

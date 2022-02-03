@@ -12,15 +12,52 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
-  Modal
+  Modal,
+  Alert
 } from "react-native";
 import { logiar } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
-
+import * as SecureStore from "expo-secure-store";
 const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const login = useSelector((store) => store.login);
+
+  
+  useEffect(() => {
+    if (login !== null) {
+      console.log(login,"login")
+      if(login.role === true){
+        navigation.navigate("ProfileAdmin");
+      }else{
+        navigation.navigate("ProfileCarrier");
+      }
+      if(login.role===1){
+        Alert.alert('deve ingresar datos')
+        navigation.navigate('Login')
+      }
+      
+    
+    }
+  }, [login]);
+
+  async function save(key, value) {
+    //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
+    try{
+      await SecureStore.setItemAsync(key, value);
+    } catch(error){
+      console.log('error', error.response)
+    }
+    }  
+  const nuevotoken = useSelector((store) => store.token);
+  useEffect(() => {
+    /* console.log("verificando, que se envia", nuevotoken); */
+    save("token", nuevotoken);
+    console.log("se guarda el token?", nuevotoken)
+  }, [nuevotoken]);
+
+  
 
   const navegar = () =>{
     navigation.navigate("SingUp")
@@ -75,7 +112,6 @@ const Login = () => {
       
       };
 
-
 return (
     //Container Start
     <View
@@ -129,11 +165,11 @@ return (
           </TouchableOpacity>
         </View>
         <View style={styles.preg}>
-          <Text style={styles.pregunta}>No tienes una cuenta? </Text>
+          <Text style={styles.pregunta}>Olvidaste tu contraseña? </Text>
         </View>
 
         <TouchableOpacity style={styles.TextButton}  onPress={navegar}>
-          <Text style={styles.SingUpText}>Registrate Ahora</Text>
+          <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
     </View> 

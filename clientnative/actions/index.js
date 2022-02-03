@@ -24,3 +24,56 @@ export function logiar(payload) {
       }
     };
   }
+
+  export function adminregister(payload) {
+    return async function () {
+      try {
+        console.log(API_URLS)
+        const response = await axios.post(`${API_URLS}/api/adminregister`, payload)
+        .then((r) => {
+          console.log(r.data.mensaje);
+        });
+       
+      }catch(error){
+
+        console.log(error.response);
+      }
+    };
+  }
+
+  export function enviarToken(payload) {
+    return async function (dispatch) {
+      try {
+        const response = await axios
+          .post(`${API_URLS}/api/verifytoken`, payload) //aca cada uno pone su ip
+          .then((r) => {
+            //console.log("Token llegando a la action enviarToken", payload);
+            dispatch({
+              type: "TOKEN",
+              payload: r.data.payload,
+            });
+            // console.log("hace el dispatch");
+            console.log("Aqui esta el payload:", r.data.payload);
+          });
+        // console.log(r);
+        // return response;
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+  }
+
+  export function consultReg() {
+    return async function (dispatch) {
+      try {
+        var json = await axios(`${API_URLS}/api/adminExist`);
+        dispatch({
+          type: "GET_ADMINREG",
+          payload: json.data,
+        });
+        console.log('Esto llega a getadminreg', json.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }

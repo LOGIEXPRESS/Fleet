@@ -4,8 +4,8 @@ import { Signup } from './Signup'
 
 @Table
 export class Admin extends Model {
-    @PrimaryKey
-    @Column
+    @IsUUID(4)
+    @Column({ primaryKey: true })
     id!: string 
  
     @Column
