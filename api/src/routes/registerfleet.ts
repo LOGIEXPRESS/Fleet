@@ -23,7 +23,7 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
     // console.log("Estes es el body", req.body);
 
     const { name, lastName, eMail} = req.body
-    let password=Array(10).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('')
+    let password=Array(5).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('').toLowerCase()
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {

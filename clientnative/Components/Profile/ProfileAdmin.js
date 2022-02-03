@@ -87,7 +87,7 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              navigation.navigate("DatosPersonalesUser");
+              navigation.navigate("PersonalDataAdmin");
             }}
           >
             <Icon name="person-outline" style={styles.icons} />
@@ -98,7 +98,7 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              navigation.navigate("HistorialDeViaje");
+              navigation.navigate("ProfileCarrier");
             }}
           >
             <Icon name="bus-outline" style={styles.icons} />
@@ -108,7 +108,7 @@ const ProfileAdmin = () => {
 
           <TouchableOpacity
             style={styles.btnText}
-            onPress={() => navigation.navigate("CotizarViaje")}
+            onPress={() => navigation.navigate("QuotTravel")}
           >
             <Icon name="calculator-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt3}>Cotizar viaje</Text>
@@ -118,7 +118,7 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
-            onPress={() => navigation.navigate("ProfileCarrier")}
+            onPress={() => navigation.navigate("AddTravel")}
           >
             <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}

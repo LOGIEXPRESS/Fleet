@@ -17,7 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderBar from "../Utils/HeaderBar";
-// import { completeProfileCarrier } from "../../actions/index.js";
+import { completeProfileCarrier } from "../../actions/index.js";
 // import SimpleModal from "./SimpleModal.js";
 // import SimpleModal10 from "../AlertasComplete/SimpleModaldni.js";
 // import SimpleModal11 from "../AlertasComplete/SimpleModalzone.js";
@@ -37,6 +37,8 @@ const CompleteProfileCarrier = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const datosCarrier = useSelector((store) => store.responseReg);
+
+  console.log(datosCarrier)
 
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
@@ -160,11 +162,14 @@ const CompleteProfileCarrier = () => {
 
   const [carrier, setCarrier] = useState({
     //Datos del carrier//
-    documentID: "",
-    license: "",
+    // documentID: "",
+    identification:"",
     phone: "",
-    location: "",
+    secret:"",
+    cbu:"",
+    // location: "",
     //Datos del vehiculo//
+    license: "",
     brand: "",
     patent: "",
     model: "",
@@ -278,61 +283,66 @@ const CompleteProfileCarrier = () => {
     });
   };
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const obj = {
-  //     id: datosCarrier.id,
-  //     documentID: carrier.documentID,
-  //     license: carrier.license,
-  //     location: carrier.location,
-  //     photo: selectedImage,
-  //     // Vehicule //
-  //     brand: carrier.brand,
-  //     patent: carrier.patent,
-  //     model: carrier.model,
-  //     color: carrier.color,
-  //     capacity: carrier.capacity,
-  //   };
+  function handleSubmit(e) {
+    e.preventDefault();
+    const obj = {
+      idSignUp: datosCarrier.id,
+      // documentID: carrier.documentID,
+      identification:carrier.identification,//tine q ser un numero
+      
+      // location: carrier.location,
+      photo: selectedImage||'url',
+      phone:carrier.phone,
+      secret:carrier.secret,
+      cbu:carrier.cbu,
+      // Vehicule //
+      license: carrier.license,
+      brand: carrier.brand,
+      patent: carrier.patent,
+      model: carrier.model,
+      color: carrier.color,
+      capacity: carrier.capacity,
+    };
 
-  //   // VALIDACIONES
-  //   if (!obj.documentID) {
-  //     changeModalVisible10(true);
-  //     return;
-  //   }
+    // // VALIDACIONES
+    // if (!obj.documentID) {
+    //   changeModalVisible10(true);
+    //   return;
+    // }
 
-  //   if (!obj.location) {
-  //     changeModalVisible11(true);
-  //     return;
-  //   }
-  //   if (!obj.license) {
-  //     changeModalVisible12(true);
-  //     return;
-  //   }
-  //   if (!obj.brand) {
-  //     changeModalVisible13(true);
-  //     return;
-  //   }
-  //   if (!obj.patent) {
-  //     changeModalVisible14(true);
-  //     return;
-  //   }
-  //   if (!obj.model) {
-  //     changeModalVisible15(true);
-  //     return;
-  //   }
-  //   if (!obj.color) {
-  //     changeModalVisible16(true);
-  //     return;
-  //   }
-  //   if (!obj.capacity) {
-  //     changeModalVisible17(true);
-  //     return;
-  //   }
+    // if (!obj.location) {
+    //   changeModalVisible11(true);
+    //   return;
+    // }
+    // if (!obj.license) {
+    //   changeModalVisible12(true);
+    //   return;
+    // }
+    // if (!obj.brand) {
+    //   changeModalVisible13(true);
+    //   return;
+    // }
+    // if (!obj.patent) {
+    //   changeModalVisible14(true);
+    //   return;
+    // }
+    // if (!obj.model) {
+    //   changeModalVisible15(true);
+    //   return;
+    // }
+    // if (!obj.color) {
+    //   changeModalVisible16(true);
+    //   return;
+    // }
+    // if (!obj.capacity) {
+    //   changeModalVisible17(true);
+    //   return;
+    // }
 
-  //   dispatch(completeProfileCarrier(obj));
-  //   console.log("soy lo que se envia", obj);
-  //   changeModalVisible(true)
-  // }
+    dispatch(completeProfileCarrier(obj));
+    console.log("soy lo que se envia", obj);
+    changeModalVisible(true)
+  }
 
   //// --> Inicio de componente <-- ////
 
@@ -386,7 +396,7 @@ const CompleteProfileCarrier = () => {
               onSubmit={(e) => handleSubmit(e)}
             >
               <Text
-                style={{ fontSize:21, fontWeight: "bold", marginBottom: 20, alignSelf:'center', color:"e81d42" }}
+                style={{ fontSize:21, fontWeight: "bold", marginBottom: 20, alignSelf:'center', color:"#e81d42" }}
               >
                 Datos personales
               </Text>
@@ -544,7 +554,7 @@ const CompleteProfileCarrier = () => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.btnEditar} onPress={() => navigation.navigate("AddTravel")}>
+              <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
                 <Text style={styles.textBtn}>Finalizar</Text>
                 {/* MODAL */}
                 

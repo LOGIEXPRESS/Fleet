@@ -8,7 +8,7 @@ import { Signup } from '../models/Signup';
 
 const router = Router()
 
-
+// funcion que crea el token
 function createToken(payload: any) {
 
     return jwt.sign({ id: payload.id, email: payload.eMail }, config.jwtSecret, {
@@ -38,7 +38,7 @@ router.post('/login', async (req: Request, res: Response) => {
 			};
 
 			return res.json({
-				token: createToken(payload),
+				token: createToken(payload), // se crea el token
 				mensaje: 'Autenticación correcta', payload
 			}).status(200);
 
@@ -69,20 +69,20 @@ router.post('/login', async (req: Request, res: Response) => {
 
 router.get('/adminExist',async(req:Request,res:Response,next:NextFunction)=>{
 
-	try{
-		let admin= await Signup.findOne({
-			where:{
-				role:true
-			}
-		})
-		if(admin){
-			return res.send(true)
-		}
-		return res.send(false)
+    try{
+        let admin= await Signup.findOne({
+            where:{
+                role:true
+            }
+        })
+        if(admin){
+            return res.send(true)
+        }
+        return res.send(false)
 
-	}catch(err){
-		next(err)
-	}
+    }catch(err){
+        next(err)
+    }
 })
 
 
