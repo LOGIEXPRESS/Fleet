@@ -69,8 +69,7 @@ const ProfileCarrier = () => {
         <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"),  }}>
           <TouchableOpacity
             style={styles.btnText}
-            // onPress={() => {
-            //   navigation.navigate("DatosPersonalesCarrier");
+            onPress={() => navigation.navigate("PersonalDataCarrier")}
             // }}
           >
             <Icon name="person-circle-outline" style={styles.icons} />
@@ -90,7 +89,7 @@ const ProfileCarrier = () => {
 
           <TouchableOpacity
             style={styles.btnText}
-            // onPress={() => navigation.navigate("CotizarViaje")}
+            onPress={() => navigation.navigate("QuotTravel")}
           >
             <Icon name="calculator-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
