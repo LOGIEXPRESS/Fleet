@@ -1,6 +1,5 @@
 import axios from "axios";
-const ADD_CARRIER = "ADD_CARRIER"
-import { API_URL} from "@env"
+import { API_URLS } from "@env"
 
 
 
@@ -8,7 +7,7 @@ import { API_URL} from "@env"
 export function addCarrier(props) {
   return async function (dispatch) {
     try {
-       const add = await axios.post(`${API_URL}/api/registerfleet`, props) 
+       const add = await axios.post(`${API_URLS}/api/registerfleet`, props) 
        console.log("ESTO ES ADD", add.data)
        return dispatch({
          type: "ADD_CARRIER",
@@ -26,8 +25,8 @@ export function addCarrier(props) {
 export function logiar(payload) {
     return async function (dispatch) {
       try {
-        console.log(API_URL)
-        const response = await axios.post(`${API_URL}/api/login`, payload)
+        console.log(API_URLS)
+        const response = await axios.post(`${API_URLS}/api/login`, payload)
         .then((r) => {
             dispatch({
                 type: "LOGEO",
@@ -49,8 +48,8 @@ export function logiar(payload) {
   export function adminregister(payload) {
     return async function () {
       try {
-        console.log(API_URL)
-        const response = await axios.post(`${API_URL}/api/adminregister`, payload)
+        console.log(API_URLS)
+        const response = await axios.post(`${API_URLS}/api/adminregister`, payload)
         .then((r) => {
           console.log(r.data.mensaje);
         });
