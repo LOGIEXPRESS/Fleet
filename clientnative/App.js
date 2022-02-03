@@ -16,6 +16,7 @@ import QuotTravel from "./Components/Travel/QuotTravel";
 import ChangePassword from "./Components/Profile/Edit/ChangePassword";
 import EditProfileCarrier from './Components/Profile/Edit/EditProfileCarrier';
 import EditVehicule from './Components/Profile/Edit/EditVehicule';
+import Home from './Components/Home/Home';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,11 @@ const App = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
+          <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
        
             <Stack.Screen
               name="Login"
