@@ -36,7 +36,7 @@ import CheckBox from "expo-checkbox";
 // import CheckBox from "@react-native-community/checkbox";
 import { ModalPicker } from "./ModalPicker";
 import { useDispatch, useSelector } from "react-redux";
-// import { registrarUsuario } from "../actions/index";
+import { adminregister } from "../../actions/index";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -196,9 +196,12 @@ const SignUp = () => {
     nombre: "",
     apellido: "",
     mail: "",
+    identification: 1234,
     contraseña: "",
     telefono: "",
-    rol: "Seleccionar Perfil...",
+    business:"",
+    secret:"",
+    photo:"URL"
   });
 
   const [check, setCheck] = useState(false);
@@ -215,26 +218,25 @@ const SignUp = () => {
   //   });
   // };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // en un objeto pongo lo que tengo en el estado inicial
-//     let rolex = undefined;
-//     if (chooseData === "◉ Usuario") {
-//       rolex = true;
-//     } if(chooseData === "◉ Transportista") {
-//       rolex = false;
-//     }
-//     const obj = {
-//       name: reg.nombre,
-//       lastName: reg.apellido,
-//       phone: reg.telefono,
-//       eMail: reg.mail,
-//       password: reg.contraseña,
-//       terminosCondiciones: check,
-//       role: rolex, 
-//     };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // en un objeto pongo lo que tengo en el estado inicial
+    // let rolex = undefined;
+    // if (chooseData === "◉ Usuario") {
+    //   rolex = true;
+    // } if(chooseData === "◉ Transportista") {
+    //   rolex = false;
+    // }
+    const obj = {
+      name: reg.nombre,
+      lastName: reg.apellido,
+      eMail: reg.mail,
+      identification: reg.identification,
+      phone: reg.telefono,
+      password: reg.contraseña
+    };
 
-//     //validaciones 
+    //validaciones 
 //     if (!obj.name ) {
 //       changeModalVisible3(true)
 //       return
@@ -269,19 +271,22 @@ const SignUp = () => {
 
 
 
-//     dispatch(registrarUsuario(obj));
-//     console.log("Estoy enviado", obj);
-//     setReg({
-//       nombre: "",
-//       apellido: "",
-//       mail: "",
-//       contraseña: "",
-//       telefono: "",
-//       // rol: "",
-//     });
+dispatch(adminregister(obj));
+ console.log("Estoy enviado", obj);
+    setReg({
+      nombre: "",
+      apellido: "",
+      mail: "",
+      identification: 1234,
+      contraseña: "",
+      telefono: "",
+      business:"",
+      secret:"",
+      photo:"URL"
+    });
 
 //     console.log(obj);
-//   };
+  };
 
   //funciones para cambiar e.value de los inputs
 
@@ -316,6 +321,19 @@ const SignUp = () => {
     });
   };
 
+  const handelChangeBusiness = (businessname) => {
+    setReg({
+      ...reg,
+      business: businessname,
+    });
+  };
+  
+  const  handelChangeSecretMail = (secret) => {
+    setReg({
+      ...reg,
+      secret: secret,
+    });
+  };
    ////--> IMAGE PICKER <-- ////
    const [selectedImage, setSelectedImage] = useState(null);
 
@@ -471,7 +489,6 @@ const SignUp = () => {
             style={styles.TextInput}
           ></TextInput>
           <TextInput
-            keyboardType={'phone-pad'}
             value={reg.business}
             onChangeText={(name) => handelChangeBusiness(name)}
             name="business"
@@ -486,10 +503,7 @@ const SignUp = () => {
             style={styles.TextInput}
           ></TextInput>
 
-
-
-
-          <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("ProfileAdmin")}>
+          <TouchableOpacity style={styles.Button} onPress={handleSubmit}>
             <Text style={styles.ButtonText} >
               Registrarme!
             </Text>
