@@ -4,6 +4,7 @@ import signUp from "./signup"
 import login from './login'
 
 import profileAdmin from './profiles'
+import review from './review'
 import registerfleet from './registerfleet'
 import uploadDataFake from './uploadDataFake'
 import travel from './travel'
@@ -22,5 +23,7 @@ router.use('/',login)
 router.use('/',profileAdmin)
 router.use('/',registerfleet)
 router.use('/',travel)
+
+router.use('/',review)
 
 export default router;
