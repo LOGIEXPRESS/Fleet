@@ -37,8 +37,12 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
     }else if (status === 'null'){
         return res.status(200).json({"msg":"Ausentes", absent})
     }else{
-       let  allCarrierStatus = await Carrier.findAll()
-       return res.status(200).json({allCarrierStatus})
+       let  allCarrierData = await Carrier.findAll({
+        include:[{
+            model:Signup
+        }]
+       })
+       return res.status(200).json({allCarrierData})
     }
 })
 
