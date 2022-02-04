@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { logiarUsuario, enviarToken, consultReg } from "./../../actions/index";
+import { logiarUsuario, enviarToken, consultReg } from "./../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/core";
