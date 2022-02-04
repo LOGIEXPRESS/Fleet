@@ -30,8 +30,13 @@ const Login = () => {
       console.log(login,"login")
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
-      }else{
+      }if(login.role===false){
+        console.log(login,"login")
+        if(login.identification === null){
+          navigation.navigate("CompleteProfileCarrier",{login})
+        }else{
         navigation.navigate("ProfileCarrier",{login})
+      }
         // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){

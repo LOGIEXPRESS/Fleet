@@ -320,7 +320,7 @@ const CompleteProfileCarrier = (props) => {
       patent: carrier.patent,
       model: carrier.model,
       color: carrier.color,
-      capacity: carrier.capacity,
+      capacity: parseInt(carrier.capacity),
     };
 
     // // VALIDACIONES
