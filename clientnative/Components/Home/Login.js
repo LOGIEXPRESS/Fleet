@@ -31,10 +31,11 @@ const Login = () => {
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
       }else{
-        navigation.navigate("ProfileCarrier");
+        navigation.navigate("CompleteProfileCarrier",{login})
+        // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
-        Alert.alert('deve ingresar datos')
+        Alert.alert('Debe ingresar datos')
         navigation.navigate('Login')
       }
       

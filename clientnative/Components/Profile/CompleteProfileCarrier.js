@@ -37,7 +37,7 @@ const CompleteProfileCarrier = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const datosCarrier = useSelector((store) => store.responseReg);
-
+  
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
   // const [chooseData10, setchooseData10] = useState();
