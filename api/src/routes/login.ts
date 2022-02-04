@@ -4,6 +4,7 @@ import config from '../../config/config';
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { Signup } from '../models/Signup';
+import { Op } from 'sequelize';
 
 
 const router = Router()
@@ -84,6 +85,34 @@ router.get('/adminExist',async(req:Request,res:Response,next:NextFunction)=>{
         next(err)
     }
 })
+
+router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+
+	const{eMail}=req.params
+
+	try{
+		let carrier= await Signup.findOne({
+			where:{
+
+				[Op.and]:[{eMail:eMail},{identification:null},{role:false}]
+
+				
+
+			}
+
+		})
+		if(!carrier){
+			return res.send(false)//carrir ya completo su perfil
+		}
+		return res.send(true)
+
+
+	}catch(err){
+		next(err)
+	}
+
+})
+
 
 
 export default router;	
