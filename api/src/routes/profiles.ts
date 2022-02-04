@@ -144,7 +144,7 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
         //track
         license ,brand ,patent ,model ,color ,capacity,
         //datos carrier
-        identification,photo,phone,secret,cbu} = req.body
+        identification,photo,phone,secret,cbu,locacion} = req.body
 
     if(idSignUp){
         try {		
@@ -164,21 +164,34 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 identification,
                 photo,
                 phone,
-                secret
+                secret,
+                locacion
                 
             }
             
             let carrier = await Carrier.create(newProfileCarrier)
+            let adminData= await Signup.findAll({
+                where:{
+                    role:true
+                }
+            })
+            let company=adminData[0]?.business
 
             let upDataSignUpCarrier= await Signup.update({
                 identification,
                 photo,
                 phone,
-                secret
+                secret,
+                locacion,
+                business:company||null
+                
             },
            { where:{
                 id:idSignUp
-            }})
+            },
+            
+        
+        })
             // .then(async(c)=>{
             //     if(!c){
             //         return res.send('carrier not found')
@@ -206,6 +219,10 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
 
 
 });
+
+// router.get('/profileCarrier/:id',async(req:Request,res:Response,next:NextFunction)=>{
+
+// })
 
 
 

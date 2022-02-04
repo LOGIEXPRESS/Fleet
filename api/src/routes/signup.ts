@@ -48,6 +48,8 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
                 eMail: dataUser?.eMail,
                 role: dataUser?.role,
                 photo: dataUser?.photo,
+                business:dataUser?.business,
+                saldo:dataUser?.saldo,
                 // idRole: dataUser.role,
                 mensaje: true
             }
