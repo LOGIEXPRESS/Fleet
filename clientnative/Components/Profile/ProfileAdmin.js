@@ -73,7 +73,7 @@ const ProfileAdmin = () => {
                   // data?.photo !== null
                   //   ? data.photo
                     // : 
-                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png",
+                    "https://user-images.githubusercontent.com/70895686/152531598-42e8c397-57d3-4bd0-8ea9-338fda1f501a.jpeg",
               }}
               style={styles.userImg}
             />

@@ -423,21 +423,21 @@ const CompleteProfileCarrier = (props) => {
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Santiago
+                {props.route.params.login.name}
                   {/* {datosCarrier.eMail} */}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Varela
+                {props.route.params.login.lastname}
                   {/* {datosCarrier.eMail} */}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="mail-outline"  style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  asd@gmail.com
+                {props.route.params.login.eMail}
                   {/* {datosCarrier.eMail} */}
                 </Text>
                 <TextInput style={styles.textPlaceholder} />
