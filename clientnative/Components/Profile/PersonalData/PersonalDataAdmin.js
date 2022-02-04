@@ -12,6 +12,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
+import * as SecureStore from "expo-secure-store";
 
 const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
@@ -23,6 +24,7 @@ const PersonalDataAdmin = () => {
   }
 
   const cerrarsesion = () =>{
+    console.log("cerrar sesion")
     save("token", "(result)")
     navigation.navigate('Login')
   }

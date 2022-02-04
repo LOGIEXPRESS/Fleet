@@ -31,7 +31,7 @@ const Login = () => {
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
       }else{
-        navigation.navigate("CompleteProfileCarrier",{login})
+        navigation.navigate("ProfileCarrier",{login})
         // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
@@ -53,9 +53,11 @@ const Login = () => {
     }  
   const nuevotoken = useSelector((store) => store.token);
   useEffect(() => {
-    /* console.log("verificando, que se envia", nuevotoken); */
+    if(nuevotoken !== ""){
+    console.log("verificando, que se envia", nuevotoken); 
     save("token", nuevotoken);
     console.log("se guarda el token?", nuevotoken)
+    }
   }, [nuevotoken]);
 
   
