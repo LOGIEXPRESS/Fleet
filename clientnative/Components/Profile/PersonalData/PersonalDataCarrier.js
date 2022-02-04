@@ -14,7 +14,7 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
 const PersonalDataCarrier = () => {
-  const data = useSelector((store) => store.responseLog);
+  const data = useSelector((store) => store.respToken);
   const navigation = useNavigation();
   const rating = 4;
 
@@ -55,22 +55,21 @@ const PersonalDataCarrier = () => {
             <Image
               source={{
                 uri:
-                  // data.photo !== null
-                  //   ? data.photo
-                  //   : 
-                    "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
+                  data?.photo === null || data?.photo === "url"
+                    ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                    : data?.photo,
               }}
               style={styles.userImg}
             />
           </View>
           <View style={styles.boxDatos} >
             <Text style={styles.userName}>
-              Matias Vila
-              {/* {data.name} {data.lastname} */}
+              
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
             </Text>
             <Text style={{ fontSize: hp('2.75%') }}>
-              {/* {data.eMail} */}
-              asd@.com
+              {data?.eMail}
+              
               </Text>
             <Text style={{ fontSize: hp('2.75%') }}>
               Buenos Aires

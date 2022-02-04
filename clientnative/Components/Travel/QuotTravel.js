@@ -18,11 +18,10 @@ import { useNavigation } from "@react-navigation/core";
 import { SafeAreaView } from "react-native";
 import { Input } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
-// import { cotizarViaje, requestTravel } from "../actions/index.js";
+import { quotTravel, desmount } from "../../Redux/actions/index.js";
 import { LogBox } from "react-native";
 import HeaderBar from "../Utils/HeaderBar.js";
 import { APIKEY_GOOGLE } from "@env"
-// import { desmount  } from "../actions/index";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -39,11 +38,11 @@ const QuotTravel = () => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
   }, [price]);
 
-  // useEffect(() => {
-  //   return () => {
-  //    dispatch(desmount())
-  //   };
-  // }, [dispatch]);
+  useEffect(() => {
+    return () => {
+     dispatch(desmount())
+    };
+  }, [dispatch]);
 
   /// --> ESTADO PARA LOS INPUTS <-- ///
   const [origen, setOrigen] = useState({
@@ -67,7 +66,7 @@ const QuotTravel = () => {
       destino: `${destino.latitude}/${destino.longitude}`,
       weight: parseFloat(weight),
     };
-    dispatch(cotizarViaje(quote));
+    dispatch(quotTravel(quote));
     console.log("Estoy enviado", quote);
   };
 

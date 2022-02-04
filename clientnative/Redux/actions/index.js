@@ -116,3 +116,17 @@ export function completeProfileCarrier(payload) {
       }
     };
 }
+
+export function quotTravel(payload) {
+  return async function (dispatch) {
+    try {
+      const quote = await axios.post(`${ API_URLS }/api/calculatePrice`, payload);
+      return dispatch({
+        type: "GET_PRICE_QUOTE",
+        payload: quote.data.price,
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}

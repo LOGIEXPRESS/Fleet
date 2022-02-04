@@ -15,7 +15,7 @@ import HeaderBar from "../../Utils/HeaderBar";
 import * as SecureStore from "expo-secure-store";
 
 const PersonalDataAdmin = () => {
-  const data = useSelector((store) => store.responseLog);
+  const data = useSelector((store) => store.respToken);
   const navigation = useNavigation();
 
   async function save(key, value) {
@@ -57,19 +57,20 @@ const PersonalDataAdmin = () => {
             resizeMode="contain"
               source={{
                 uri:
-                  // data.photo !== null
-                  //   ? data.photo
-                  //   : 
-                    // "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
-                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                  data?.photo === null || data?.photo === "url"
+                    // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png" 
+                    : data?.photo
+                    
+                    
               }}
               style={styles.userImg}
             />
           </View>
           <View style={styles.boxDatos} >
             <Text style={styles.userName}>
-              Matias Vila
-              {/* {data.name} {data.lastname} */}
+              {/* Matias Vila */}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
             </Text>
           </View>
         </View>

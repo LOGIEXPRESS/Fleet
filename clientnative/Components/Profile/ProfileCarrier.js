@@ -21,15 +21,16 @@ import HeaderBar from "../Utils/HeaderBar";
 
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
-  // const data = useSelector((store) => store.responseLog);
+  const data = useSelector((store) => store.respToken);
   const navigation = useNavigation();
 
   // console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
-  // useEffect(() => {
-  //   //console.log("data", data);
-  // }, [data]);
+  useEffect(() => {
+    console.log("data", data);
+
+  }, [data]);
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white'  }}>
@@ -45,25 +46,26 @@ const ProfileCarrier = () => {
             <Image
               source={{
                 uri:
-                  // data.photo !== null
-                    // ? data.photo
-                    // : 
-                    "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
+                  data?.photo === null || data?.photo === "url"
+                    ? "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000"
+                    : data?.photo
+                    
               }}
               style={styles.userImg}
             />
           </View>
           
           <Text style={styles.userName}>
-            Matías Gonzalez
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
             {/* {data.name} {data.lastname} */}
           </Text>
           <Text style={styles.empresaName}>
            Transportista en RadioTruck      
+           {/* Transportista en {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}  */}
           </Text>
           <Text style={styles.saldo}>
             Saldo:      $ 200.0000
-            {/* {data.name} {data.lastname} */}
+            
           </Text>
         </View>
         <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"),  }}>

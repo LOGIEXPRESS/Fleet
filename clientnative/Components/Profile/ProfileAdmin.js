@@ -22,13 +22,14 @@ import {
 
 const ProfileAdmin = () => {
   const login = useSelector((store) => store.login);
-  const data = useSelector((store) => store.responseLog);
+  const data = useSelector((store) => store.respToken);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const respPermisse = useSelector((store) => store.respPermisse);
 
   useEffect(() => {
-    console.log("ESTE ES  LOGIN",login);
+
+    console.log("ESTE ES  LOGIN",data);
   }, []);
   
 
@@ -70,21 +71,22 @@ const ProfileAdmin = () => {
             resizeMode="contain"
             source={{
                 uri:
-                  // data?.photo !== null
-                  //   ? data.photo
-                    // : 
-                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png",
+                  data?.photo === null || data?.photo === "url"
+                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                    : data?.photo
+                    
               }}
               style={styles.userImg}
             />
           </View>
           <Text style={styles.userName}>
-            Mauro Vila
-            {/* {data.name} {data.lastname} */}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
+            
           </Text>
           <Text style={styles.userName2}>
             Administrador de RadioTruck
-            {/* {data.name} {data.lastname} */}
+            {/* Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}  */}
+            
           </Text>
         </View>
 

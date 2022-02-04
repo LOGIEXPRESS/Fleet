@@ -36,7 +36,13 @@ import {
 const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const datosCarrier = useSelector((store) => store.responseReg);
+  const datosCarrier = useSelector((store) => store.respToken);
+
+
+  useEffect(() => {
+    console.log("SOY DATOS DEL CARRIER", datosCarrier);
+  }, [datosCarrier]);
+
   
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
@@ -140,9 +146,6 @@ const CompleteProfileCarrier = (props) => {
   //   setchooseData17(data);
   // };
 
-  // useEffect(() => {
-  //   console.log("SOY DATOS DEL CARRIER", datosCarrier);
-  // }, [datosCarrier]);
 
   /// --> ESTADO PARA EL MODAL <-- ///
   // const [isModalVisible, setisModalVisible] = useState(false);
@@ -424,21 +427,21 @@ const CompleteProfileCarrier = (props) => {
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Santiago
-                  {/* {datosCarrier.eMail} */}
+                  {/* Santiago */}
+                  {datosCarrier?.name}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Varela
-                  {/* {datosCarrier.eMail} */}
+                  {/* Varela */}
+                  {datosCarrier?.lastname}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="mail-outline"  style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  asd@gmail.com
+                 { datosCarrier?.eMail}
                   {/* {datosCarrier.eMail} */}
                 </Text>
                 <TextInput style={styles.textPlaceholder} />
