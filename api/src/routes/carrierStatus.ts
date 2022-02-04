@@ -4,14 +4,14 @@ import { Signup } from '../models/Signup';
 const router=Router()
 
 
-router.get('/Fleet',async(req:Request,res:Response,next:NextFunction)=>{
-    // let {role, status}=req.params
+// router.get('/Fleet',async(req:Request,res:Response,next:NextFunction)=>{
+//     // let {role, status}=req.params
 
-    let carriers = await Signup.findAll({where:{role: false}, raw: true}) // me busco a todos lo conductores
+//     let carriers = await Signup.findAll({where:{role: false}, raw: true}) // me busco a todos lo conductores
 
-    return carriers
+//     return carriers
 
-})
+// })
 
 router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
@@ -63,3 +63,5 @@ router.get('/CarrrierDetails',async(req:Request,res:Response,next:NextFunction)=
 })
 
 export default router
+
+
