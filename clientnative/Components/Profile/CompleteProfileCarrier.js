@@ -361,6 +361,7 @@ const CompleteProfileCarrier = (props) => {
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
     // changeModalVisible(true)
+    navigation.navigate("ProfileCarrier")
   }
 
   //// --> Inicio de componente <-- ////
