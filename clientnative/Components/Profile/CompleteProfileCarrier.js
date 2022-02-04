@@ -360,6 +360,7 @@ const CompleteProfileCarrier = (props) => {
 
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
+    navigation.navigate('ProfileCarrier')
     // changeModalVisible(true)
     navigation.navigate("ProfileCarrier")
   }
