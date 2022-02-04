@@ -168,7 +168,7 @@ const CompleteProfileCarrier = (props) => {
     phone: "",
     secret:"",
     cbu:"",
-    // location: "",
+    locacion: "",
     //Datos del vehiculo//
     license: "",
     brand: "",
@@ -248,10 +248,10 @@ const CompleteProfileCarrier = (props) => {
     });
   }
 
-  const handleChangeLocation = (location) => {
+  const handleChangeLocacion = (locacion) => {
     setCarrier({
       ...carrier,
-      location: location,
+      locacion: locacion,
     });
   };
 
@@ -312,7 +312,7 @@ const CompleteProfileCarrier = (props) => {
       // documentID: carrier.documentID,
       identification:Number(carrier.identification),//tine q ser un numero
       
-      // location: carrier.location,
+      locacion: carrier.locacion,
       photo: selectedImage||'url',
       phone:carrier.phone,
       secret:carrier.secret,
@@ -475,10 +475,10 @@ const CompleteProfileCarrier = (props) => {
               <View style={styles.viewsInputs}>
                 <Icon name="map-outline"  style={styles.icons} />
                 <TextInput
-                  value={carrier.location}
-                  onChangeText={(location) => handleChangeLocation(location)}
+                  value={carrier.locacion}
+                  onChangeText={(locacion) => handleChangeLocacion(locacion)}
                   placeholder="Ubicación de residencia actual"
-                  name="location"
+                  name="locacion"
                   style={styles.textPlaceholder}
                 />
               </View>

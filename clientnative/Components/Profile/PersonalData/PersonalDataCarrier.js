@@ -72,8 +72,8 @@ const PersonalDataCarrier = () => {
               
               </Text>
             <Text style={{ fontSize: hp('2.75%') }}>
-              Buenos Aires
-              {/* {data.location} */}
+              {/* Buenos Aires */}
+              {data.locacion}
               </Text>
           </View>
         </View>
