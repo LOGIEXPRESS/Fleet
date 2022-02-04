@@ -27,8 +27,8 @@ export class Carrier extends Model{
     @Column
     capacity!: number
 
-    @Column
-    status!: boolean
+    // @Column
+    // status!: boolean
  
     @BelongsTo(()=>Signup)
     carrier!:Signup

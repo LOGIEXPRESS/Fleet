@@ -139,7 +139,7 @@ router.get('/adminData/:id',async(req:Request,res:Response,next:NextFunction)=>{
 
 //ruta para completar tabla carrier 
 router.post('/carrierProfile', async (req: Request, res: Response, next: NextFunction) => {
-	
+	console.log("que llega?", req.body)
 	const {idSignUp ,
         //track
         license ,brand ,patent ,model ,color ,capacity,

@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/core";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
+import * as SecureStore from "expo-secure-store";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,6 +24,7 @@ const PersonalDataCarrier = () => {
   }
 
   const cerrarsesion = () =>{
+    console.log("cerrar sesion")
     save("token", "(result)")
     navigation.navigate('Login')
   }

@@ -171,6 +171,33 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 
 
 // })
+
+router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+
+    const{eMail}=req.params
+
+    try{
+        let carrier= await Signup.findOne({
+            where:{
+
+                [Op.and]:[{eMail:eMail},{identification:null},{role:false}]
+
+                
+
+            }
+
+        })
+        if(!carrier){
+            return res.send(false)//carrir ya completo su perfil
+        }
+        return res.send(true)
+
+
+    }catch(err){
+        next(err)
+    }
+
+})
 export default router
 
 
