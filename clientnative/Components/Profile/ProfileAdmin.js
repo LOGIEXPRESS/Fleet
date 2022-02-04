@@ -105,7 +105,7 @@ const ProfileAdmin = () => {
             style={styles.btnText}
             onPress={() => {
               
-              navigation.navigate("ProfileCarrier");
+              navigation.navigate("ViewFleet");
             }}
           >
             <Icon name="bus-outline" style={styles.icons} />

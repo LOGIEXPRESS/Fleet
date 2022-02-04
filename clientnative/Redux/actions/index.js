@@ -1,5 +1,25 @@
 import axios from "axios";
-import { API_URLS} from "@env"
+import { API_URLS } from "@env"
+
+
+
+
+export function addCarrier(props) {
+  return async function (dispatch) {
+    try {
+       const add = await axios.post(`${API_URLS}/api/registerfleet`, props) 
+       console.log("ESTO ES ADD", add.data)
+       return dispatch({
+         type: "ADD_CARRIER",
+         payload: add.data
+       })
+    } catch (error) {
+       console.log("Error", error) 
+    }
+  }
+}
+
+
 
 
 export function logiar(payload) {

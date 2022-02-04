@@ -36,7 +36,7 @@ import CheckBox from "expo-checkbox";
 // import CheckBox from "@react-native-community/checkbox";
 import { ModalPicker } from "./ModalPicker";
 import { useDispatch, useSelector } from "react-redux";
-import { adminregister } from "../../actions/index";
+import { adminregister } from "../../Redux/actions/index";
 
 const SignUp = () => {
   const dispatch = useDispatch();

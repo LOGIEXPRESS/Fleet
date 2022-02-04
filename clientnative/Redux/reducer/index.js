@@ -6,11 +6,12 @@ const initialState = {
   //hago un estado inicial
   login: null,
   token: "",
+  respAddCarrier: null,
   responseLog: null,
   respToken: null,
   adminreg: null,
 };
-
+console.log("ESTO ES EL INITAL STATE", initialState )
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -21,6 +22,11 @@ export default function rootReducer(state = initialState, action) {
         login: action.payload, //en registrarusuario meteme el action.payload
         token: action.token
       };
+    case "ADD_CARRIER":
+      return {
+        ...state,
+        respAddCarrier: action.payload
+      }
       case "TOKEN":
       return {
         ...state,

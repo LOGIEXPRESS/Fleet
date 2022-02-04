@@ -17,7 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderBar from "../Utils/HeaderBar";
-import { completeProfileCarrier } from "../../actions/index.js";
+import { completeProfileCarrier } from "../../Redux/actions/index.js";
 // import SimpleModal from "./SimpleModal.js";
 // import SimpleModal10 from "../AlertasComplete/SimpleModaldni.js";
 // import SimpleModal11 from "../AlertasComplete/SimpleModalzone.js";
@@ -360,6 +360,7 @@ const CompleteProfileCarrier = (props) => {
 
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
+    navigation.navigate('ProfileCarrier')
     // changeModalVisible(true)
     navigation.navigate("ProfileCarrier")
   }
