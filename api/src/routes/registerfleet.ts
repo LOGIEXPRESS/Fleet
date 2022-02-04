@@ -1,9 +1,12 @@
 import { Response, Request, Router, NextFunction } from 'express';
+import { FileTextChanges } from 'typescript';
+const { Op } = require("sequelize");
 const nodemailer = require('nodemailer');
 import { uuid } from 'uuidv4';
 const bcrypt = require("bcryptjs");
 const router = Router()
 import { Signup } from '../models/Signup';
+import { Carrier } from '../models/Carrier';
 
 router.get('/allan', async (req: Request, res: Response, next: NextFunction) => {
      
@@ -16,7 +19,25 @@ router.get('/allan', async (req: Request, res: Response, next: NextFunction) => 
     }
 });
 
-
+router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
+ 
+     var fleet=await Signup.findAll({
+        where: {role : { [Op.eq]: false } }
+            }
+        )
+        if(fleet.length===0){return res.send("No hay transportistas registrados");}
+        let arr:any=[]; let carrier:any=[];
+         for(var i=0;i < fleet.length;i++){
+           
+             carrier[i]=await Carrier.findAll({
+                where: {SignupId:fleet[i].id }
+                    }
+                )
+                arr[i]={transportista:fleet[i],vehiculo:carrier[i][0]};
+         }
+    
+        res.send(arr);
+    });
 router.post('/registerfleet', async (req: Request, res: Response, next: NextFunction) => {
     
   // const data1 = JSON.parse(req.body)
