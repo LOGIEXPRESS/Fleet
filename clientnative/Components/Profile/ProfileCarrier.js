@@ -22,14 +22,16 @@ import HeaderBar from "../Utils/HeaderBar";
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
   // const data = useSelector((store) => store.responseLog);
+  const datosCarrier = useSelector((store) => store.responseLog);
+  
   const navigation = useNavigation();
 
   // console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
-  // useEffect(() => {
-  //   //console.log("data", data);
-  // }, [data]);
+  useEffect(() => {
+    console.log("DATOS PROFILE CARRIER: ", datosCarrier);
+  }, [datosCarrier]);
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white'  }}>

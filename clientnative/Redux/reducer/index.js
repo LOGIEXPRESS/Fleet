@@ -10,6 +10,7 @@ const initialState = {
   responseLog: null,
   respToken: null,
   adminreg: null,
+  responseComoplitPerfilCarrier:null
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -38,6 +39,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         adminreg: action.payload,
       };
+      case"COMPLETE_PROFILE_CARRIER":
+      return{
+        ...state,
+        responseComoplitPerfilCarrier:action.payload
+      }
     
     default:
       return state;

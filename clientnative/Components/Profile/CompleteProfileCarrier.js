@@ -36,7 +36,7 @@ import {
 const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const datosCarrier = useSelector((store) => store.responseReg);
+  const datosCarrier = useSelector((store) => store.responseComoplitPerfilCarrier);
   
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
@@ -362,7 +362,7 @@ const CompleteProfileCarrier = (props) => {
     console.log("soy lo que se envia", obj);
     navigation.navigate('ProfileCarrier')
     // changeModalVisible(true)
-    navigation.navigate("ProfileCarrier")
+    
   }
 
   //// --> Inicio de componente <-- ////

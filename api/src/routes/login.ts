@@ -27,6 +27,8 @@ router.post('/login', async (req: Request, res: Response) => {
 		const compare = await bcryptjs.compare(password, user[0].password)
 
 		if (compare) {
+
+
 			const payload = {
 				eMail,
 				id: user[0].id,
@@ -37,10 +39,24 @@ router.post('/login', async (req: Request, res: Response) => {
 				phone: user[0].phone,
 				photo:  user[0].photo,
 			};
+			if(!user[0].identification && !user[0].role){
+				return res.json({
+					token: createToken(payload), // se crea el token
+					mensaje: 'Autenticación correcta', 
+					payload,
+					completPerfil:false
+				}).status(200);
+
+
+
+				
+			}
 
 			return res.json({
 				token: createToken(payload), // se crea el token
-				mensaje: 'Autenticación correcta', payload
+				mensaje: 'Autenticación correcta',
+				payload,
+				completPerfil:true
 			}).status(200);
 
 
