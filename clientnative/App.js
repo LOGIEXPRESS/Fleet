@@ -11,8 +11,8 @@ import ProfileAdmin from "./Components/Profile/ProfileAdmin";
 import ViewFleet from "./Components/Historial de viaje/ViewFleet"
 import NewCarrier from "./Components/Añadir Transportista/NewCarrier.js";
 import { LogBox } from 'react-native';
-import CompleteProfileCarrier from  "./Components/Profile/CompleteProfileCarrier";
-import AddTravel from  "./Components/Travel/AddTravel";
+import CompleteProfileCarrier from "./Components/Profile/CompleteProfileCarrier";
+import AddTravel from "./Components/Travel/AddTravel";
 import PersonalDataCarrier from "./Components/Profile/PersonalData/PersonalDataCarrier";
 import PersonalDataAdmin from "./Components/Profile/PersonalData/PersonalDataAdmin";
 import QuotTravel from "./Components/Travel/QuotTravel";
@@ -41,7 +41,7 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator>
 
-        {/*     <Stack.Screen
+                 <Stack.Screen
               name="Login"
               component={Login}
               options={{ headerShown: false }}
@@ -60,23 +60,23 @@ const App = () => {
               name="ProfileCarrier"
               component={ProfileCarrier}
               options={{ headerShown: false }}
-            /> */}
-         {/*    <Stack.Screen
-              name="ViewFleet"
-              component={ViewFleet}
-              options={{ headerShown: false }}
-            /> */}
+            />
             <Stack.Screen 
               name="startCheckout"
               component={startCheckout}
               options={{ headerShown: false }}
             />
-       {/*        <Stack.Screen
+            <Stack.Screen
+              name="ViewFleet"
+              component={ViewFleet}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="NewCarrier"
               component={NewCarrier}
               options={{ headerShown: false }}
-            /> */}
-      {/*       <Stack.Screen
+            />
+            <Stack.Screen
               name="CompleteProfileCarrier"
               component={CompleteProfileCarrier}
               options={{ headerShown: false }}
@@ -86,12 +86,12 @@ const App = () => {
               component={AddTravel}
               options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="PersonalDataCarrier"
               component={PersonalDataCarrier}
               options={{ headerShown: false }}
             />
-              <Stack.Screen
+            <Stack.Screen
               name="PersonalDataAdmin"
               component={PersonalDataAdmin}
               options={{ headerShown: false }}
@@ -106,7 +106,7 @@ const App = () => {
               component={ChangePassword}
               options={{ headerShown: false }}
             />
-             <Stack.Screen
+            <Stack.Screen
               name="EditVehicule"
               component={EditVehicule}
               options={{ headerShown: false }}
@@ -115,11 +115,11 @@ const App = () => {
               name="EditProfileCarrier"
               component={EditProfileCarrier}
               options={{ headerShown: false }}
-      />*/}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
     </StripeProvider>
-  ); 
+  );
 };
 export default App;

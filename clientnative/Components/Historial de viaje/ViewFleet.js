@@ -32,22 +32,22 @@ const HistorialDeViaje = () => {
         <Image source={require('../Utils/foto1.jpg')} style={styles.img} />
         <View style={styles.cardsText}>
           <Text style={styles.cardsName}>Bill Gate</Text>
-        <View style={styles.flexbtn}>
-          <TouchableOpacity style={styles.btnText}>
-            <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnText} onPress={navigation.navigate('startCheckout')}>
-            <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
-          </TouchableOpacity>
+          <View style={styles.flexbtn}>
+            <TouchableOpacity style={styles.btnText}>
+              <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('startCheckout')}>
+              <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
+            </TouchableOpacity>
           </View>
-          <View  style={styles.flexbtn}>
-          <TouchableOpacity style={styles.btnText}>
-            <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnText}>
-            <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.flexbtn}>
+            <TouchableOpacity style={styles.btnText}>
+              <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnText}>
+              <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     )
@@ -59,15 +59,21 @@ const HistorialDeViaje = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <HeaderBar screen={"null"} />
         <View style={styles.containerHeaders}>
-          <View style={{flexDirection: 'row'}}>
-          <Text style={{ fontSize: hp("2.5%"), fontWeight: "bold" }}>
-            Controla tu Flota
-          </Text>
-          <Icon name='stats-chart-outline' style={styles.icon} size={hp('2.4%')}/>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontSize: hp("2.5%"), fontWeight: "bold" }}>
+              Controla tu Flota
+            </Text>
+            <Icon name='stats-chart-outline' style={styles.icon} size={hp('2.4%')} />
           </View>
-          <Text style={styles.textViajes}>
-            Total de transportistas online (3)
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('NewCarrier')}>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.textViajes}>
+                Añade un nuevo transportista
+              </Text>
+              <Icon name='person-add-outline' style={styles.iconAdd} size={hp('2%')} />
+            </View>
+          </TouchableOpacity>
+
         </View>
         <View style={styles.viewAnterior}>
           <Text style={styles.textAnterior}>CON UN VIAJE EN CURSO</Text>
@@ -76,8 +82,8 @@ const HistorialDeViaje = () => {
         <View style={styles.containerCards}>
           <View style={styles.cards}>
             <View style={styles.insideCard}>
-            {CarrierContainer()}
-            {CarrierContainer()}
+              {CarrierContainer()}
+              {CarrierContainer()}
             </View>
           </View>
         </View>
@@ -88,7 +94,7 @@ const HistorialDeViaje = () => {
           <View style={styles.containerCards}>
             <View style={styles.cards}>
               <View style={styles.insideCard}>
-              {CarrierContainer()}
+                {CarrierContainer()}
               </View>
             </View>
           </View>
@@ -100,7 +106,7 @@ const HistorialDeViaje = () => {
           <View style={styles.containerCards}>
             <View style={styles.cards}>
               <View style={styles.insideCard}>
-              {CarrierContainer()}
+                {CarrierContainer()}
               </View>
             </View>
           </View>
@@ -114,12 +120,16 @@ export default HistorialDeViaje;
 
 const styles = StyleSheet.create({
   flexbtn: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     margin: wp('0.5%')
   },
   icon: {
-    marginLeft:hp('1%'),
-    
+    marginLeft: hp('1%'),
+
+  },
+  iconAdd: {
+    marginLeft: hp('1%'),
+    color: '#ff1c02'
   },
   img: {
     width: hp('12%'),
