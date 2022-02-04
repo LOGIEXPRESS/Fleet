@@ -15,7 +15,7 @@ import {
   Modal,
   Alert
 } from "react-native";
-import { logiar } from "../../actions/index";
+import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 const Login = () => {
@@ -31,10 +31,11 @@ const Login = () => {
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
       }else{
-        navigation.navigate("ProfileCarrier");
+        navigation.navigate("CompleteProfileCarrier",{login})
+        // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
-        Alert.alert('deve ingresar datos')
+        Alert.alert('Debe ingresar datos')
         navigation.navigate('Login')
       }
       

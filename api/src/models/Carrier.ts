@@ -35,5 +35,8 @@ export class Carrier extends Model{
    
    @ForeignKey(()=>Signup)
    SignupId!:string
+   
+   @Column
+   cbu!: string
 
 }

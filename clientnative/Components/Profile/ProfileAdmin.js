@@ -21,11 +21,17 @@ import {
 } from "react-native-responsive-screen";
 
 const ProfileAdmin = () => {
-  const resptoken = useSelector((store) => store.respToken);
+  const login = useSelector((store) => store.login);
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const respPermisse = useSelector((store) => store.respPermisse);
+
+  useEffect(() => {
+    console.log("ESTE ES  LOGIN",login);
+  }, []);
+  
+
 
   // useEffect(() => {
   //   if (respPermisse === "user sin travel") {
@@ -62,11 +68,11 @@ const ProfileAdmin = () => {
           <View style={{ marginTop: wp("7%") }}>
             <Image
             resizeMode="contain"
-              source={{
+            source={{
                 uri:
                   // data?.photo !== null
                   //   ? data.photo
-                  //   : 
+                    // : 
                     "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png",
               }}
               style={styles.userImg}
@@ -98,7 +104,8 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              navigation.navigate("ProfileCarrier");
+              
+              navigation.navigate("ViewFleet");
             }}
           >
             <Icon name="bus-outline" style={styles.icons} />

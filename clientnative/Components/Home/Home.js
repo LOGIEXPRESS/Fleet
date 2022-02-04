@@ -12,13 +12,13 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { logiarUsuario, enviarToken, consultReg } from "./../../actions/index";
+import { logiarUsuario, enviarToken, consultReg } from "./../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/core";
 import { Image } from "react-native-elements/dist/image/Image";
 
-const home = () => {
+const Home = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const resptoken = useSelector((store) => store.respToken);
@@ -133,6 +133,6 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
 
 

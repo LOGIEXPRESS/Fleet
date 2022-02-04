@@ -36,7 +36,7 @@ import CheckBox from "expo-checkbox";
 // import CheckBox from "@react-native-community/checkbox";
 import { ModalPicker } from "./ModalPicker";
 import { useDispatch, useSelector } from "react-redux";
-import { adminregister } from "../../actions/index";
+import { adminregister } from "../../Redux/actions/index";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -200,7 +200,7 @@ const SignUp = () => {
     telefono: "",
     business:"",
     secret:"",
-    photo:"URL"
+    photo:""
   });
 
   const [check, setCheck] = useState(false);
@@ -232,7 +232,7 @@ const SignUp = () => {
       eMail: reg.mail,
       identification: reg.identification,
       phone: reg.telefono,
-      photo:reg.photo,
+      photo:selectedImage,
       password: reg.contraseña,
       business:reg.business,
       secret:reg.secret,
@@ -284,7 +284,7 @@ dispatch(adminregister(obj));
       telefono: "",
       business:"",
       secret:"",
-      photo:"URL"
+      photo:""
     });
 navigation.navigate("Login")
 //     console.log(obj);
@@ -484,6 +484,7 @@ navigation.navigate("Login")
           ></TextInput>
 
           <TextInput
+          keyboardType={'phone-pad'}
             value={reg.telefono}
             onChangeText={(name) => handelChangeTel(name)}
             name="telefono"
