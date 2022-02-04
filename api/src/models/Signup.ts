@@ -53,5 +53,11 @@ export class Signup extends Model {
     @Column
     role!: boolean
 
+    @Column
+    saldo!:string
+
+    @Column
+    locacion!:string
+
 
 }
