@@ -83,7 +83,7 @@ export function completeProfileCarrier(payload) {
     return async function (dispatch) {
       try {
         const response = await axios.post(
-          `${API_URL}/api/carrierProfile`,
+          `${API_URLS}/api/carrierProfile`,
           payload
         );
         // console.log('Soy el console.log de response', response)

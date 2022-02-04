@@ -33,12 +33,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const CompleteProfileCarrier = () => {
+const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const datosCarrier = useSelector((store) => store.responseReg);
-
-  console.log(datosCarrier)
+//  console.log(props.route.params.login.id)
+ 
 
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
@@ -229,7 +229,7 @@ const CompleteProfileCarrier = () => {
   const handleChangeDocumentID = (documentID) => {
     setCarrier({
       ...carrier,
-      documentID: documentID,
+      identification: documentID,
     });
   };
 
@@ -239,6 +239,13 @@ const CompleteProfileCarrier = () => {
       license: license,
     });
   };
+
+  const handleChangePhone=(phone)=>{
+    setCarrier({
+      ...carrier,
+      phone: phone,
+    });
+  }
 
   const handleChangeLocation = (location) => {
     setCarrier({
@@ -283,12 +290,26 @@ const CompleteProfileCarrier = () => {
     });
   };
 
+  const handleChangeSecret=(secret)=>{
+    setCarrier({
+      ...carrier,
+      secret: secret,
+    });
+  }
+
+  const handleChangeCbu=(cbu)=>{
+    setCarrier({
+      ...carrier,
+      cbu: cbu,
+    });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const obj = {
-      idSignUp: datosCarrier.id,
+      idSignUp: props.route.params.login.id,
       // documentID: carrier.documentID,
-      identification:carrier.identification,//tine q ser un numero
+      identification:Number(carrier.identification),//tine q ser un numero
       
       // location: carrier.location,
       photo: selectedImage||'url',
@@ -341,7 +362,7 @@ const CompleteProfileCarrier = () => {
 
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
-    changeModalVisible(true)
+    // changeModalVisible(true)
   }
 
   //// --> Inicio de componente <-- ////
@@ -462,7 +483,7 @@ const CompleteProfileCarrier = () => {
                 <Icon name="color-fill-outline"  style={styles.icons} />
                 <TextInput
                   value={carrier.secret}
-                  onChangeText={(secret) => handleChangeLocation(secret)}
+                  onChangeText={(secret) => handleChangeSecret(secret)}
                   placeholder="¿Cuál es tu color favorito?"
                   name="secret"
                   style={styles.textPlaceholder}
