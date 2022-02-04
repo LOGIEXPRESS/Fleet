@@ -40,7 +40,11 @@ const App = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-
+          <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
                  <Stack.Screen
               name="Login"
               component={Login}
