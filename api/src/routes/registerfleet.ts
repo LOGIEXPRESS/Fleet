@@ -10,7 +10,7 @@ router.get('/allan', async (req: Request, res: Response, next: NextFunction) => 
     
     try {
             res.send("Allan Torres")
-    }
+    } 
     catch (err) {
         next(err)
     }
