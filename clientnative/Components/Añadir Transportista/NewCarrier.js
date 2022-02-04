@@ -29,8 +29,15 @@ const NewCarrier = () => {
 
 
     useEffect(() => {
-        console.log("ESTO SERIA LA RESPUESTAAAAAAAAAA", respAddCarrier)
-    
+        if(respAddCarrier){
+            if(respAddCarrier.mensaje === 'eMail usado'){
+                alert('EMAIL YA REGISTRADO EN LA APP');
+                setName('');
+                setLastname('');
+                setEMail('');
+            }
+        }
+        
     
     }, [respAddCarrier]);
     
@@ -46,6 +53,7 @@ const NewCarrier = () => {
        const check = checkEmail(data.eMail)
         if(check) {
             dispatch(addCarrier(data))
+            console.log(data)
         } else {
             alert('EL E-MAIL INGRESADO NO ES VALIDO')
         }
