@@ -68,7 +68,7 @@ const ProfileAdmin = () => {
           <View style={{ marginTop: wp("7%") }}>
             <Image
             resizeMode="contain"
-              source={{
+            source={{
                 uri:
                   // data?.photo !== null
                   //   ? data.photo

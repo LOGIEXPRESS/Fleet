@@ -17,7 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderBar from "../Utils/HeaderBar";
-// import { completeProfileCarrier } from "../../actions/index.js";
+import { completeProfileCarrier } from "../../actions/index.js";
 // import SimpleModal from "./SimpleModal.js";
 // import SimpleModal10 from "../AlertasComplete/SimpleModaldni.js";
 // import SimpleModal11 from "../AlertasComplete/SimpleModalzone.js";
@@ -33,7 +33,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-const CompleteProfileCarrier = () => {
+const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const datosCarrier = useSelector((store) => store.responseReg);
@@ -160,11 +160,14 @@ const CompleteProfileCarrier = () => {
 
   const [carrier, setCarrier] = useState({
     //Datos del carrier//
-    documentID: "",
-    license: "",
+    // documentID: "",
+    identification:"",
     phone: "",
-    location: "",
+    secret:"",
+    cbu:"",
+    // location: "",
     //Datos del vehiculo//
+    license: "",
     brand: "",
     patent: "",
     model: "",
@@ -224,7 +227,7 @@ const CompleteProfileCarrier = () => {
   const handleChangeDocumentID = (documentID) => {
     setCarrier({
       ...carrier,
-      documentID: documentID,
+      identification: documentID,
     });
   };
 
@@ -234,6 +237,13 @@ const CompleteProfileCarrier = () => {
       license: license,
     });
   };
+
+  const handleChangePhone=(phone)=>{
+    setCarrier({
+      ...carrier,
+      phone: phone,
+    });
+  }
 
   const handleChangeLocation = (location) => {
     setCarrier({
@@ -278,61 +288,80 @@ const CompleteProfileCarrier = () => {
     });
   };
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   const obj = {
-  //     id: datosCarrier.id,
-  //     documentID: carrier.documentID,
-  //     license: carrier.license,
-  //     location: carrier.location,
-  //     photo: selectedImage,
-  //     // Vehicule //
-  //     brand: carrier.brand,
-  //     patent: carrier.patent,
-  //     model: carrier.model,
-  //     color: carrier.color,
-  //     capacity: carrier.capacity,
-  //   };
+  const handleChangeSecret=(secret)=>{
+    setCarrier({
+      ...carrier,
+      secret: secret,
+    });
+  }
 
-  //   // VALIDACIONES
-  //   if (!obj.documentID) {
-  //     changeModalVisible10(true);
-  //     return;
-  //   }
+  const handleChangeCbu=(cbu)=>{
+    setCarrier({
+      ...carrier,
+      cbu: cbu,
+    });
+  }
 
-  //   if (!obj.location) {
-  //     changeModalVisible11(true);
-  //     return;
-  //   }
-  //   if (!obj.license) {
-  //     changeModalVisible12(true);
-  //     return;
-  //   }
-  //   if (!obj.brand) {
-  //     changeModalVisible13(true);
-  //     return;
-  //   }
-  //   if (!obj.patent) {
-  //     changeModalVisible14(true);
-  //     return;
-  //   }
-  //   if (!obj.model) {
-  //     changeModalVisible15(true);
-  //     return;
-  //   }
-  //   if (!obj.color) {
-  //     changeModalVisible16(true);
-  //     return;
-  //   }
-  //   if (!obj.capacity) {
-  //     changeModalVisible17(true);
-  //     return;
-  //   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    const obj = {
+      idSignUp: props.route.params.login.id,
+      // documentID: carrier.documentID,
+      identification:Number(carrier.identification),//tine q ser un numero
+      
+      // location: carrier.location,
+      photo: selectedImage||'url',
+      phone:carrier.phone,
+      secret:carrier.secret,
+      cbu:carrier.cbu,
+      // Vehicule //
+      license: carrier.license,
+      brand: carrier.brand,
+      patent: carrier.patent,
+      model: carrier.model,
+      color: carrier.color,
+      capacity: carrier.capacity,
+    };
 
-  //   dispatch(completeProfileCarrier(obj));
-  //   console.log("soy lo que se envia", obj);
-  //   changeModalVisible(true)
-  // }
+    // // VALIDACIONES
+    // if (!obj.documentID) {
+    //   changeModalVisible10(true);
+    //   return;
+    // }
+
+    // if (!obj.location) {
+    //   changeModalVisible11(true);
+    //   return;
+    // }
+    // if (!obj.license) {
+    //   changeModalVisible12(true);
+    //   return;
+    // }
+    // if (!obj.brand) {
+    //   changeModalVisible13(true);
+    //   return;
+    // }
+    // if (!obj.patent) {
+    //   changeModalVisible14(true);
+    //   return;
+    // }
+    // if (!obj.model) {
+    //   changeModalVisible15(true);
+    //   return;
+    // }
+    // if (!obj.color) {
+    //   changeModalVisible16(true);
+    //   return;
+    // }
+    // if (!obj.capacity) {
+    //   changeModalVisible17(true);
+    //   return;
+    // }
+
+    dispatch(completeProfileCarrier(obj));
+    console.log("soy lo que se envia", obj);
+    // changeModalVisible(true)
+  }
 
   //// --> Inicio de componente <-- ////
 
@@ -452,7 +481,7 @@ const CompleteProfileCarrier = () => {
                 <Icon name="color-fill-outline"  style={styles.icons} />
                 <TextInput
                   value={carrier.secret}
-                  onChangeText={(secret) => handleChangeLocation(secret)}
+                  onChangeText={(secret) => handleChangeSecret(secret)}
                   placeholder="¿Cuál es tu color favorito?"
                   name="secret"
                   style={styles.textPlaceholder}
@@ -544,7 +573,7 @@ const CompleteProfileCarrier = () => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.btnEditar} onPress={() => navigation.navigate("AddTravel")}>
+              <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
                 <Text style={styles.textBtn}>Finalizar</Text>
                 {/* MODAL */}
                 
