@@ -149,7 +149,7 @@ const NewCarrier = () => {
                 <View style={styles.containerCards}>
                     <View style={styles.cards}>
                         <View style={styles.insideCard}>
-                            {fleet === null ? <ActivityIndicator size="large" color="#0000ff" /> :
+                            {fleet ?
                                 fleet.map((user, index) => {
                                     
                                     return (
@@ -168,7 +168,7 @@ const NewCarrier = () => {
                                             </View>
                                         </View>
                                     )
-                                })
+                                }):  <ActivityIndicator size="large" color="#0000ff" /> 
                             }
                         </View>
                     </View>

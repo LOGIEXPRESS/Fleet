@@ -38,7 +38,7 @@ router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
         where: {role : { [Op.eq]: false } }
             }
         )
-        if(fleet.length===0){return res.send("No hay transportistas registrados");}
+        if(fleet.length===0){return res.send(null);}
         let arr:any=[]; let carrier:any=[];
          for(var i=0;i < fleet.length;i++){
            

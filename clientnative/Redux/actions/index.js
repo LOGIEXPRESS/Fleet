@@ -2,7 +2,20 @@ import axios from "axios";
 import { API_URLS } from "@env"
 
 
+export function updatePerfil (payload) {
+  return async function (dispatch) {
+    try {
+      const update = await axios.post(`${API_URLS}/api/updateUser`, payload)
+      return dispatch({
+        type: 'UPDATE_PERFIL',
+        payload: update.data
+      })
 
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
 
 export function reset(){
   return async function (dispatch){
