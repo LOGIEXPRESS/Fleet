@@ -21,10 +21,10 @@ import HeaderBar from "../Utils/HeaderBar";
 
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
-  const data = useSelector((store) => store.respToken);
+  const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
-  // console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
+  console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
   useEffect(() => {
@@ -34,14 +34,14 @@ const ProfileCarrier = () => {
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white'  }}>
-      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+      {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
-        </View>
+        </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-           <View style={{ marginTop: wp("3%")  }}>
+           <View style={{ marginTop: wp("12%")  }}>
             
             <Image
               source={{
@@ -56,12 +56,12 @@ const ProfileCarrier = () => {
           </View>
           
           <Text style={styles.userName}>
-            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
-            {/* {data.name} {data.lastname} */}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
+            {/* {data.name} {data.lastName} */}
           </Text>
           <Text style={styles.empresaName}>
-           Transportista en RadioTruck      
-           {/* Transportista en {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}  */}
+           {/* Transportista en RadioTruck       */}
+           Transportista en {data?.business} 
           </Text>
           <Text style={styles.saldo}>
             Saldo:      $ 200.0000

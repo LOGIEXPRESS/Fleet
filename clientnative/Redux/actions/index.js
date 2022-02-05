@@ -106,10 +106,10 @@ export function completeProfileCarrier(payload) {
           `${API_URLS}/api/carrierProfile`,
           payload
         );
-        // console.log('Soy el console.log de response', response)
+        console.log('Soy el console.log de responsecomplete', response.data.payload2[1][0])
         return dispatch({
           type: "COMPLETE_PROFILE_CARRIER",
-          payload: response.data,
+          payload: response.data.payload2[1][0],
         });
       } catch (error) {
         console.log(error.response);

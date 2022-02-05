@@ -22,11 +22,13 @@ const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const login = useSelector((store) => store.login);
+  const login = useSelector((store) => store.responseLog);
 
   
   useEffect(() => {
-    if (login !== null) {
+    console.log("se activa el login?",login)
+    if (login?.business !== undefined) {
+      console.log("que tiene loginbusiness", login?.business)
       console.log(login,"login")
       if(login.role === true){
         navigation.navigate("ProfileAdmin");

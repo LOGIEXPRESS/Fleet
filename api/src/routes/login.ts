@@ -34,10 +34,12 @@ router.post('/login', async (req: Request, res: Response) => {
 				id: user[0].id,
 				role: user[0].role,
 				name: user[0].name,
-				lastname: user[0].lastName,
+				lastName: user[0].lastName,
                 identification:user[0].identification,
 				phone: user[0].phone,
 				photo:  user[0].photo,
+				locacion: user[0].locacion,
+				business: user[0].business,
 			};
 			if(!user[0].identification && !user[0].role){
 				return res.json({
@@ -67,7 +69,7 @@ router.post('/login', async (req: Request, res: Response) => {
 				role:1,
 				// role: user[0].role,
 				name: user[0].name,
-				lastname: user[0].lastName,
+				lastName: user[0].lastName,
 				phone: user[0].phone,
 			};
 			return res.json({

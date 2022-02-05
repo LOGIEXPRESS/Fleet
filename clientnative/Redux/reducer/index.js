@@ -24,7 +24,7 @@ export default function rootReducer(state = initialState, action) {
     case "LOGEO":
       return {
         ...state,
-        login: action.payload, //en registrarusuario meteme el action.payload
+        responseLog: action.payload, //en registrarusuario meteme el action.payload
         token: action.token
       };
     case "ADD_CARRIER":
@@ -56,6 +56,11 @@ export default function rootReducer(state = initialState, action) {
           return {
             ...state,
             price: action.payload,
+          };
+          case "COMPLETE_PROFILE_CARRIER":
+          return {
+            ...state,
+            responseLog: action.payload,
           };
     
     default:

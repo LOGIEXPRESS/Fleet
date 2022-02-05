@@ -36,11 +36,14 @@ import {
 const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const datosCarrier = useSelector((store) => store.respToken);
+  const datosCarrier = useSelector((store) => store.responseLog);
 
 
   useEffect(() => {
     console.log("SOY DATOS DEL CARRIER", datosCarrier);
+    if(datosCarrier.business !== null){
+    navigation.navigate('ProfileCarrier')
+    }
   }, [datosCarrier]);
 
   
@@ -363,7 +366,7 @@ const CompleteProfileCarrier = (props) => {
 
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
-    navigation.navigate('ProfileCarrier')
+   
     // changeModalVisible(true)
     
   }
@@ -435,7 +438,7 @@ const CompleteProfileCarrier = (props) => {
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
                   {/* Varela */}
-                  {datosCarrier?.lastname}
+                  {datosCarrier?.lastName}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>

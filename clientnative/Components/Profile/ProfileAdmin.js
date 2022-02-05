@@ -21,8 +21,8 @@ import {
 } from "react-native-responsive-screen";
 
 const ProfileAdmin = () => {
-  const login = useSelector((store) => store.login);
-  const data = useSelector((store) => store.respToken);
+  // const login = useSelector((store) => store.login);
+  const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const respPermisse = useSelector((store) => store.respPermisse);
@@ -58,15 +58,15 @@ const ProfileAdmin = () => {
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white' }}>
-       <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
-        </View>
+        </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("7%") }}>
+          <View style={{ marginTop: wp("12%") }}>
             <Image
             resizeMode="contain"
             source={{
@@ -80,12 +80,12 @@ const ProfileAdmin = () => {
             />
           </View>
           <Text style={styles.userName}>
-            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             
           </Text>
           <Text style={styles.userName2}>
-            Administrador de RadioTruck
-            {/* Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}  */}
+            {/* Administrador de RadioTruck */}
+            Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)} 
             
           </Text>
         </View>

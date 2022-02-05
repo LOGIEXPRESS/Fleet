@@ -43,7 +43,7 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
             const payload = {
                 id: dataUser?.id,
                 name: dataUser?.name,
-                lastname: dataUser?.lastName,
+                lastName: dataUser?.lastName,
                 phone: dataUser?.phone,
                 eMail: dataUser?.eMail,
                 role: dataUser?.role,

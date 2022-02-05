@@ -14,7 +14,7 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
 const PersonalDataCarrier = () => {
-  const data = useSelector((store) => store.respToken);
+  const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const rating = 4;
 
@@ -65,7 +65,7 @@ const PersonalDataCarrier = () => {
           <View style={styles.boxDatos} >
             <Text style={styles.userName}>
               
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             </Text>
             <Text style={{ fontSize: hp('2.75%') }}>
               {data?.eMail}

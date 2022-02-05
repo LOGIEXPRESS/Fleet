@@ -15,7 +15,7 @@ import HeaderBar from "../../Utils/HeaderBar";
 import * as SecureStore from "expo-secure-store";
 
 const PersonalDataAdmin = () => {
-  const data = useSelector((store) => store.respToken);
+  const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
   async function save(key, value) {
@@ -70,7 +70,7 @@ const PersonalDataAdmin = () => {
           <View style={styles.boxDatos} >
             <Text style={styles.userName}>
               {/* Matias Vila */}
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastname.charAt(0).toUpperCase() + data?.lastname.slice(1)}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             </Text>
           </View>
         </View>
