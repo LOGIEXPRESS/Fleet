@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
 // import { requestPermisse, deletePermisse } from "./../actions/index";
 import { useSelector, useDispatch } from "react-redux";
+import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
 import {
   widthPercentageToDP as wp,
@@ -20,11 +21,18 @@ import {
 } from "react-native-responsive-screen";
 
 const ProfileAdmin = () => {
-  const resptoken = useSelector((store) => store.respToken);
+  // const login = useSelector((store) => store.login);
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const respPermisse = useSelector((store) => store.respPermisse);
+
+  useEffect(() => {
+
+    console.log("ESTE ES  LOGIN",data);
+  }, []);
+  
+
 
   // useEffect(() => {
   //   if (respPermisse === "user sin travel") {
@@ -50,31 +58,35 @@ const ProfileAdmin = () => {
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white' }}>
+       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+        <HeaderBar  screen={'null'} style={{color:"white"}}/>
+        </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("10%") }}>
+          <View style={{ marginTop: wp("12%") }}>
             <Image
             resizeMode="contain"
-              source={{
+            source={{
                 uri:
-                  // data?.photo !== null
-                  //   ? data.photo
-                  //   : 
-                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png",
+                  data?.photo === null || data?.photo === "url"
+                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                    : data?.photo
+                    
               }}
               style={styles.userImg}
             />
           </View>
           <Text style={styles.userName}>
-            Mauro Vila
-            {/* {data.name} {data.lastname} */}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
+            
           </Text>
           <Text style={styles.userName2}>
-            Administrador de RadioTruck
-            {/* {data.name} {data.lastname} */}
+            {/* Administrador de RadioTruck */}
+            Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)} 
+            
           </Text>
         </View>
 
@@ -83,7 +95,7 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              navigation.navigate("DatosPersonalesUser");
+              navigation.navigate("PersonalDataAdmin");
             }}
           >
             <Icon name="person-outline" style={styles.icons} />
@@ -94,7 +106,8 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              navigation.navigate("HistorialDeViaje");
+              
+              navigation.navigate("ViewFleet");
             }}
           >
             <Icon name="bus-outline" style={styles.icons} />
@@ -104,7 +117,7 @@ const ProfileAdmin = () => {
 
           <TouchableOpacity
             style={styles.btnText}
-            onPress={() => navigation.navigate("CotizarViaje")}
+            onPress={() => navigation.navigate("QuotTravel")}
           >
             <Icon name="calculator-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt3}>Cotizar viaje</Text>
@@ -114,7 +127,7 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
-            onPress={() => navigation.navigate("ProfileCarrier")}
+            onPress={() => navigation.navigate("AddTravel")}
           >
             <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}
@@ -235,7 +248,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: hp('3.5%'),
-    height: hp('8%'),
+    height: hp('9.5%'),
     fontWeight: '700',
   },
   userBtnTxt3: {

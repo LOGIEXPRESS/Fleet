@@ -1044,6 +1044,11 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     "to-fast-properties" "^2.0.0"
 
+"@blackbox-vision/react-native-mercadopago-px@^0.7.2":
+  "integrity" "sha512-NOULPf0b3c8yws4YI8bXmp1ATkmPErk8sK4s+uMhxemAzNfq7If1y465CE2t3Ng6LKmpJZMw2K8A430piHaksQ=="
+  "resolved" "https://registry.npmjs.org/@blackbox-vision/react-native-mercadopago-px/-/react-native-mercadopago-px-0.7.2.tgz"
+  "version" "0.7.2"
+
 "@cnakazawa/watch@^1.0.3":
   "integrity" "sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ=="
   "resolved" "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.4.tgz"
@@ -2811,9 +2816,9 @@
   "version" "10.0.1"
 
 "expo-location@~14.0.1":
-  "integrity" "sha512-P3Mrty7uxezBFE9SwYhskeNwwHAapw/6lrLj2fYILgJkNiXv28ns5CwSNsTtJ+MfeHeV93t20qrkk7kJ30SQVw=="
-  "resolved" "https://registry.npmjs.org/expo-location/-/expo-location-14.0.1.tgz"
-  "version" "14.0.1"
+  "integrity" "sha512-xFlj03NM0g9LZfWyIyL8q6AIXDhXskctX96806QGqZKv9C+JI2osEiTiyFxG8ei1MeTJojHfx+E07ORuByWiMw=="
+  "resolved" "https://registry.npmjs.org/expo-location/-/expo-location-14.0.2.tgz"
+  "version" "14.0.2"
   dependencies:
     "@expo/config-plugins" "^4.0.2"
     "unimodules-task-manager-interface" "~7.1.0"
@@ -2838,9 +2843,9 @@
     "invariant" "^2.2.4"
 
 "expo-secure-store@~11.1.0":
-  "integrity" "sha512-LyCLqsoibP90Td4mSWc+un+xGNYnIuGOrfbp2aG2KAn1ZGcDL6muxIaFj7a/4Kh+EiCIoU5EPb1YjOATbmaBnQ=="
-  "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-11.1.0.tgz"
-  "version" "11.1.0"
+  "integrity" "sha512-pCajYYoZbl8IORxXw83SLUsWlU6a+HmjJZP8oiSvkG1KnZ5gPepiAMRRmcFUApYXBgiOvKRGOBEUfVwmR7yO4A=="
+  "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-11.1.1.tgz"
+  "version" "11.1.1"
 
 "expo-status-bar@~1.2.0":
   "integrity" "sha512-pVZZ/kDCXFK79E4dCtRecs3XLC8aiwlciutSd/fFmUPJSQZ1Txia6hlKajPt0GAYft8/YnT0V3URXzWZOBniYQ=="

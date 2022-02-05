@@ -45,10 +45,19 @@ export class Signup extends Model {
     password!: string
 
     @Column
-    terminosCondiciones!: boolean
+    secret!: string
+
+    @Column
+    business!: string
 
     @Column
     role!: boolean
+
+    @Column
+    saldo!:string
+
+    @Column
+    locacion!:string
 
 
 }

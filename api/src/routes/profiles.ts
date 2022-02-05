@@ -139,8 +139,12 @@ router.get('/adminData/:id',async(req:Request,res:Response,next:NextFunction)=>{
 
 //ruta para completar tabla carrier 
 router.post('/carrierProfile', async (req: Request, res: Response, next: NextFunction) => {
-	
-	const {idSignUp ,license ,brand ,patent ,model ,color ,capacity} = req.body
+	console.log("que llega?", req.body)
+	const {idSignUp ,
+        //track
+        license ,brand ,patent ,model ,color ,capacity,
+        //datos carrier
+        identification,photo,phone,secret,cbu,locacion} = req.body
 
     if(idSignUp){
         try {		
@@ -153,13 +157,44 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 model,
                 color,
                 capacity,
+                cbu,
                 SignupId:idSignUp
+            }
+            let signUpCarrier={
+                identification,
+                photo,
+                phone,
+                secret,
+                locacion
+                
             }
             
             let carrier = await Carrier.create(newProfileCarrier)
+            let adminData= await Signup.findAll({
+                where:{
+                    role:true
+                }
+            })
+            let company=adminData[0]?.business
 
-            return res.json({menssage:'carrier created',payload:carrier})
-
+            let upDataSignUpCarrier= await Signup.update({
+                identification,
+                photo,
+                phone,
+                secret,
+                locacion,
+                business:company||null
+                
+            },
+           { where:{
+                id:idSignUp
+            },
+            returning: true,
+            
+        
+        })
+           
+            return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier})
         
         } catch (err) {
             next(err)
@@ -174,6 +209,10 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
 
 
 });
+
+// router.get('/profileCarrier/:id',async(req:Request,res:Response,next:NextFunction)=>{
+
+// })
 
 
 

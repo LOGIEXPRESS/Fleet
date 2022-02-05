@@ -26,11 +26,17 @@ export class Carrier extends Model{
 
     @Column
     capacity!: number
+
+    // @Column
+    // status!: boolean
  
     @BelongsTo(()=>Signup)
     carrier!:Signup
    
    @ForeignKey(()=>Signup)
    SignupId!:string
+   
+   @Column
+   cbu!: string
 
 }
