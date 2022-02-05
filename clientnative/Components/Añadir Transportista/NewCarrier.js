@@ -151,6 +151,7 @@ const NewCarrier = () => {
                         <View style={styles.insideCard}>
                             {fleet === null ? <ActivityIndicator size="large" color="#0000ff" /> :
                                 fleet.map((user, index) => {
+                                    
                                     return (
                                         <View style={styles.viewUsers} key={index}>
                                             <View style={{ flexDirection: 'row' }}>
