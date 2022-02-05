@@ -190,10 +190,7 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 id:idSignUp
             },
             returning: true,
-            
-        
-        })
-           
+        }) 
             return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier})
         
         } catch (err) {
