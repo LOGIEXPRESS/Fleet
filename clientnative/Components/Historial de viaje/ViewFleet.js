@@ -34,7 +34,7 @@ const HistorialDeViaje = () => {
           <Text style={styles.cardsName}>Bill Gate</Text>
           <View style={styles.flexbtn}>
             <TouchableOpacity style={styles.btnText}>
-              <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES </Text>
+              <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('startCheckout')}>
               <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>

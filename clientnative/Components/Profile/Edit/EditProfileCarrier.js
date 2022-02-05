@@ -129,7 +129,7 @@ const handleChangeName = (name) => {
   });
 };
 
-const handleChangeLastName = (lastName) => {
+const handleChangelastName = (lastName) => {
   setUser({
     ...user,
     lastName : lastName,
@@ -239,10 +239,10 @@ const handleChangePhone = (phone) => {
             <TextInput
              value={user.lastName}
               placeholder="Apellido"
-              name="lastname"
+              name="lastName"
               style={styles.textPlaceholder}
               onChangeText={(lastName) =>
-                handleChangeLastName(lastName)
+                handleChangelastName(lastName)
               }
             />
           </View>

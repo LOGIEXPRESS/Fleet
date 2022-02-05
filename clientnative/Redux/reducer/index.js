@@ -10,6 +10,11 @@ const initialState = {
   responseLog: null,
   respToken: null,
   adminreg: null,
+  editPassword: [],
+  editarPerfilUser: [],
+  editarPerfilCarrier: [],
+  editVehicule: [],
+  price: []
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -19,7 +24,7 @@ export default function rootReducer(state = initialState, action) {
     case "LOGEO":
       return {
         ...state,
-        login: action.payload, //en registrarusuario meteme el action.payload
+        responseLog: action.payload, //en registrarusuario meteme el action.payload
         token: action.token
       };
     case "ADD_CARRIER":
@@ -38,6 +43,25 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         adminreg: action.payload,
       };
+      case "DESMOUNT":
+        return {
+          ...state,
+          editPassword: [],
+          editarPerfilUser: [],
+          editarPerfilCarrier: [],
+          editVehicule: [],
+          price: []
+        };
+        case "GET_PRICE_QUOTE":
+          return {
+            ...state,
+            price: action.payload,
+          };
+          case "COMPLETE_PROFILE_CARRIER":
+          return {
+            ...state,
+            responseLog: action.payload,
+          };
     
     default:
       return state;

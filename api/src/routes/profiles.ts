@@ -139,12 +139,12 @@ router.get('/adminData/:id',async(req:Request,res:Response,next:NextFunction)=>{
 
 //ruta para completar tabla carrier 
 router.post('/carrierProfile', async (req: Request, res: Response, next: NextFunction) => {
-	
+	console.log("que llega?", req.body)
 	const {idSignUp ,
         //track
         license ,brand ,patent ,model ,color ,capacity,
         //datos carrier
-        identification,photo,phone,secret,cbu} = req.body
+        identification,photo,phone,secret,cbu,locacion} = req.body
 
     if(idSignUp){
         try {		
@@ -164,34 +164,34 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 identification,
                 photo,
                 phone,
-                secret
+                secret,
+                locacion
                 
             }
             
             let carrier = await Carrier.create(newProfileCarrier)
+            let adminData= await Signup.findAll({
+                where:{
+                    role:true
+                }
+            })
+            let company=adminData[0]?.business
 
             let upDataSignUpCarrier= await Signup.update({
                 identification,
                 photo,
                 phone,
-                secret
+                secret,
+                locacion,
+                business:company||null
+                
             },
            { where:{
                 id:idSignUp
-            }})
-            // .then(async(c)=>{
-            //     if(!c){
-            //         return res.send('carrier not found')
-            //     }
-            //     await c.update({identification})
-            // })
-            // if(!upDataSignUpCarrier){
-            //     return res.send('carrier not found')
-            // }
-            // await upDataSignUpCarrier.update({identification,photo,secret})
-
-            return res.json({menssage:'carrier created',payload:carrier})
-
+            },
+            returning: true,
+        }) 
+            return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier})
         
         } catch (err) {
             next(err)
@@ -206,6 +206,10 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
 
 
 });
+
+// router.get('/profileCarrier/:id',async(req:Request,res:Response,next:NextFunction)=>{
+
+// })
 
 
 

@@ -36,7 +36,16 @@ import {
 const CompleteProfileCarrier = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const datosCarrier = useSelector((store) => store.responseReg);
+  const datosCarrier = useSelector((store) => store.responseLog);
+
+
+  useEffect(() => {
+    console.log("SOY DATOS DEL CARRIER", datosCarrier);
+    if(datosCarrier.business !== null){
+    navigation.navigate('ProfileCarrier')
+    }
+  }, [datosCarrier]);
+
   
   // // validaciones dni
   // const [isModalVisible10, setisModalVisible10] = useState(false);
@@ -140,9 +149,6 @@ const CompleteProfileCarrier = (props) => {
   //   setchooseData17(data);
   // };
 
-  // useEffect(() => {
-  //   console.log("SOY DATOS DEL CARRIER", datosCarrier);
-  // }, [datosCarrier]);
 
   /// --> ESTADO PARA EL MODAL <-- ///
   // const [isModalVisible, setisModalVisible] = useState(false);
@@ -165,7 +171,7 @@ const CompleteProfileCarrier = (props) => {
     phone: "",
     secret:"",
     cbu:"",
-    // location: "",
+    locacion: "",
     //Datos del vehiculo//
     license: "",
     brand: "",
@@ -245,10 +251,10 @@ const CompleteProfileCarrier = (props) => {
     });
   }
 
-  const handleChangeLocation = (location) => {
+  const handleChangeLocacion = (locacion) => {
     setCarrier({
       ...carrier,
-      location: location,
+      locacion: locacion,
     });
   };
 
@@ -309,7 +315,7 @@ const CompleteProfileCarrier = (props) => {
       // documentID: carrier.documentID,
       identification:Number(carrier.identification),//tine q ser un numero
       
-      // location: carrier.location,
+      locacion: carrier.locacion,
       photo: selectedImage||'url',
       phone:carrier.phone,
       secret:carrier.secret,
@@ -320,7 +326,7 @@ const CompleteProfileCarrier = (props) => {
       patent: carrier.patent,
       model: carrier.model,
       color: carrier.color,
-      capacity: carrier.capacity,
+      capacity: parseInt(carrier.capacity),
     };
 
     // // VALIDACIONES
@@ -361,8 +367,9 @@ const CompleteProfileCarrier = (props) => {
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
     navigation.navigate('ProfileCarrier')
+   
     // changeModalVisible(true)
-    navigation.navigate("ProfileCarrier")
+    
   }
 
   //// --> Inicio de componente <-- ////
@@ -424,21 +431,21 @@ const CompleteProfileCarrier = (props) => {
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Santiago
-                  {/* {datosCarrier.eMail} */}
+                  {/* Santiago */}
+                  {datosCarrier?.name}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="person-circle-outline" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  Varela
-                  {/* {datosCarrier.eMail} */}
+                  {/* Varela */}
+                  {datosCarrier?.lastName}
                 </Text>
               </View>
               <View style={styles.viewsInputs}>
                 <Icon name="mail-outline"  style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
-                  asd@gmail.com
+                 { datosCarrier?.eMail}
                   {/* {datosCarrier.eMail} */}
                 </Text>
                 <TextInput style={styles.textPlaceholder} />
@@ -472,10 +479,10 @@ const CompleteProfileCarrier = (props) => {
               <View style={styles.viewsInputs}>
                 <Icon name="map-outline"  style={styles.icons} />
                 <TextInput
-                  value={carrier.location}
-                  onChangeText={(location) => handleChangeLocation(location)}
+                  value={carrier.locacion}
+                  onChangeText={(locacion) => handleChangeLocacion(locacion)}
                   placeholder="Ubicación de residencia actual"
-                  name="location"
+                  name="locacion"
                   style={styles.textPlaceholder}
                 />
               </View>
