@@ -46,7 +46,7 @@ router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
                 where: {SignupId:fleet[i].id }
                     }
                 )
-                arr[i]={transportista:fleet[i],vehiculo:carrier[i][0]};
+                arr[i]={transportista:fleet[i],vehiculo: carrier[i].length === 0 ? "No tiene vehiculo registrado" : carrier[i][0] };
          }
     
         res.send(arr);
@@ -171,6 +171,34 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 
 
 // })
+
+router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunction) => {
+
+    const { id } = req.query
+    if(id===''){return res.send('El id no puede estar vacio')}
+    try {
+        const carrier =  await Carrier.destroy({
+            where: {
+                SignupId:id
+            }
+        })
+      const signup =  await Signup.destroy({
+            where: {
+               id:id
+            }
+        })
+
+        if(signup===1)return  res.send( { mensaje: "Usuario eliminado" })
+        else return  res.send({mensaje: "Error al eliminar usuario."})
+
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
+
+
 export default router
 
 

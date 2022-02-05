@@ -4,6 +4,48 @@ import { API_URLS } from "@env"
 
 
 
+export function reset(){
+  return async function (dispatch){
+    try {
+      return dispatch({
+        type: 'RESET'
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+export function deleteFleet (props) {
+  return async function (dispatch) {
+    try {
+      const userDeleted = await axios.get(`${API_URLS}/api/deleteFleet?id=${props}`)
+      return dispatch({
+        type: "DELETE_FLEET",
+        payload: userDeleted.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+
+
+export function registeredFleet () {
+  return async function (dispatch) {
+    try {
+      const fleet = await axios.get(`${API_URLS}/api/findFleet`)
+      return dispatch({
+        type: "REGISTERED_FLEET",
+        payload: fleet.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
 export function addCarrier(props) {
   return async function (dispatch) {
     try {

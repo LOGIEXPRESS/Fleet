@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, Modal } from 'react-native'
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -7,15 +7,15 @@ import {
 import HeaderBar from "../Utils/HeaderBar";
 import Icon from "react-native-vector-icons/Ionicons";
 import { TextInput, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import { addCarrier } from '../../Redux/actions/index.js'
+import { addCarrier, registeredFleet, deleteFleet, reset } from '../../Redux/actions/index.js'
 import { useSelector, useDispatch } from "react-redux";
 import { set } from "react-native-reanimated";
-
+import { useNavigation } from "@react-navigation/core";
 
 
 const NewCarrier = () => {
 
-
+    const navigation = useNavigation();
     const respAddCarrier = useSelector((store) => store.respAddCarrier)
     function checkEmail(eMail) {
         var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -26,40 +26,71 @@ const NewCarrier = () => {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
     const [eMail, setEMail] = useState('')
+    const fleet = useSelector((store) => store.registeredFleet)
+    const respDelete = useSelector((store) => store.respDeleteUser)
 
 
+    const [modalView, setModalView] = useState(false)
+    const [modalDelete, setModalDelete] = useState(false)
+    const [id , setId] = useState(null)
     useEffect(() => {
-        if(respAddCarrier){
-            if(respAddCarrier.mensaje === 'eMail usado'){
+        dispatch(registeredFleet());
+        if (respAddCarrier) {
+            if (respAddCarrier.mensaje === 'eMail usado') {
                 alert('EMAIL YA REGISTRADO EN LA APP');
-                setName('');
-                setLastname('');
-                setEMail('');
             }
         }
-        
-    
-    }, [respAddCarrier]);
-    
-    
-    
 
+
+    }, [dispatch, respAddCarrier]);
+    console.log("REPUESTA DEL DELETE", respDelete)
+    /* s */
+    /*     useEffect(() => {
+            if (respDelete) {
+                if (respDelete.mensaje === "Usuario eliminado") {
+                    alert('USUARIO ELMINADO CON EXITO')
+                }
+            }
+    
+            return () => {
+                reset()
+            };
+        }, [dispatch]); */
+
+
+    const modalHandleDelete = (props) => {
+        const id = props
+        console.log("eSTA ES LA IP QUE ENVIO", id)
+        setModalDelete(true)
+        setId(id)
+    }
+
+    const handleDelete= (props) =>  {
+      dispatch(deleteFleet(props))
+      setModalDelete(false)
+      dispatch(registeredFleet());
+    }
+
+
+    console.log("ESTA ES LA ID A BORRAR", id )
     const handleSubmit = () => {
         const data = {
             name: name,
             lastName: lastname,
             eMail: eMail,
         }
-       const check = checkEmail(data.eMail)
-        if(check) {
+        const check = checkEmail(data.eMail)
+        if (check) {
             dispatch(addCarrier(data))
             console.log(data)
+            setModalView(false)
         } else {
             alert('EL E-MAIL INGRESADO NO ES VALIDO')
+            setModalView(false)
         }
-    }   
-    
+    }
 
+    console.log("Esto son los fleet", fleet)
     return (
         <View style={{ backgroundColor: "white", flex: 1 }}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -67,48 +98,6 @@ const NewCarrier = () => {
                 <View style={styles.containerHeaders}>
                     <Text style={{ fontSize: 20 }}>AÑADE TRANSPORSTISTAS A TU FLOTA</Text>
                     <Icon name="bus-outline" style={styles.icons} />
-                </View>
-                <View style={styles.viewAnterior}>
-                    <Text style={styles.textAnterior}>TUS TRANSPORSTISTAS</Text>
-                </View>
-                <View style={styles.containerCards}>
-                    <View style={styles.cards}>
-                        <View style={styles.insideCard}>
-                            <View style={styles.viewUsers}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View>
-                                        <Text style={styles.textUsers}>Juan Carlos</Text>
-                                        <Text style={styles.textUsers}>Juan_carlos@gmail.com</Text>
-                                    </View>
-                                    <TouchableOpacity>
-                                        <Icon name="close-outline" style={styles.iconX} />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={styles.viewUsers}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View>
-                                        <Text style={styles.textUsers}>Juan Carlos</Text>
-                                        <Text style={styles.textUsers}>Juan_carlos@gmail.com</Text>
-                                    </View>
-                                    <TouchableOpacity>
-                                        <Icon name="close-outline" style={styles.iconX} />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={styles.viewUsers}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View>
-                                        <Text style={styles.textUsers}>Juan Carlos</Text>
-                                        <Text style={styles.textUsers}>Juan_carlos@gmail.com</Text>
-                                    </View>
-                                    <TouchableOpacity>
-                                        <Icon name="close-outline" style={styles.iconX} />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
                 </View>
                 <View style={styles.viewAnterior}>
                     <Text style={styles.textAnterior}>AÑADE UN NUEVO TRANSPORSTISTA</Text>
@@ -144,15 +133,106 @@ const NewCarrier = () => {
                                 />
                             </View>
                             <View>
-                                <TouchableOpacity style={styles.Button} onPress={() => handleSubmit()}>
-                                    <Text style={styles.btnText} >
+                                <TouchableOpacity style={styles.Button} onPress={() => setModalView(true)} >
+                                    <Text style={styles.btnText}  >
                                         Agregar
                                     </Text>
                                 </TouchableOpacity>
+                   
                             </View>
                         </View>
                     </View>
                 </View>
+                <View style={styles.viewAnterior}>
+                    <Text style={styles.textAnterior}>TUS TRANSPORSTISTAS</Text>
+                </View>
+                <View style={styles.containerCards}>
+                    <View style={styles.cards}>
+                        <View style={styles.insideCard}>
+                            {fleet === null ? <ActivityIndicator size="large" color="#0000ff" /> :
+                                fleet.map((user, index) => {
+                                    return (
+                                        <View style={styles.viewUsers} key={index}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <TouchableOpacity onPress={() => modalHandleDelete(user.transportista.id)}>
+                                                    <Icon name="close-outline" style={styles.iconX} />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => navigation.navigate('VehiculeDetails', user.vehiculo)}>
+                                                    <Icon name="bus-outline" style={styles.iconVehicule} />
+                                                </TouchableOpacity>
+                                                <View style={styles.textPosition}>
+                                                    <Text style={styles.textUsers}>{user.transportista.name}</Text>
+                                                    <Text style={styles.textUsers}>{user.transportista.eMail}</Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    )
+                                })
+                            }
+                        </View>
+                    </View>
+                </View>
+                <Modal
+                    animationType="slide"
+                    onDismiss={() => console.log("close")}
+                    onShow={() => console.log('open')}
+                    transparent
+                    visible={modalView}
+                >
+                    <View style={styles.containerModal}>
+                        <View style={styles.viewModal}>
+                            <View style={styles.textModal}>
+                                <Icon name="person-add" style={styles.icon_modal} />
+                                <Text>Revisa si los datos a enviar estan bien</Text>
+                                <Text>Nombre: {name}</Text>
+                                <Text>Apellido: {lastname}</Text>
+                                <Text>Email: {eMail}</Text>
+                                <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={styles.btnModal} >
+                                    <Text style={styles.btnText} onPress={() => handleSubmit()}  >
+                                        Agregar
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btnModal} >
+                                    <Text style={styles.btnText} onPress={() => setModalView(false)} >
+                                        Cancelar
+                                    </Text>
+                                </TouchableOpacity>
+                                </View>
+                            
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+                <Modal
+                    animationType="slide"
+                    onDismiss={() => console.log("close")}
+                    onShow={() => console.log('open')}
+                    transparent
+                    visible={modalDelete}
+                >
+                    <View style={styles.containerModal}>
+                        <View style={styles.DeleteModal}>
+                            <View style={styles.textModal}>
+                                <Icon name="close-circle" style={styles.icon_modal} />
+                                <Text>Estas seguro que deseas eliminar a este usuario?</Text>
+                              <View style={{flexDirection:'row'}}> 
+                              <TouchableOpacity style={styles.btnModal} >
+                                    <Text style={styles.btnText} onPress={() => handleDelete(id)}  >
+                                        Eliminar
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.btnModal} >
+                                    <Text style={styles.btnText} onPress={() => setModalDelete(false)}  >
+                                       Cancelar
+                                    </Text>
+                                </TouchableOpacity>
+                              </View>
+                       
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
             </ScrollView>
         </View>
     )
@@ -162,6 +242,28 @@ const NewCarrier = () => {
 export default NewCarrier
 
 const styles = StyleSheet.create({
+    containerModal: {
+        flex: 1,
+        backgroundColor: 'rgba(1,1,1, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    viewModal: {
+        height: hp('30%'),
+        width: wp('70%'),
+        backgroundColor: '#fff'
+    },
+    DeleteModal: {
+        height: hp('23%'),
+        width: wp('70%'),
+        backgroundColor: '#fff'
+    },
+    textModal: {
+        alignItems: 'center',
+        alignContent: 'center',
+        paddingTop: hp('4%')
+    },
     containerHeaders: {
         flex: 1,
         marginLeft: wp("5%"),
@@ -181,6 +283,10 @@ const styles = StyleSheet.create({
         padding: hp('1%'),
         marginLeft: hp("1%"),
         marginTop: hp('-0.5%')
+    },
+    icon_modal: {
+        fontSize: hp("5%"),
+        color: "#ff1c49",
     },
     viewAnterior: {
         padding: wp("2%"),
@@ -228,21 +334,33 @@ const styles = StyleSheet.create({
         padding: wp("2%"),
         backgroundColor: "#DDDDDD", //"#FFC107",
         marginTop: wp("1%"),
-        marginBottom: wp("2.5%"),
+        marginBottom: wp("2.5"),
         borderColor: "#DDDDDD",
         width: wp('87%'),
         borderBottomWidth: wp("0.55%"),
         borderTopWidth: wp("0.55%"),
     },
+    textPosition: {
+        marginTop: hp('1'),
+        marginBottom: hp('1'),
+        marginLeft: wp('3%')
+    },
     textUsers: {
         fontSize: hp("1.6%"),
-        marginLeft: wp("2%"),
+        marginRight: wp("30%"),
     },
     iconX: {
         fontSize: hp("4%"),
+        color: "red",
+        marginTop: hp('1'),
+        marginBottom: hp('1'),
+    },
+    iconVehicule: {
+        fontSize: hp("3.6%"),
         color: "#000",
-        marginLeft: hp("20%"),
-        marginTop: hp('-0.1%')
+        marginTop: hp('1'),
+        marginBottom: hp('1'),
+        marginLeft: hp('1%')
     },
     viewsInputs: {
         flexDirection: 'row',
@@ -259,6 +377,20 @@ const styles = StyleSheet.create({
     textPlaceholder: {
         fontSize: hp("1.8%"),
         marginLeft: wp("2%"),
+    },
+    btnModal: {
+        width: wp('20%'),
+        color: "black",
+        margin: hp('1%'),
+        height: hp('4%'),
+        backgroundColor: "#ff1c49",
+        borderRadius: hp('1%'),
+        marginTop: hp("3%"),
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        shadowOpacity: 50,
+        elevation: 10,
     },
     Button: {
         width: wp('50%'),
