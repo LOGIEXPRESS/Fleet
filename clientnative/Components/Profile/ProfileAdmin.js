@@ -129,10 +129,12 @@ const ProfileAdmin = () => {
             // onPress={() => handleRequest(data?.idRole)}
             onPress={() => navigation.navigate("AddTravel")}
           >
-            <Image
+            {/* <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}
-              source={"https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"}
-            />
+              source={
+                {uri: "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"}
+              }
+            /> */}
             <Text style={styles.userBtnTxt2}>Agregar Viaje</Text>
           </TouchableOpacity>
         </View>
@@ -250,6 +252,7 @@ const styles = StyleSheet.create({
     fontSize: hp('3.5%'),
     height: hp('9.5%'),
     fontWeight: '700',
+    paddingVertical: hp('2%'),
   },
   userBtnTxt3: {
     marginTop: wp('1%'),

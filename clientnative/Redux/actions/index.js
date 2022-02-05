@@ -130,3 +130,17 @@ export function quotTravel(payload) {
     }
   };
 }
+
+export function changePassword(payload) {
+  return async function (dispatch) {
+    try {
+      const newpass = await axios.post(`${ API_URLS }/api/changePassword`, payload);
+      return dispatch({
+        type: "CHANGE_PASSWORD",
+        payload: newpass.data.payload
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}

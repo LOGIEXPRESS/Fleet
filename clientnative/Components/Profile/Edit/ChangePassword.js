@@ -19,9 +19,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/Ionicons";
 //Hook para la navegacion
 import { useNavigation } from "@react-navigation/core";
-// import ModalContraseña from "./ModalContraseña";
+import ModalContraseña from "./ModalsPassword/ModalContraseña";
 import HeaderBar from "../../Utils/HeaderBar";
-// import ModalSuccess from './ModalSuccess';
+import ModalSuccess from './ModalsPassword/ModalSuccess';
 // import SimpleModal80 from "../AlertasLog/SimpleModalchangepass";
 // import { desmount } from '../../actions/index.js'
 
@@ -31,18 +31,18 @@ const ChangePassword = () => {
   const data = useSelector((store) => store.responseLog);
   const editPassword = useSelector((store) => store. editPassword);
 
-//   useEffect(() => {
-//     console.log("cambio de pass",  editPassword);
-//     if(editPassword?.menssage) {
-//       changeModalVisible2(true)
-//     }
-//   }, [data,  editPassword]);
+  useEffect(() => {
+    console.log("cambio de pass",  editPassword);
+    if(editPassword?.menssage) {
+      changeModalVisible2(true)
+    }
+  }, [data,  editPassword]);
 
-//  useEffect(() => {
-//    return () => {
-//     dispatch(desmount())
-//    };
-//  }, [dispatch]);
+ useEffect(() => {
+   return () => {
+    dispatch(desmount())
+   };
+ }, [dispatch]);
  
 
   /// --> ESTADO PARA EL INPUT <-- ///
@@ -54,7 +54,7 @@ const ChangePassword = () => {
   const [chooseData, setchooseData] = useState();
 
   const changeModalVisible = (bool) => {
-    if(contraseña === contraseña2 && contraseña != ''){
+    if(contraseña === contraseña2 && contraseña !== ''){
     setisModalVisible(bool);
     }else{
       changeModalVisible80(true)
@@ -70,27 +70,27 @@ const ChangePassword = () => {
 
      // CONTRASEÑA NO COINCIDEN
  
-  //  const [isModalVisible80, setisModalVisible80] = useState(false);
-  //  const [chooseData80, setchooseData80] = useState();
+   const [isModalVisible80, setisModalVisible80] = useState(false);
+   const [chooseData80, setchooseData80] = useState();
  
-  //  const changeModalVisible80 = (bool) => {
-  //    setisModalVisible80(bool);
-  //  };
-  //  const setData80 = (data) => {
-  //   setchooseData80(data);
-  // };
+   const changeModalVisible80 = (bool) => {
+     setisModalVisible80(bool);
+   };
+   const setData80 = (data) => {
+    setchooseData80(data);
+  };
 
-  // /// --> ESTADO PARA EL MODAL DE SUCCESS <-- ///
-  // const [isModalVisible2, setisModalVisible2] = useState(false);
-  // const [chooseData2, setchooseData2] = useState();
+  /// --> ESTADO PARA EL MODAL DE SUCCESS <-- ///
+  const [isModalVisible2, setisModalVisible2] = useState(false);
+  const [chooseData2, setchooseData2] = useState();
 
-  // const changeModalVisible2 = (bool) => {
-  //   setisModalVisible2(bool);
-  // };
+  const changeModalVisible2 = (bool) => {
+    setisModalVisible2(bool);
+  };
 
-  // const setData2 = (data) => {
-  //   setchooseData2(data);
-  // };
+  const setData2 = (data) => {
+    setchooseData2(data);
+  };
   return (
     <View style={styles.container}>
     
@@ -134,7 +134,7 @@ const ChangePassword = () => {
       >
         <Text style={styles.textBtn}>Cambiar</Text>
         {/* MODAL */}
-        {/* <Modal
+        <Modal
           transparent={true}
           animationType="fade"
           visible={isModalVisible}
@@ -168,7 +168,7 @@ const ChangePassword = () => {
                     setData80={setData80}
                   />
                   
-                  </Modal> */}
+                  </Modal>
       </TouchableOpacity>
     </View>
   );
