@@ -22,8 +22,8 @@ import { useNavigation } from "@react-navigation/core";
 import ModalContraseña from "./ModalsPassword/ModalContraseña";
 import HeaderBar from "../../Utils/HeaderBar";
 import ModalSuccess from './ModalsPassword/ModalSuccess';
-// import SimpleModal80 from "../AlertasLog/SimpleModalchangepass";
-// import { desmount } from '../../actions/index.js'
+import SimpleModal80 from "../Edit/ModalsPassword/SimpleModalchangepass";
+import { desmount } from "../../../Redux/actions";
 
 
 const ChangePassword = () => {
