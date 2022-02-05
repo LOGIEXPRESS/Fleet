@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     fontSize: hp("5.8%"),
     fontWeight: "bold",
+    textDecorationLine:"underline",
+    textDecorationColor: "#ff1c49",
+    marginBottom:hp("2%"),
   },
   userImg: {
     height: hp('30%'),
@@ -123,13 +126,11 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: hp('4%'),
     fontWeight: "bold",
-    marginBottom: 1,
   },
   boxDatos: {
     flexDirection: "column",
     alignSelf:'center',
     marginTop: hp("1%"),
-    marginLeft: 20,
     
   },
   estrellitas: {

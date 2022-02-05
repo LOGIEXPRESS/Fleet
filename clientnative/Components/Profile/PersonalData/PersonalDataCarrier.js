@@ -13,6 +13,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
+import { Overlay } from "react-native-elements/dist/overlay/Overlay";
 const PersonalDataCarrier = () => {
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
@@ -51,7 +52,7 @@ const PersonalDataCarrier = () => {
             marginLeft: wp('5%'),
           }}
         >
-          <View style={{ marginTop: wp('5%') }}>
+          <View style={{ marginTop: wp('5%'), marginLeft: wp('-2%')}}>
             <Image
               source={{
                 uri:
@@ -67,11 +68,11 @@ const PersonalDataCarrier = () => {
               
               {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             </Text>
-            <Text style={{ fontSize: hp('2.75%') }}>
+            <Text style={{ fontSize: hp('2.3%') }}>
               {data?.eMail}
               
               </Text>
-            <Text style={{ fontSize: hp('2.75%') }}>
+            <Text style={{ fontSize: hp('2.3%'), marginTop:hp('0.3%') }}>
               {/* Buenos Aires */}
               {data.locacion}
               </Text>
@@ -121,6 +122,8 @@ const styles = StyleSheet.create({
   perfilTex: {
     alignSelf:'center',
     fontSize: hp("5.8%"),
+    textDecorationLine:"underline",
+    textDecorationColor: "#ff1c49",
     fontWeight: "bold",
     marginTop: 12,
   },
@@ -136,12 +139,12 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: hp('3.75%'),
     fontWeight: "bold",
-    marginBottom: 1,
+    marginBottom: hp('0.5%'),
   },
   boxDatos: {
     flexDirection: "column",
-    marginTop: 40,
-    marginLeft: 20,
+    marginTop: 45,
+    marginLeft: 10,
     
   },
   estrellitas: {

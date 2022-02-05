@@ -144,3 +144,8 @@ export function changePassword(payload) {
     }
   };
 }
+export function desmount() {
+  return {
+    type: 'DESMOUNT',
+  };
+};

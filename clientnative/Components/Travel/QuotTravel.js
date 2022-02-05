@@ -18,9 +18,9 @@ import { useNavigation } from "@react-navigation/core";
 import { SafeAreaView } from "react-native";
 import { Input } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
-import { quotTravel, desmount } from "../../Redux/actions/index.js";
+import { quotTravel, desmount } from "../../Redux/actions";
 import { LogBox } from "react-native";
-import HeaderBar from "../Utils/HeaderBar.js";
+import HeaderBar from "../Utils/HeaderBar";
 import { APIKEY_GOOGLE } from "@env"
 import {
   widthPercentageToDP as wp,
@@ -72,8 +72,8 @@ const QuotTravel = () => {
 
   //// --> Inicio de componente <-- ////
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#F4F4F4' }}>
-      <View style={{marginTop:hp("-4%"), marginBottom:hp("-4%")}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={styles.header}>
       <HeaderBar  screen={'null'}/>
       </View>
       <ScrollView keyboardShouldPersistTaps={"handled"}>
@@ -83,8 +83,9 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Origen</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1,  borderColor:"#ff1c49",
-              borderWidth:2, borderRadius:hp("1.3%"), height:hp("7%")}}
+              style={{ flex: 1 }}
+              style={{borderColor:"#ff1c49",
+              borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
               <GooglePlacesAutocomplete
                 placeholder="Lugar de origen del envío"
@@ -119,10 +120,12 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Destino</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1,  borderColor:"#ff1c49",
-              borderWidth:2, borderRadius:hp("1.3%"), height:hp("7%")}}
+              style={{ flex: 1 }}
+              style={{borderColor:"#ff1c49",
+              borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
               <GooglePlacesAutocomplete
+              
                 placeholder="Lugar de destino del envío"
                 fetchDetails={true}
                 GooglePlacesSearchQuery={{
@@ -173,7 +176,7 @@ const QuotTravel = () => {
                 source={require("../Utils/dinero.png")}
                 style={styles.imgDinero}
               />
-              <Text style={{ fontSize: 21, marginLeft: 22, fontWeight: 'bold' }}>$ {price}</Text>
+              <Text style={{ fontSize: 25, marginLeft: 22, fontWeight: 'bold' }}>$ {price}</Text>
             </View>
             {/* BOTON */}
             <View style={{ marginTop: 80, marginLeft: 25 }}>
@@ -195,19 +198,21 @@ const styles = StyleSheet.create({
     padding: wp('2%'),
     justifyContent: 'center',
     marginLeft: wp('2.5%'),
+    backgroundColor: "white"
   },
   textCotiza: {
     fontWeight: "bold",
     fontSize: 27,
-    marginBottom: wp('3%'),
+    marginBottom: hp('-1%'),
     textAlign: "center",
+    
     
   },
   textsOriDes: {
     fontSize: 19,
     fontWeight: "bold",
     marginBottom: 8,
-    marginTop: 20
+    marginTop: hp('3%')
     
   },
 
@@ -235,7 +240,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     borderColor:"#ff1c49",
-    borderWidth:3
+    borderWidth:5
   },
   viewsInputs: {
     backgroundColor: "white",
@@ -245,7 +250,8 @@ const styles = StyleSheet.create({
     height: hp("7%"),
     marginTop: 8,
     borderColor:"#ff1c49",
-              borderWidth:2, borderRadius:hp("1.3%"), height:hp("7%")
+              borderWidth:2, borderRadius:hp("1.3%"), height:hp("8.8%")
+              
   },
   textPrecio: {
     fontSize: 24,
@@ -270,11 +276,14 @@ const styles = StyleSheet.create({
     marginTop: 6,
     fontSize: 15,
     alignSelf:'center',
+    backgroundColor:"white"
+
+    
       
     
   },
   btnEditar: {
-    marginTop:hp("-5%"),
+    marginTop:hp("-7%"),
     backgroundColor:"#ff1c49",
     borderRadius: 10,
     width: wp('90%'),
@@ -284,6 +293,10 @@ const styles = StyleSheet.create({
    shadowOpacity:30,
    elevation:20,
   
+  },
+  header: {
+    marginTop:hp("-5%"),  
+    marginBottom:hp("-3%"),
   },
 });
 
