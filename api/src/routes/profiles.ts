@@ -194,7 +194,7 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
         
         })
            
-            return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier[1][0]})
+            return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier})
 
         
         } catch (err) {
