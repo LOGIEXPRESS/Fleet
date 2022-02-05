@@ -189,21 +189,12 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
            { where:{
                 id:idSignUp
             },
+            returning: true,
             
         
         })
-            // .then(async(c)=>{
-            //     if(!c){
-            //         return res.send('carrier not found')
-            //     }
-            //     await c.update({identification})
-            // })
-            // if(!upDataSignUpCarrier){
-            //     return res.send('carrier not found')
-            // }
-            // await upDataSignUpCarrier.update({identification,photo,secret})
-
-            return res.json({menssage:'carrier created',payload:carrier})
+           
+            return res.json({menssage:'carrier created',payload:carrier,payload2:upDataSignUpCarrier[1][0]})
 
         
         } catch (err) {
