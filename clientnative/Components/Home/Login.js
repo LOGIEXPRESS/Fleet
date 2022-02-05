@@ -22,16 +22,23 @@ const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const login = useSelector((store) => store.login);
+  const login = useSelector((store) => store.responseLog);
 
   
   useEffect(() => {
-    if (login !== null) {
+    console.log("se activa el login?",login)
+    if (login?.business !== undefined) {
+      console.log("que tiene loginbusiness", login?.business)
       console.log(login,"login")
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
-      }else{
-        navigation.navigate("CompleteProfileCarrier",{login})
+      }if(login.role===false){
+        console.log(login,"login")
+        if(login.identification === null){
+          navigation.navigate("CompleteProfileCarrier",{login})
+        }else{
+        navigation.navigate("ProfileCarrier",{login})
+      }
         // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
@@ -53,9 +60,11 @@ const Login = () => {
     }  
   const nuevotoken = useSelector((store) => store.token);
   useEffect(() => {
-    /* console.log("verificando, que se envia", nuevotoken); */
+    if(nuevotoken !== ""){
+    console.log("verificando, que se envia", nuevotoken); 
     save("token", nuevotoken);
     console.log("se guarda el token?", nuevotoken)
+    }
   }, [nuevotoken]);
 
   

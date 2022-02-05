@@ -6,12 +6,7 @@ import { Carrier } from "../models/Carrier";
 import { Review } from "../models/Review";
 import { Travel } from "../models/Travel";
 
-
-
 const router =Router()
-
-
-
 
 router.post('/reviewAdmin',async(req:Request,res:Response,next:NextFunction)=>{
    
