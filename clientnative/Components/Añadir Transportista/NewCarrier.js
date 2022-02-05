@@ -234,7 +234,7 @@ const NewCarrier = () => {
                         </View>
                     </View>
                 </Modal>
-            </ScrollView>
+            </ScrollView> 
         </View>
     )
 }
