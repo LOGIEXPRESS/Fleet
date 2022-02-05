@@ -130,3 +130,9 @@ export function quotTravel(payload) {
     }
   };
 }
+
+export function desmount() {
+  return {
+    type: 'DESMOUNT',
+  };
+};
