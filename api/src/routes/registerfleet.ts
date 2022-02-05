@@ -19,6 +19,31 @@ router.get('/allan', async (req: Request, res: Response, next: NextFunction) => 
     }
 });
 
+router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunction) => {
+     
+    const { id} = req.query
+    if(id===''){return res.send('El id no puede estar vacio')}
+    try {
+        const carrier =  await Carrier.destroy({
+            where: {
+                SignupId:id
+            }
+        })
+      const signup =  await Signup.destroy({
+            where: {
+               id:id
+            }
+        })
+       
+        if(signup===1)return  res.send("Usuario eliminado")
+        else return  res.send("Error al eliminar usuario.")
+            
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
 router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
  
      var fleet=await Signup.findAll({
