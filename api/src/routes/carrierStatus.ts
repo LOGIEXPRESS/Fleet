@@ -9,7 +9,7 @@ router.get('/Fleet',async(req:Request,res:Response,next:NextFunction)=>{
 
     let carriers = await Signup.findAll({where:{role: false}, raw: true}) // me busco a todos lo conductores
 
-    return carriers
+    return res.send(carriers);
 
 })
 
