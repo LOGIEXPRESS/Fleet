@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
@@ -26,7 +26,8 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const login = useSelector((store) => store.responseLog);
- 
+  const lastNameRef = useRef();
+
   
   useEffect(() => {
     console.log("se activa el login?",login)
@@ -97,7 +98,7 @@ const Login = () => {
         e.preventDefault();
         // en un objeto pongo lo que tengo en el estado inicial
         const obj = {
-          eMail: log.mail,
+          eMail: log.mail.toLowerCase().trim(),
           password: log.contraseña,
         };
     
@@ -162,7 +163,14 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
-           
+            
+            autoFocus={true}
+
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              lastNameRef.current.focus();
+            }}
+            blurOnSubmit={false}
             
           ></TextInput>
           <TextInput
@@ -172,6 +180,9 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
+            ref={lastNameRef} onSubmitEditing={() => {
+              return console.log('done')
+          }}
            
           
           ></TextInput>
