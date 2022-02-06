@@ -83,7 +83,7 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Origen</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1 }}
+              // style={{ flex: 1 }}
               style={{borderColor:"#ff1c49",
               borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
@@ -120,7 +120,7 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Destino</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1 }}
+              // style={{ flex: 1 }}
               style={{borderColor:"#ff1c49",
               borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
