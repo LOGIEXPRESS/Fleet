@@ -17,15 +17,15 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
     let {status}=req.params
 
-    let available = await Carrier.findAll({where:{
+    let available = await Signup.findAll({where:{
         status: true},
         raw: true
     });
-    let busy = await Carrier.findAll({where:{
+    let busy = await Signup.findAll({where:{
         status: false},
         raw: true
     });;
-    let absent = await Carrier.findAll({where:{
+    let absent = await Signup.findAll({where:{
         status: null},
         raw: true
     });
@@ -37,11 +37,8 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
     }else if (status === 'null'){
         return res.status(200).json({"msg":"Ausentes", absent})
     }else{
-       let  allCarrierData = await Carrier.findAll({
-        include:[{
-            model:Signup
-        }]
-       })
+       let  allCarrierData = await Signup.findAll()
+       
        return res.status(200).json({allCarrierData})
     }
 })

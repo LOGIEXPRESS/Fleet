@@ -67,9 +67,6 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
-    
-    
-
     const { name, lastName, eMail,  password, phone, photo, secret , identification, business  } = req.body
 
     

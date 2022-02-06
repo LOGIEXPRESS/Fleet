@@ -37,6 +37,9 @@ export class Signup extends Model {
     
     @Column
     phone!: string
+
+    @Column
+    status!: boolean
     
     @Column
     eMail!: string
