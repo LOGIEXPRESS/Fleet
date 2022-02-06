@@ -12,6 +12,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
+import * as SecureStore from "expo-secure-store";
 
 const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
@@ -23,6 +24,7 @@ const PersonalDataAdmin = () => {
   }
 
   const cerrarsesion = () =>{
+    console.log("cerrar sesion")
     save("token", "(result)")
     navigation.navigate('Login')
   }
@@ -55,19 +57,20 @@ const PersonalDataAdmin = () => {
             resizeMode="contain"
               source={{
                 uri:
-                  // data.photo !== null
-                  //   ? data.photo
-                  //   : 
-                    // "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg",
-                    "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                  data?.photo === null || data?.photo === "url"
+                    // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png" 
+                    : data?.photo
+                    
+                    
               }}
               style={styles.userImg}
             />
           </View>
           <View style={styles.boxDatos} >
             <Text style={styles.userName}>
-              Matias Vila
-              {/* {data.name} {data.lastname} */}
+              {/* Matias Vila */}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             </Text>
           </View>
         </View>
@@ -109,6 +112,9 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     fontSize: hp("5.8%"),
     fontWeight: "bold",
+    textDecorationLine:"underline",
+    textDecorationColor: "#ff1c49",
+    marginBottom:hp("2%"),
   },
   userImg: {
     height: hp('30%'),
@@ -120,13 +126,11 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: hp('4%'),
     fontWeight: "bold",
-    marginBottom: 1,
   },
   boxDatos: {
     flexDirection: "column",
     alignSelf:'center',
     marginTop: hp("1%"),
-    marginLeft: 20,
     
   },
   estrellitas: {

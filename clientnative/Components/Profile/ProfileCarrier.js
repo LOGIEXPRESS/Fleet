@@ -21,49 +21,51 @@ import HeaderBar from "../Utils/HeaderBar";
 
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
-  // const data = useSelector((store) => store.responseLog);
+  const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
-  // console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
+  console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
-  // useEffect(() => {
-  //   //console.log("data", data);
-  // }, [data]);
+  useEffect(() => {
+    console.log("data", data);
+
+  }, [data]);
 
   return (
     <View style={{ flex: 1,  backgroundColor: 'white'  }}>
-      <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+      {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
-        </View>
+        </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-           <View style={{ marginTop: wp("3%")  }}>
+           <View style={{ marginTop: wp("12%")  }}>
             
             <Image
               source={{
                 uri:
-                  // data.photo !== null
-                    // ? data.photo
-                    // : 
-                    "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000",
+                  data?.photo === null || data?.photo === "url"
+                    ? "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000"
+                    : data?.photo
+                    
               }}
               style={styles.userImg}
             />
           </View>
           
           <Text style={styles.userName}>
-            Matías Gonzalez
-            {/* {data.name} {data.lastname} */}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
+            {/* {data.name} {data.lastName} */}
           </Text>
           <Text style={styles.empresaName}>
-           Transportista en RadioTruck      
+           {/* Transportista en RadioTruck       */}
+           Transportista en {data?.business} 
           </Text>
           <Text style={styles.saldo}>
             Saldo:      $ 200.0000
-            {/* {data.name} {data.lastname} */}
+            
           </Text>
         </View>
         <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"),  }}>

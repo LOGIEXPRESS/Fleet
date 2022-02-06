@@ -10,6 +10,7 @@ const router=Router()
 //     let carriers = await Signup.findAll({where:{role: false}, raw: true}) // me busco a todos lo conductores
 
 //     return carriers
+    // return res.send(carriers);
 
 // })
 
@@ -38,7 +39,7 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
         return res.status(200).json({"msg":"Ausentes", absent})
     }else{
        let  allCarrierData = await Signup.findAll()
-       
+
        return res.status(200).json({allCarrierData})
     }
 })

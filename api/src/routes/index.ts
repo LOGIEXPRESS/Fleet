@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import  prueba  from "./prueba";
+import prueba from "./prueba";
 import signUp from "./signup"
 import login from './login'
-
+import carrierStatus from './carrierStatus'
 import profileAdmin from './profiles'
 import review from './review'
 import registerfleet from './registerfleet'
@@ -15,26 +15,29 @@ const router = Router();
 
 // router.use('/', dataFake)
 
- router.use('/', uploadDataFake) 
+
+router.use('/', carrierStatus)
+
+router.use('/', uploadDataFake)
 
 router.use("/", prueba)
 
-router.use("/",signUp)
+router.use("/", signUp)
 
-router.use('/',login)
+router.use('/', login)
 
-router.use('/',profileAdmin)
+router.use('/', profileAdmin)
 
-router.use('/',registerfleet)
+router.use('/', registerfleet)
 
-router.use('/',travel)
+router.use('/', travel)
 
-router.use('/',edits)
+router.use('/', edits)
 
-router.use('/',changePassword)
+router.use('/', changePassword)
 
-router.use('/',logout)
+router.use('/', logout)
 
-router.use('/',review)
+router.use('/', review)
 
 export default router;
