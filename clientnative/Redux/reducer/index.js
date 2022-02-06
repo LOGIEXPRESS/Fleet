@@ -79,6 +79,12 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             responseLog: action.payload,
           };
+          case "CHANGE_PASSWORD":
+          return {
+            ...state,
+            editPassword: action.payload,
+          }
+    
           case "UPDATE_PERFIL":
             return {
               ...state,
