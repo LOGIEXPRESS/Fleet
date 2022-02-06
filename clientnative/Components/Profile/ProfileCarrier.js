@@ -101,7 +101,7 @@ const ProfileCarrier = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => navigation.navigate("ScreenMap")}
-            onPress={() => navigation.navigate("CompleteProfileCarrier")}
+            
           >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
