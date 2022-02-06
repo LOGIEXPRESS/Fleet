@@ -10,6 +10,8 @@ const initialState = {
   responseLog: null,
   respToken: null,
   adminreg: null,
+  registeredFleet: null,
+  respDeleteUser: null,
   editPassword: [],
   editarPerfilUser: [],
   editarPerfilCarrier: [],
@@ -43,6 +45,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         adminreg: action.payload,
       };
+      case "REGISTERED_FLEET":
+        return {
+          ...state,
+          registeredFleet: action.payload
+        };
+      case "DELETE_FLEET":
+        return {
+          ...state,
+          respDeleteUser: action.payload
+        }
+      case "RESET": 
+      return {
+        ...state,
+        respDeleteUser: null
+      }
       case "DESMOUNT":
         return {
           ...state,
@@ -62,7 +79,17 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             responseLog: action.payload,
           };
+          case "CHANGE_PASSWORD":
+          return {
+            ...state,
+            editPassword: action.payload,
+          }
     
+          case "UPDATE_PERFIL":
+            return {
+              ...state,
+              editarPerfilUser: action.payload,
+            }
     default:
       return state;
   }
