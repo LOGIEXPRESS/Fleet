@@ -18,12 +18,15 @@ import {
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
+
+
+
 const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const login = useSelector((store) => store.responseLog);
-
+ 
   
   useEffect(() => {
     console.log("se activa el login?",login)
@@ -70,7 +73,7 @@ const Login = () => {
   
 
   const navegar = () =>{
-    navigation.navigate("SingUp")
+    navigation.navigate("Login")
   }
     const [log, setLog] = useState({
         mail: "",
@@ -124,7 +127,7 @@ const Login = () => {
 
 return (
     //Container Start
-    <View
+    <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
@@ -159,6 +162,8 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
+           
+            
           ></TextInput>
           <TextInput
             value={log.contraseña}
@@ -167,6 +172,8 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
+           
+          
           ></TextInput>
           <TouchableOpacity style={styles.Button}>
             <Text style={styles.ButtonText} onPress={handleSubmit}>
@@ -182,7 +189,7 @@ return (
           <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
-    </View> 
+    </ScrollView> 
     // Container End
   );
 };
