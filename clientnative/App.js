@@ -21,6 +21,10 @@ import EditProfileCarrier from './Components/Profile/Edit/EditProfileCarrier';
 import EditVehicule from './Components/Profile/Edit/EditVehicule';
 import Home from './Components/Home/Home';
 import startCheckout from './Components/MercadoPago/startCheckout.js'
+import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
+
+
+
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -65,7 +69,7 @@ const App = () => {
               component={ProfileCarrier}
               options={{ headerShown: false }}
             />
-            <Stack.Screen 
+            <Stack.Screen
               name="startCheckout"
               component={startCheckout}
               options={{ headerShown: false }}
@@ -118,6 +122,11 @@ const App = () => {
             <Stack.Screen
               name="EditProfileCarrier"
               component={EditProfileCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="VehiculeDetails"
+              component={VehiculeDetails}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

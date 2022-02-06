@@ -83,8 +83,8 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Origen</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1 }}
-              style={{borderColor:"#ff1c49",
+              // style={}
+              style={{borderColor:"#ff1c49", flex: 1, 
               borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
               <GooglePlacesAutocomplete
@@ -120,8 +120,8 @@ const QuotTravel = () => {
             <Text style={styles.textsOriDes}>Destino</Text>
             <ScrollView
               keyboardShouldPersistTaps={"handled"}
-              style={{ flex: 1 }}
-              style={{borderColor:"#ff1c49",
+              // style={}
+              style={{borderColor:"#ff1c49",  flex: 1 ,
               borderWidth:2, borderRadius:hp("1.3%"), paddingTop:hp("0.8%")}}
             >
               <GooglePlacesAutocomplete
