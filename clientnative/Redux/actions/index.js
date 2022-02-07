@@ -80,7 +80,7 @@ export function addCarrier(props) {
 export function logiar(payload) {
     return async function (dispatch) {
       try {
-        console.log(API_URLS)
+        console.log("SALIENDO DE DISPACHT LOGIAR",API_URLS)
         const response = await axios.post(`${API_URLS}/api/login`, payload)
         .then((r) => {
             dispatch({
@@ -193,7 +193,7 @@ export function changePassword(payload) {
       console.log(newpass.data);
       return dispatch({
         type: "CHANGE_PASSWORD",
-        payload: newpass.data.payload
+        payload: newpass.data
       });
 
       
