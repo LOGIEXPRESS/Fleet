@@ -11,6 +11,7 @@ import travel from './travel'
 import edits from './edits'
 import changePassword from './changePass'
 import logout from './logout'
+import recoverPass from './recoverPassword'
 const router = Router();
 
 // router.use('/', dataFake)
@@ -39,5 +40,7 @@ router.use('/', changePassword)
 router.use('/', logout)
 
 router.use('/', review)
+
+router.use('/',recoverPass)
 
 export default router;
