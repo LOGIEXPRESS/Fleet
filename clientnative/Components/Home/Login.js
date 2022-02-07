@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useMemo} from "react";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
@@ -19,7 +19,10 @@ import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 const Login = () => {
-
+  const [log, setLog] = useState({
+    mail: "",
+    contraseña: "",
+  });
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const login = useSelector((store) => store.responseLog);
@@ -34,11 +37,11 @@ const Login = () => {
         navigation.navigate("ProfileAdmin");
       }if(login.role===false){
         console.log(login,"login")
-        if(login.identification === null){
-          navigation.navigate("CompleteProfileCarrier",{login})
-        }else{
-        navigation.navigate("ProfileCarrier",{login})
-      }
+        if (login.identification === null) {
+          navigation.navigate("CompleteProfileCarrier", { login });
+        } else {
+          navigation.navigate("ProfileCarrier", { login });
+        }
         // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
@@ -67,60 +70,66 @@ const Login = () => {
     }
   }, [nuevotoken]);
 
+  const disabledSummit = useMemo(() => {
+    if (
+      log.contraseña < 0 && log.mail<0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [log])
   
 
   const navegar = () =>{
     navigation.navigate("SingUp")
   }
-    const [log, setLog] = useState({
-        mail: "",
-        contraseña: "",
-      });
+
     
-      const handelChangeMail = (email) => {
-        setLog({
-          ...log,
-          mail: email,
-        });
-      };
-      const handelChangePass = (pass) => {
-        setLog({
-          ...log,
-          contraseña: pass,
-        });
-      };
+  const handelChangeMail = (email) => {
+    setLog({
+      ...log,
+      mail: email,
+    });
+  };
+  const handelChangePass = (pass) => {
+    setLog({
+      ...log,
+      contraseña: pass,
+    });
+  };
       
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // en un objeto pongo lo que tengo en el estado inicial
-        const obj = {
-          eMail: log.mail,
-          password: log.contraseña,
-        };
-    
-        //Validaciones:
-    
-        // if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
-        //   changeModalVisible5(true)
-        //   return;
-        // }
-        // if (!obj.password) {
-        //   changeModalVisible6(true)
-        //   return;
-        // }
-    
-        dispatch(logiar(obj));
-        console.log("Estoy enviado", obj);
-        setLog({
-          mail: "",
-          contraseña: "",
-        });
-    
-        //cuando se cumpla que respuesta != null
-        //haga un console.log(respuesta)
-    
-      
-      };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // en un objeto pongo lo que tengo en el estado inicial
+    const obj = {
+      eMail: log.mail,
+      password: log.contraseña,
+    };
+
+    //Validaciones:
+
+    // if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
+    //   changeModalVisible5(true)
+    //   return;
+    // }
+    // if (!obj.password) {
+    //   changeModalVisible6(true)
+    //   return;
+    // }
+
+    dispatch(logiar(obj));
+    console.log("Estoy enviado", obj);
+    setLog({
+      mail: "",
+      contraseña: "",
+    });
+
+    //cuando se cumpla que respuesta != null
+    //haga un console.log(respuesta)
+
+  
+  };
 
 return (
     //Container Start
@@ -168,7 +177,7 @@ return (
             secureTextEntry={true}
             style={styles.TextInput}
           ></TextInput>
-          <TouchableOpacity style={styles.Button}>
+          <TouchableOpacity style={styles.Button} disabled={disabledSummit}>
             <Text style={styles.ButtonText} onPress={handleSubmit}>
               Iniciar Sesión
             </Text>
