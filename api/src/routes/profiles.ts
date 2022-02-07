@@ -181,7 +181,7 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 identification,
                 photo,
                 phone,
-                secret,
+                secret:secret.toLowerCase().trim(),
                 locacion,
                 business:company||null
                 
