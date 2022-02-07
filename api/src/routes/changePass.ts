@@ -11,14 +11,14 @@ const router=Router()
 
 router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=>{
 
-    const {id,newPassword}=req.body
+    const {idUser ,newPassword}=req.body
 
     console.log("Este es req.body", req.body ,  );
     
 
    try{
 
-    let userEdit= await Signup.findByPk(id)
+    let userEdit= await Signup.findByPk(idUser)
     console.log("LLEGANDO DENTRO DE TRY", userEdit);
     
     // .then(async(user)=>{
