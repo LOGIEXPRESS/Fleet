@@ -13,7 +13,7 @@ router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=
 
     const {id,newPassword}=req.body
 
-    // console.log(req.body);
+    console.log("Este es req.body", req.body ,  );
     
 
    try{
