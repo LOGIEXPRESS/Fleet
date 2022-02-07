@@ -13,25 +13,27 @@ router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=
 
     const {id,newPassword}=req.body
 
-    console.log(req.body);
+    // console.log(req.body);
     
 
    try{
 
     let userEdit= await Signup.findByPk(id)
-    .then(async(user)=>{
-        if(!user){
-            return res.json({menssage:'Not found UserEdit'})
-        }else{
-            let newPasswordHash = await bcrypt.hash(newPassword, 8)
+    console.log(userEdit);
+    
+    // .then(async(user)=>{
+    //     if(!user){
+    //         return res.json({menssage:'Not found UserEdit'})
+    //     }else{
+    //         let newPasswordHash = await bcrypt.hash(newPassword, 8)
 
-            await user.update({password:newPasswordHash})
+    //         await user.update({password:newPasswordHash})
 
-            return user
+    //         return user
 
-        }
+    //     }
         
-    })
+    // })
 
     res.json({menssage:'update password ok',payload:userEdit})
 }catch(err){
