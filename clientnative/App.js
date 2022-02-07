@@ -57,7 +57,7 @@ const App = () => {
             <Stack.Screen
               name="SingUp"
               component={SingUp}
-              options={{ headerShown: false, gestureEnabled: false }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ProfileAdmin"
