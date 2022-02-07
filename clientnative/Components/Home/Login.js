@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
@@ -15,23 +15,34 @@ import {
   Modal,
   Alert
 } from "react-native";
-import { logiar } from "../../actions/index";
+import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
+
+
+
 const Login = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const login = useSelector((store) => store.login);
+  const login = useSelector((store) => store.responseLog);
+  const lastNameRef = useRef();
 
   
   useEffect(() => {
-    if (login !== null) {
+    console.log("se activa el login?",login)
+    if (login?.business !== undefined) {
+      console.log("que tiene loginbusiness", login?.business)
       console.log(login,"login")
       if(login.role === true){
         navigation.navigate("ProfileAdmin");
-      }else{
-        navigation.navigate("CompleteProfileCarrier",{login})
+      }if(login.role===false){
+        console.log(login,"login")
+        if(login.identification === null){
+          navigation.navigate("CompleteProfileCarrier",{login})
+        }else{
+        navigation.navigate("ProfileCarrier",{login})
+      }
         // navigation.navigate("ProfileCarrier");
       }
       if(login.role===1){
@@ -53,15 +64,17 @@ const Login = () => {
     }  
   const nuevotoken = useSelector((store) => store.token);
   useEffect(() => {
-    /* console.log("verificando, que se envia", nuevotoken); */
+    if(nuevotoken !== ""){
+    console.log("verificando, que se envia", nuevotoken); 
     save("token", nuevotoken);
     console.log("se guarda el token?", nuevotoken)
+    }
   }, [nuevotoken]);
 
   
 
   const navegar = () =>{
-    navigation.navigate("SingUp")
+    navigation.navigate("RecoverPassword")
   }
     const [log, setLog] = useState({
         mail: "",
@@ -85,7 +98,7 @@ const Login = () => {
         e.preventDefault();
         // en un objeto pongo lo que tengo en el estado inicial
         const obj = {
-          eMail: log.mail,
+          eMail: log.mail.toLowerCase().trim(),
           password: log.contraseña,
         };
     
@@ -115,7 +128,7 @@ const Login = () => {
 
 return (
     //Container Start
-    <View
+    <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
@@ -150,6 +163,15 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
+            
+            autoFocus={true}
+
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              lastNameRef.current.focus();
+            }}
+            blurOnSubmit={false}
+            
           ></TextInput>
           <TextInput
             value={log.contraseña}
@@ -158,6 +180,11 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
+            ref={lastNameRef} onSubmitEditing={() => {
+              return console.log('done')
+          }}
+           
+          
           ></TextInput>
           <TouchableOpacity style={styles.Button}>
             <Text style={styles.ButtonText} onPress={handleSubmit}>
@@ -173,7 +200,7 @@ return (
           <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
-    </View> 
+    </ScrollView> 
     // Container End
   );
 };

@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { logiarUsuario, enviarToken, consultReg } from "./../../actions/index";
+import { logiarUsuario, enviarToken, consultReg } from "./../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 import { useNavigation } from "@react-navigation/core";
@@ -26,6 +26,7 @@ const Home = () => {
   console.log("llega adminreg", adminreg)
   console.log("llega respotoken", resptoken)
   useEffect(() => {
+    getValueFor();
     dispatch(consultReg())
   }, []);
 
@@ -55,7 +56,7 @@ const Home = () => {
   //TOKEN
   const [result, onChangeResult] = useState("(result)");
   // getValueFor(); // PRIMERO CORROBORAMOS SI HAY UN TOKEN GUARDADO
-  getValueFor();
+
   console.log("result",result)
   useEffect(() => {
     if (result != "(result)") {
@@ -66,7 +67,7 @@ const Home = () => {
       };
 
       //console.log("este es el result", obj2);
-
+      
       dispatch(enviarToken(obj2));
     }
   }, [result]);
@@ -88,8 +89,10 @@ const Home = () => {
   useEffect(() => {
     // console.log("respotoken:", resptoken);
     // console.log("resptoken.mensaje", resptoken.mensaje);
-    if(adminreg != false){
-    if (resptoken != null) {
+    
+    if(adminreg !== false){
+    if (resptoken !== null) {
+      console.log("holaaa",resptoken)
       if (resptoken.mensaje === true) {
         console.log("resptoken", resptoken.role)
         if (resptoken.role === true) {

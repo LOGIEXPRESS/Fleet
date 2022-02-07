@@ -1,29 +1,65 @@
 import { Response, Request, Router, NextFunction } from 'express';
+import { FileTextChanges } from 'typescript';
+const { Op } = require("sequelize");
 const nodemailer = require('nodemailer');
 import { uuid } from 'uuidv4';
 const bcrypt = require("bcryptjs");
 const router = Router()
 import { Signup } from '../models/Signup';
+import { Carrier } from '../models/Carrier';
 
 router.get('/allan', async (req: Request, res: Response, next: NextFunction) => {
-     
-    
+
+
     try {
-            res.send("Allan Torres")
+        res.send("Allan Torres")
     }
     catch (err) {
         next(err)
     }
 });
 
+router.get('/carriers', async (req: Request, res: Response, next: NextFunction) => {
+    try {
 
-router.post('/registerfleet', async (req: Request, res: Response, next: NextFunction) => {
+        const carrier = await Signup.findAll();
+        return res.json({
+            carrier
+        }).status(200);
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
+router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
+ 
+     var fleet=await Signup.findAll({
+        where: {role : { [Op.eq]: false } }
+            }
+        )
+        if(fleet.length===0){return res.send(null);}
+        let arr:any=[]; let carrier:any=[];
+         for(var i=0;i < fleet.length;i++){
+           
+             carrier[i]=await Carrier.findAll({
+                where: {SignupId:fleet[i].id }
+                    }
+                )
+                arr[i]={transportista:fleet[i],vehiculo: carrier[i].length === 0 ? "No tiene vehiculo registrado" : carrier[i][0] };
+         }
     
-  // const data1 = JSON.parse(req.body)
+        res.send(arr);
+    });
+
+    
+router.post('/registerfleet', async (req: Request, res: Response, next: NextFunction) => {
+
+    // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
 
-    const { name, lastName, eMail} = req.body
-    let password=Array(5).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('').toLowerCase()
+    const { name, lastName, eMail } = req.body
+    let password = Array(5).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function (x) { return x[Math.floor(Math.random() * x.length)] }).join('').toLowerCase()
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
@@ -32,11 +68,11 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
         lastName,
         eMail,
         password: passwordHash,
-        role:false
+        role: false
     }
     ////////<inicio formato> Este es el mensaje que se le va a enviar al usuario con formato html
-    let contentHTML=
-    `<h1>New user</h1>
+    let contentHTML =
+        `<h1>New user</h1>
                <ul>
                   <li>${name} ${lastName}</li>
                   <li>email: ${eMail}</li>
@@ -45,22 +81,22 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 
     //////</fin formato>
     /////<inicio configuración transporter>ç
-    
-    let transporter= nodemailer.createTransport({
+
+    let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
         secure: true, // upgrade later with STARTTLS
         auth: {
-          user: "logiexpressfleet@gmail.com",
-          pass: "boilbfullbjrotpf",
+            user: "logiexpressfleet@gmail.com",
+            pass: "boilbfullbjrotpf",
         },
-        tls:{
-            rejectUnauthorized:false
+        tls: {
+            rejectUnauthorized: false
         }
     });
     ////</fin  configuración transporter>
     try {
-        const [user,created] = await Signup.findOrCreate({//crea un usuario si no excisiste 
+        const [user, created] = await Signup.findOrCreate({//crea un usuario si no excisiste 
             where: { eMail: eMail },
             defaults: payload,
         })
@@ -91,9 +127,9 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 
 //     const{ name, lastName, email}=req.body
 //     let password=uuid()
- 
 
- 
+
+
 //     let contentHTML=
 //     `<h1>New user</h1>
 //                <ul>
@@ -135,6 +171,60 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 
 
 // })
+
+router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunction) => {
+
+    const { id } = req.query
+    if(id===''){return res.send('El id no puede estar vacio')}
+    try {
+        const carrier =  await Carrier.destroy({
+            where: {
+                SignupId:id
+            }
+        })
+      const signup =  await Signup.destroy({
+            where: {
+               id:id
+            }
+        })
+
+        if(signup===1)return  res.send( { mensaje: "Usuario eliminado" })
+        else return  res.send({mensaje: "Error al eliminar usuario."})
+
+    }
+    catch (err) {
+        next(err)
+    }
+});
+
+
+
+router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+
+    const{eMail}=req.params
+
+    try{
+        let carrier= await Signup.findOne({
+            where:{
+
+                [Op.and]:[{eMail:eMail},{identification:null},{role:false}]
+
+                
+
+            }
+
+        })
+        if(!carrier){
+            return res.send(false)//carrir ya completo su perfil
+        }
+        return res.send(true)
+
+
+    }catch(err){
+        next(err)
+    }
+
+})
 export default router
 
 

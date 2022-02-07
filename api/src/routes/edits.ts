@@ -1,49 +1,49 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
 import { Carrier }  from '../models/Carrier';
-import bcrypt from "bcryptjs";
-import passport from 'passport';
-import jwt from 'jsonwebtoken'
+
 
 
 const router=Router()
 
-router.get('/logout', passport.authenticate('jwt', { session: false }), (req: Request, res: Response) => {
-    req.logOut()
-    res.json({ user: { username: '', role: '' }, success: true });
-}); 
+//cambio de lugar las rutas 
+
+// router.get('/logout', passport.authenticate('jwt', { session: false }), (req: Request, res: Response) => {
+//     req.logOut()
+//     res.json({ user: { username: '', role: '' }, success: true });
+// }); 
 
 
-router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=>{
+// router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=>{
 
-    const {id,newPassword}=req.body
-    // console.log('id user: ',id)
-    // console.log('newPass: ',newPassword)
+//     const {id,newPassword}=req.body
+//     // console.log('id user: ',id)
+//     // console.log('newPass: ',newPassword)
 
-   try{
+//    try{
 
-    let userEdit= await Signup.findByPk(id)
-    .then(async(user)=>{
-        if(!user){
-            return res.json({menssage:'Not found UserEdit'})
-        }else{
-            let newPasswordHash = await bcrypt.hash(newPassword, 8)
+//     let userEdit= await Signup.findByPk(id)
+//     .then(async(user)=>{
+//         if(!user){
+//             return res.json({menssage:'Not found UserEdit'})
+//         }else{
+//             let newPasswordHash = await bcrypt.hash(newPassword, 8)
 
-            await user.update({password:newPasswordHash})
+//             await user.update({password:newPasswordHash})
 
-            return user
+//             return user
 
-        }
+//         }
         
-    })
+//     })
 
-    res.json({menssage:'update password ok',payload:userEdit})
-}catch(err){
-    next(err)
-}
+//     res.json({menssage:'update password ok',payload:userEdit})
+// }catch(err){
+//     next(err)
+// }
     
 
-})
+// })
 
 router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunction) => {
 	
