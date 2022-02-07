@@ -82,7 +82,7 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
         id: uuid(),
         name,
         lastName,
-        eMail,
+        eMail:eMail.trim(),
         password: passwordHash,
         phone,
         photo,
