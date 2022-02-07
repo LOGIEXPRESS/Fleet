@@ -24,7 +24,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
 	if (user.length > 0) {
 
-		const compare = await bcryptjs.compare(password, user[0].password)
+		const compare = await bcryptjs.compare(password.trim(), user[0].password)
 
 		if (compare) {
 
