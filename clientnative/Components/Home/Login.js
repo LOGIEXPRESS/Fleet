@@ -74,7 +74,7 @@ const Login = () => {
   
 
   const navegar = () =>{
-    navigation.navigate("Login")
+    navigation.navigate("RecoverPassword")
   }
     const [log, setLog] = useState({
         mail: "",
