@@ -52,22 +52,22 @@ const App = () => {
                  <Stack.Screen
               name="Login"
               component={Login}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
               name="SingUp"
               component={SingUp}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
               name="ProfileAdmin"
               component={ProfileAdmin}
-              options={{ headerShown: false }}
+              options={{ headerShown: false,gestureEnabled: false }}
             />
             <Stack.Screen
               name="ProfileCarrier"
               component={ProfileCarrier}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
               name="startCheckout"
