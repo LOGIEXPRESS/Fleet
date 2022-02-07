@@ -19,7 +19,7 @@ router.post('/changePassword',async(req:Request,res:Response,next:NextFunction)=
    try{
 
     let userEdit= await Signup.findByPk(id)
-    console.log(userEdit);
+    console.log("LLEGANDO DENTRO DE TRY", userEdit);
     
     // .then(async(user)=>{
     //     if(!user){
