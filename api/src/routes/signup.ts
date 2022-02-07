@@ -86,7 +86,7 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
         password: passwordHash,
         phone,
         photo,
-        secret,
+        secret:secret.toLowerCase().trim(),
         identification,
         business,
         role: true
