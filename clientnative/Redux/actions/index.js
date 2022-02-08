@@ -202,6 +202,22 @@ export function changePassword(payload) {
     }
   };
 }
+
+export function sendMessage (payload) {
+  return async function (dispatch) {
+    try {
+
+      console.log("Sale de la action sendMessage",payload);
+      const newpass = await axios.post(`${ API_URLS }/api/requestTravel`, payload);
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
+
 export function desmount() {
   return {
     type: 'DESMOUNT',

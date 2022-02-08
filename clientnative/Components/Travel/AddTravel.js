@@ -30,6 +30,7 @@ import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
 import HeaderBar from "../Utils/HeaderBar";
 import { APIKEY_GOOGLE } from "@env"
+import { sendMessage } from "../../Redux/actions/index";
 
 
 
@@ -223,7 +224,7 @@ const AddTravel = (props) => {
                     return
                 }
          
-        // sendMessage(travel)
+        sendMessage(travel)
 
         console.log("Estoy enviando:", travel)
     }
