@@ -3,9 +3,9 @@ import { Response, Request, Router, NextFunction } from 'express';
  import { uuid } from 'uuidv4';
  
 import { Travel } from '../models/Travel';
-import { Admin } from '../models/Admin';
-import { Signup } from '../models/Signup';
 import { Carrier } from '../models/Carrier';
+import { Signup } from '../models/Signup';
+import { Truck } from '../models/Truck';
  
 
  var userFake=[
@@ -163,7 +163,7 @@ const router = Router()
             let carrier = await Carrier.bulkCreate(carrierFake);
           
   
-              const userTrues = await Admin.create(idUser);  
+              const userTrues = await Carrier.create(idUser);  
 			 const obj={
 				user_regs,
 			      carrier, 

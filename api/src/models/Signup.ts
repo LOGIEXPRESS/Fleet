@@ -1,7 +1,7 @@
 import { Model, Column, Table, IsUUID, HasOne, ForeignKey } from 'sequelize-typescript'
 
+import { Truck } from './Truck'
 import { Carrier } from './Carrier'
-import { Admin } from './Admin'
 
 
 export interface IUser extends Signup {
@@ -17,11 +17,11 @@ export class Signup extends Model {
     @Column({ primaryKey: true })
     id!: string
 
-    @HasOne(() => Carrier)
-    carrier!: Carrier
+    @HasOne(() => Truck)
+    carrier!: Truck
 
-    @HasOne(() => Admin)
-    admin!: Admin
+    @HasOne(() => Carrier)
+    admin!: Carrier
 
     @Column
     name!: string
