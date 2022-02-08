@@ -13,7 +13,7 @@ const HeaderBar = (props) => {
     const screen = props.screen
    // console.log("Esto es donde tengo que volver", props.screen)
     return (
-        <View style={{ paddingHorizontal:  wp('3%'), flexDirection: "row",  paddingBottom: wp('4%'), marginTop: wp('10%')}}>
+        <View style={{ paddingHorizontal:  wp('3%'), flexDirection: "row",  paddingBottom: wp('.5%'), marginTop: wp('10%')}}>
             <View style={{flex: 1, alignItems: "flex-start"}}>
                 <TouchableOpacity style={{
                     flexDirection: "row",
