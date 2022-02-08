@@ -73,9 +73,8 @@ const QuotTravel = () => {
   //// --> Inicio de componente <-- ////
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={styles.header}>
       <HeaderBar  screen={'null'}/>
-      </View>
+   
       <ScrollView keyboardShouldPersistTaps={"handled"}>
         <View style={styles.container}>
           <Text style={styles.textCotiza}>¡Cotiza tu viaje!</Text>
@@ -256,7 +255,7 @@ const styles = StyleSheet.create({
   textPrecio: {
     fontSize: 24,
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 13,
     
   },
   imgDinero: {

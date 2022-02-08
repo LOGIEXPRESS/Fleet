@@ -24,7 +24,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
 	if (user.length > 0) {
 
-		const compare = await bcryptjs.compare(password, user[0].password)
+		const compare = await bcryptjs.compare(password.trim(), user[0].password)
 
 		if (compare) {
 
@@ -104,7 +104,33 @@ router.get('/adminExist',async(req:Request,res:Response,next:NextFunction)=>{
     }
 })
 
-router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+// router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+
+// 	const{eMail}=req.params
+
+// 	try{
+// 		let carrier= await Signup.findOne({
+// 			where:{
+
+// 				[Op.and]:[{eMail:eMail},{identification:null},{role:false}]
+
+				
+
+// 			}
+
+// 		})
+// 		if(!carrier){
+// 			return res.send(false)//carrir ya completo su perfil
+// 		}
+// 		return res.send(true)
+
+
+// 	}catch(err){
+// 		next(err)
+// 	}
+
+// })
+router.get('/findInfo/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
 
 	const{eMail}=req.params
 
@@ -112,7 +138,7 @@ router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunctio
 		let carrier= await Signup.findOne({
 			where:{
 
-				[Op.and]:[{eMail:eMail},{identification:null},{role:false}]
+				eMail:eMail
 
 				
 
@@ -120,9 +146,9 @@ router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunctio
 
 		})
 		if(!carrier){
-			return res.send(false)//carrir ya completo su perfil
+			return res.send('not found info')//carrir ya completo su perfil
 		}
-		return res.send(true)
+		return res.send(carrier)
 
 
 	}catch(err){

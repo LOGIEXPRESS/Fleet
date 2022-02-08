@@ -76,17 +76,17 @@ router.post('/adminregister', async (req: Request, res: Response, next: NextFunc
     const { name, lastName, eMail,  password, phone, photo, secret , identification, business  } = req.body
 
     
-    let passwordHash = await bcrypt.hash(password, 8)
+    let passwordHash = await bcrypt.hash(password.trim(), 8)
 
     let payload = {
         id: uuid(),
         name,
         lastName,
-        eMail,
+        eMail:eMail.trim(),
         password: passwordHash,
         phone,
         photo,
-        secret,
+        secret:secret.toLowerCase().trim(),
         identification,
         business,
         role: true
