@@ -1,4 +1,5 @@
-import React, { useState, useEffect , useMemo} from "react";
+import React, { useState, useEffect, useRef,useMemo } from "react";
+
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
@@ -18,6 +19,9 @@ import {
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
+
+
+
 const Login = () => {
   const [log, setLog] = useState({
     mail: "",
@@ -26,6 +30,7 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const login = useSelector((store) => store.responseLog);
+  const lastNameRef = useRef();
 
   
   useEffect(() => {
@@ -82,9 +87,8 @@ const Login = () => {
   
 
   const navegar = () =>{
-    navigation.navigate("SingUp")
+    navigation.navigate("RecoverPassword")
   }
-
     
   const handelChangeMail = (email) => {
     setLog({
@@ -103,7 +107,7 @@ const Login = () => {
     e.preventDefault();
     // en un objeto pongo lo que tengo en el estado inicial
     const obj = {
-      eMail: log.mail,
+      eMail: log.mail.trim(),
       password: log.contraseña,
     };
 
@@ -133,7 +137,7 @@ const Login = () => {
 
 return (
     //Container Start
-    <View
+    <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
       showsVerticalScrollIndicator={false}
     >
@@ -168,6 +172,15 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
+            
+            autoFocus={true}
+
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              lastNameRef.current.focus();
+            }}
+            blurOnSubmit={false}
+            
           ></TextInput>
           <TextInput
             value={log.contraseña}
@@ -176,6 +189,11 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
+            ref={lastNameRef} onSubmitEditing={() => {
+              return console.log('done')
+          }}
+           
+          
           ></TextInput>
           <TouchableOpacity style={styles.Button} disabled={disabledSummit}>
             <Text style={styles.ButtonText} onPress={handleSubmit}>
@@ -191,7 +209,7 @@ return (
           <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
-    </View> 
+    </ScrollView> 
     // Container End
   );
 };

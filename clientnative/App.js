@@ -22,7 +22,7 @@ import EditVehicule from './Components/Profile/Edit/EditVehicule';
 import Home from './Components/Home/Home';
 import startCheckout from './Components/MercadoPago/startCheckout.js'
 import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
-
+import RecoverPassword from './Components/Home/RecoverPassword'
 
 
 
@@ -49,10 +49,15 @@ const App = () => {
               component={Home}
               options={{ headerShown: false }}
             />
-                 <Stack.Screen
+            <Stack.Screen
               name="Login"
               component={Login}
               options={{ headerShown: false, gestureEnabled: false }}
+            />
+             <Stack.Screen
+              name="RecoverPassword"
+              component={RecoverPassword}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="SingUp"
