@@ -18,17 +18,6 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
     let {status}=req.params
 
-<<<<<<< HEAD
-    let available = await Signup.findAll({where:{
-        status: true},
-        raw: true
-    });
-    let busy = await Signup.findAll({where:{
-        status: false},
-        raw: true
-    });;
-    let absent = await Signup.findAll({where:{
-=======
     let available = await Truck.findAll({where:{
         status: true},
         raw: true
@@ -38,7 +27,6 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
         raw: true
     });;
     let absent = await Truck.findAll({where:{
->>>>>>> 647926c7fd5b3f4d3054e05cd7331b28fa67ef06
         status: null},
         raw: true
     });
