@@ -24,10 +24,10 @@ import { Input } from "react-native-elements"
 import { useSelector, useDispatch } from "react-redux";
 // import { cotizarViaje, requestTravel } from "../actions/index.js"
 import { LogBox } from 'react-native';
-// import SimpleModal20 from "./AlertasTravel/SimpleModalorigin";
-// import SimpleModal21 from "./AlertasTravel/SimpleModaldest";
-// import SimpleModal22 from "./AlertasTravel/SimpleModalweight";
-// import SimpleModal23 from "./AlertasTravel/SimpleModalprice";
+import SimpleModal20 from "./MoldasTravel/SimpleModalorigin";
+import SimpleModal21 from "./MoldasTravel/SimpleModaldest";
+import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
+import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
 import HeaderBar from "../Utils/HeaderBar";
 import { APIKEY_GOOGLE } from "@env"
 
@@ -77,54 +77,54 @@ const AddTravel = (props) => {
 
     // validacion Origen
 
-    // const [isModalVisible20, setisModalVisible20] = useState(false);
-    // const [chooseData20, setchooseData20] = useState();
+    const [isModalVisible20, setisModalVisible20] = useState(false);
+    const [chooseData20, setchooseData20] = useState();
 
-    // const changeModalVisible20 = (bool) => {
-    //     setisModalVisible20(bool);
-    // };
+    const changeModalVisible20 = (bool) => {
+        setisModalVisible20(bool);
+    };
 
-    // const setData20 = (data) => {
-    //     setchooseData20(data);
-    // };
+    const setData20 = (data) => {
+        setchooseData20(data);
+    };
 
-    // // validacion modelo
+    // validacion modelo
 
-    // const [isModalVisible21, setisModalVisible21] = useState(false);
-    // const [chooseData21, setchooseData21] = useState();
+    const [isModalVisible21, setisModalVisible21] = useState(false);
+    const [chooseData21, setchooseData21] = useState();
 
-    // const changeModalVisible21 = (bool) => {
-    //     setisModalVisible21(bool);
-    // };
+    const changeModalVisible21 = (bool) => {
+        setisModalVisible21(bool);
+    };
 
-    // const setData21 = (data) => {
-    //     setchooseData21(data);
-    // };
-    // // validacion color
+    const setData21 = (data) => {
+        setchooseData21(data);
+    };
+    // validacion color
 
-    // const [isModalVisible22, setisModalVisible22] = useState(false);
-    // const [chooseData22, setchooseData22] = useState();
+    const [isModalVisible22, setisModalVisible22] = useState(false);
+    const [chooseData22, setchooseData22] = useState();
 
-    // const changeModalVisible22 = (bool) => {
-    //     setisModalVisible22(bool);
-    // };
+    const changeModalVisible22 = (bool) => {
+        setisModalVisible22(bool);
+    };
 
-    // const setData22 = (data) => {
-    //     setchooseData22(data);
-    // };
+    const setData22 = (data) => {
+        setchooseData22(data);
+    };
 
-    // // validacion capacidad
+    // validacion capacidad
 
-    // const [isModalVisible23, setisModalVisible23] = useState(false);
-    // const [chooseData23, setchooseData23] = useState();
+    const [isModalVisible23, setisModalVisible23] = useState(false);
+    const [chooseData23, setchooseData23] = useState();
 
-    // const changeModalVisible23 = (bool) => {
-    //     setisModalVisible23(bool);
-    // };
+    const changeModalVisible23 = (bool) => {
+        setisModalVisible23(bool);
+    };
 
-    // const setData23 = (data) => {
-    //     setchooseData23(data);
-    // };
+    const setData23 = (data) => {
+        setchooseData23(data);
+    };
 
     // const sendMessage = (props) => {
 
@@ -133,6 +133,7 @@ const AddTravel = (props) => {
     //         setResponse(resp.status);
     //     });
     // }
+
 
     /* console.log("ESTO ES EL SOCKET", socket) */
     let [response, setResponse] = useState(null);
@@ -437,13 +438,13 @@ const AddTravel = (props) => {
                   />
                 </View>
                 <View style={styles.btn2}>
-                  <TouchableOpacity style={styles.btnEditar}>
+                  <TouchableOpacity style={styles.btnEditar} onPress={handleQuote} >
                     <Text style={styles.textBtn}>Cotizar</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
                     <Text style={styles.textBtn}>Agregar</Text>
                     {/* validaciones */}
-                    {/* <Modal
+                    <Modal
                                         transparent={true}
                                         animationType="fade"
                                         visible={isModalVisible20}
@@ -486,7 +487,7 @@ const AddTravel = (props) => {
                                             changeModalVisible23={changeModalVisible23}
                                             setData23={setData23}
                                         />
-                                    </Modal> */}
+                                    </Modal>
                   </TouchableOpacity>
                 </View>
               </View>
