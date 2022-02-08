@@ -6,6 +6,7 @@ import { uuid } from 'uuidv4';
 const bcrypt = require("bcryptjs");
 const router = Router()
 import { Signup } from '../models/Signup';
+import { Truck } from '../models/Truck';
 import { Carrier } from '../models/Carrier';
 
 router.get('/allan', async (req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +42,7 @@ router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
         let arr:any=[]; let carrier:any=[];
          for(var i=0;i < fleet.length;i++){
            
-             carrier[i]=await Carrier.findAll({
+             carrier[i]=await Truck.findAll({
                 where: {SignupId:fleet[i].id }
                     }
                 )
@@ -98,6 +99,15 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
             where: { eMail: eMail },
             defaults: payload,
         })
+
+        const admin={
+            id:uuid(),
+            eMail:user.eMail,
+            company:user.business,
+            SignupId:user.id
+
+        }
+        await Carrier.create(admin)
 
         if (!created) {
             const payload = {
@@ -175,7 +185,7 @@ router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunctio
     const { id } = req.query
     if(id===''){return res.send('El id no puede estar vacio')}
     try {
-        const carrier =  await Carrier.destroy({
+        const carrier =  await Truck.destroy({
             where: {
                 SignupId:id
             }
