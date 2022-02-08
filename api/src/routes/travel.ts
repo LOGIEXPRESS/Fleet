@@ -3,9 +3,9 @@ const { Op } = require("sequelize");
 import { uuid } from 'uuidv4';
 
 import { Travel } from '../models/Travel';
-import { Admin } from '../models/Admin';
- 
 import { Carrier } from '../models/Carrier';
+ 
+import { Truck } from '../models/Truck';
  
 import { Signup } from '../models/Signup';
  
@@ -103,7 +103,7 @@ router.post('/calculatePrice', (req: Request, res: Response) => {
 
 
 router.post('/requestTravel', async (req: Request, res: Response, next: NextFunction) => {
- 
+              //id es el del administrador 
               const { id, orig, destination, weight, price, description, finishedTravel} = req.body
 
               try {
@@ -138,7 +138,7 @@ router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction
 
   const { id } = req.body
   let getTravel = await Travel.findAll({ where: { id: id } })
-  let varUser = await Admin.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
+  let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
  /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
   let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
   const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
@@ -169,7 +169,7 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
       var travelFullData = [];
       for (let i = 0; i < tam; i++) {
 
-        let varUser = await Admin.findAll({ where: { id: travel[i].adminId } })
+        let varUser = await Carrier.findAll({ where: { id: travel[i].adminId } })
         let varUserReg = await Signup.findOne({ where: { id: varUser[0].SignupId } });
         travelFullData[i] = { travel: travel[i], user: varUser[0], userReg: varUserReg }
       }
@@ -266,10 +266,13 @@ router.get('/TravelOn/:idRole',async(req:Request,res:Response,next:NextFunction)
 
 
 router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction) => {
+  //id es del travel 
+  //userId es id de admin es decir del trasportitas 
   const { userId, id } = req.body;
   try {
-    let confirm = await Travel.update({finishedTravel: 'process'}, {where: { id: id , userId : { [Op.eq]: userId } }})
+    let confirm = await Travel.update({finishedTravel: 'process',carrierId:userId}, {where: { id: id }})
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm )
+    res.send(confirm)
   } catch (error) {
     next(error)
   }

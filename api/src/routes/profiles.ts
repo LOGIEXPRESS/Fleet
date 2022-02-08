@@ -1,8 +1,8 @@
 import { Response, Request, Router, NextFunction } from 'express';
 
 import { uuid } from 'uuidv4';
-import { Admin } from '../models/Admin';
 import { Carrier } from '../models/Carrier';
+import { Truck } from '../models/Truck';
 import { Signup } from '../models/Signup';
 
 
@@ -30,7 +30,7 @@ router.post('/adminProfile', async (req: Request, res: Response, next: NextFunct
             
             }
     
-            let profileAdmin=await Admin.create(newProfile)
+            let profileAdmin=await Carrier.create(newProfile)
             
     
             return res.json({menssage:'perfil add',payload:profileAdmin})
@@ -56,7 +56,7 @@ router.get('/emailsCarriers/:id',async(req:Request,res:Response,next:NextFunctio
 
     try{
 
-        let emails= await Admin.findOne({
+        let emails= await Carrier.findOne({
             where:{
 
                 SignupId:id
@@ -113,7 +113,7 @@ router.get('/adminData/:id',async(req:Request,res:Response,next:NextFunction)=>{
     if(id){
 
         try{
-            let data= await Admin.findOne({where:{
+            let data= await Carrier.findOne({where:{
 
                 SignupId:id
             }})
@@ -169,7 +169,7 @@ router.post('/carrierProfile', async (req: Request, res: Response, next: NextFun
                 
             }
             
-            let carrier = await Carrier.create(newProfileCarrier)
+            let carrier = await Truck.create(newProfileCarrier)
             let adminData= await Signup.findAll({
                 where:{
                     role:true
