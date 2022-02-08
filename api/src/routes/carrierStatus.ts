@@ -1,5 +1,5 @@
 import { Response, Request, Router, NextFunction } from 'express';
-import { Carrier } from '../models/Carrier';
+import { Truck } from '../models/Truck';
 import { Signup } from '../models/Signup';
 const router=Router()
 
@@ -17,15 +17,15 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
     let {status}=req.params
 
-    let available = await Carrier.findAll({where:{
+    let available = await Truck.findAll({where:{
         status: true},
         raw: true
     });
-    let busy = await Carrier.findAll({where:{
+    let busy = await Truck.findAll({where:{
         status: false},
         raw: true
     });;
-    let absent = await Carrier.findAll({where:{
+    let absent = await Truck.findAll({where:{
         status: null},
         raw: true
     });
@@ -37,7 +37,7 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
     }else if (status === 'null'){
         return res.status(200).json({"msg":"Ausentes", absent})
     }else{
-       let  allCarrierData = await Carrier.findAll({
+       let  allCarrierData = await Truck.findAll({
         include:[{
             model:Signup
         }]
@@ -51,7 +51,7 @@ router.get('/CarrrierDetails',async(req:Request,res:Response,next:NextFunction)=
     let {id}=req.params
 
     let carrierData = await Signup.findByPk(id) 
-    let vehicleData = await Carrier.findOne({where:{
+    let vehicleData = await Truck.findOne({where:{
         SignupId: id,
     }}) 
 

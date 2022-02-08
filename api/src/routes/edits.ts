@@ -1,6 +1,6 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
-import { Carrier }  from '../models/Carrier';
+import { Truck }  from '../models/Truck';
 
 
 
@@ -64,7 +64,7 @@ router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunc
 			if(color){upDateThis.color = color}
 			if(capacity){upDateThis.capacity = capacity}
 			
-			vehicle = await Carrier.update(upDateThis, {
+			vehicle = await Truck.update(upDateThis, {
 				where: {
 					SignupId: id
 				},
