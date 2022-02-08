@@ -107,7 +107,7 @@ const Login = () => {
     e.preventDefault();
     // en un objeto pongo lo que tengo en el estado inicial
     const obj = {
-      eMail: log.mail,
+      eMail: log.mail.trim(),
       password: log.contraseña,
     };
 
