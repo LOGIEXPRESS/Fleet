@@ -92,151 +92,184 @@ const NewCarrier = () => {
 
     console.log("Esto son los fleet", fleet)
     return (
-        <View style={{ backgroundColor: "white", flex: 1 }}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <HeaderBar screen='null' />
-                <View style={styles.containerHeaders}>
-                    <Text style={{ fontSize: 20 }}>AÑADE TRANSPORSTISTAS A TU FLOTA</Text>
-                    <Icon name="bus-outline" style={styles.icons} />
+      <View style={{ backgroundColor: "white", flex: 1 }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <HeaderBar screen="null" />
+          <View style={styles.containerHeaders}>
+            <Text style={{ fontSize: 20 }}>
+              AÑADE TRANSPORSTISTAS A TU FLOTA
+            </Text>
+            <Icon name="bus-outline" style={styles.icons} />
+          </View>
+          <View style={styles.viewAnterior}>
+            <Text style={styles.textAnterior}>
+              AÑADE UN NUEVO TRANSPORSTISTA
+            </Text>
+          </View>
+          <View style={styles.containerCards}>
+            <View style={styles.cards}>
+              <View style={styles.insideCard}>
+                <View style={styles.viewsInputs}>
+                  <Icon name="enter-outline" style={styles.icon_email} />
+                  <TextInput
+                    name="name"
+                    placeholder="Nombre"
+                    style={styles.textPlaceholder}
+                    onChangeText={(e) => setName(e)}
+                  />
                 </View>
-                <View style={styles.viewAnterior}>
-                    <Text style={styles.textAnterior}>AÑADE UN NUEVO TRANSPORSTISTA</Text>
+                <View style={styles.viewsInputs}>
+                  <Icon name="enter-outline" style={styles.icon_email} />
+                  <TextInput
+                    name="lastname"
+                    placeholder="Apellido"
+                    style={styles.textPlaceholder}
+                    onChangeText={(e) => setLastname(e)}
+                  />
                 </View>
-                <View style={styles.containerCards}>
-                    <View style={styles.cards} >
-                        <View style={styles.insideCard}>
-                            <View style={styles.viewsInputs}>
-                                <Icon name="enter-outline" style={styles.icon_email} />
-                                <TextInput
-                                    name='name'
-                                    placeholder="Nombre"
-                                    style={styles.textPlaceholder}
-                                    onChangeText={(e) => setName(e)}
-                                />
-                            </View>
-                            <View style={styles.viewsInputs}>
-                                <Icon name="enter-outline" style={styles.icon_email} />
-                                <TextInput
-                                    name='lastname'
-                                    placeholder="Apellido"
-                                    style={styles.textPlaceholder}
-                                    onChangeText={(e) => setLastname(e)}
-                                />
-                            </View>
-                            <View style={styles.viewsInputs}>
-                                <Icon name="mail-outline" style={styles.icon_email} />
-                                <TextInput
-                                    name='e-mail'
-                                    placeholder="Ingrese e-mail del transportista"
-                                    style={styles.textPlaceholder}
-                                    onChangeText={(e) => setEMail(e)}
-                                />
-                            </View>
-                            <View>
-                                <TouchableOpacity style={styles.Button} onPress={() => setModalView(true)} >
-                                    <Text style={styles.btnText}  >
-                                        Agregar
-                                    </Text>
-                                </TouchableOpacity>
-                   
-                            </View>
-                        </View>
-                    </View>
+                <View style={styles.viewsInputs}>
+                  <Icon name="mail-outline" style={styles.icon_email} />
+                  <TextInput
+                    name="e-mail"
+                    placeholder="Ingrese e-mail del transportista"
+                    style={styles.textPlaceholder}
+                    onChangeText={(e) => setEMail(e)}
+                  />
                 </View>
-                <View style={styles.viewAnterior}>
-                    <Text style={styles.textAnterior}>TUS TRANSPORSTISTAS</Text>
+                <View>
+                  <TouchableOpacity
+                    style={styles.Button}
+                    onPress={() => setModalView(true)}
+                  >
+                    <Text style={styles.btnText}>Agregar</Text>
+                  </TouchableOpacity>
                 </View>
-                <View style={styles.containerCards}>
-                    <View style={styles.cards}>
-                        <View style={styles.insideCard}>
-                            {fleet ?
-                                fleet.map((user, index) => {
-                                    
-                                    return (
-                                        <View style={styles.viewUsers} key={index}>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => modalHandleDelete(user.transportista.id)}>
-                                                    <Icon name="close-outline" style={styles.iconX} />
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => navigation.navigate('VehiculeDetails', user.vehiculo)}>
-                                                    <Icon name="bus-outline" style={styles.iconVehicule} />
-                                                </TouchableOpacity>
-                                                <View style={styles.textPosition}>
-                                                    <Text style={styles.textUsers}>{user.transportista.name}</Text>
-                                                    <Text style={styles.textUsers}>{user.transportista.eMail}</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    )
-                                }):  <ActivityIndicator size="large" color="#0000ff" /> 
+              </View>
+            </View>
+          </View>
+          <View style={styles.viewAnterior}>
+            <Text style={styles.textAnterior}>TUS TRANSPORSTISTAS</Text>
+          </View>
+          <View style={styles.containerCards}>
+            <View style={styles.cards}>
+              <View style={styles.insideCard}>
+                {fleet ? (
+                  fleet.map((user, index) => {
+                    return (
+                      <View style={styles.viewUsers} key={index}>
+                        <View style={{ flexDirection: "row" }}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              modalHandleDelete(user.transportista.id)
                             }
+                          >
+                            <Icon name="close-outline" style={styles.iconX} />
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() =>
+                              navigation.navigate(
+                                "VehiculeDetails",
+                                user.vehiculo
+                              )
+                            }
+                          >
+                            <Icon
+                              name="bus-outline"
+                              style={styles.iconVehicule}
+                            />
+                          </TouchableOpacity>
+                          <View style={styles.textPosition}>
+                            <Text style={styles.textUsers}>
+                              {user.transportista.name}
+                            </Text>
+                            <Text style={styles.textUsers}>
+                              {user.transportista.eMail}
+                            </Text>
+                          </View>
                         </View>
-                    </View>
+                      </View>
+                    );
+                  })
+                ) : (
+                  <ActivityIndicator size="large" color="#0000ff" />
+                )}
+              </View>
+            </View>
+          </View>
+          <Modal
+            animationType="slide"
+            onDismiss={() => console.log("close")}
+            onShow={() => console.log("open")}
+            transparent
+            visible={modalView}
+          >
+            <View style={styles.containerModal}>
+              <View style={styles.viewModal}>
+                <View style={styles.textModal}>
+                  <Icon name="person-add" style={styles.icon_modal} />
+                  <Text>Revisa si los datos a enviar estan bien</Text>
+                  <Text>Nombre: {name}</Text>
+                  <Text>Apellido: {lastname}</Text>
+                  <Text>Email: {eMail}</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity style={styles.btnModal}>
+                      <Text
+                        style={styles.btnText}
+                        onPress={() => handleSubmit()}
+                      >
+                        Agregar
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btnModal}>
+                      <Text
+                        style={styles.btnText}
+                        onPress={() => setModalView(false)}
+                      >
+                        Cancelar
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <Modal
-                    animationType="slide"
-                    onDismiss={() => console.log("close")}
-                    onShow={() => console.log('open')}
-                    transparent
-                    visible={modalView}
-                >
-                    <View style={styles.containerModal}>
-                        <View style={styles.viewModal}>
-                            <View style={styles.textModal}>
-                                <Icon name="person-add" style={styles.icon_modal} />
-                                <Text>Revisa si los datos a enviar estan bien</Text>
-                                <Text>Nombre: {name}</Text>
-                                <Text>Apellido: {lastname}</Text>
-                                <Text>Email: {eMail}</Text>
-                                <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => handleSubmit()}  >
-                                        Agregar
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => setModalView(false)} >
-                                        Cancelar
-                                    </Text>
-                                </TouchableOpacity>
-                                </View>
-                            
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-                <Modal
-                    animationType="slide"
-                    onDismiss={() => console.log("close")}
-                    onShow={() => console.log('open')}
-                    transparent
-                    visible={modalDelete}
-                >
-                    <View style={styles.containerModal}>
-                        <View style={styles.DeleteModal}>
-                            <View style={styles.textModal}>
-                                <Icon name="close-circle" style={styles.icon_modal} />
-                                <Text>Estas seguro que deseas eliminar a este usuario?</Text>
-                              <View style={{flexDirection:'row'}}> 
-                              <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => handleDelete(id)}  >
-                                        Eliminar
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => setModalDelete(false)}  >
-                                       Cancelar
-                                    </Text>
-                                </TouchableOpacity>
-                              </View>
-                       
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-            </ScrollView> 
-        </View>
-    )
+              </View>
+            </View>
+          </Modal>
+          <Modal
+            animationType="slide"
+            onDismiss={() => console.log("close")}
+            onShow={() => console.log("open")}
+            transparent
+            visible={modalDelete}
+          >
+            <View style={styles.containerModal}>
+              <View style={styles.DeleteModal}>
+                <View style={styles.textModal}>
+                  <Icon name="close-circle" style={styles.icon_modal} />
+                  <Text>Estas seguro que deseas eliminar a este usuario?</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity style={styles.btnModal}>
+                      <Text
+                        style={styles.btnText}
+                        onPress={() => handleDelete(id)}
+                      >
+                        Eliminar
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btnModal}>
+                      <Text
+                        style={styles.btnText}
+                        onPress={() => setModalDelete(false)}
+                      >
+                        Cancelar
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </Modal>
+        </ScrollView>
+      </View>
+    );
 }
 
 

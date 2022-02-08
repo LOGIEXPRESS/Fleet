@@ -36,23 +36,23 @@ import { APIKEY_GOOGLE } from "@env"
 
 
 // funcion para calcular la distancia en km
-// function getDistanciaMetros(origen, destino) {
-//     var lat1 = origen.latitude;
-//     var lon1 = origen.longitude;
-//     var lat2 = destino.latitude;
-//     var lon2 = destino.longitude;
-//     rad = function (x) { return x * Math.PI / 180; }
-//     var R = 6378.137; //Radio de la tierra en km 
-//     var dLat = rad(lat2 - lat1);
-//     var dLong = rad(lon2 - lon1);
-//     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) *
-//         Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
-//     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+function getDistanciaMetros(origen, destino) {
+    var lat1 = origen.latitude;
+    var lon1 = origen.longitude;
+    var lat2 = destino.latitude;
+    var lon2 = destino.longitude;
+    rad = function (x) { return x * Math.PI / 180; }
+    var R = 6378.137; //Radio de la tierra en km 
+    var dLat = rad(lat2 - lat1);
+    var dLong = rad(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) *
+        Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-//     //aquí obtienes la distancia en metros por la conversion 1Km =1000m
-//     var d = R * c * 1000;
-//     return d / 1000;
-// }
+    //aquí obtienes la distancia en metros por la conversion 1Km =1000m
+    var d = R * c * 1000;
+    return d / 1000;
+}
 
 
 
@@ -62,6 +62,7 @@ const AddTravel = (props) => {
 
     const socket = useSelector((store) => store.socket)
 
+    
 
     ////--> HOOK PARA LA NAVEGACION <-- ////
     const navigation = useNavigation();
@@ -69,7 +70,7 @@ const AddTravel = (props) => {
     /* const response = useSelector((store) => store.responseTravel) */
     const data = props.route.params
 
-    // console.log("esto me llega ", data)
+    console.log("esto me llega DATA ", data)
 
 
     //Estados para las validaciones:
@@ -189,42 +190,42 @@ const AddTravel = (props) => {
         })
     };
 
-    // const handleSubmit = () => {
-    //     const travel = {
-    //         orig: `${origen.latitude}/${origen.longitude}/${origen.name}`,
-    //         destination: `${destino.latitude}/${destino.longitude}/${destino.name}`,
-    //         weight: parseFloat(weight),
-    //         price: price.price,
-    //         description: description,
-    //         id: data,
-    //         finishedTravel: 'earring',
-    //     };
+    const handleSubmit = () => {
+        const travel = {
+            orig: `${origen.latitude}/${origen.longitude}/${origen.name}`,
+            destination: `${destino.latitude}/${destino.longitude}/${destino.name}`,
+            weight: parseFloat(weight),
+            price: price.price,
+            description: description,
+            id: data.id,
+            finishedTravel: 'earring',
+        };
 
-    //     //VALIDACIONES
+        //VALIDACIONES
 
-    //             if (travel.orig === `0/0/null`) {
-    //                 changeModalVisible20(true)
-    //                 return
-    //             }
+                if (travel.orig === `0/0/null`) {
+                    changeModalVisible20(true)
+                    return
+                }
         
-    //             if (travel.destination === `0/0/null`) {
-    //                 changeModalVisible21(true)
-    //                 return
-    //             }
+                if (travel.destination === `0/0/null`) {
+                    changeModalVisible21(true)
+                    return
+                }
         
-    //             if (!travel.weight) {
-    //                 changeModalVisible22(true)
-    //                 return
-    //             }
-    //             if (travel.price === 0) {
-    //                 changeModalVisible23(true)
-    //                 return
-    //             }
+                if (!travel.weight) {
+                    changeModalVisible22(true)
+                    return
+                }
+                if (travel.price === 0) {
+                    changeModalVisible23(true)
+                    return
+                }
          
-    //     sendMessage(travel)
+        // sendMessage(travel)
 
-    //     console.log("Estoy enviando:", travel)
-    // }
+        console.log("Estoy enviando:", travel)
+    }
 
     // if (origen.latitude > 0 && destino.latitude > 0) {
     //     let distance = getDistanciaMetros(origen, destino)
@@ -439,7 +440,7 @@ const AddTravel = (props) => {
                   <TouchableOpacity style={styles.btnEditar}>
                     <Text style={styles.textBtn}>Cotizar</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.btnEditar}>
+                  <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
                     <Text style={styles.textBtn}>Agregar</Text>
                     {/* validaciones */}
                     {/* <Modal
