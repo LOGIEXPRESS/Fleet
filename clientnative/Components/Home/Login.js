@@ -59,10 +59,11 @@ const Login = () => {
     }
   }, [login]);
 
-   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-    return () => backHandler.remove()
-  }, [])
+  //para desavilitar volver atras del cel
+  //  useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+  //   return () => backHandler.remove()
+  // }, [])
 
 
   async function save(key, value) {
