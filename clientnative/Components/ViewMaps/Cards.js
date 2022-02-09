@@ -7,15 +7,15 @@ const CARD_HEIGTH = 380;
 const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
-const Card = ({orig,destination,price,description,weight,business,random}) => {
+const Card = ({orig,destination,price,description,weight,business,photo}) => {
   return (
 <View style={styles.card} >
                 <View style={{ alignItems: "center", flexDirection: "column" }}>
                   <Image
-                    source={{
-                      uri:
-                       `https://picsum.photos/seed/picsum/200/300?random`
-                    }}
+                    source={photo?{
+                      uri:photo
+                      
+                    }:require('../Utils/logo.png')}
                     style={styles.cardImage}
                   />
                   {/* <StarRating ratings={rating} reviews={rating} /> */}
@@ -24,8 +24,8 @@ const Card = ({orig,destination,price,description,weight,business,random}) => {
                 <View style={styles.textContent}>
                   <Text>ID: </Text>
                   <Text>DESCRIPCION: {description} </Text>
-                  <Text>ORIGEN: {orig.split("/")[0]}</Text>
-                  <Text>DESTINO: {destination}</Text>
+                  <Text>ORIGEN: {orig.split("/")[2]}</Text>
+                  <Text>DESTINO: {destination.split("/")[2]}</Text>
                   <Text>PESO: {weight}ton</Text>
                   <Text>PAGO: ${price}</Text>
                   <View style={styles.btn2}>
@@ -37,7 +37,7 @@ const Card = ({orig,destination,price,description,weight,business,random}) => {
                     </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+</View>
   );
 };
 
