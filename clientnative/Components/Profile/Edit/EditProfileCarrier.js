@@ -60,6 +60,18 @@ const EditProfileCarrier = () => {
   setchooseData(data);
   };
 
+  const handelNavigetion=(e)=>{
+    e.preventDefault()
+    if(datosUser.role){
+      navigation.navigate('ProfileAdmin')
+    }
+    if(!datosUser.role){
+      navigation.navigate('ProfileCarrier')
+    }
+    
+
+  }
+
   ////--> HOOK PARA LA NAVEGACION <-- ////
   const navigation = useNavigation();
 
@@ -280,7 +292,7 @@ const EditProfileCarrier = () => {
               onChangeText={(location) => handleChangelocation(location)}
             />
           </View>
-          <View style={styles.viewsInputs}>
+          {/* <View style={styles.viewsInputs}>
             <Icon name="reader-outline" size={26} />
             <TextInput
               value={user.cbu}
@@ -289,12 +301,12 @@ const EditProfileCarrier = () => {
               style={styles.textPlaceholder}
               onChangeText={(cbu) => handleChangeCbu(cbu)}
             />
-          </View>
+          </View> */}
 
           <View style={styles.btn2}>
             <TouchableOpacity
               style={styles.btnEditar}
-              onPress={() => navigation.navigate("DatosPersonalesCarrier")}
+              onPress={handelNavigetion}
             >
               <Text style={styles.textBtn}>Cancelar</Text>
             </TouchableOpacity>

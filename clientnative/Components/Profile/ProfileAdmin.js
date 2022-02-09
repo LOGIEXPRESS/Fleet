@@ -127,12 +127,15 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
-            onPress={() => navigation.navigate("AddTravel")}
+            onPress={() => navigation.navigate("AddTravel", data)}
+
           >
-            <Image
+            {/* <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}
-              source={"https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"}
-            />
+              source={
+                {uri: "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"}
+              }
+            /> */}
             <Text style={styles.userBtnTxt2}>Agregar Viaje</Text>
           </TouchableOpacity>
         </View>
@@ -182,11 +185,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#fff",
     width: wp("88%"),
-    height: hp("7%"),
+    height: hp("8%"),
     padding: wp('2.5%'),
     borderRadius: wp('3%'),
-    shadowOpacity: 80,
-    elevation: 16,
+    shadowOpacity: 5,
+    elevation: 2,
     marginTop: wp("7%"),
     borderColor: "#E1E8EB",
     borderWidth: 1.75,
@@ -201,8 +204,8 @@ const styles = StyleSheet.create({
     height: hp("8.5%"),
     padding: wp('5%'),
     borderRadius: wp('4%'),
-    shadowOpacity: 80,
-    elevation: 15,
+    shadowOpacity: 5,
+    elevation: 2,
     marginTop: wp('7.5%'),
   },
   userImg: {
@@ -250,6 +253,7 @@ const styles = StyleSheet.create({
     fontSize: hp('3.5%'),
     height: hp('9.5%'),
     fontWeight: '700',
+    paddingVertical: hp('2%'),
   },
   userBtnTxt3: {
     marginTop: wp('1%'),

@@ -16,7 +16,8 @@ const initialState = {
   editarPerfilUser: [],
   editarPerfilCarrier: [],
   editVehicule: [],
-  price: []
+  price: [],
+  travels: [],
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -79,6 +80,17 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             responseLog: action.payload,
           };
+          case "CHANGE_PASSWORD":
+          return {
+            ...state,
+            editPassword: action.payload,
+          }
+          case "GET_TRAVELS":
+            return {
+              ...state,
+              travels: action.payload,
+            };
+    
           case "UPDATE_PERFIL":
             return {
               ...state,
