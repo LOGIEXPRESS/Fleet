@@ -30,7 +30,7 @@ import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
 import HeaderBar from "../Utils/HeaderBar";
 import { APIKEY_GOOGLE } from "@env"
-import { sendMessage } from "../../Redux/actions/index";
+import  {sendMessage}  from "../../Redux/actions/index";
 
 
 
@@ -224,7 +224,7 @@ const AddTravel = (props) => {
                     return
                 }
          
-        sendMessage(travel)
+        dispatch(sendMessage(travel))
 
         console.log("Estoy enviando:", travel)
     }
@@ -442,8 +442,8 @@ const AddTravel = (props) => {
                   <TouchableOpacity style={styles.btnEditar} onPress={handleQuote} >
                     <Text style={styles.textBtn}>Cotizar</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
-                    <Text style={styles.textBtn}>Agregar</Text>
+                  <TouchableOpacity style={styles.btnEditar} onPress={()=>handleSubmit()} >
+                    <Text style={styles.textBtn}  >Agregar</Text>
                     {/* validaciones */}
                     <Modal
                                         transparent={true}

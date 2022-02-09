@@ -204,7 +204,7 @@ export function changePassword(payload) {
 }
 
 export function sendMessage (payload) {
-  return async function (dispatch) {
+  return async function () {
     try {
 
       console.log("Sale de la action sendMessage",payload);
