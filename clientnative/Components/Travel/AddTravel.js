@@ -29,6 +29,7 @@ import SimpleModal21 from "./MoldasTravel/SimpleModaldest";
 import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
 import HeaderBar from "../Utils/HeaderBar";
+
 import { APIKEY_GOOGLE } from "@env"
 import  {sendMessage}  from "../../Redux/actions/index";
 
@@ -405,7 +406,7 @@ const AddTravel = (props) => {
                   <Icon
                     name="cash-outline"
                     size={26}
-                    style={{ marginTop: hp("1%"), color: "#ff1c49" }}
+                    style={{  color: "#ff1c49" }}
                   />
                   <Text
                     placeholder="Presiona Cotizar"
@@ -532,10 +533,15 @@ const styles = StyleSheet.create({
         padding: wp('2%'),
     },
     textPlaceholder: {
-        marginLeft: wp('3%'),
-        fontSize: hp('2.1%'),
-        marginBottom: wp('0.1'),
+        marginLeft: wp('4%'),
+        fontSize: hp('2%'),
+        marginTop:hp("0.5%")
     },
+    textPlaceholder2: {
+      marginLeft: wp('4%'),
+      fontSize: hp('2%'),
+      marginTop:hp("1%")
+  },
     btnEditar: {
         backgroundColor: "#ff1c49",
         borderRadius: wp('2%'),

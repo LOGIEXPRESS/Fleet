@@ -223,46 +223,46 @@ const styles = StyleSheet.create({
     
   },
   userName2: {
-    fontSize: 21,
-    // fontWeight: "bold",
+    fontSize: hp("2.24%"),
+  
     // marginTop: 7,
     // marginBottom: wp("3%"),
-    color: "grey"
+    color: "#ff1c49"
   },
   userBtnTxt: {
     marginTop: wp('1%'),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.5%'),
+    fontSize: hp('2.8%'),
     marginLeft: wp('7.3%'),
     marginTop: wp('0.9%'),
-    fontWeight: '700'
+    fontWeight: '600'
   },
   userBtnTxt4: {
     marginTop: wp('1%'),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.5%'),
+    fontSize: hp('2.8%'),
     marginLeft: wp('14.3%'),
     marginTop: wp('0.9%'),
-    fontWeight: '700'
+    fontWeight: '600'
   },
   userBtnTxt2: {
     color: "white",
     textAlign: "center",
     fontSize: hp('3.5%'),
     height: hp('9.5%'),
-    fontWeight: '700',
+    fontWeight: '600',
     paddingVertical: hp('2%'),
   },
   userBtnTxt3: {
     marginTop: wp('1%'),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.5%'),
+    fontSize: hp('2.8%'),
     marginLeft: wp('11.5%'),
     marginTop: wp('0.9%'),
-    fontWeight: '700'
+    fontWeight: '600'
   },
   userInfoWrapper: {
     flexDirection: "row",

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
+import { cleanToken } from "../../../Redux/actions";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
@@ -13,8 +14,9 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
-import { Overlay } from "react-native-elements/dist/overlay/Overlay";
+
 const PersonalDataCarrier = () => {
+  const dispatch = useDispatch();
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const rating = 4;
@@ -27,6 +29,7 @@ const PersonalDataCarrier = () => {
   const cerrarsesion = () =>{
     console.log("cerrar sesion")
     save("token", "(result)")
+    dispatch(cleanToken())
     navigation.navigate('Login')
   }
 
@@ -37,7 +40,7 @@ const PersonalDataCarrier = () => {
   return (
     <View style={styles.container}>
       <View showsVerticalScrollIndicator={false}>
-      <View style={{marginTop:hp("-1%"),marginLeft:wp("-5%"),marginBottom:hp("-3%")}}>
+      <View style={{marginTop:hp("-10%"),marginLeft:wp("-4%"),marginBottom:hp("-3%")}}>
       <HeaderBar  screen={'null'} />
       </View>
       <View>
@@ -121,11 +124,9 @@ const styles = StyleSheet.create({
    },
   perfilTex: {
     alignSelf:'center',
-    fontSize: hp("5.8%"),
-    textDecorationLine:"underline",
-    textDecorationColor: "#ff1c49",
+    fontSize: hp("4.8%"),
     fontWeight: "bold",
-    marginTop: 12,
+    marginTop: hp("3%"),
   },
   userImg: {
     marginTop: 12,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     backgroundColor: "#fff",
     borderColor: "#ff1c49",
-    width: wp("88%"),
+    width: wp("82%"),
     height: hp("8%"),
     marginBottom: wp('10%'),
     borderRadius: wp('3%'),
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
   textBtn: {
     textAlign: "center",
     // marginTop: 5,
-    fontSize: hp('3.25%'),
+    fontSize: hp('2.9%'),
     fontWeight: "bold",
   },
 });

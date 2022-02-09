@@ -154,6 +154,7 @@ export function enviarToken(payload) {
 }
 
 export function consultReg() {
+  console.log("que pasa con consultreg")
     return async function (dispatch) {
       try {
         var json = await axios(`${API_URLS}/api/adminExist`);
@@ -236,5 +237,11 @@ export function sendMessage (payload) {
 export function desmount() {
   return {
     type: 'DESMOUNT',
+  };
+};
+
+export function cleanToken() {
+  return {
+    type: 'CLEAN_TOKEN',
   };
 };
