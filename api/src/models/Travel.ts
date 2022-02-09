@@ -38,13 +38,13 @@ export class Travel extends Model{
     updatedAt!: Date
 
     @BelongsTo(() => Carrier)
-    admin!: Carrier
+    truck!: Carrier
 
     @ForeignKey(() => Carrier)
     carrierId!: any
 
     @BelongsTo(() => Signup)
-    carrier!: Signup
+    admin!: Signup
 
     @ForeignKey(() => Signup)
     adminId!: string
