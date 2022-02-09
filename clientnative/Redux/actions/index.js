@@ -17,6 +17,20 @@ export function updatePerfil (payload) {
   }
 }
 
+export function getTravels() {
+  return async function (dispatch) {
+    try {
+      const request = await axios.get(`${ API_URLS }/api/Travel`);
+      return dispatch({
+        type: "GET_TRAVELS",
+        payload: request.data,
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
 export function reset(){
   return async function (dispatch){
     try {
