@@ -22,7 +22,26 @@ import * as Location from "expo-location";
 
 import { useNavigation } from "@react-navigation/core";
 
+import { getTravels } from "../../Redux/actions";
+import Card from "./Cards";
+import Pointers from "./Pointers";
+
+
+
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGTH = 380;
+const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+
+
 export default function ScreenMap() {
+
+  const dispatch=useDispatch()
+
+  const travels = useSelector((state) => state.travels)
+
+  
+
   const [pin, setPin] = useState({
     latitude: 0,
     longitude: 0,
@@ -56,43 +75,45 @@ export default function ScreenMap() {
         longitudeDelta: 0.0421,
       });
     })();
-    // dispatch(getTravels());
-    // console.log("ESTO SON LOS VIAJES", travels);
-  }, []);
+    dispatch(getTravels());
+    
+  }, [dispatch]);
+  console.log("ESTO SON LOS VIAJES", travels);
+  
 
-  useEffect(() => {
-    mapAnimation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-      if (index >= travels.length) {
-        index = travels.length - 1;
-      }
-      if (index <= 0) {
-        index = 0;
-      }
+  // useEffect(() => {
+  //   mapAnimation.addListener(({ value }) => {
+  //     let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+  //     if (index >= travels.length) {
+  //       index = travels.length - 1;
+  //     }
+  //     if (index <= 0) {
+  //       index = 0;
+  //     }
 
-      clearTimeout(regionTimeout);
+  //     clearTimeout(regionTimeout);
 
-      const regionTimeout = setTimeout(() => {
-        if (mapIndex !== index) {
-          mapIndex = index;
-          const { orig } = travels[index]?.travel;
-          const origen = orig.split("/");
-          const coordinate = {
-            latitude: Number(origen[0]),
-            longitude: Number(origen[1]),
-          };
-          _map.current.animateToRegion(
-            {
-              ...coordinate,
-              latitudeDelta: region.latitudeDelta,
-              longitudeDelta: region.longitudeDelta,
-            },
-            350
-          );
-        }
-      }, 10);
-    });
-  });
+  //     const regionTimeout = setTimeout(() => {
+  //       if (mapIndex !== index) {
+  //         mapIndex = index;
+  //         const { orig } = travels[index]?.travel;
+  //         const origen = orig.split("/");
+  //         const coordinate = {
+  //           latitude: Number(origen[0]),
+  //           longitude: Number(origen[1]),
+  //         };
+  //         _map.current.animateToRegion(
+  //           {
+  //             ...coordinate,
+  //             latitudeDelta: region.latitudeDelta,
+  //             longitudeDelta: region.longitudeDelta,
+  //           },
+  //           350
+  //         );
+  //       }
+  //     }, 10);
+  //   });
+  // });
 
   const onMarkerPress = (mapEventData) => {
     const markerID = mapEventData._targetInst.return.key;
@@ -113,18 +134,91 @@ export default function ScreenMap() {
   return (
     <View style={styles.container}>
       {pin.latitude !== 0 ? (
-        <MapView
-          style={StyleSheet.absoluteFill}
-          ref={_map}
-          initialRegion={pin}
-          provider="google"
-        > 
-          <Marker
-          coordinate={pin}
-          />
-          <View style={{ marginTop: 35, position: "absolute" }}></View>
+        <View style={styles.container}>
+          <MapView
+            style={StyleSheet.absoluteFill}
+            ref={_map}
+            initialRegion={pin}
+            provider="google"
+          > 
+            <Marker coordinate={pin} />
 
-        </MapView>
+            {/* {travels !== 0 ?(travels.map((point,index)=>{
+              return (
+                <Pointers key={index} onMarkerPress={onMarkerPress}/>
+              )
+            })
+              
+            ):
+            <ActivityIndicator size="large" color="#0000ff" />
+              
+            } */}
+            
+
+            
+            
+          
+            
+          </MapView>
+          
+            <Animated.ScrollView
+              ref={_scrollView}
+              horizontal
+              scrollEventThrottle={1}
+              showHorizontalScrollIndicator={false}
+              style={styles.scrollView}
+              pagingEnabled
+              snapToInterval={CARD_WIDTH + 20}
+              snapToAlignment="center"
+              contentInset={{
+                top: 0,
+                left: SPACING_FOR_CARD_INSET,
+                bot: 0,
+                right: SPACING_FOR_CARD_INSET,
+              }}
+              contentContainerStyle={{
+                paddingHorizontal:
+                  Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
+              }}
+              onScroll={Animated.event(
+                [
+                  {
+                    nativeEvent: {
+                      contentOffset: {
+                        x: mapAnimation,
+                      },
+                    },
+                  },
+                ],
+                { useNativeDriver: true }
+              )}>
+
+            {travels?.length>0 ?(travels?.map((data,index)=>{
+              return(
+                <Card key={index} 
+                orig={data.orig} 
+                destination={data.destination} 
+                price={data.price} 
+                description={data.description}
+                weight={data.weight}
+                business={data.admin.business}
+                random={index}/>
+              )
+            })
+              
+            ):null}
+
+          </Animated.ScrollView>
+          
+
+        </View>
+        
+
+        
+         
+        
+
+        
       ) : (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
@@ -193,21 +287,21 @@ const styles = StyleSheet.create({
       flex: 2,
       padding: 10,
     },
-    // card: {
-    //   // padding: 10,
-    //   elevation: 2,
-    //   backgroundColor: "#FFF",
-    //   borderTopLeftRadius: 5,
-    //   borderTopRightRadius: 5,
-    //   marginHorizontal: 10,
-    //   shadowColor: "#000",
-    //   shadowRadius: 5,
-    //   shadowOpacity: 0.3,
-    //   shadowOffset: { x: 2, y: -2 },
-    //   height: CARD_HEIGTH,
-    //   width: CARD_WIDTH,
-    //   overflow: "hidden",
-    // },
+    card: {
+      // padding: 10,
+      elevation: 2,
+      backgroundColor: "#FFF",
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      marginHorizontal: 10,
+      shadowColor: "#000",
+      shadowRadius: 5,
+      shadowOpacity: 0.3,
+      shadowOffset: { x: 2, y: -2 },
+      height: CARD_HEIGTH,
+      width: CARD_WIDTH,
+      overflow: "hidden",
+    },
     header: {
       marginTop: 20,
     },

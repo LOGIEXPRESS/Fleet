@@ -35,10 +35,9 @@ router.get('/carriers', async (req: Request, res: Response, next: NextFunction) 
 
 router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
  
-     var fleet=await Signup.findAll({
-        where: {role : { [Op.eq]: false } }
-            }
-        )
+     var fleet = await Signup.findAll({
+       where: { role: { [Op.eq]: false } },
+     });
         if(fleet.length===0){return res.send(null);}
         let arr:any=[]; let carrier:any=[];
          for(var i=0;i < fleet.length;i++){
@@ -64,21 +63,20 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
-        id: uuid(),
-        name,
-        lastName,
-        eMail,
-        password: passwordHash,
-        role: false
-    }
+      id: uuid(),
+      name,
+      lastName,
+      eMail,
+      password: passwordHash,
+      role: false,
+    };
     ////////<inicio formato> Este es el mensaje que se le va a enviar al usuario con formato html
-    let contentHTML =
-        `<h1>New user</h1>
+    let contentHTML = `<h1>New user</h1>
                <ul>
                   <li>${name} ${lastName}</li>
                   <li>email: ${eMail}</li>
                   <li>password:${password}</li>    
-               </ul> `
+               </ul> `;
 
     //////</fin formato>
     /////<inicio configuración transporter>ç

@@ -127,7 +127,8 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
-            onPress={() => navigation.navigate("AddTravel")}
+            onPress={() => navigation.navigate("AddTravel", data)}
+
           >
             {/* <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}
