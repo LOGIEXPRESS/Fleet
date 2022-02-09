@@ -32,7 +32,7 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 export default function ScreenMap() {
 
-  const dispatch=useDispatch()
+  const dispatch= useDispatch()
 
   const travels = useSelector((state) => state.travels)
 
@@ -135,9 +135,15 @@ export default function ScreenMap() {
           <Marker
           coordinate={pin}
           />
-          <View style={{ marginTop: 35, position: "absolute" }}></View>
+         {/*  <View style={{ marginTop: 35, position: "absolute" }}></View> */}
 
-          {travels?.length !==0 ?(
+        
+
+        </MapView>
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
+   {/*    {travels?.length !==0 ?(
             <Animated.ScrollView
             
             ref={_scrollView}
@@ -190,7 +196,7 @@ export default function ScreenMap() {
                         
                         
                         />
-                        {/* <StarRating ratings={rating} reviews={rating} /> */}
+                        <StarRating ratings={rating} reviews={rating} />
                                
 
                       </View> 
@@ -212,13 +218,7 @@ export default function ScreenMap() {
            
           ):(
             <ActivityIndicator size="large" color="#0000ff" />
-          )}
-
-        </MapView>
-      ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
-      )}
-      
+          )} */}
     </View>
 )};
 
