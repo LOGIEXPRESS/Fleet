@@ -162,19 +162,26 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
     /* let travel = await Travel.findAll() */
-    const travel = await Travel.findAll({ where: { carrierId:{[Op.eq]: null} }})
-    // res.send(travel);
-    if (travel.length > 0) {
-      let tam = travel.length;
-      var travelFullData = [];
-      for (let i = 0; i < tam; i++) {
+    const travel = await Travel.findAll({
+      where:{
+        carrierId:{[Op.eq]:null}
+      },
+      include:Signup
+    }) 
 
-        let varUser = await Carrier.findAll({ where: { id: travel[i].adminId } })
-        let varUserReg = await Signup.findOne({ where: { id: varUser[0].SignupId } });
-        travelFullData[i] = { travel: travel[i], user: varUser[0], userReg: varUserReg }
-      }
-      return res.send(travelFullData)
-    }
+  
+   res.send(travel);
+    // if (travel.length > 0) {
+    //   let tam = travel.length;
+    //   var travelFullData = [];
+    //   for (let i = 0; i < tam; i++) {
+
+    //     let varUser = await Carrier.findAll({ where: { id: travel[i].adminId } })
+    //     let varUserReg = await Signup.findOne({ where: { id: varUser[0].SignupId } });
+    //     travelFullData[i] = { travel: travel[i], user: varUser[0], userReg: varUserReg }
+    //   }
+    //   return res.send(travelFullData)
+    // }
     //res.send('data not found')
     //por consola me aparece:"Executing (default): SELECT "id", "ducumentoIdentidad", "eMail", "ubicacion", "cel", "tel", "fotoPerfil", "medioPago", "name", "lastName", "paswword", "terminosCondiciones", "createdAt", "updatedAt" FROM "Users" AS "User";"
     //no pude corregirlo!!

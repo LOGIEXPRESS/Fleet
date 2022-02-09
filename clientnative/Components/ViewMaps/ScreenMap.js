@@ -22,7 +22,20 @@ import * as Location from "expo-location";
 
 import { useNavigation } from "@react-navigation/core";
 
+import { getTravels } from "../../Redux/actions";
+
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGTH = 380;
+const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+
+
 export default function ScreenMap() {
+
+  const dispatch=useDispatch()
+
+  const travels = useSelector((state) => state.travels)
+
   const [pin, setPin] = useState({
     latitude: 0,
     longitude: 0,
@@ -56,8 +69,8 @@ export default function ScreenMap() {
         longitudeDelta: 0.0421,
       });
     })();
-    // dispatch(getTravels());
-    // console.log("ESTO SON LOS VIAJES", travels);
+    dispatch(getTravels());
+    console.log("ESTO SON LOS VIAJES", travels[0]);
   }, []);
 
   useEffect(() => {
@@ -123,6 +136,83 @@ export default function ScreenMap() {
           coordinate={pin}
           />
           <View style={{ marginTop: 35, position: "absolute" }}></View>
+
+          {travels?.length !==0 ?(
+            <Animated.ScrollView
+            
+            ref={_scrollView}
+            horizontal
+            scrollEventThrottle={1}
+            showHorizontalScrollIndicator={false}
+            style={styles.scrollView}
+            pagingEnabled
+            snapToInterval={CARD_WIDTH + 20}
+            snapToAlignment="center"
+            contentInset={{
+              top: 0,
+              left: SPACING_FOR_CARD_INSET,
+              bot: 0,
+              right: SPACING_FOR_CARD_INSET,
+            }}
+            contentContainerStyle={{
+              paddingHorizontal:
+                Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
+            }}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: mapAnimation,
+                    },
+                  },
+                },
+              ],
+              { useNativeDriver: true }
+            )}
+            >
+              {
+                travels?.map((data,index)=>{
+
+                  let origen=data.orig
+                  let destino=data.destination
+
+                  return(
+                    <View style={styles.card} key={index}>
+                      <View style={{ alignItems: "center", flexDirection: "column" }}>
+                        <Image
+
+                          source={{
+                            uri:
+                              "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                          }}
+                          style={styles.cardImage}
+                        
+                        
+                        />
+                        {/* <StarRating ratings={rating} reviews={rating} /> */}
+                               
+
+                      </View> 
+                      <View style={styles.textContent}>
+                        <Text>Pago: {data.price}</Text>  
+                        <Text>Origen: {origen}</Text>
+                        <Text>Destino: {destino}</Text>
+
+                      </View>
+
+                    </View>
+                  )
+
+                })
+              }
+            
+
+            </Animated.ScrollView>
+           
+          ):(
+            <ActivityIndicator size="large" color="#0000ff" />
+          )}
 
         </MapView>
       ) : (
@@ -193,21 +283,21 @@ const styles = StyleSheet.create({
       flex: 2,
       padding: 10,
     },
-    // card: {
-    //   // padding: 10,
-    //   elevation: 2,
-    //   backgroundColor: "#FFF",
-    //   borderTopLeftRadius: 5,
-    //   borderTopRightRadius: 5,
-    //   marginHorizontal: 10,
-    //   shadowColor: "#000",
-    //   shadowRadius: 5,
-    //   shadowOpacity: 0.3,
-    //   shadowOffset: { x: 2, y: -2 },
-    //   height: CARD_HEIGTH,
-    //   width: CARD_WIDTH,
-    //   overflow: "hidden",
-    // },
+    card: {
+      // padding: 10,
+      elevation: 2,
+      backgroundColor: "#FFF",
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      marginHorizontal: 10,
+      shadowColor: "#000",
+      shadowRadius: 5,
+      shadowOpacity: 0.3,
+      shadowOffset: { x: 2, y: -2 },
+      height: CARD_HEIGTH,
+      width: CARD_WIDTH,
+      overflow: "hidden",
+    },
     header: {
       marginTop: 20,
     },
