@@ -14,69 +14,110 @@ const router=Router()
 
 // })
 
-router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=>{
+router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
 
     let {id}=req.params;
 
     let user = await Truck.findAll({where:{
         SignupId: id, 
     }})
+    // console.log(user)
 
-    if(user){
+    let userStatus = user[0].status
+    // console.log(userStatus)
 
-        const userStatus = user[0].status
-        //console.log(userStatus)
-        //const changeStatus = !userStatus
-        //console.log(changeStatus)
+    if (user && (userStatus!== null)){
 
         let upDateThis: any = {}
-         //console.log(upDateThis)
-
+        
         if(userStatus){upDateThis.status = !userStatus}
-
+        
+        //console.log(upDateThis)
         const changeStatus = await Truck.update(upDateThis, {where:{
             SignupId: id, 
         }})
-
-        // const newStatus = changeStatus[0].status
+         //console.log(changeStatus)
 
         return res.status(200).json({"msg":"Cambio el status", changeStatus})
+
+    }else if( user && (userStatus == null)){
+
+        let upDateThis: any = {}
         
+        if(userStatus){upDateThis.status = false}
+        
+        //console.log(upDateThis)
+       const changeStatus = await Truck.update(upDateThis, {where:{
+           SignupId: id, 
+       }})
+        //console.log(changeStatus)
+
+       return res.status(200).json({"msg":"Cambio el status", changeStatus})
+
+    }else{
+
+        return res.status(404).json({"msg":"ACA ROMPE, NO ENCONTRAMOS STATUS "})
     }
+
+    //-------------------->ESTO NO FUNCIONA<-----------------//
+
+    // if(user){
+
+    //     const userStatus = user[0].status
+    //     //console.log(userStatus)
+    //     //const changeStatus = !userStatus
+    //     //console.log(changeStatus)
+
+    //     let upDateThis: any = {}
+    //      //console.log(upDateThis)
+
+    //     if(userStatus){upDateThis.status = !userStatus}
+
+    //     const changeStatus = await Truck.update(upDateThis, {where:{
+    //         SignupId: id, 
+    //     }})
+
+    //     // const newStatus = changeStatus[0].status
+
+    //     return res.status(200).json({"msg":"Cambio el status", changeStatus})
+        
+    // }
 
 })
 
 router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
-    let {status}=req.params
+    // let {status}=req.params
 
-    let available = await Truck.findAll({where:{
+    let on = await Truck.findAll({where:{
         status: true},
         raw: true
     });
-    let busy = await Truck.findAll({where:{
+    let inSevice = await Truck.findAll({where:{
         status: false},
         raw: true
     });;
-    let absent = await Truck.findAll({where:{
+    let off = await Truck.findAll({where:{
         status: null},
         raw: true
     });
 
-    if( status === 'true'){
-        return res.status(200).json({"msg":"Disponibles", available})
-    }else if (status === 'false'){
-        return res.status(200).json({"msg":"Ocupados", busy})
-    }else if (status === 'null'){
-        return res.status(200).json({"msg":"Ausentes", absent})
-    }else{
-       let  allCarrierData = await Truck.findAll({
-        include:[{
-            model:Signup
-        }]
-       })
-       return res.status(200).json({allCarrierData})
-    }
+    return res.status(200).json({"Fuera de servicio":off, "Disponibles":on, "Ocupados":inSevice })
+
+    // if( on ){
+    //     return res.status(200).json({"msg":"Disponibles", on})
+    // }else if (inSevice){
+    //     return res.status(200).json({"msg":"Ocupados", inSevice})
+    // }else if (off){
+    //     return res.status(200).json({"msg":"Ausentes", off})
+    // }else{
+    //    let  allCarrierData = await Truck.findAll({
+    //     include:[{
+    //         model:Signup
+    //     }]
+    //    })
+    //    return res.status(200).json({allCarrierData})
+    // }
 })
 
 

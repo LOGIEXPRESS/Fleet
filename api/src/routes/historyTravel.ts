@@ -2,7 +2,9 @@
 
 // import { Carrier } from '../models/Carrier';
 // import { Travel } from '../models/Travel';
-// import { User } from '../models/User';
+// import { Truck } from '../models/Truck';
+// import { Signup } from '../models/Signup';
+// // import { User } from '../models/User';
 
 // const router=Router()
 
@@ -11,11 +13,12 @@
 // router.get('/historyTravelUser/:idUserReg',async(req:Request,res:Response,next:NextFunction)=>{
 
 //     let {idUserReg}=req.params
-//     console.log(req.params)
+
+//     // console.log(req.params)
     
 //     try{
 
-//         let user=await User.findOne({where:{idUserReg:idUserReg}})
+//         let user = await User.findOne({where:{idUserReg:idUserReg}})
 
 //         if(!user){
 //             return res.json({menssage:'Not found user'})
@@ -46,6 +49,8 @@
 
 
 // })
+
+
 // router.get(`/historyTravelCarrier/:idUser_Reg`,async(req:Request,res:Response,next:NextFunction)=>{
 
 //     let {idUser_Reg}=req.params
