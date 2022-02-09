@@ -144,22 +144,26 @@ const styles = StyleSheet.create({
    marginTop : wp('8%')
   },
   btn: {
-    borderWidth: 4,
+    flexDirection: "row",
+    justifyContent: "center",
     backgroundColor: "#fff",
-    borderColor: "#ff1c49",
     width: wp("88%"),
     height: hp("8%"),
-    marginBottom: wp('10%'),
+    padding: wp('2.5%'),
     borderRadius: wp('3%'),
-    justifyContent:'center',
-    shadowOpacity: 80,
-    elevation: 13,
-    
+    shadowOpacity: 5,
+    elevation: 2,
+    marginTop: wp("7%"),
+    borderColor: "#E1E8EB",
+    borderWidth: 1.75,
   },
   textBtn: {
+    marginTop: wp('1%'),
+    color: "black",
+    justifyContent:"center",
     textAlign: "center",
-    // marginTop: 5,
-    fontSize: hp('3.25%'),
-    fontWeight: "bold",
+    fontSize: hp('2.5%'),
+    marginTop: wp('0.9%'),
+    fontWeight: '700'
   },
 });

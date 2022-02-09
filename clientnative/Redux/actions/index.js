@@ -21,6 +21,7 @@ export function getTravels() {
   return async function (dispatch) {
     try {
       const request = await axios.get(`${ API_URLS }/api/Travel`);
+      // console.log("LLEGANDO LOS VIJAES POR la accion getTravels",request.data);
       return dispatch({
         type: "GET_TRAVELS",
         payload: request.data,
@@ -216,6 +217,22 @@ export function changePassword(payload) {
     }
   };
 }
+
+export function sendMessage (payload) {
+  return async function () {
+    try {
+
+      console.log("Sale de la action sendMessage",payload);
+      const newpass = await axios.post(`${ API_URLS }/api/requestTravel`, payload);
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
+
 export function desmount() {
   return {
     type: 'DESMOUNT',

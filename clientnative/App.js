@@ -23,7 +23,7 @@ import Home from './Components/Home/Home';
 import startCheckout from './Components/MercadoPago/startCheckout.js'
 import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
 import RecoverPassword from './Components/Home/RecoverPassword'
-import ScreenMap from "./Components/ViewMaps/ScreenMap.js";
+import ScreenMap from "./Components/ViewMaps/ScreenMap";
 
 
 
