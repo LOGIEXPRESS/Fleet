@@ -1,7 +1,7 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
 import { Carrier }  from '../models/Carrier';
-
+import axios from 'axios';
 const mercadopago = require('mercadopago');
 
 const router=Router()
@@ -10,7 +10,7 @@ router.get('/payment', async (req: Request, res: Response) => {
     res.send('Allan Torres line 15');
   });
 
-router.post('/mercadopago', async (req, res) => {
+  router.post('/mercadopago', async (req, res) => {
     const { title, unit_price } = req.body;
     console.log(req.body)
     try{
@@ -38,6 +38,28 @@ router.post('/mercadopago', async (req, res) => {
     res.json({ response, init_points });
   
   }catch(err){
+    console.error(err)
+  }
+  });
+  router.get('/checkout', async (req, res) => {
+    let {id}=req.query;
+    console.log("#####line 46#####");
+    console.log(id);
+    let status:any;
+    try{
+  
+      
+   const resp= await   axios
+          .get('ttps://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
+          
+      })
+      .then((res) => {
+        console.log(res.statusText)
+         status=res.statusText;
+      });
+     res.send(status);
+    }
+ catch(err){
     console.error(err)
   }
   });
