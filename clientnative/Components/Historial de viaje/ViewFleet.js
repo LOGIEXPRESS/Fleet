@@ -18,6 +18,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
+import Checkout from "../MercadoPago/Checkout";
 
 const HistorialDeViaje = () => {
   const navigation = useNavigation();
@@ -44,9 +45,10 @@ const HistorialDeViaje = () => {
             <TouchableOpacity style={styles.btnText}>
               <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnText}>
+            <TouchableOpacity style={styles.btnText} onPress={()=>navigation.navigate("Mercadopago")} >
               <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
             </TouchableOpacity>
+            
           </View>
         </View>
       </View>
