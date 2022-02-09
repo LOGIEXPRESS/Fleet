@@ -48,7 +48,7 @@ export default function ScreenMap() {
 
   const travels = useSelector((state) => state.travels)
 
-  
+
 
   const [pin, setPin] = useState({
     latitude: 0,
@@ -84,44 +84,44 @@ export default function ScreenMap() {
       });
     })();
     dispatch(getTravels());
-    
+
   }, [dispatch]);
   console.log("ESTO SON LOS VIAJES", travels);
-  
 
-  // useEffect(() => {
-  //   mapAnimation.addListener(({ value }) => {
-  //     let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-  //     if (index >= travels.length) {
-  //       index = travels.length - 1;
-  //     }
-  //     if (index <= 0) {
-  //       index = 0;
-  //     }
 
-  //     clearTimeout(regionTimeout);
+  useEffect(() => {
+    mapAnimation.addListener(({ value }) => {
+      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      if (index >= travels.length) {
+        index = travels.length - 1;
+      }
+      if (index <= 0) {
+        index = 0;
+      }
 
-  //     const regionTimeout = setTimeout(() => {
-  //       if (mapIndex !== index) {
-  //         mapIndex = index;
-  //         const { orig } = travels[index]?.travel;
-  //         const origen = orig.split("/");
-  //         const coordinate = {
-  //           latitude: Number(origen[0]),
-  //           longitude: Number(origen[1]),
-  //         };
-  //         _map.current.animateToRegion(
-  //           {
-  //             ...coordinate,
-  //             latitudeDelta: region.latitudeDelta,
-  //             longitudeDelta: region.longitudeDelta,
-  //           },
-  //           350
-  //         );
-  //       }
-  //     }, 10);
-  //   });
-  // });
+      clearTimeout(regionTimeout);
+
+      const regionTimeout = setTimeout(() => {
+        if (mapIndex !== index) {
+          mapIndex = index;
+          const { orig } = travels[index];
+          const origen = orig.split("/");
+          const coordinate = {
+            latitude: Number(origen[0]),
+            longitude: Number(origen[1]),
+          };
+          _map.current.animateToRegion(
+            {
+              ...coordinate,
+              latitudeDelta: region.latitudeDelta,
+              longitudeDelta: region.longitudeDelta,
+            },
+            350
+          );
+        }
+      }, 10);
+    });
+  });
 
   const onMarkerPress = (mapEventData) => {
     const markerID = mapEventData._targetInst.return.key;
@@ -141,7 +141,7 @@ export default function ScreenMap() {
 
   return (
     <View style={styles.container}>
-     {/*  <HeaderBar screen="null" style={styles.header} /> */}
+      {/*  <HeaderBar screen="null" style={styles.header} /> */}
       {pin.latitude !== 0 ? (
         <View style={styles.container}>
           <MapView
@@ -149,7 +149,7 @@ export default function ScreenMap() {
             ref={_map}
             initialRegion={pin}
             provider="google"
-          > 
+          >
             <Marker coordinate={pin} />
 
             {/* {travels !== 0 ?(travels.map((point,index)=>{
@@ -162,157 +162,184 @@ export default function ScreenMap() {
             <ActivityIndicator size="large" color="#0000ff" />
               
             } */}
-            
+            <View style={{ marginTop: 35, position: "absolute" }}></View>
+            {travels !== 0 ? (
+              travels?.map((point, index) => {
+                const orig = point.orig.split("/");
+                const lat = Number(orig[0]);
+                const lon = Number(orig[1]);
+                return (
+                  <MapView.Marker
+                    key={index}
+                    coordinate={{
+                      latitude: lat,
+                      longitude: lon,
+                    }}
+                    onPress={(e) => onMarkerPress(e)}
+                  >
+                    <Animated.View style={styles.markerWrap}>
+                      <Animated.Image
+                        source={require("../Utils/puntero.png")}
+                        style={styles.marker}
+                        resizeMode="cover"
+                      />
+                    </Animated.View>
+                  </MapView.Marker>
+                );
+              })
+            ) : (
+              <ActivityIndicator size="large" color="#0000ff" />
+            )}
 
-            
-            
-          
-            
+
+
+
+
           </MapView>
-          
-            <Animated.ScrollView
-              ref={_scrollView}
-              horizontal
-              scrollEventThrottle={1}
-              showHorizontalScrollIndicator={false}
-              style={styles.scrollView}
-              pagingEnabled
-              snapToInterval={CARD_WIDTH + 20}
-              snapToAlignment="center"
-              contentInset={{
-                top: 0,
-                left: SPACING_FOR_CARD_INSET,
-                bot: 0,
-                right: SPACING_FOR_CARD_INSET,
-              }}
-              contentContainerStyle={{
-                paddingHorizontal:
-                  Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
-              }}
-              onScroll={Animated.event(
-                [
-                  {
-                    nativeEvent: {
-                      contentOffset: {
-                        x: mapAnimation,
-                      },
+
+          <Animated.ScrollView
+            ref={_scrollView}
+            horizontal
+            scrollEventThrottle={1}
+            showHorizontalScrollIndicator={false}
+            style={styles.scrollView}
+            pagingEnabled
+            snapToInterval={CARD_WIDTH + 20}
+            snapToAlignment="center"
+            contentInset={{
+              top: 0,
+              left: SPACING_FOR_CARD_INSET,
+              bot: 0,
+              right: SPACING_FOR_CARD_INSET,
+            }}
+            contentContainerStyle={{
+              paddingHorizontal:
+                Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
+            }}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: mapAnimation,
                     },
                   },
-                ],
-                { useNativeDriver: true }
-              )}>
+                },
+              ],
+              { useNativeDriver: true }
+            )}>
 
-            {travels?.length>0 ?(travels?.map((data,index)=>{
-              return(
-                <Card key={index} 
-                orig={data.orig} 
-                destination={data.destination} 
-                price={data.price} 
-                description={data.description}
-                weight={data.weight}
-                business={data.admin.business}
-                random={index}/>
+            {travels?.length > 0 ? (travels?.map((data, index) => {
+              return (
+                <Card key={index}
+                  orig={data.orig}
+                  destination={data.destination}
+                  price={data.price}
+                  description={data.description}
+                  weight={data.weight}
+                  business={data.admin.business}
+                  random={index} />
               )
             })
-              
-            ):null}
+
+            ) : null}
 
           </Animated.ScrollView>
-          
+
 
         </View>
-        
 
-        
-         
-        
 
-        
+
+
+
+
+
       ) : (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
-      
+
     </View>
   )
 };
 
 
 const styles = StyleSheet.create({
-    container: {
-      marginTop: 0,
-      flex: 1,
-    },
-    markerWrap: {
-      alignItems: "center",
-      justifyContent: "center",
-      width: 50,
-      height: 50,
-    },
-    marker: {
-      width: 30,
-      height: 30,
-    },
-    map: {
-      width: Dimensions.get("window").width,
-      height: Dimensions.get("window").height,
-    },
-    btnEditar: {
-      backgroundColor: "#FFC107",
-      borderRadius: 10,
-      width: 150,
-      height: 50,
-      marginTop: 20,
-      alignSelf: "center",
-      marginBottom: 20,
-      marginRight: 30,
-    },
-    textBtn: {
-      color: "white",
-      fontSize: 17,
-      alignSelf: "center",
-      marginTop: 12,
-    },
-    scrollView: {
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      right: 0,
-      paddingVertical: 10,
-    },
-    cardImage: {
-      height: 150,
-      width: 150,
-      borderRadius: 100,
-    },
-    cardtitle: {
-      fontSize: 12,
-      // marginTop: 5,
-      fontWeight: "bold",
-    },
-    cardDescription: {
-      fontSize: 12,
-      color: "#444",
-    },
-    textContent: {
-      flex: 2,
-      padding: 10,
-    },
-    card: {
-      // padding: 10,
-      elevation: 2,
-      backgroundColor: "#FFF",
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
-      marginHorizontal: 10,
-      shadowColor: "#000",
-      shadowRadius: 5,
-      shadowOpacity: 0.3,
-      shadowOffset: { x: 2, y: -2 },
-      height: CARD_HEIGTH,
-      width: CARD_WIDTH,
-      overflow: "hidden",
-    },
-    header: {
-      marginTop: 20,
-    },
-  });
+  container: {
+    marginTop: 0,
+    flex: 1,
+  },
+  markerWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+    height: 50,
+  },
+  marker: {
+    width: 30,
+    height: 30,
+  },
+  map: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  },
+  btnEditar: {
+    backgroundColor: "#FFC107",
+    borderRadius: 10,
+    width: 150,
+    height: 50,
+    marginTop: 20,
+    alignSelf: "center",
+    marginBottom: 20,
+    marginRight: 30,
+  },
+  textBtn: {
+    color: "white",
+    fontSize: 17,
+    alignSelf: "center",
+    marginTop: 12,
+  },
+  scrollView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 10,
+  },
+  cardImage: {
+    height: 150,
+    width: 150,
+    borderRadius: 100,
+  },
+  cardtitle: {
+    fontSize: 12,
+    // marginTop: 5,
+    fontWeight: "bold",
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: "#444",
+  },
+  textContent: {
+    flex: 2,
+    padding: 10,
+  },
+  card: {
+    // padding: 10,
+    elevation: 2,
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginHorizontal: 10,
+    shadowColor: "#000",
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: CARD_HEIGTH,
+    width: CARD_WIDTH,
+    overflow: "hidden",
+  },
+  header: {
+    marginTop: 20,
+  },
+});
