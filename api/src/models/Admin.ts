@@ -15,7 +15,7 @@ export class Admin extends Model {
     eMail!:string
 
     @BelongsTo(()=>Signup)
-   admin!: Signup
+    admin!: Signup
 
     @ForeignKey(()=>Signup)
     SignupId!:string

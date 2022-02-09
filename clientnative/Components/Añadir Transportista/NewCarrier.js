@@ -11,39 +11,41 @@ import { addCarrier, registeredFleet, deleteFleet, reset } from '../../Redux/act
 import { useSelector, useDispatch } from "react-redux";
 import { set } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/core";
-
+import ModalAlert from "./ModalAlert.js";
 
 const NewCarrier = () => {
 
     const navigation = useNavigation();
-    const respAddCarrier = useSelector((store) => store.respAddCarrier)
+    const respAddCarrier = useSelector((store) => store.respAddCarrier);
     function checkEmail(eMail) {
         var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
         var check = expReg.test(eMail)
         return check;
     }
     const dispatch = useDispatch();
-    const [name, setName] = useState('')
-    const [lastname, setLastname] = useState('')
-    const [eMail, setEMail] = useState('')
-    const fleet = useSelector((store) => store.registeredFleet)
-    const respDelete = useSelector((store) => store.respDeleteUser)
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [eMail, setEMail] = useState('');
+    const fleet = useSelector((store) => store.registeredFleet);
+    const respDelete = useSelector((store) => store.respDeleteUser);
 
-
-    const [modalView, setModalView] = useState(false)
-    const [modalDelete, setModalDelete] = useState(false)
-    const [id , setId] = useState(null)
+    const [modalAlert2, setModalAlert2] = useState(false);
+    const [modalAlert1, setModalAlert1] = useState(false);
+    const [modalView, setModalView] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
+    const [id, setId] = useState(null);
     useEffect(() => {
         dispatch(registeredFleet());
         if (respAddCarrier) {
             if (respAddCarrier.mensaje === 'eMail usado') {
-                alert('EMAIL YA REGISTRADO EN LA APP');
+                setModalAlert2(true)
             }
         }
 
 
     }, [dispatch, respAddCarrier]);
-    console.log("REPUESTA DEL DELETE", respDelete)
+
+    console.log("REPUESTA DEL DELETE", respDelete);
     /* s */
     /*     useEffect(() => {
             if (respDelete) {
@@ -63,16 +65,16 @@ const NewCarrier = () => {
         console.log("eSTA ES LA IP QUE ENVIO", id)
         setModalDelete(true)
         setId(id)
-    }
+    };
 
-    const handleDelete= (props) =>  {
-      dispatch(deleteFleet(props))
-      setModalDelete(false)
-      dispatch(registeredFleet());
-    }
+    const handleDelete = (props) => {
+        dispatch(deleteFleet(props))
+        setModalDelete(false)
+        dispatch(registeredFleet());
+    };
 
 
-    console.log("ESTA ES LA ID A BORRAR", id )
+    console.log("ESTA ES LA ID A BORRAR", id)
     const handleSubmit = () => {
         const data = {
             name: name,
@@ -85,10 +87,14 @@ const NewCarrier = () => {
             console.log(data)
             setModalView(false)
         } else {
-            alert('EL E-MAIL INGRESADO NO ES VALIDO')
+            setModalAlert1(true)
             setModalView(false)
         }
     }
+
+
+
+
 
     console.log("Esto son los fleet", fleet)
     return (
@@ -138,7 +144,7 @@ const NewCarrier = () => {
                                         Agregar
                                     </Text>
                                 </TouchableOpacity>
-                   
+
                             </View>
                         </View>
                     </View>
@@ -151,7 +157,7 @@ const NewCarrier = () => {
                         <View style={styles.insideCard}>
                             {fleet ?
                                 fleet.map((user, index) => {
-                                    
+
                                     return (
                                         <View style={styles.viewUsers} key={index}>
                                             <View style={{ flexDirection: 'row' }}>
@@ -168,7 +174,7 @@ const NewCarrier = () => {
                                             </View>
                                         </View>
                                     )
-                                }):  <ActivityIndicator size="large" color="#0000ff" /> 
+                                }) : <ActivityIndicator size="large" color="#0000ff" />
                             }
                         </View>
                     </View>
@@ -188,19 +194,19 @@ const NewCarrier = () => {
                                 <Text>Nombre: {name}</Text>
                                 <Text>Apellido: {lastname}</Text>
                                 <Text>Email: {eMail}</Text>
-                                <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => handleSubmit()}  >
-                                        Agregar
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => setModalView(false)} >
-                                        Cancelar
-                                    </Text>
-                                </TouchableOpacity>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <TouchableOpacity style={styles.btnModal} >
+                                        <Text style={styles.btnText}  onPress={() => handleSubmit()} >
+                                            Agregar
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.btnModal} >
+                                        <Text style={styles.btnText} onPress={() => setModalView(false)} >
+                                            Cancelar
+                                        </Text>
+                                    </TouchableOpacity>
                                 </View>
-                            
+
                             </View>
                         </View>
                     </View>
@@ -217,24 +223,48 @@ const NewCarrier = () => {
                             <View style={styles.textModal}>
                                 <Icon name="close-circle" style={styles.icon_modal} />
                                 <Text>Estas seguro que deseas eliminar a este usuario?</Text>
-                              <View style={{flexDirection:'row'}}> 
-                              <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => handleDelete(id)}  >
-                                        Eliminar
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.btnModal} >
-                                    <Text style={styles.btnText} onPress={() => setModalDelete(false)}  >
-                                       Cancelar
-                                    </Text>
-                                </TouchableOpacity>
-                              </View>
-                       
+                                <View style={{ flexDirection: 'row' }}>
+                                    <TouchableOpacity style={styles.btnModal} >
+                                        <Text style={styles.btnText} onPress={() => handleDelete(id)}  >
+                                            Eliminar
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.btnModal} >
+                                        <Text style={styles.btnText} onPress={() => setModalDelete(false)}  >
+                                            Cancelar
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+
                             </View>
                         </View>
                     </View>
                 </Modal>
-            </ScrollView> 
+                <Modal
+                    animationType="slide"
+                    onDismiss={() => console.log("close")}
+                    onShow={() => console.log('open')}
+                    transparent
+                    visible={modalAlert1}
+                >
+                <ModalAlert
+                text={'El e-mail ingresado no es valido, por favor ingrese otro'}
+                setModal={setModalAlert1}
+                />
+                </Modal>
+                <Modal
+                    animationType="slide"
+                    onDismiss={() => console.log("close")}
+                    onShow={() => console.log('open')}
+                    transparent
+                    visible={modalAlert2}
+                >
+                <ModalAlert
+                text={'Usuario ya registrado'}
+                setModal={setModalAlert2}
+                />
+                </Modal>
+            </ScrollView>
         </View>
     )
 }
@@ -257,6 +287,11 @@ const styles = StyleSheet.create({
     },
     DeleteModal: {
         height: hp('23%'),
+        width: wp('70%'),
+        backgroundColor: '#fff'
+    },
+    alertModal: {
+        height: hp('29%'),
         width: wp('70%'),
         backgroundColor: '#fff'
     },
