@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
   Button,
   Modal,
-  Alert
+  Alert,
+  BackHandler
 } from "react-native";
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,6 +58,12 @@ const Login = () => {
     
     }
   }, [login]);
+
+   useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
+
 
   async function save(key, value) {
     //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token

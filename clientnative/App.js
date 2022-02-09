@@ -23,7 +23,7 @@ import Home from './Components/Home/Home';
 import startCheckout from './Components/MercadoPago/startCheckout.js'
 import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
 import RecoverPassword from './Components/Home/RecoverPassword'
-import ScreenMap from "./Components/ViewMaps/ScreenMap.js";
+// import ScreenMap from "./Components/ViewMaps/ScreenMap.js";
 
 
 
@@ -75,11 +75,11 @@ const App = () => {
               component={ProfileCarrier}
               options={{ headerShown: false, gestureEnabled: false }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
               name="ScreenMap"
               component={ScreenMap}
               options={{ headerShown: false, gestureEnabled: false }}
-            />
+            /> */}
             <Stack.Screen
               name="startCheckout"
               component={startCheckout}
