@@ -387,9 +387,10 @@ const CompleteProfileCarrier = (props) => {
         <Text
           style={{
             fontWeight: "bold",
-            marginLeft: 15,
-            marginTop: hp("-0.7%"),
+            marginLeft: wp("3%"),
+            // marginTop: hp("0%"),
             fontSize: 23,
+            // alignSelf:"center",
             color: "#151f27",
             marginBottom: 15,
           }}

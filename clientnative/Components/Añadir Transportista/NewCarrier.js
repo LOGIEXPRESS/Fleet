@@ -157,7 +157,7 @@ const NewCarrier = () => {
                   fleet.map((user, index) => {
                     return (
                       <View style={styles.viewUsers} key={index}>
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", }}>
                           <TouchableOpacity
                             onPress={() =>
                               modalHandleDelete(user.transportista.id)
@@ -191,7 +191,7 @@ const NewCarrier = () => {
                     );
                   })
                 ) : (
-                  <ActivityIndicator size="large" color="#0000ff" />
+                  <ActivityIndicator size="large" color="#ff1c49" />
                 )}
               </View>
             </View>
@@ -281,10 +281,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(1,1,1, 0.5)',
         justifyContent: 'center',
         alignItems: 'center'
+        
 
     },
     viewModal: {
-        height: hp('30%'),
+        height: hp('35%'),
         width: wp('70%'),
         backgroundColor: '#fff'
     },
@@ -352,6 +353,7 @@ const styles = StyleSheet.create({
     },
     insideCard: {
         width: wp("91%"),
+        // height:30,
         padding: wp("4%"),
     },
     textFinished: {
@@ -413,13 +415,13 @@ const styles = StyleSheet.create({
         marginLeft: wp("2%"),
     },
     btnModal: {
-        width: wp('20%'),
+        width: wp('25%'),
         color: "black",
         margin: hp('1%'),
-        height: hp('4%'),
+        height: hp('5%'),
         backgroundColor: "#ff1c49",
         borderRadius: hp('1%'),
-        marginTop: hp("3%"),
+        marginTop: hp("5%"),
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -438,11 +440,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         shadowOpacity: 80,
         elevation: 15,
-        marginLeft: hp('8%')
+        alignSelf:"center"
+        // marginLeft: hp('8%')
     },
     btnText: {
-        fontSize: hp("2%"),
-        marginLeft: wp("2%"),
+        fontSize: hp("1.9%"),
+        // marginLeft: wp("2%"),
         color: '#ffff'
     }
 })

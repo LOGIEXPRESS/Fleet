@@ -1,6 +1,9 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity,Dimensions} from 'react-native';
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 // import StarRating from './StarRating';
 const { width, height } = Dimensions.get("window");
 const CARD_HEIGTH = 380;
@@ -10,7 +13,7 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 const Card = ({orig,destination,price,description,weight,business,random}) => {
   return (
 <View style={styles.card} >
-                <View style={{ alignItems: "center", flexDirection: "column" }}>
+                <View style={{ alignItems: "center", flexDirection: "column", backgroundColor:"" }}>
                   <Image
                     source={{
                       uri:
@@ -19,15 +22,15 @@ const Card = ({orig,destination,price,description,weight,business,random}) => {
                     style={styles.cardImage}
                   />
                   {/* <StarRating ratings={rating} reviews={rating} /> */}
-                  <Text>Empresa: {business}</Text>
+                  
                 </View>
                 <View style={styles.textContent}>
                   <Text>ID: </Text>
-                  <Text>DESCRIPCION: {description} </Text>
-                  <Text>ORIGEN: {orig.split("/")[0]}</Text>
-                  <Text>DESTINO: {destination}</Text>
-                  <Text>PESO: {weight}ton</Text>
-                  <Text>PAGO: ${price}</Text>
+                  <Text>ORIGEN: {orig.split("/")[2]}</Text>
+                  <Text>DESTINO: {destination.split("/")[2]}</Text>
+                  <Text>PESO: {weight} Toneladas</Text>
+                  <Text>DESCRIPCIÓN: {description} </Text>
+                  <Text style={{justifyContent:"center", marginLeft:wp("22%")}}>TOTAL: ${price}</Text>
                   <View style={styles.btn2}>
                     <TouchableOpacity
                       style={styles.btnEditar}
@@ -47,12 +50,14 @@ const styles = StyleSheet.create({
     container: {
       marginTop: 0,
       flex: 1,
+      
     },
     markerWrap: {
       alignItems: "center",
       justifyContent: "center",
       width: 50,
       height: 50,
+      
     },
     marker: {
       width: 30,
@@ -63,20 +68,20 @@ const styles = StyleSheet.create({
       height: Dimensions.get("window").height,
     },
     btnEditar: {
-      backgroundColor: "#FFC107",
+      backgroundColor: "#ff1c49",
       borderRadius: 10,
       width: 150,
       height: 50,
-      marginTop: 20,
+      marginTop: hp("0.7%"),
       alignSelf: "center",
-      marginBottom: 20,
+      // marginBottom: 20,
       marginRight: 30,
     },
     textBtn: {
       color: "white",
       fontSize: 17,
       alignSelf: "center",
-      marginTop: 12,
+      marginTop: hp("1.7%"),
     },
     scrollView: {
       position: "absolute",
@@ -84,6 +89,7 @@ const styles = StyleSheet.create({
       left: 0,
       right: 0,
       paddingVertical: 10,
+      
     },
     cardImage: {
       height: 150,
@@ -102,13 +108,14 @@ const styles = StyleSheet.create({
     textContent: {
       flex: 2,
       padding: 10,
+      marginTop:hp("-1%"),
     },
     card: {
       // padding: 10,
       elevation: 2,
-      backgroundColor: "#FFF",
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
+      backgroundColor: "whitesmoke",
+      borderTopLeftRadius: wp("5%"),
+      borderTopRightRadius: wp("5%"),
       marginHorizontal: 10,
       shadowColor: "#000",
       shadowRadius: 5,
@@ -117,6 +124,10 @@ const styles = StyleSheet.create({
       height: CARD_HEIGTH,
       width: CARD_WIDTH,
       overflow: "hidden",
+      borderWidth:0.4,
+      borderColor:"black",
+      borderBottomWidth:0,
+      elevation:20
     },
     header: {
       marginTop: 20,
