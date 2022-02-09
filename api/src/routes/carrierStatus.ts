@@ -14,6 +14,38 @@ const router=Router()
 
 // })
 
+router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=>{
+
+    let {id}=req.params;
+
+    let user = await Truck.findAll({where:{
+        SignupId: id, 
+    }})
+
+    if(user){
+
+        const userStatus = user[0].status
+        //console.log(userStatus)
+        //const changeStatus = !userStatus
+        //console.log(changeStatus)
+
+        let upDateThis: any = {}
+         //console.log(upDateThis)
+
+        if(userStatus){upDateThis.status = !userStatus}
+
+        const changeStatus = await Truck.update(upDateThis, {where:{
+            SignupId: id, 
+        }})
+
+        // const newStatus = changeStatus[0].status
+
+        return res.status(200).json({"msg":"Cambio el status", changeStatus})
+        
+    }
+
+})
+
 router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 
     let {status}=req.params
@@ -48,20 +80,20 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 })
 
 
-router.get('/CarrrierDetails',async(req:Request,res:Response,next:NextFunction)=>{
-    let {id}=req.params
+// router.get('/CarrrierDetails',async(req:Request,res:Response,next:NextFunction)=>{
+//     let {id}=req.params
 
-    let carrierData = await Signup.findByPk(id) 
-    let vehicleData = await Truck.findOne({where:{
-        SignupId: id,
-    }}) 
+//     let carrierData = await Signup.findByPk(id) 
+//     let vehicleData = await Truck.findOne({where:{
+//         SignupId: id,
+//     }}) 
 
-    let allData = {...carrierData, ...vehicleData} 
+//     let allData = {...carrierData, ...vehicleData} 
 
-    return res.status(200).json({"msg":"Detalle", allData})
+//     return res.status(200).json({"msg":"Detalle", allData})
   
 
-})
+// })
 
 
 
