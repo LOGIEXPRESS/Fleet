@@ -6,6 +6,7 @@ import { uuid } from 'uuidv4';
 const bcrypt = require("bcryptjs");
 const router = Router()
 import { Signup } from '../models/Signup';
+import { Truck } from '../models/Truck';
 import { Carrier } from '../models/Carrier';
 
 router.get('/allan', async (req: Request, res: Response, next: NextFunction) => {
@@ -59,15 +60,14 @@ router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunctio
 
 router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
  
-     var fleet=await Signup.findAll({
-        where: {role : { [Op.eq]: false } }
-            }
-        )
+     var fleet = await Signup.findAll({
+       where: { role: { [Op.eq]: false } },
+     });
         if(fleet.length===0){return res.send(null);}
         let arr:any=[]; let carrier:any=[];
          for(var i=0;i < fleet.length;i++){
            
-             carrier[i]=await Carrier.findAll({
+             carrier[i]=await Truck.findAll({
                 where: {SignupId:fleet[i].id }
                     }
                 )
@@ -88,21 +88,20 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
-        id: uuid(),
-        name,
-        lastName,
-        eMail,
-        password: passwordHash,
-        role: false
-    }
+      id: uuid(),
+      name,
+      lastName,
+      eMail,
+      password: passwordHash,
+      role: false,
+    };
     ////////<inicio formato> Este es el mensaje que se le va a enviar al usuario con formato html
-    let contentHTML =
-        `<h1>New user</h1>
+    let contentHTML = `<h1>New user</h1>
                <ul>
                   <li>${name} ${lastName}</li>
                   <li>email: ${eMail}</li>
                   <li>password:${password}</li>    
-               </ul> `
+               </ul> `;
 
     //////</fin formato>
     /////<inicio configuración transporter>ç
@@ -125,6 +124,15 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
             where: { eMail: eMail },
             defaults: payload,
         })
+
+        const admin={
+            id:uuid(),
+            eMail:user.eMail,
+            company:user.business,
+            SignupId:user.id
+
+        }
+        await Carrier.create(admin)
 
         if (!created) {
             const payload = {
@@ -202,7 +210,7 @@ router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunctio
     const { id } = req.query
     if(id===''){return res.send('El id no puede estar vacio')}
     try {
-        const carrier =  await Carrier.destroy({
+        const carrier =  await Truck.destroy({
             where: {
                 SignupId:id
             }

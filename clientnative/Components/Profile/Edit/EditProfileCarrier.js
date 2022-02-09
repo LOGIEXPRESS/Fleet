@@ -60,6 +60,18 @@ const EditProfileCarrier = () => {
   setchooseData(data);
   };
 
+  const handelNavigetion=(e)=>{
+    e.preventDefault()
+    if(datosUser.role){
+      navigation.navigate('ProfileAdmin')
+    }
+    if(!datosUser.role){
+      navigation.navigate('ProfileCarrier')
+    }
+    
+
+  }
+
   ////--> HOOK PARA LA NAVEGACION <-- ////
   const navigation = useNavigation();
 
@@ -294,7 +306,7 @@ const EditProfileCarrier = () => {
           <View style={styles.btn2}>
             <TouchableOpacity
               style={styles.btnEditar}
-              // onPress={() => navigation.navigate("PersonalDataAdmin")}
+              onPress={handelNavigetion}
             >
               <Text style={styles.textBtn}>Cancelar</Text>
             </TouchableOpacity>

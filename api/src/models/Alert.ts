@@ -1,7 +1,7 @@
 import {AutoIncrement, Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, HasOne, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Carrier } from './Carrier';
+import { Truck } from './Truck';
 // import { Review } from './Review';
-import { Admin } from './Admin';
+import { Carrier } from './Carrier';
 import { Travel } from './Travel';
 import { Service } from 'ts-node';
 
@@ -27,11 +27,11 @@ export class Alert extends Model{
     @ForeignKey(() => Travel)
     TravelId!: string
 
-    @BelongsTo(() => Carrier)
-    carrier!: Carrier
+    @BelongsTo(() => Truck)
+    truck!: Truck
 
-    @ForeignKey(() => Carrier)
-    CarrierId!: string
+    @ForeignKey(() => Truck)
+    TruckId!: string
 
 
 

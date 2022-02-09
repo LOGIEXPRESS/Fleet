@@ -17,6 +17,21 @@ export function updatePerfil (payload) {
   }
 }
 
+export function getTravels() {
+  return async function (dispatch) {
+    try {
+      const request = await axios.get(`${ API_URLS }/api/Travel`);
+      // console.log("LLEGANDO LOS VIJAES POR la accion getTravels",request.data);
+      return dispatch({
+        type: "GET_TRAVELS",
+        payload: request.data,
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
 export function reset(){
   return async function (dispatch){
     try {
@@ -80,7 +95,7 @@ export function addCarrier(props) {
 export function logiar(payload) {
     return async function (dispatch) {
       try {
-        console.log(API_URLS)
+        console.log("SALIENDO DE DISPACHT LOGIAR",API_URLS)
         const response = await axios.post(`${API_URLS}/api/login`, payload)
         .then((r) => {
             dispatch({
@@ -190,15 +205,34 @@ export function changePassword(payload) {
   return async function (dispatch) {
     try {
       const newpass = await axios.post(`${ API_URLS }/api/changePassword`, payload);
+      console.log(newpass.data);
       return dispatch({
         type: "CHANGE_PASSWORD",
-        payload: newpass.data.payload
+        payload: newpass.data
       });
+
+      
     } catch (error) {
       console.log("Error", error);
     }
   };
 }
+
+export function sendMessage (payload) {
+  return async function () {
+    try {
+
+      console.log("Sale de la action sendMessage",payload);
+      const newpass = await axios.post(`${ API_URLS }/api/requestTravel`, payload);
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
+
 export function desmount() {
   return {
     type: 'DESMOUNT',
