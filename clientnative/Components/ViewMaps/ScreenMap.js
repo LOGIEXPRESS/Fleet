@@ -70,7 +70,7 @@ export default function ScreenMap() {
       });
     })();
     dispatch(getTravels());
-    console.log("ESTO SON LOS VIAJES", travels[0]);
+    
   }, []);
 
   useEffect(() => {
@@ -107,6 +107,11 @@ export default function ScreenMap() {
     });
   });
 
+  useEffect(() => {
+    console.log("ESTO SON LOS VIAJES en el Estado de redux travels", travels)
+  }, [travels])
+  
+
   const onMarkerPress = (mapEventData) => {
     const markerID = mapEventData._targetInst.return.key;
     let x = markerID * CARD_WIDTH + markerID * 20;
@@ -123,7 +128,7 @@ export default function ScreenMap() {
   const _scrollView = React.useRef(null);
   const rating = 3;
 
-  return (
+  return  (
     <View style={styles.container}>
       {pin.latitude !== 0 ? (
         <MapView
@@ -136,91 +141,115 @@ export default function ScreenMap() {
           coordinate={pin}
           />
           <View style={{ marginTop: 35, position: "absolute" }}></View>
-
-          {travels?.length !==0 ?(
-            <Animated.ScrollView
-            
-            ref={_scrollView}
-            horizontal
-            scrollEventThrottle={1}
-            showHorizontalScrollIndicator={false}
-            style={styles.scrollView}
-            pagingEnabled
-            snapToInterval={CARD_WIDTH + 20}
-            snapToAlignment="center"
-            contentInset={{
-              top: 0,
-              left: SPACING_FOR_CARD_INSET,
-              bot: 0,
-              right: SPACING_FOR_CARD_INSET,
-            }}
-            contentContainerStyle={{
-              paddingHorizontal:
-                Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
-            }}
-            onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: {
-                      x: mapAnimation,
-                    },
-                  },
-                },
-              ],
-              { useNativeDriver: true }
-            )}
-            >
-              {
-                travels?.map((data,index)=>{
-
-                  let origen=data.orig
-                  let destino=data.destination
-
-                  return(
-                    <View style={styles.card} key={index}>
-                      <View style={{ alignItems: "center", flexDirection: "column" }}>
-                        <Image
-
-                          source={{
-                            uri:
-                              "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
-                          }}
-                          style={styles.cardImage}
-                        
-                        
-                        />
-                        {/* <StarRating ratings={rating} reviews={rating} /> */}
-                               
-
-                      </View> 
-                      <View style={styles.textContent}>
-                        <Text>Pago: {data.price}</Text>  
-                        <Text>Origen: {origen}</Text>
-                        <Text>Destino: {destino}</Text>
-
-                      </View>
-
-                    </View>
-                  )
-
-                })
-              }
-            
-
-            </Animated.ScrollView>
-           
-          ):(
+          {travels !== 0 ? (
+            travels?.map((point, index) => {
+              const orig = point.travel.orig.split("/");
+              const dest = point.travel.destination.split("/");
+              const lat = Number(orig[0]);
+              const lon = Number(orig[1]);
+              return (
+                <MapView.Marker
+                  key={index}
+                  coordinate={{
+                    latitude: lat,
+                    longitude: lon,
+                  }}
+                  onPress={(e) => onMarkerPress(e)}
+                >
+                  <Animated.View style={styles.markerWrap}>
+                    <Animated.Image
+                      source={require("../Utils/puntero.png")}
+                      style={styles.marker}
+                      resizeMode="cover"
+                    />
+                  </Animated.View>
+                </MapView.Marker>
+              );
+            })
+          ) : (
             <ActivityIndicator size="large" color="#0000ff" />
           )}
-
         </MapView>
       ) : (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
-      
+      {travels.length !== 0 ? (
+        <Animated.ScrollView
+          ref={_scrollView}
+          horizontal
+          scrollEventThrottle={1}
+          showHorizontalScrollIndicator={false}
+          style={styles.scrollView}
+          pagingEnabled
+          snapToInterval={CARD_WIDTH + 20}
+          snapToAlignment="center"
+          contentInset={{
+            top: 0,
+            left: SPACING_FOR_CARD_INSET,
+            bot: 0,
+            right: SPACING_FOR_CARD_INSET,
+          }}
+          contentContainerStyle={{
+            paddingHorizontal:
+              Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
+          }}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: mapAnimation,
+                  },
+                },
+              },
+            ],
+            { useNativeDriver: true }
+          )}
+        >
+          {travels?.map((resp, index) => {
+            console.log("ESTA ES LA RESP",resp)
+            const orig = resp.travel.orig.split("/");
+            const dest = resp.travel.destination.split("/");
+            return (
+              <View style={styles.card} key={index}>
+                <View style={{ alignItems: "center", flexDirection: "column" }}>
+                  <Image
+                    source={{
+                      uri:
+                        resp.user.photo !== null
+                          ? resp.user.photo
+                          : "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                    }}
+                    style={styles.cardImage}
+                  />
+                  <StarRating ratings={rating} reviews={rating} />
+                  <Text>User: {resp.user.identification}</Text>
+                </View>
+                <View style={styles.textContent}>
+                  <Text>ID: {resp.travel.id}</Text>
+                  <Text>DESCRIPCION: {resp.travel.description}</Text>
+                  <Text>ORIGEN:{orig[2]}</Text>
+                  <Text>DESTINO:{dest[2]}</Text>
+                  <Text>PESO:{resp.travel.weight}</Text>
+                  <Text>PRECIO:{resp.travel.price}</Text>
+                  <View style={styles.btn2}>
+                    <TouchableOpacity
+                      style={styles.btnEditar}
+                      onPress={() => navigation.navigate("StartCarrier", resp)}
+                    >
+                      <Text style={styles.textBtn}> Ofrecer Servicio</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            );
+          })}
+        </Animated.ScrollView>
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
     </View>
-)};
+  );};
 
 
 const styles = StyleSheet.create({
