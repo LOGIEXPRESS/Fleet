@@ -29,6 +29,9 @@ export class Travel extends Model{
     @Column
     finishedTravel!: string
 
+    @Column
+    statusPay!: string
+
     @CreatedAt
     @Column
     createdAt!: Date
