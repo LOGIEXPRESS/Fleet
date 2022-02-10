@@ -515,7 +515,7 @@ const AddTravel = (props) => {
                           <Text>Descripción: {description}</Text>
                           <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity style={styles.btnModal} >
-                              <Text style={styles.btnText} >
+                              <Text style={styles.btnText} onPress={() => handleSubmit()} >
                                 Agregar
                               </Text>
                             </TouchableOpacity>
