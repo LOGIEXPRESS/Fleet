@@ -12,10 +12,12 @@ import edits from './edits'
 import changePassword from './changePass'
 import logout from './logout'
 import recoverPass from './recoverPassword'
+import historyTravel from './historyTravel'
 const router = Router();
 
 // router.use('/', dataFake)
 
+router.use('/', historyTravel)
 
 router.use('/', carrierStatus)
 
