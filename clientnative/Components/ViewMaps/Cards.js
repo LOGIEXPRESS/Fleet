@@ -10,18 +10,29 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGTH = 380;
 const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+import { useNavigation } from "@react-navigation/core";
 
-const Card = ({orig,destination,price,description,weight,business,photo}) => {
+const Card = ({orig,destination,price,description,weight,business,random}) => {
+
+  const props = {
+    origen: orig,
+    destination: destination,
+    price: price,
+    description: description,
+    weight: weight,
+
+  }
+  const navigation = useNavigation()
   return (
 <View style={styles.card} >
                 <View style={{ alignItems: "center", flexDirection: "column" }}>
-                  <Image
+                  {/* <Image
                     source={photo?{
                       uri:photo
                       
                     }:require('../Utils/logo.png')}
                     style={styles.cardImage}
-                  />
+                  /> */}
                   {/* <StarRating ratings={rating} reviews={rating} /> */}
                   <Text>Empresa: {business}</Text>
                 </View>
@@ -35,7 +46,7 @@ const Card = ({orig,destination,price,description,weight,business,photo}) => {
                   <View style={styles.btn2}>
                     <TouchableOpacity
                       style={styles.btnEditar}
-                      
+                      onPress={() => navigation.navigate("StartCarrier", props)}
                     >
                       <Text style={styles.textBtn}>Comenzar Viaje</Text>
                     </TouchableOpacity>
