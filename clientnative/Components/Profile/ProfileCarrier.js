@@ -130,7 +130,7 @@ const ProfileCarrier = () => {
                 <View style={{ flexDirection: 'row' }}>
                  <TouchableOpacity 
                  style={styles.btnModal}
-                 
+                 onPress={()=> navigation.navigate("ScreenMap")}
                  >
                    <Text style={styles.btnModalText}>Aceptar</Text>
                  </TouchableOpacity>
