@@ -88,11 +88,32 @@ catch(err){
 
 router.get('/render', (req: Request , res: Response, ) => {
 
+  let {x} = req.query
   // const {id} = req.params
-  res.send(`
-    <h1>Bienvenidos a Henry!</h1>
-  `);
 
+  if(x === "0"){
+      return   res.send(`
+      <body style="background-color:red; color: white " >
+        <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago fallido!</h1>
+      </body>
+    `);
+  }
+  if (x==="1") {
+    return res.send(`
+    <body style="background-color:yellow; color: black " >
+      <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago pendiente!</h1>
+    </body>
+  `);
+  }
+
+  if(x==="2"){
+    return   res.send(`
+    <body style="background-color:green; color: white " >
+      <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago exitoso!</h1>
+    </body>
+  `)
+  }
+  res.send(`Error en el paramentro x = ${x}`)
 })
 
 
