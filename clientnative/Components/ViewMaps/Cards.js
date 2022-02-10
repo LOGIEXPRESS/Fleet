@@ -12,7 +12,7 @@ const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 import { useNavigation } from "@react-navigation/core";
 
-const Card = ({orig,destination,price,description,weight,business,random}) => {
+const Card = ({orig,destination,price,description,weight,business,photo}) => {
 
   const props = {
     origen: orig,
