@@ -71,8 +71,38 @@ router.get(
 
     let allData = { ...carrierData, ...vehicleData };
 
-    return res.status(200).json({ msg: "Detalle", allData });
-  }
-);
+});
+
+router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=>{
+
+    let {id}=req.params;
+
+    let user = await Truck.findAll({where:{
+        SignupId: id, 
+    }})
+
+    if(user){
+
+        const userStatus = user[0].status
+        //console.log(userStatus)
+        //const changeStatus = !userStatus
+        //console.log(changeStatus)
+
+        let upDateThis: any = {}
+         //console.log(upDateThis)
+
+        if(userStatus){upDateThis.status = !userStatus}
+
+        const changeStatus = await Truck.update(upDateThis, {where:{
+            SignupId: id, 
+        }})
+
+        // const newStatus = changeStatus[0].status
+
+        return res.status(200).json({"msg":"Cambio el status", changeStatus})
+        
+    }
+
+})
 
 export default router;

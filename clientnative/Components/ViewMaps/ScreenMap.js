@@ -28,7 +28,6 @@ import Card from "./Cards";
 
 
 
-
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

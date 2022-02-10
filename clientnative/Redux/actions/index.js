@@ -2,6 +2,31 @@ import axios from "axios";
 import { API_URLS } from "@env"
 
 
+
+
+export function userStatus () {
+  return async function (dispatch) {
+    try {
+      const users = await axios.get(`${API_URLS}/api/FleetStatus`)
+      const filterOn = users.data.allCarrierData.filter((f) => f.status === true )
+      const filterOff = users.data.allCarrierData.filter((f) => f.status === null )
+      const filterInService = users.data.allCarrierData.filter((f) => f.status === false )
+      const filter = {
+        On : filterOn ,
+        Off: filterOff,
+        InService: filterInService
+        
+      }
+      return dispatch ({
+        type: "USER_STATUS",
+        payload: filter
+      })
+    } catch (error) {
+      console.log("Error",error )
+    }
+  }
+}
+
 export function updatePerfil (payload) {
   return async function (dispatch) {
     try {
