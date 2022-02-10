@@ -34,9 +34,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": "https://www.youtube.com/",
-          "pending": "https://www.google.com/",
-          "success": "https://www.facebook.com/"
+          "failure": "https://superfleetback.herokuapp.com/api/render?x=0",
+          "pending": "https://superfleetback.herokuapp.com/api/render?x=1",
+          "success": "https://superfleetback.herokuapp.com/api/render?x=2"
       }
   }
 
@@ -94,14 +94,27 @@ router.get('/render', (req: Request , res: Response, ) => {
   if(x === "0"){
       return   res.send(`
       <body style="background-color:red; color: white " >
-        <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago fallido!</h1>
+      <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width:300px;
+      height:300px;
+      " />
+        <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago fallido!</h1>
       </body>
     `);
   }
   if (x==="1") {
     return res.send(`
     <body style="background-color:yellow; color: black " >
-      <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago pendiente!</h1>
+      <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width:300px;
+      height:300px;
+      "
+      />
+      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago pendiente!</h1>
     </body>
   `);
   }
@@ -109,7 +122,13 @@ router.get('/render', (req: Request , res: Response, ) => {
   if(x==="2"){
     return   res.send(`
     <body style="background-color:green; color: white " >
-      <h1 style="text-align:center ; margin-top: 45vh ; font-size: 70px">Pago exitoso!</h1>
+    <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:300px;
+    height:300px;
+    " />
+      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago exitoso!</h1>
     </body>
   `)
   }
