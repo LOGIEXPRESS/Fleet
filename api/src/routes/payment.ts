@@ -20,14 +20,25 @@ router.post("/mercadopago", async (req, res) => {
     });
 
     let preference = {
-      items: [
-        {
-          title,
-          unit_price,
-          quantity: 1,
-        },
+      "items": [
+          {
+             "title": "Dummy Item Title",
+                  "description": "Dummy Item Description",
+                  "quantity": 1,
+                  "currency_id": "ARS",
+                  "unit_price": 10.0
+          }
       ],
-    };
+      "payer": {
+          "email": "payer@email.com"
+      },
+      "auto_return": "all",
+      "back_urls" : {
+          "failure": "https://www.youtube.com/",
+          "pending": "https://www.google.com/",
+          "success": "https://www.facebook.com/"
+      }
+  }
 
     let answer = await mercadopago.preferences.create(preference);
 
