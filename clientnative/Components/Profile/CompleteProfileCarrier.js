@@ -18,17 +18,21 @@ import { useNavigation } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderBar from "../Utils/HeaderBar";
 import { completeProfileCarrier } from "../../Redux/actions/index.js";
-// import SimpleModal from "./SimpleModal.js";
-// import SimpleModal10 from "../AlertasComplete/SimpleModaldni.js";
-// import SimpleModal11 from "../AlertasComplete/SimpleModalzone.js";
-// import SimpleModal12 from "../AlertasComplete/SimpleModallicense.js";
-// import SimpleModal13 from "../AlertasComplete/SimpleModalbrand.js";
-// import SimpleModal14 from "../AlertasComplete/SimpleModalpatent.js";
-// import SimpleModal15 from "../AlertasComplete/SimpleModalmodel.js";
-// import SimpleModal16 from "../AlertasComplete/SimpleModalcolor.js";
-// import SimpleModal17 from "../AlertasComplete/SimpleModalcapacity.js";
+import SimpleModal10 from "../Alerts/Complete/SimpleModaldni";
+import SimpleModal from "../Alerts/Complete/SimpleModal";
+import SimpleModal11 from "../Alerts/Complete/SimpleModalzone";
+import SimpleModal12 from "../Alerts/Complete/SimpleModallicense.js";
+import SimpleModal13 from "../Alerts/Complete/SimpleModalbrand.js";
+import SimpleModal14 from "../Alerts/Complete/SimpleModalpatent.js";
+import SimpleModal15 from "../Alerts/Complete/SimpleModalmodel.js";
+import SimpleModal16 from "../Alerts/Complete/SimpleModalcolor.js";
+import SimpleModal17 from "../Alerts/Complete/SimpleModalcapacity.js";
+import SimpleModal7 from './../Alerts/SingUp/SimpleModalphone';
+import SimpleModal101 from "../Alerts/Complete/SimpleModalsecret.js";
+import SimpleModal102 from "../Alerts/Complete/SimpleModalcbu.js";
 // prueba para las screens responsive
 import {
+
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
@@ -47,120 +51,158 @@ const CompleteProfileCarrier = (props) => {
   }, [datosCarrier]);
 
   
-  // // validaciones dni
-  // const [isModalVisible10, setisModalVisible10] = useState(false);
-  // const [chooseData10, setchooseData10] = useState();
+  // validaciones dni
+  const [isModalVisible10, setisModalVisible10] = useState(false);
+  const [chooseData10, setchooseData10] = useState();
 
-  // const changeModalVisible10 = (bool) => {
-  //   setisModalVisible10(bool);
-  // };
+  const changeModalVisible10 = (bool) => {
+    setisModalVisible10(bool);
+  };
 
-  // const setData10 = (data) => {
-  //   setchooseData10(data);
-  // };
+  const setData10 = (data) => {
+    setchooseData10(data);
+  };
 
-  // // validaciones zona
+  //validaciones telefono
 
-  // const [isModalVisible11, setisModalVisible11] = useState(false);
-  // const [chooseData11, setchooseData11] = useState();
+  const [isModalVisible7, setisModalVisible7] = useState(false);
+  const [chooseData7, setchooseData7] = useState();
 
-  // const changeModalVisible11 = (bool) => {
-  //   setisModalVisible11(bool);
-  // };
+  const changeModalVisible7 = (bool) => {
+    setisModalVisible7(bool);
+  };
 
-  // const setData11 = (data) => {
-  //   setchooseData11(data);
-  // };
+  const setData7 = (data) => {
+    setchooseData7(data);
+  };
 
-  // // validaciones licencia
+  // validaciones zona
 
-  // const [isModalVisible12, setisModalVisible12] = useState(false);
-  // const [chooseData12, setchooseData12] = useState();
+  const [isModalVisible11, setisModalVisible11] = useState(false);
+  const [chooseData11, setchooseData11] = useState();
 
-  // const changeModalVisible12 = (bool) => {
-  //   setisModalVisible12(bool);
-  // };
+  const changeModalVisible11 = (bool) => {
+    setisModalVisible11(bool);
+  };
 
-  // const setData12 = (data) => {
-  //   setchooseData12(data);
-  // };
+  const setData11 = (data) => {
+    setchooseData11(data);
+  };
 
-  // // validacion marca
+    // validaciones color favorito
 
-  // const [isModalVisible13, setisModalVisible13] = useState(false);
-  // const [chooseData13, setchooseData13] = useState();
+    const [isModalVisible101, setisModalVisible101] = useState(false);
+    const [chooseData101, setchooseData101] = useState();
+  
+    const changeModalVisible101 = (bool) => {
+      setisModalVisible101(bool);
+    };
+  
+    const setData101 = (data) => {
+      setchooseData101(data);
+    };
+      // validaciones clave mercadopago
 
-  // const changeModalVisible13 = (bool) => {
-  //   setisModalVisible13(bool);
-  // };
+  const [isModalVisible102, setisModalVisible102] = useState(false);
+  const [chooseData102, setchooseData102] = useState();
 
-  // const setData13 = (data) => {
-  //   setchooseData13(data);
-  // };
+  const changeModalVisible102 = (bool) => {
+    setisModalVisible102(bool);
+  };
 
-  // // validacion patente
+  const setData102 = (data) => {
+    setchooseData102(data);
+  };
 
-  // const [isModalVisible14, setisModalVisible14] = useState(false);
-  // const [chooseData14, setchooseData14] = useState();
+  // validaciones licencia
 
-  // const changeModalVisible14 = (bool) => {
-  //   setisModalVisible14(bool);
-  // };
+  const [isModalVisible12, setisModalVisible12] = useState(false);
+  const [chooseData12, setchooseData12] = useState();
 
-  // const setData14 = (data) => {
-  //   setchooseData14(data);
-  // };
+  const changeModalVisible12 = (bool) => {
+    setisModalVisible12(bool);
+  };
 
-  // // validacion modelo
+  const setData12 = (data) => {
+    setchooseData12(data);
+  };
 
-  // const [isModalVisible15, setisModalVisible15] = useState(false);
-  // const [chooseData15, setchooseData15] = useState();
+  // validacion marca
 
-  // const changeModalVisible15 = (bool) => {
-  //   setisModalVisible15(bool);
-  // };
+  const [isModalVisible13, setisModalVisible13] = useState(false);
+  const [chooseData13, setchooseData13] = useState();
 
-  // const setData15 = (data) => {
-  //   setchooseData15(data);
-  // };
-  // // validacion color
+  const changeModalVisible13 = (bool) => {
+    setisModalVisible13(bool);
+  };
 
-  // const [isModalVisible16, setisModalVisible16] = useState(false);
-  // const [chooseData16, setchooseData16] = useState();
+  const setData13 = (data) => {
+    setchooseData13(data);
+  };
 
-  // const changeModalVisible16 = (bool) => {
-  //   setisModalVisible16(bool);
-  // };
+  // validacion patente
 
-  // const setData16 = (data) => {
-  //   setchooseData16(data);
-  // };
+  const [isModalVisible14, setisModalVisible14] = useState(false);
+  const [chooseData14, setchooseData14] = useState();
 
-  // // validacion capacidad
+  const changeModalVisible14 = (bool) => {
+    setisModalVisible14(bool);
+  };
 
-  // const [isModalVisible17, setisModalVisible17] = useState(false);
-  // const [chooseData17, setchooseData17] = useState();
+  const setData14 = (data) => {
+    setchooseData14(data);
+  };
 
-  // const changeModalVisible17 = (bool) => {
-  //   setisModalVisible17(bool);
-  // };
+  // validacion modelo
 
-  // const setData17 = (data) => {
-  //   setchooseData17(data);
-  // };
+  const [isModalVisible15, setisModalVisible15] = useState(false);
+  const [chooseData15, setchooseData15] = useState();
+
+  const changeModalVisible15 = (bool) => {
+    setisModalVisible15(bool);
+  };
+
+  const setData15 = (data) => {
+    setchooseData15(data);
+  };
+  // validacion color
+
+  const [isModalVisible16, setisModalVisible16] = useState(false);
+  const [chooseData16, setchooseData16] = useState();
+
+  const changeModalVisible16 = (bool) => {
+    setisModalVisible16(bool);
+  };
+
+  const setData16 = (data) => {
+    setchooseData16(data);
+  };
+
+  // validacion capacidad
+
+  const [isModalVisible17, setisModalVisible17] = useState(false);
+  const [chooseData17, setchooseData17] = useState();
+
+  const changeModalVisible17 = (bool) => {
+    setisModalVisible17(bool);
+  };
+
+  const setData17 = (data) => {
+    setchooseData17(data);
+  };
 
 
-  /// --> ESTADO PARA EL MODAL <-- ///
-  // const [isModalVisible, setisModalVisible] = useState(false);
-  // const [chooseData, setchooseData] = useState();
+  / --> ESTADO PARA EL MODAL <-- ///
+  const [isModalVisible, setisModalVisible] = useState(false);
+  const [chooseData, setchooseData] = useState();
 
-  // const changeModalVisible = (bool) => {
-  //   setisModalVisible(bool);
-  // };
+  const changeModalVisible = (bool) => {
+    setisModalVisible(bool);
+  };
 
-  // const setData = (data) => {
-  //   setchooseData(data);
-  // };
+  const setData = (data) => {
+    setchooseData(data);
+  };
 
   //// --> ESTADO PARA LOS INPUTS <-- ////
 
@@ -330,39 +372,53 @@ const CompleteProfileCarrier = (props) => {
     };
 
     // // VALIDACIONES
-    // if (!obj.documentID) {
-    //   changeModalVisible10(true);
-    //   return;
-    // }
+    if (!obj.identification) {
+      changeModalVisible10(true);
+      return;
+    }
 
-    // if (!obj.location) {
-    //   changeModalVisible11(true);
-    //   return;
-    // }
-    // if (!obj.license) {
-    //   changeModalVisible12(true);
-    //   return;
-    // }
-    // if (!obj.brand) {
-    //   changeModalVisible13(true);
-    //   return;
-    // }
-    // if (!obj.patent) {
-    //   changeModalVisible14(true);
-    //   return;
-    // }
-    // if (!obj.model) {
-    //   changeModalVisible15(true);
-    //   return;
-    // }
-    // if (!obj.color) {
-    //   changeModalVisible16(true);
-    //   return;
-    // }
-    // if (!obj.capacity) {
-    //   changeModalVisible17(true);
-    //   return;
-    // }
+    if (!obj.phone) {
+      changeModalVisible7(true);
+      return;
+    }
+
+    if (!obj.locacion) {
+      changeModalVisible11(true);
+      return;
+    }
+
+    if (!obj.secret) {
+      changeModalVisible101(true);
+      return;
+    }
+    if (!obj.cbu) {
+      changeModalVisible102(true);
+      return;
+    }
+    if (!obj.license) {
+      changeModalVisible12(true);
+      return;
+    }
+    if (!obj.brand) {
+      changeModalVisible13(true);
+      return;
+    }
+    if (!obj.patent) {
+      changeModalVisible14(true);
+      return;
+    }
+    if (!obj.model) {
+      changeModalVisible15(true);
+      return;
+    }
+    if (!obj.color) {
+      changeModalVisible16(true);
+      return;
+    }
+    if (!obj.capacity) {
+      changeModalVisible17(true);
+      return;
+    }
 
     dispatch(completeProfileCarrier(obj));
     console.log("soy lo que se envia", obj);
@@ -501,7 +557,7 @@ const CompleteProfileCarrier = (props) => {
                 <Icon name="reader-outline"  style={styles.icons} />
                 <TextInput
                   value={carrier.cbu}
-                  placeholder="Número de CBU"
+                  placeholder="Clave de MercadoPago"
                   name="cbu"
                   style={styles.textPlaceholder}
                   onChangeText={(cbu) =>
@@ -585,7 +641,139 @@ const CompleteProfileCarrier = (props) => {
 
               <TouchableOpacity style={styles.btnEditar} onPress={handleSubmit}>
                 <Text style={styles.textBtn}>Finalizar</Text>
-                {/* MODAL */}
+                 {/* MODAL */}
+                 <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible}
+                  nRequestClose={() => changeModalVisible(false)}
+                >
+                  <SimpleModal
+                    changeModalVisible={changeModalVisible}
+                    setData={setData}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible10}
+                  nRequestClose={() => changeModalVisible10(false)}
+                >
+                  <SimpleModal10
+                    changeModalVisible10={changeModalVisible10}
+                    setData10={setData10}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible11}
+                  nRequestClose={() => changeModalVisible11(false)}
+                >
+                  <SimpleModal11
+                    changeModalVisible11={changeModalVisible11}
+                    setData11={setData11}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible12}
+                  nRequestClose={() => changeModalVisible12(false)}
+                >
+                  <SimpleModal12
+                    changeModalVisible12={changeModalVisible12}
+                    setData12={setData12}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible13}
+                  nRequestClose={() => changeModalVisible13(false)}
+                >
+                  <SimpleModal13
+                    changeModalVisible13={changeModalVisible13}
+                    setData13={setData13}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible14}
+                  nRequestClose={() => changeModalVisible14(false)}
+                >
+                  <SimpleModal14
+                    changeModalVisible14={changeModalVisible14}
+                    setData14={setData14}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible15}
+                  nRequestClose={() => changeModalVisible15(false)}
+                >
+                  <SimpleModal15
+                    changeModalVisible15={changeModalVisible15}
+                    setData15={setData15}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible16}
+                  nRequestClose={() => changeModalVisible16(false)}
+                >
+                  <SimpleModal16
+                    changeModalVisible16={changeModalVisible16}
+                    setData16={setData16}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible17}
+                  nRequestClose={() => changeModalVisible17(false)}
+                >
+                  <SimpleModal17
+                    changeModalVisible17={changeModalVisible17}
+                    setData17={setData17}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible7}
+                  nRequestClose={() => changeModalVisible7(false)}
+                >
+                  <SimpleModal7
+                    changeModalVisible7={changeModalVisible7}
+                    setData7={setData7}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible101}
+                  nRequestClose={() => changeModalVisible101(false)}
+                >
+                  <SimpleModal101
+                    changeModalVisible101={changeModalVisible101}
+                    setData101={setData101}
+                  />
+                </Modal>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible102}
+                  nRequestClose={() => changeModalVisible102(false)}
+                >
+                  <SimpleModal102
+                    changeModalVisible102={changeModalVisible102}
+                    setData102={setData102}
+                  />
+                </Modal>
                 
               </TouchableOpacity>
             </View>
