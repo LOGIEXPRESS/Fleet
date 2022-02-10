@@ -26,13 +26,13 @@ const Card = ({orig,destination,price,description,weight,business,random}) => {
   return (
 <View style={styles.card} >
                 <View style={{ alignItems: "center", flexDirection: "column" }}>
-                  {/* <Image
+                  <Image
                     source={photo?{
                       uri:photo
                       
                     }:require('../Utils/logo.png')}
                     style={styles.cardImage}
-                  /> */}
+                  />
                   {/* <StarRating ratings={rating} reviews={rating} /> */}
                   <Text>Empresa: {business}</Text>
                 </View>
