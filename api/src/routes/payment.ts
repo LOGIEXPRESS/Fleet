@@ -64,16 +64,16 @@ catch(err){
 }
 });
 
-router.get('totalprice',(req: Request, res: Response, next: NextFunction) => {
-  let {id} = req.query
-  try {
+// router.get('totalprice',(req: Request, res: Response, next: NextFunction) => {
+//   let {id} = req.query
+//   try {
 
 
     
-  } catch (error) {
-    next(error)
-  }
-})
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 
   export default router
