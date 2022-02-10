@@ -86,5 +86,14 @@ catch(err){
 //   }
 // })
 
+router.get('/render', (req: Request , res: Response, ) => {
 
-  export default router
+  // const {id} = req.params
+  res.send(`
+    <h1>Bienvenidos a Henry!</h1>
+  `);
+
+})
+
+
+export default router
