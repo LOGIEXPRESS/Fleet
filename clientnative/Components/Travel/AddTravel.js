@@ -29,6 +29,7 @@ import SimpleModal21 from "./MoldasTravel/SimpleModaldest";
 import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
 import HeaderBar from "../Utils/HeaderBar";
+
 import { APIKEY_GOOGLE } from "@env"
 import { sendMessage } from "../../Redux/actions/index";
 

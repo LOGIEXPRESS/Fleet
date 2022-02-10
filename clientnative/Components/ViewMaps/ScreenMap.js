@@ -24,7 +24,7 @@ import { useNavigation } from "@react-navigation/core";
 
 import { getTravels } from "../../Redux/actions";
 import Card from "./Cards";
-import Pointers from "./Pointers";
+// import Pointers from "./Pointers";
 
 
 
@@ -39,6 +39,7 @@ const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 import HeaderBar from "../Utils/HeaderBar";
+import CardWaiting from "./CardWaiting";
 
 
 
@@ -150,7 +151,11 @@ export default function ScreenMap() {
             initialRegion={pin}
             provider="google"
           >
-            <Marker coordinate={pin} />
+            <Marker
+            title="Mi Ubicacion"
+            coordinate={pin} 
+            // description='descrpcion'
+            />
 
             {/* {travels !== 0 ?(travels.map((point,index)=>{
               return (
@@ -171,6 +176,8 @@ export default function ScreenMap() {
                 return (
                   <MapView.Marker
                     key={index}
+                    title={`Trasporte de ${point.description}`}
+                    description={`Peso: ${point.weight} ton Pago: $${point.price}`}
                     coordinate={{
                       latitude: lat,
                       longitude: lon,
@@ -238,11 +245,12 @@ export default function ScreenMap() {
                   description={data.description}
                   weight={data.weight}
                   business={data.admin.business}
+                  photo={data.admin.photo}
                   random={index} />
               )
             })
 
-            ) : null}
+            ) : <CardWaiting></CardWaiting>}
 
           </Animated.ScrollView>
 

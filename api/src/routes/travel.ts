@@ -277,13 +277,17 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
   //userId es id de admin es decir del trasportitas 
   const { userId, id } = req.body;
   try {
-    let confirm = await Travel.update({finishedTravel: 'process',carrierId:userId}, {where: { id: id }})
-    console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm )
-    res.send(confirm)
+    let confirm = await Travel.update(
+      { finishedTravel: "process", carrierId: userId },
+      { where: { id: id } }
+    );
+    console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
+    res.send(confirm);
   } catch (error) {
-    next(error)
+    next(error);
   }
 })
+
 
 
 

@@ -431,7 +431,7 @@ navigation.navigate("Login")
             style={styles.imgPerfil}
           />
           <View>
-            <Text style={{fontSize:hp("2.5%"), color:"#8a9096"}}>
+            <Text style={{fontSize:hp("2.3%"), color:"#8a9096"}}>
               Foto de la empresa
             </Text>
           </View>
@@ -574,9 +574,9 @@ const styles = StyleSheet.create({
     elevation: 15,
   },
   ButtonText: {
-    fontWeight: "bold",
+    // fontWeight: "bold",
     fontSize: 18,
-    color: "#E1E8EB",
+    color: "white",
   },
   SingUpText: {
     color: "#4632a1",

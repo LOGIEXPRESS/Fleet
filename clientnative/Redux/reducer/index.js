@@ -72,6 +72,11 @@ export default function rootReducer(state = initialState, action) {
           editVehicule: [],
           price: []
         };
+        case "CLEAN_TOKEN":
+          return {
+            ...state,        
+            token: ""
+          };
         case "GET_PRICE_QUOTE":
           return {
             ...state,

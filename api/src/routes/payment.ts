@@ -1,14 +1,14 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
-import { Carrier } from '../models/Carrier';
+import { Carrier }  from '../models/Carrier';
 import axios from 'axios';
 const mercadopago = require('mercadopago');
 
-const router = Router()
+const router=Router()
 
 router.get('/payment', async (req: Request, res: Response) => {
-  res.send('Allan Torres line 15');
-});
+    res.send('Allan Torres line 15');
+  });
 
 router.post("/mercadopago", async (req, res) => {
   const { title, unit_price } = req.body;
@@ -20,25 +20,25 @@ router.post("/mercadopago", async (req, res) => {
     });
 
     let preference = {
-      items: [
-        {
-           "title": "Dummy Item Title",
-                "description": "Dummy Item Description",
-                "quantity": 1,
-                "currency_id": "ARS",
-                "unit_price": 10.0
-        }
-    ],
-    payer: {
-        "email": "payer@email.com"
-    },
-    auto_return: "all",
-    back_urls : {
-        failure: `logasiodjkaisdkas/?`,
-        pending: "https://www.google.com/",
-        success: "https://www.facebook.com/"
-    }
-    };
+      "items": [
+          {
+             "title": "Dummy Item Title",
+                  "description": "Dummy Item Description",
+                  "quantity": 1,
+                  "currency_id": "ARS",
+                  "unit_price": 10.0
+          }
+      ],
+      "payer": {
+          "email": "payer@email.com"
+      },
+      "auto_return": "all",
+      "back_urls" : {
+          "failure": "https://superfleetback.herokuapp.com/api/render?x=0",
+          "pending": "https://superfleetback.herokuapp.com/api/render?x=1",
+          "success": "https://superfleetback.herokuapp.com/api/render?x=2"
+      }
+  }
 
     let answer = await mercadopago.preferences.create(preference);
 
@@ -51,23 +51,28 @@ router.post("/mercadopago", async (req, res) => {
   }
 });
 
-
+  
 router.get('/checkout', async (req: Request, res: Response) => {
-  let { id } = req.query;
+  let {id}=req.query;
   console.log("#####line 46#####");
   console.log(id);
-  let status: any;
-  try {
-    const resp = await axios.get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id=%27' + id, {})
-      .then((res) => {
-        console.log(res.statusText)
-        status = res.statusText;
-      });
+  let status:any;
+  try{
+
+
+  const resp= await   axios
+        .get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
+
+    })
+    .then((res) => {
+      console.log(res.statusText)
+        status=res.statusText;
+    });
     res.send(status);
   }
-  catch (err) {
-    console.error(err)
-  }
+catch(err){
+  console.error(err)
+}
 });
 
 // router.get('totalprice',(req: Request, res: Response, next: NextFunction) => {
@@ -75,11 +80,60 @@ router.get('/checkout', async (req: Request, res: Response) => {
 //   try {
 
 
-
+    
 //   } catch (error) {
 //     next(error)
 //   }
 // })
+
+router.get('/render', (req: Request , res: Response, ) => {
+
+  let {x} = req.query
+  // const {id} = req.params
+
+  if(x === "0"){
+      return   res.send(`
+      <body style="background-color:red; color: white " >
+      <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width:300px;
+      height:300px;
+      " />
+        <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago fallido!</h1>
+      </body>
+    `);
+  }
+  if (x==="1") {
+    return res.send(`
+    <body style="background-color:yellow; color: black " >
+      <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width:300px;
+      height:300px;
+      "
+      />
+      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago pendiente!</h1>
+    </body>
+  `);
+  }
+
+  if(x==="2"){
+    return   res.send(`
+    <body style="background-color:green; color: white " >
+    <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:300px;
+    height:300px;
+    " />
+      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago exitoso!</h1>
+    </body>
+  `)
+  }
+  res.send(`Error en el paramentro x = ${x}`)
+})
 
 
 export default router

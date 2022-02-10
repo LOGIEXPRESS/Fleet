@@ -26,6 +26,10 @@ const ProfileCarrier = () => {
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
+  const handler = () => {
+    navigation.navigate("ScreenMap");
+    setModalAlert(false)
+  }
 
   const [modalAlert, setModalAlert] = useState(false)
 
@@ -106,7 +110,7 @@ const ProfileCarrier = () => {
           <TouchableOpacity
             style={styles.btn2}
             onPress={() => setModalAlert(true)}
-
+            // onPress={()=> navigation.navigate("ScreenMap")}
           >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
@@ -130,7 +134,7 @@ const ProfileCarrier = () => {
                 <View style={{ flexDirection: 'row' }}>
                  <TouchableOpacity 
                  style={styles.btnModal}
-                 
+                 onPress={()=> handler()}
                  >
                    <Text style={styles.btnModalText}>Aceptar</Text>
                  </TouchableOpacity>
