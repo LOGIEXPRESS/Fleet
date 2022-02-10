@@ -59,6 +59,7 @@ router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
         return res.status(404).json({"msg":"ACA ROMPE, NO ENCONTRAMOS STATUS "})
     }
 
+
     //-------------------->ESTO NO FUNCIONA<-----------------//
 
     // if(user){
@@ -82,10 +83,9 @@ router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
     //     return res.status(200).json({"msg":"Cambio el status", changeStatus})
         
     // }
-
 })
 
-router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
+router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunction) => {
 
     // let {status}=req.params
 
@@ -121,6 +121,39 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 })
 
 
+
+router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=>{
+    
+    let {id}=req.params;
+    
+    let user = await Truck.findAll({where:{
+        SignupId: id, 
+    }})
+    
+    if(user){
+        
+        const userStatus = user[0].status
+        //console.log(userStatus)
+        //const changeStatus = !userStatus
+        //console.log(changeStatus)
+        
+        let upDateThis: any = {}
+        //console.log(upDateThis)
+        
+        if(userStatus){upDateThis.status = !userStatus}
+        
+        const changeStatus = await Truck.update(upDateThis, {where:{
+            SignupId: id, 
+        }})
+        
+        // const newStatus = changeStatus[0].status
+        
+        return res.status(200).json({"msg":"Cambio el status", changeStatus})
+        
+    }
+    
+})
+
 // router.get('/CarrrierDetails',async(req:Request,res:Response,next:NextFunction)=>{
 //     let {id}=req.params
 
@@ -132,10 +165,7 @@ router.get('/FleetStatus',async(req:Request,res:Response,next:NextFunction)=>{
 //     let allData = {...carrierData, ...vehicleData} 
 
 //     return res.status(200).json({"msg":"Detalle", allData})
-  
-
 // })
-
 
 
 export default router

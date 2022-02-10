@@ -18,6 +18,7 @@ const initialState = {
   editVehicule: [],
   price: [],
   travels: [],
+  userStatus: null
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -59,7 +60,8 @@ export default function rootReducer(state = initialState, action) {
       case "RESET": 
       return {
         ...state,
-        respDeleteUser: null
+        respDeleteUser: null,
+        userStatus: null
       }
       case "DESMOUNT":
         return {
@@ -70,6 +72,11 @@ export default function rootReducer(state = initialState, action) {
           editVehicule: [],
           price: []
         };
+        case "CLEAN_TOKEN":
+          return {
+            ...state,        
+            token: ""
+          };
         case "GET_PRICE_QUOTE":
           return {
             ...state,
@@ -95,6 +102,11 @@ export default function rootReducer(state = initialState, action) {
             return {
               ...state,
               editarPerfilUser: action.payload,
+            }
+          case "USER_STATUS":
+            return {
+              ...state,
+              userStatus: action.payload
             }
     default:
       return state;

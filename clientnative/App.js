@@ -24,6 +24,8 @@ import startCheckout from './Components/MercadoPago/startCheckout.js'
 import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
 import RecoverPassword from './Components/Home/RecoverPassword'
 import ScreenMap from "./Components/ViewMaps/ScreenMap";
+import Mercadopago from "./Components/MercadoPago/Mercadopago";
+import StartCarrier from './Components/Travel/StartCarrier';
 
 
 
@@ -138,6 +140,11 @@ const App = () => {
             <Stack.Screen
               name="VehiculeDetails"
               component={VehiculeDetails}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="StartCarrier"
+              component={StartCarrier}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
