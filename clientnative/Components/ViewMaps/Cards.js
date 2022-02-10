@@ -11,43 +11,37 @@ const CARD_HEIGTH = 380;
 const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
-const Card = ({orig,destination,price,description,weight,business,random}) => {
- 
+const Card = ({orig,destination,price,description,weight,business,photo}) => {
   return (
-    <View style={styles.card}>
-      <View
-        style={{
-          alignItems: "center",
-          flexDirection: "column",
-          backgroundColor: "",
-        }}
-      >
-        <Image
-          source={{
-            uri: `https://picsum.photos/seed/picsum/200/300?random`,
-          }}
-          style={styles.cardImage}
-        />
-        {/* <StarRating ratings={rating} reviews={rating} /> */}
-      </View>
-      <View style={styles.textContent}>
-        <Text>ID: </Text>
-        <Text>ORIGEN: {orig.split("/")[2]}</Text>
-        <Text>DESTINO: {destination.split("/")[2]}</Text>
-        <Text>PESO: {weight} Toneladas</Text>
-        <Text>DESCRIPCIÓN: {description} </Text>
-        <Text style={{ justifyContent: "center", marginLeft: wp("22%") }}>
-          TOTAL: ${price}
-        </Text>
-        <View style={styles.btn2}>
-          <TouchableOpacity style={styles.btnEditar}>
-            <Text style={styles.textBtn}>
-              Comenzar Viaje
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+<View style={styles.card} >
+                <View style={{ alignItems: "center", flexDirection: "column" }}>
+                  <Image
+                    source={photo?{
+                      uri:photo
+                      
+                    }:require('../Utils/logo.png')}
+                    style={styles.cardImage}
+                  />
+                  {/* <StarRating ratings={rating} reviews={rating} /> */}
+                  <Text>Empresa: {business}</Text>
+                </View>
+                <View style={styles.textContent}>
+                  <Text>ID: </Text>
+                  <Text>DESCRIPCION: {description} </Text>
+                  <Text>ORIGEN: {orig.split("/")[2]}</Text>
+                  <Text>DESTINO: {destination.split("/")[2]}</Text>
+                  <Text>PESO: {weight}ton</Text>
+                  <Text>PAGO: ${price}</Text>
+                  <View style={styles.btn2}>
+                    <TouchableOpacity
+                      style={styles.btnEditar}
+                      
+                    >
+                      <Text style={styles.textBtn}>Comenzar Viaje</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+</View>
   );
 };
 
