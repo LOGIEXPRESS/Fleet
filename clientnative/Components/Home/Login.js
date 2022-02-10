@@ -143,6 +143,17 @@ const Login = () => {
   
   };
 
+  useEffect(() => {
+    async function getValueFor() {
+      // SE CONSULTA EL VALUE DEL STORE, CON EL KEY
+      let result = await SecureStore.getItemAsync("token");
+
+      console.log("TOKEN EN SECURE STORE ", result);
+    }
+    // console.log("ESTE ES  LOGIN",data);
+    getValueFor();
+  }, []);
+
 return (
     //Container Start
     <ScrollView

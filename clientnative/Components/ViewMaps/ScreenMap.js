@@ -40,8 +40,6 @@ export default function ScreenMap() {
 
   const travels = useSelector((state) => state.travels)
 
-  
-
   const [pin, setPin] = useState({
     latitude: 0,
     longitude: 0,
@@ -140,7 +138,7 @@ export default function ScreenMap() {
             ref={_map}
             initialRegion={pin}
             provider="google"
-          > 
+          >
             <Marker coordinate={pin} />
 
             {/* {travels !== 0 ?(travels.map((point,index)=>{
@@ -153,78 +151,63 @@ export default function ScreenMap() {
             <ActivityIndicator size="large" color="#0000ff" />
               
             } */}
-            
-
-            
-            
-          
-            
           </MapView>
-          
-            <Animated.ScrollView
-              ref={_scrollView}
-              horizontal
-              scrollEventThrottle={1}
-              showHorizontalScrollIndicator={false}
-              style={styles.scrollView}
-              pagingEnabled
-              snapToInterval={CARD_WIDTH + 20}
-              snapToAlignment="center"
-              contentInset={{
-                top: 0,
-                left: SPACING_FOR_CARD_INSET,
-                bot: 0,
-                right: SPACING_FOR_CARD_INSET,
-              }}
-              contentContainerStyle={{
-                paddingHorizontal:
-                  Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
-              }}
-              onScroll={Animated.event(
-                [
-                  {
-                    nativeEvent: {
-                      contentOffset: {
-                        x: mapAnimation,
-                      },
+
+          <Animated.ScrollView
+            ref={_scrollView}
+            horizontal
+            scrollEventThrottle={1}
+            showHorizontalScrollIndicator={false}
+            style={styles.scrollView}
+            pagingEnabled
+            snapToInterval={CARD_WIDTH + 20}
+            snapToAlignment="center"
+            contentInset={{
+              top: 0,
+              left: SPACING_FOR_CARD_INSET,
+              bot: 0,
+              right: SPACING_FOR_CARD_INSET,
+            }}
+            contentContainerStyle={{
+              paddingHorizontal:
+                Platform.OS === "android" ? SPACING_FOR_CARD_INSET : 0,
+            }}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: mapAnimation,
                     },
                   },
-                ],
-                { useNativeDriver: true }
-              )}>
-
-            {travels?.length>0 ?(travels?.map((data,index)=>{
-              return(
-                <Card key={index} 
-                orig={data.orig} 
-                destination={data.destination} 
-                price={data.price} 
-                description={data.description}
-                weight={data.weight}
-                business={data.admin.business}
-                random={index}/>
-              )
-            })
-              
-            ):null}
-
+                },
+              ],
+              { useNativeDriver: true }
+            )}
+          >
+            {travels?.length > 0
+              ? travels?.map((data, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      orig={data.orig}
+                      destination={data.destination}
+                      price={data.price}
+                      description={data.description}
+                      weight={data.weight}
+                      business={data.admin.business}
+                      random={index}
+                    />
+                  );
+                })
+              : null}
           </Animated.ScrollView>
-          
-
         </View>
-        
-
-        
-         
-        
-
-        
       ) : (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
-      
     </View>
-)};
+  );};
 
 
 const styles = StyleSheet.create({

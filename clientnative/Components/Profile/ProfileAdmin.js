@@ -19,6 +19,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import * as SecureStore from "expo-secure-store";
 
 const ProfileAdmin = () => {
   // const login = useSelector((store) => store.login);
@@ -28,11 +29,15 @@ const ProfileAdmin = () => {
   const respPermisse = useSelector((store) => store.respPermisse);
 
   useEffect(() => {
+    async function getValueFor() {
+      // SE CONSULTA EL VALUE DEL STORE, CON EL KEY
+      let result = await SecureStore.getItemAsync("token");
 
-    console.log("ESTE ES  LOGIN",data);
+      console.log("TOKEN EN SECURE STORE ", result);
+    }
+    // console.log("ESTE ES  LOGIN",data);
+    getValueFor();
   }, []);
-  
-
 
   // useEffect(() => {
   //   if (respPermisse === "user sin travel") {
@@ -57,36 +62,34 @@ const ProfileAdmin = () => {
   };
 
   return (
-    <View style={{ flex: 1,  backgroundColor: 'white' }}>
-       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
         </View> */}
       <ScrollView showsVerticalScrollIndicator={false}>
-
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <View style={{ marginTop: wp("12%") }}>
             <Image
-            resizeMode="contain"
-            source={{
+              resizeMode="contain"
+              source={{
                 uri:
                   data?.photo === null || data?.photo === "url"
                     ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
-                    : data?.photo
-                    
+                    : data?.photo,
               }}
               style={styles.userImg}
             />
           </View>
           <Text style={styles.userName}>
-            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
-            
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}{" "}
+            {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
           </Text>
           <Text style={styles.userName2}>
             {/* Administrador de RadioTruck */}
-            Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)} 
-            
+            Administrador de{" "}
+            {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}
           </Text>
         </View>
 
@@ -106,7 +109,6 @@ const ProfileAdmin = () => {
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => {
-              
               navigation.navigate("ViewFleet");
             }}
           >
@@ -128,7 +130,6 @@ const ProfileAdmin = () => {
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
             onPress={() => navigation.navigate("AddTravel", data)}
-
           >
             {/* <Image
               style={{ width: wp('12%'), height: hp('6%'), marginTop: wp('-2%')}}
