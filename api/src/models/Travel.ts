@@ -1,7 +1,8 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, HasOne, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Carrier } from './Carrier';
+import { Truck } from './Truck';
 import { Review } from './Review';
-import { Admin } from './Admin';
+import { Carrier } from './Carrier';
+import { Signup } from './Signup';
 
 @Table
 export class Travel extends Model{
@@ -28,6 +29,9 @@ export class Travel extends Model{
     @Column
     finishedTravel!: string
 
+    @Column
+    statusPay!: string
+
     @CreatedAt
     @Column
     createdAt!: Date
@@ -36,17 +40,17 @@ export class Travel extends Model{
     @Column
     updatedAt!: Date
 
-    @BelongsTo(() => Admin)
-    admin!: Admin
+    @BelongsTo(() => Truck)
+    truck!: Truck
 
-    @ForeignKey(() => Admin)
-    adminId!: any
+    @ForeignKey(() => Truck)
+    truckId!: string
 
-    @BelongsTo(() => Carrier)
-    carrier!: Carrier
+    @BelongsTo(() => Signup)
+    admin!: Signup
 
-    @ForeignKey(() => Carrier)
-    carrierId!: string
+    @ForeignKey(() => Signup)
+    adminId!: string
 
     @HasOne(() => Review)
     rewiew!: Review

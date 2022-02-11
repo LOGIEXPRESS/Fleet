@@ -13,7 +13,7 @@ const router = Router()
 function createToken(payload: any) {
 
     return jwt.sign({ id: payload.id, email: payload.eMail }, config.jwtSecret, {
-        expiresIn: 200
+        expiresIn: 86400
     })
 }
 

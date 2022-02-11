@@ -1,42 +1,29 @@
-
-import { Model, Column, Table, CreatedAt, UpdatedAt, PrimaryKey, IsUUID, BelongsTo, ForeignKey } from 'sequelize-typescript'
-import { Signup } from './Signup';
+import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, BelongsTo, PrimaryKey, ForeignKey, HasMany, DataType} from 'sequelize-typescript'
+import { Travel } from './Travel'
+import { Signup } from './Signup'
 
 @Table
-export class Carrier extends Model{
-
+export class Carrier extends Model {
     @IsUUID(4)
     @Column({ primaryKey: true })
     id!: string
 
     @Column
-    license!: string 
+    company!: string
 
+    // @Column(DataType.ARRAY(DataType.STRING))
+    // eMail!:string
     @Column
-    brand!: string
+    eMail!:string
 
-    @Column
-    patent!: string
-
-    @Column
-    model!: string 
-
-    @Column
-    color!: string
-
-    @Column
-    capacity!: number
-
-    @Column
-    status!: boolean
- 
     @BelongsTo(()=>Signup)
-    carrier!:Signup
-   
-   @ForeignKey(()=>Signup)
-   SignupId!:string
-   
-   @Column
-   cbu!: string
+    trasportista!: Signup
+
+    @ForeignKey(()=>Signup)
+    SignupId!:string
+
+    // @HasMany(()=>Travel)
+    // travel!:Travel
+
 
 }

@@ -14,12 +14,15 @@ import {
   TouchableOpacity,
   Button,
   Modal,
-  Alert
+  Alert,
+  BackHandler
 } from "react-native";
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
-
+import SimpleModal5 from './../Alerts/Login/SimpleModalmail';
+import SimpleModal6 from './../Alerts/Login/SimpleModalpass';
+import SimpleModal30 from './../Alerts/Login/SimpleModallog';
 
 
 const Login = () => {
@@ -49,14 +52,24 @@ const Login = () => {
         }
         // navigation.navigate("ProfileCarrier");
       }
-      if(login.role===1){
-        Alert.alert('Debe ingresar datos')
-        navigation.navigate('Login')
-      }
-      
+     
     
     }
+    if(login?.role === 1){
+      console.log("llego acá al 1")
+      changeModalVisible30(true)
+      // Alert.alert('Debe ingresar datos')
+      // navigation.navigate('Login')
+    }
+    
   }, [login]);
+
+  //para desavilitar volver atras del cel
+  //  useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+  //   return () => backHandler.remove()
+  // }, [])
+
 
   async function save(key, value) {
     //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
@@ -84,6 +97,43 @@ const Login = () => {
       return false;
     }
   }, [log])
+
+      // COMBINACION MAIL Y PASS MAL
+      const [isModalVisible30, setisModalVisible30] = useState(false);
+      const [chooseData30, setchooseData30] = useState();
+    
+      const changeModalVisible30 = (bool) => {
+        setisModalVisible30(bool);
+      };
+    
+      const setData30 = (data) => {
+        setchooseData30(data);
+      };
+    
+       //MAIL MAL INGRESADO
+       const [isModalVisible5, setisModalVisible5] = useState(false);
+       const [chooseData5, setchooseData5] = useState();
+     
+       const changeModalVisible5 = (bool) => {
+         setisModalVisible5(bool);
+       };
+     
+       const setData5 = (data) => {
+         setchooseData5(data);
+       };
+     
+        // CONTRASEÑA MAL INGRESADA
+      
+        const [isModalVisible6, setisModalVisible6] = useState(false);
+        const [chooseData6, setchooseData6] = useState();
+      
+        const changeModalVisible6 = (bool) => {
+          setisModalVisible6(bool);
+        };
+        const setData6 = (data) => {
+          setchooseData6(data);
+        };
+    
   
 
   const navegar = () =>{
@@ -113,14 +163,14 @@ const Login = () => {
 
     //Validaciones:
 
-    // if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
-    //   changeModalVisible5(true)
-    //   return;
-    // }
-    // if (!obj.password) {
-    //   changeModalVisible6(true)
-    //   return;
-    // }
+    if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
+      changeModalVisible5(true)
+      return;
+    }
+    if (!obj.password) {
+      changeModalVisible6(true)
+      return;
+    }
 
     dispatch(logiar(obj));
     console.log("Estoy enviado", obj);
@@ -134,6 +184,17 @@ const Login = () => {
 
   
   };
+
+  useEffect(() => {
+    async function getValueFor() {
+      // SE CONSULTA EL VALUE DEL STORE, CON EL KEY
+      let result = await SecureStore.getItemAsync("token");
+
+      console.log("TOKEN EN SECURE STORE ", result);
+    }
+    // console.log("ESTE ES  LOGIN",data);
+    getValueFor();
+  }, []);
 
 return (
     //Container Start
@@ -199,6 +260,42 @@ return (
             <Text style={styles.ButtonText} onPress={handleSubmit}>
               Iniciar Sesión
             </Text>
+            <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible5}
+                  nRequestClose={() => changeModalVisible5(false)}
+                >
+                  <SimpleModal5
+                    changeModalVisible5={changeModalVisible5}
+                    setData5={setData5}
+                  />                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible6}
+                  nRequestClose={() => changeModalVisible6(false)}
+                >
+                  <SimpleModal6
+                    changeModalVisible6={changeModalVisible6}
+                    setData6={setData6}
+                  />                  
+                  </Modal>
+            <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible30}
+                  nRequestClose={() => changeModalVisible30(false)}
+                >
+                  <SimpleModal30
+                    changeModalVisible30={changeModalVisible30}
+                    setData30={setData30}
+                  />
+                  
+                  </Modal>
+
+
           </TouchableOpacity>
         </View>
         <View style={styles.preg}>

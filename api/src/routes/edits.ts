@@ -1,6 +1,6 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
-import { Carrier }  from '../models/Carrier';
+import { Truck }  from '../models/Truck';
 
 
 
@@ -48,13 +48,13 @@ const router=Router()
 router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunction) => {
 	
 	try{
-		const { id, brand, patent, model, color, capacity} = req.body
+		const { id, brand, patent, model, color, capacity, status } = req.body
 	
 		// const carrierId = await Carrier.findOne({ where: { SignupId: id } })
 
 		let vehicle
 
-		if (brand || patent || model || color || capacity) {
+		if (brand || patent || model || color || capacity || status ) {
 
 			let upDateThis: any = {}
 
@@ -63,8 +63,9 @@ router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunc
 			if(model){upDateThis.model = model}
 			if(color){upDateThis.color = color}
 			if(capacity){upDateThis.capacity = capacity}
-			
-			vehicle = await Carrier.update(upDateThis, {
+			if(status){upDateThis.status = status }
+
+			vehicle = await Truck.update(upDateThis, {
 				where: {
 					SignupId: id
 				},

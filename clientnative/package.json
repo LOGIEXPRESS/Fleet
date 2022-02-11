@@ -42,6 +42,7 @@
     "react-native-screens": "^3.10.2",
     "react-native-star-rating": "^1.1.0",
     "react-native-web": "0.17.1",
+    "react-native-webview": "^11.17.1",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-redux": "^7.2.6",

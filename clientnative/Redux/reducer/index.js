@@ -16,9 +16,14 @@ const initialState = {
   editarPerfilUser: [],
   editarPerfilCarrier: [],
   editVehicule: [],
-  price: []
+  price: [],
+  travels: [],
+  userStatus: null,
+  confirmTravel: null,
+  respStatus: null,
+  userCarrier: null,
 };
-console.log("ESTO ES EL INITAL STATE", initialState )
+console.log("ESTO ES EL INITAL STATE", initialState)
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -34,31 +39,93 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         respAddCarrier: action.payload
       }
-      case "TOKEN":
+    case "TOKEN":
       return {
         ...state,
         respToken: action.payload,
         responseLog: action.payload,
       };
-      case "GET_ADMINREG":
+    case "GET_ADMINREG":
       return {
         ...state,
         adminreg: action.payload,
       };
-      case "REGISTERED_FLEET":
-        return {
-          ...state,
-          registeredFleet: action.payload
-        };
-      case "DELETE_FLEET":
-        return {
-          ...state,
-          respDeleteUser: action.payload
-        }
-      case "RESET": 
+    case "REGISTERED_FLEET":
       return {
         ...state,
-        respDeleteUser: null
+        registeredFleet: action.payload
+      };
+    case "DELETE_FLEET":
+      return {
+        ...state,
+        respDeleteUser: action.payload
+      }
+    case "RESET":
+      return {
+        ...state,
+        respDeleteUser: null,
+        userStatus: null,
+        userCarrier: null,
+      }
+    case "DESMOUNT":
+      return {
+        ...state,
+        editPassword: [],
+        editarPerfilUser: [],
+        editarPerfilCarrier: [],
+        editVehicule: [],
+        price: []
+      };
+    case "CLEAN_TOKEN":
+      return {
+        ...state,
+        token: ""
+      };
+    case "GET_PRICE_QUOTE":
+      return {
+        ...state,
+        price: action.payload,
+      };
+    case "COMPLETE_PROFILE_CARRIER":
+      return {
+        ...state,
+        responseLog: action.payload,
+      };
+    case "CHANGE_PASSWORD":
+      return {
+        ...state,
+        editPassword: action.payload,
+      }
+    case "GET_TRAVELS":
+      return {
+        ...state,
+        travels: action.payload,
+      };
+
+    case "UPDATE_PERFIL":
+      return {
+        ...state,
+        editarPerfilUser: action.payload,
+      }
+    case "USER_STATUS":
+      return {
+        ...state,
+        userStatus: action.payload
+      }
+    case "STATUS_OFF":
+      return {
+        ...state,
+        respStatus: action.payload
+      }
+    case "STATUS_ON":
+      return {
+        ...state,
+        respStatus: action.payload
+      }
+    case "REQUEST_CARRIER":
+      return {
+        ...state,
+        userCarrier: action.payload
       }
       case "DESMOUNT":
         return {
@@ -69,6 +136,11 @@ export default function rootReducer(state = initialState, action) {
           editVehicule: [],
           price: []
         };
+        case "CLEAN_TOKEN":
+          return {
+            ...state,        
+            token: ""
+          };
         case "GET_PRICE_QUOTE":
           return {
             ...state,
@@ -84,11 +156,26 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             editPassword: action.payload,
           }
+          case "GET_TRAVELS":
+            return {
+              ...state,
+              travels: action.payload,
+            };
     
           case "UPDATE_PERFIL":
             return {
               ...state,
               editarPerfilUser: action.payload,
+            }
+          case "USER_STATUS":
+            return {
+              ...state,
+              userStatus: action.payload
+            }
+          case "CONFIRME_REQUEST":
+            return {
+              ...state,
+              confirmTravel: action.payload
             }
     default:
       return state;

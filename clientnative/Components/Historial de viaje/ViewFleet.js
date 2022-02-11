@@ -18,38 +18,72 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
+import Checkout from "../MercadoPago/Checkout";
+import { userStatus, reset } from "../../Redux/actions/index.js";
+
+
 
 const HistorialDeViaje = () => {
+
+  const user = useSelector((store) => store.userStatus)
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(userStatus())
 
+    return () => {
+      dispatch(reset())
+    }
+  }, [dispatch])
 
+  console.log("Esto serian los users:", user)
 
-  const CarrierContainer = () => {
+  const CarrierContainer = (props) => {
+    console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
+
     return (
-      <View style={styles.viewUsers}>
-        <Image source={require('../Utils/foto1.jpg')} style={styles.img} />
-        <View style={styles.cardsText}>
-          <Text style={styles.cardsName}>Bill Gate</Text>
-          <View style={styles.flexbtn}>
-            <TouchableOpacity style={styles.btnText}>
-              <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('startCheckout')}>
-              <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.flexbtn}>
-            <TouchableOpacity style={styles.btnText}>
-              <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnText}>
-              <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+      <View>
+        {
+          props.length !== 0 ? props.map((e, index) => {
+            return (
+              <View style={styles.viewUsers} key={index}>
+                <Image source={{
+                  uri:
+                    e.carrier.photo === null || e.carrier.photo === "url"
+                      ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                      : e.carrier.photo
+
+                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
+                <View style={styles.cardsText}>
+                  <Text style={styles.cardsName}>{e.carrier.name} {e.carrier.lastName}</Text>
+                  <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
+                  <View style={styles.flexbtn}>
+                    <TouchableOpacity style={styles.btnText}>
+                      <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('startCheckout')}>
+                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.flexbtn}>
+                    <TouchableOpacity style={styles.btnText}>
+                      <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btnText}>
+                      <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            )
+          }) : (<View style={{alignContent: 'center', alignItems:'center'}}>
+              <Text style={{fontSize: hp('2%'), fontWeight:'400'}}>No hay transportistas disponibles</Text>
+               </View>)
+        }
+
       </View>
+
     )
   }
 
@@ -82,8 +116,10 @@ const HistorialDeViaje = () => {
         <View style={styles.containerCards}>
           <View style={styles.cards}>
             <View style={styles.insideCard}>
-              {CarrierContainer()}
-              {CarrierContainer()}
+              {
+                user ? CarrierContainer(user.Ocupados) : <ActivityIndicator size="large" color="#0000ff" />
+              }
+
             </View>
           </View>
         </View>
@@ -94,7 +130,9 @@ const HistorialDeViaje = () => {
           <View style={styles.containerCards}>
             <View style={styles.cards}>
               <View style={styles.insideCard}>
-                {CarrierContainer()}
+                {
+                  user ? CarrierContainer(user.Disponibles) : <ActivityIndicator size="large" color="#0000ff" />
+                }
               </View>
             </View>
           </View>
@@ -106,7 +144,9 @@ const HistorialDeViaje = () => {
           <View style={styles.containerCards}>
             <View style={styles.cards}>
               <View style={styles.insideCard}>
-                {CarrierContainer()}
+                {
+                  user ? CarrierContainer(user.Fuera_de_servicio) : <ActivityIndicator size="large" color="#0000ff" />
+                }
               </View>
             </View>
           </View>
@@ -131,11 +171,18 @@ const styles = StyleSheet.create({
     marginLeft: hp('1%'),
     color: '#ff1c02'
   },
-  img: {
+  imgOn: {
     width: hp('12%'),
     height: wp('23%'),
     borderRadius: hp('10%'),
     borderColor: '#49B145',
+    borderWidth: wp('0.8%')
+  },
+  imgOff: {
+    width: hp('12%'),
+    height: wp('23%'),
+    borderRadius: hp('10%'),
+    borderColor: '#808080',
     borderWidth: wp('0.8%')
   },
   containerCards: {
@@ -223,18 +270,23 @@ const styles = StyleSheet.create({
   },
   viewUsers: {
     flexDirection: 'row',
-    padding: wp("2%"),
-    backgroundColor: "#DDDDDD", //"#FFC107",
+    padding: wp("4%"),
+    backgroundColor: "#EAB6AD", //"#FFC107",
     marginTop: wp("1%"),
     marginBottom: wp("2.5%"),
-    borderColor: "#DDDDDD",
+    borderColor: "#ff1c02",
     width: wp('87%'),
-    borderBottomWidth: wp("0.55%"),
-    borderTopWidth: wp("0.55%"),
+    borderWidth: hp('0.15%'),
+    shadowOpacity: 80,
+    elevation: 15,
+    borderRadius: wp('4%')
   },
   cardsName: {
-    fontSize: hp('2.4%'),
-    marginLeft: wp('17%')
+    fontSize: hp('2%'),
+  },
+  cardsSubtitle: {
+    fontSize: hp('1.5%'),
+    color: '#808080'
   },
   cardsText: {
     position: "relative",

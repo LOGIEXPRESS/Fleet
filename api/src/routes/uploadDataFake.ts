@@ -3,9 +3,9 @@ import { Response, Request, Router, NextFunction } from 'express';
  import { uuid } from 'uuidv4';
  
 import { Travel } from '../models/Travel';
-import { Admin } from '../models/Admin';
-import { Signup } from '../models/Signup';
 import { Carrier } from '../models/Carrier';
+import { Signup } from '../models/Signup';
+import { Truck } from '../models/Truck';
  
 
  var userFake=[
@@ -153,24 +153,23 @@ var carrierFake = [{
 			var idUser={
             id:uuid(),
 	   company:'Fletes Convaca',
-       eMail: ['FletesConvaca@gmail.com','FletesConvaca@gmail.com'], 
+       eMail: "allantorress@gmail.com", 
 	   SignupId: '360208c5-551c-4825-afc5-b05a0e4c9a62'
 	};
 	
 const router = Router()
  router.get('/uploadDataFake', async(req: Request, res: Response) => {
-             const user_regs= await Signup.bulkCreate(userFake);
-            let carrier = await Carrier.bulkCreate(carrierFake);
-          
-  
-              const userTrues = await Admin.create(idUser);  
-			 const obj={
-				user_regs,
-			      carrier, 
-			    userTrues
-			 }
+            const signup= await Signup.bulkCreate(userFake);
+            let carrier = await Truck.bulkCreate(carrierFake);
+            const admin = await Carrier.create(idUser);  
+			const obj = {
+         signup,
+         //   carrier,
+         // admin
+       };
 	res.send(obj);
 });
+
 
 
 

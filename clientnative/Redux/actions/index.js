@@ -2,6 +2,92 @@ import axios from "axios";
 import { API_URLS } from "@env"
 
 
+
+/* 
+export function userStatus () {
+  return async function (dispatch) {
+    try {
+      const users = await axios.get(`${API_URLS}/api/FleetStatus`)
+      const filterOn = users.data.allCarrierData.filter((f) => f.status === true )
+      const filterOff = users.data.allCarrierData.filter((f) => f.status === null )
+      const filterInService = users.data.allCarrierData.filter((f) => f.status === false )
+      const filter = {
+        On : filterOn ,
+        Off: filterOff,
+        InService: filterInService
+        
+      }
+      return dispatch ({
+        type: "USER_STATUS",
+        payload: filter
+      })
+    } catch (error) {
+      console.log("Error",error )
+    }
+  }
+} */
+
+
+export function requestCarrier (props) {
+  return async function (dispatch) {
+    try {
+      const carrier = await axios.get(`${API_URLS}/api/findOneCarrier?id=${props}`)
+      return dispatch ({
+        type: 'REQUEST_CARRIER',
+        payload: carrier.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+
+export function statusOff (props) {
+  return async function (dispatch){
+    try {
+      const update = await axios.post(`${API_URLS}/api/ChangeOff`, props )
+      return dispatch({
+        type: 'STATUS_OFF',
+        payload: update.data
+      })
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
+
+export function statusOn(props) {
+  return async function (dispatch){
+    try {
+      const update = await axios.post(`${API_URLS}/api/ChangeOn`, props )
+      return dispatch({
+        type: 'STATUS_ON',
+        payload: update.data
+      })
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
+
+
+export function userStatus () {
+  return async function(dispatch) {
+    try {
+      const users = await axios.get(`${API_URLS}/api/FleetStatus`)
+      return dispatch ({
+        type: 'USER_STATUS',
+        payload: users.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+
+
 export function updatePerfil (payload) {
   return async function (dispatch) {
     try {
@@ -15,6 +101,21 @@ export function updatePerfil (payload) {
         console.log("Error", error)
     }
   }
+}
+
+export function getTravels() {
+  return async function (dispatch) {
+    try {
+      const request = await axios.get(`${ API_URLS }/api/Travel`);
+      
+      return dispatch({
+        type: "GET_TRAVELS",
+        payload: request.data,
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 }
 
 export function reset(){
@@ -139,6 +240,7 @@ export function enviarToken(payload) {
 }
 
 export function consultReg() {
+  console.log("que pasa con consultreg")
     return async function (dispatch) {
       try {
         var json = await axios(`${API_URLS}/api/adminExist`);
@@ -202,8 +304,44 @@ export function changePassword(payload) {
     }
   };
 }
+
+export function sendMessage (payload) {
+  return async function () {
+    try {
+
+      console.log("Sale de la action sendMessage",payload);
+      const newpass = await axios.post(`${ API_URLS }/api/requestTravel`, payload);
+      
+
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
+export function reqTravelConfirm (payload) {
+  return async function (dispatch) {
+    try {
+      const confirm = await axios.post(`${ API_URLS }/api/confirmTravel`, payload);
+      return dispatch({
+        type: "CONFIRME_REQUEST",
+        payload: confirm.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+
 export function desmount() {
   return {
     type: 'DESMOUNT',
+  };
+};
+
+export function cleanToken() {
+  return {
+    type: 'CLEAN_TOKEN',
   };
 };

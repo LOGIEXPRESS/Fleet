@@ -19,16 +19,16 @@ import {
   Button,
 } from "react-native";
 import HeaderBar from "../Utils/HeaderBar";
-// import SimpleModal1 from "./AlertasReg/SimpleModalok.js";
-// import SimpleModal2 from "./AlertasReg/SimpleModalok2.js";
-// import SimpleModal3 from "./AlertasReg/SimpleModalname.js";
-// import SimpleModal4 from "./AlertasReg/SimpleModalLastname.js";
-// import SimpleModal5 from "./AlertasReg/SimpleModalmail.js";
-// import SimpleModal6 from "./AlertasReg/SimpleModalpass.js";
-// import SimpleModal7 from "./AlertasReg/SimpleModalphone.js";
-// import SimpleModal8 from "./AlertasReg/SimpleModalterms.js";
-// import SimpleModal9 from "./AlertasReg/SimpleModalrole.js";
-// import SimpleModal40 from "./AlertasReg/SimpleModalsamemail.js";
+import SimpleModal1 from "./../Alerts/SingUp/SimpleModalok";
+import SimpleModal2 from "../Alerts/SingUp/SimpleModalok2.js";
+import SimpleModal3 from "../Alerts/SingUp//SimpleModalname.js";
+import SimpleModal4 from "../Alerts/SingUp//SimpleModalLastname.js";
+import SimpleModal5 from "../Alerts/SingUp//SimpleModalmail.js";
+import SimpleModal6 from "../Alerts/SingUp//SimpleModalpass.js";
+import SimpleModal7 from "../Alerts/SingUp//SimpleModalphone.js";
+import SimpleModal8 from "../Alerts/SingUp//SimpleModalterms.js";
+import SimpleModal9 from "../Alerts/SingUp//SimpleModalrole.js";
+import SimpleModal40 from "../Alerts/SingUp//SimpleModalsamemail.js"; 
 
 
 import CheckBox from "expo-checkbox";
@@ -47,127 +47,127 @@ const SignUp = () => {
 
   // ALERTAS:
 
-  //REGISTRO USUARIO OK
-  // const [isModalVisible1, setisModalVisible1] = useState(false);
-  // const [chooseData1, setchooseData1] = useState();
+  // REGISTRO USUARIO OK
+  const [isModalVisible1, setisModalVisible1] = useState(false);
+  const [chooseData1, setchooseData1] = useState();
 
-  // const changeModalVisible1 = (bool) => {
-  //   setisModalVisible1(bool);
-  // };
+  const changeModalVisible1 = (bool) => {
+    setisModalVisible1(bool);
+  };
 
-  // const setData1 = (data) => {
-  //   setchooseData1(data);
-  // };
+  const setData1 = (data) => {
+    setchooseData1(data);
+  };
 
-  // // REGISTRO TRANSPORTISTA OK
-  // const [isModalVisible2, setisModalVisible2] = useState(false);
-  // const [chooseData2, setchooseData2] = useState();
+  // REGISTRO TRANSPORTISTA OK
+  const [isModalVisible2, setisModalVisible2] = useState(false);
+  const [chooseData2, setchooseData2] = useState();
 
-  // const changeModalVisible2 = (bool) => {
-  //   setisModalVisible2(bool);
-  // };
+  const changeModalVisible2 = (bool) => {
+    setisModalVisible2(bool);
+  };
 
-  // const setData2 = (data) => {
-  //   setchooseData2(data);
-  // };
+  const setData2 = (data) => {
+    setchooseData2(data);
+  };
 
 
-  // // NOMBRE MAL INGRESADO
-  // const [isModalVisible3, setisModalVisible3] = useState(false);
-  // const [chooseData3, setchooseData3] = useState();
+  // NOMBRE MAL INGRESADO
+  const [isModalVisible3, setisModalVisible3] = useState(false);
+  const [chooseData3, setchooseData3] = useState();
 
-  // const changeModalVisible3 = (bool) => {
-  //   setisModalVisible3(bool);
-  // };
+  const changeModalVisible3 = (bool) => {
+    setisModalVisible3(bool);
+  };
 
-  // const setData3 = (data) => {
-  //   setchooseData3(data);
-  // };
+  const setData3 = (data) => {
+    setchooseData3(data);
+  };
 
-  // // APELLIDO MAL INGRESADO
+  // APELLIDO MAL INGRESADO
 
-  // const [isModalVisible4, setisModalVisible4] = useState(false);
-  // const [chooseData4, setchooseData4] = useState();
+  const [isModalVisible4, setisModalVisible4] = useState(false);
+  const [chooseData4, setchooseData4] = useState();
 
-  // const changeModalVisible4 = (bool) => {
-  //   setisModalVisible4(bool);
-  // };
+  const changeModalVisible4 = (bool) => {
+    setisModalVisible4(bool);
+  };
 
-  // const setData4 = (data) => {
-  //   setchooseData4(data);
-  // };
+  const setData4 = (data) => {
+    setchooseData4(data);
+  };
 
-  // //MAIL MAL INGRESADO
-  // const [isModalVisible5, setisModalVisible5] = useState(false);
-  // const [chooseData5, setchooseData5] = useState();
+  //MAIL MAL INGRESADO
+  const [isModalVisible5, setisModalVisible5] = useState(false);
+  const [chooseData5, setchooseData5] = useState();
 
-  // const changeModalVisible5 = (bool) => {
-  //   setisModalVisible5(bool);
-  // };
+  const changeModalVisible5 = (bool) => {
+    setisModalVisible5(bool);
+  };
 
-  // const setData5 = (data) => {
-  //   setchooseData5(data);
-  // };
+  const setData5 = (data) => {
+    setchooseData5(data);
+  };
 
-  // // CONTRASEÑA MAL INGRESADA
+  // CONTRASEÑA MAL INGRESADA
 
-  // const [isModalVisible6, setisModalVisible6] = useState(false);
-  // const [chooseData6, setchooseData6] = useState();
+  const [isModalVisible6, setisModalVisible6] = useState(false);
+  const [chooseData6, setchooseData6] = useState();
 
-  // const changeModalVisible6 = (bool) => {
-  //   setisModalVisible6(bool);
-  // };
+  const changeModalVisible6 = (bool) => {
+    setisModalVisible6(bool);
+  };
 
-  // const setData6 = (data) => {
-  //   setchooseData6(data);
-  // };
-  // // TELEFONO MAL INGRESADO
+  const setData6 = (data) => {
+    setchooseData6(data);
+  };
+  // TELEFONO MAL INGRESADO
 
-  // const [isModalVisible7, setisModalVisible7] = useState(false);
-  // const [chooseData7, setchooseData7] = useState();
+  const [isModalVisible7, setisModalVisible7] = useState(false);
+  const [chooseData7, setchooseData7] = useState();
 
-  // const changeModalVisible7 = (bool) => {
-  //   setisModalVisible7(bool);
-  // };
+  const changeModalVisible7 = (bool) => {
+    setisModalVisible7(bool);
+  };
 
-  // const setData7 = (data) => {
-  //   setchooseData7(data);
-  // };
-  // // NO ACEPTA TERMINOS
-  // const [isModalVisible8, setisModalVisible8] = useState(false);
-  // const [chooseData8, setchooseData8] = useState();
+  const setData7 = (data) => {
+    setchooseData7(data);
+  };
+  // NO ACEPTA TERMINOS
+  const [isModalVisible8, setisModalVisible8] = useState(false);
+  const [chooseData8, setchooseData8] = useState();
 
-  // const changeModalVisible8 = (bool) => {
-  //   setisModalVisible8(bool);
-  // };
+  const changeModalVisible8 = (bool) => {
+    setisModalVisible8(bool);
+  };
 
-  // const setData8 = (data) => {
-  //   setchooseData8(data);
-  // };
+  const setData8 = (data) => {
+    setchooseData8(data);
+  };
 
-  // // NO ELIJE ROL
-  // const [isModalVisible9, setisModalVisible9] = useState(false);
-  // const [chooseData9, setchooseData9] = useState();
+  // NO ELIJE ROL
+  const [isModalVisible9, setisModalVisible9] = useState(false);
+  const [chooseData9, setchooseData9] = useState();
 
-  // const changeModalVisible9 = (bool) => {
-  //   setisModalVisible9(bool);
-  // };
+  const changeModalVisible9 = (bool) => {
+    setisModalVisible9(bool);
+  };
 
-  // const setData9 = (data) => {
-  //   setchooseData9(data);
-  // };
+  const setData9 = (data) => {
+    setchooseData9(data);
+  };
 
-  // // MAIL REPETIDO
-  // const [isModalVisible40, setisModalVisible40] = useState(false);
-  // const [chooseData40, setchooseData40] = useState();
+  // MAIL REPETIDO
+  const [isModalVisible40, setisModalVisible40] = useState(false);
+  const [chooseData40, setchooseData40] = useState();
 
-  // const changeModalVisible40 = (bool) => {
-  //   setisModalVisible40(bool);
-  // };
+  const changeModalVisible40 = (bool) => {
+    setisModalVisible40(bool);
+  };
 
-  // const setData40 = (data) => {
-  //   setchooseData40(data);
-  // };
+  const setData40 = (data) => {
+    setchooseData40(data);
+  };
 
   
 
@@ -238,38 +238,39 @@ const SignUp = () => {
       secret:reg.secret,
     };
 
-    //validaciones 
-//     if (!obj.name ) {
-//       changeModalVisible3(true)
-//       return
-//   }
-//   if (!obj.lastName) {
-//       // alert("Por favor escribe el Apellido correctamente!")
-//       changeModalVisible4(true)
-//       return
-//   }
-//   if (!obj.eMail.includes('.com') || !obj.eMail.includes('@')  ) {
-//     changeModalVisible5(true)
-//     // alert("Por favor escribe un correo electrónico válido!")
-//     return
-// } if (!obj.password) {
-//   changeModalVisible6(true)
-//   // alert("Por favor escribe una Contraseña válida!")
-//   return
-// }
-// if (!obj.phone) {
-//   changeModalVisible7(true)
-//       // alert("Por favor escribe un número de telefono válido!")
-//       return
-//   }if (obj.terminosCondiciones === false) {
-//     changeModalVisible8(true)
-//     // alert("Debes aceptar los términos para poder registrarte!")
-//     return
-//   }if (obj.role === undefined) {
-//     changeModalVisible9(true)
-//   // alert("Por favor elije un Rol!")
-//   return
-// }
+    // validaciones 
+    if (!obj.name ) {
+      changeModalVisible3(true)
+      return
+  }
+  if (!obj.lastName) {
+      // alert("Por favor escribe el Apellido correctamente!")
+      changeModalVisible4(true)
+      return
+  }
+  if (!obj.eMail.includes('.com') || !obj.eMail.includes('@')  ) {
+    changeModalVisible5(true)
+    // alert("Por favor escribe un correo electrónico válido!")
+    return
+} if (!obj.password) {
+  changeModalVisible6(true)
+  // alert("Por favor escribe una Contraseña válida!")
+  return
+}
+if (!obj.phone) {
+  changeModalVisible7(true)
+      // alert("Por favor escribe un número de telefono válido!")
+      return
+  }
+  if (!obj.business) {
+    changeModalVisible8(true)
+    // alert("Debes aceptar los términos para poder registrarte!")
+    return
+  }if (!obj.secret) {
+    changeModalVisible9(true)
+  // alert("Por favor elije un Rol!")
+  return
+}
 
 
 
@@ -431,7 +432,7 @@ navigation.navigate("Login")
             style={styles.imgPerfil}
           />
           <View>
-            <Text style={{fontSize:hp("2.5%"), color:"#8a9096"}}>
+            <Text style={{fontSize:hp("2.3%"), color:"#8a9096"}}>
               Foto de la empresa
             </Text>
           </View>
@@ -510,7 +511,124 @@ navigation.navigate("Login")
             <Text style={styles.ButtonText} >
               Registrarme!
             </Text>
+            <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible1}
+                  nRequestClose={() => changeModalVisible1(false)}
+                >
+                  <SimpleModal1
+                    changeModalVisible1={changeModalVisible1}
+                    setData1={setData1}
+                  />
+                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible2}
+                  nRequestClose={() => changeModalVisible2(false)}
+                >
+                  <SimpleModal2
+                    changeModalVisible2={changeModalVisible2}
+                    setData2={setData2}
+                  />
+                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible3}
+                  nRequestClose={() => changeModalVisible3(false)}
+                >
+                  <SimpleModal3
+                    changeModalVisible3={changeModalVisible3}
+                    setData3={setData3}
+                  />
+                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible4}
+                  nRequestClose={() => changeModalVisible4(false)}
+                >
+                  <SimpleModal4
+                    changeModalVisible4={changeModalVisible4}
+                    setData4={setData4}
+                  />
+                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible5}
+                  nRequestClose={() => changeModalVisible5(false)}
+                >
+                  <SimpleModal5
+                    changeModalVisible5={changeModalVisible5}
+                    setData5={setData5}
+                  />                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible6}
+                  nRequestClose={() => changeModalVisible6(false)}
+                >
+                  <SimpleModal6
+                    changeModalVisible6={changeModalVisible6}
+                    setData6={setData6}
+                  />                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible7}
+                  nRequestClose={() => changeModalVisible7(false)}
+                >
+                  <SimpleModal7
+                    changeModalVisible7={changeModalVisible7}
+                    setData7={setData7}
+                  />                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible8}
+                  nRequestClose={() => changeModalVisible8(false)}
+                >
+                  <SimpleModal8
+                    changeModalVisible8={changeModalVisible8}
+                    setData8={setData8}
+                  />                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible9}
+                  nRequestClose={() => changeModalVisible9(false)}
+                >
+                  <SimpleModal9
+                    changeModalVisible9={changeModalVisible9}
+                    setData9={setData9}
+                  />
+                  
+                  </Modal>
+                  <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible40}
+                  nRequestClose={() => changeModalVisible40(false)}
+                >
+                  <SimpleModal40
+                    changeModalVisible40={changeModalVisible40}
+                    setData40={setData40}
+                  />
+                  
+                  </Modal>
           </TouchableOpacity>
+          
          
         </View>
 
@@ -574,9 +692,9 @@ const styles = StyleSheet.create({
     elevation: 15,
   },
   ButtonText: {
-    fontWeight: "bold",
+    // fontWeight: "bold",
     fontSize: 18,
-    color: "#E1E8EB",
+    color: "white",
   },
   SingUpText: {
     color: "#4632a1",

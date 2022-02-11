@@ -12,9 +12,10 @@ import edits from './edits'
 import changePassword from './changePass'
 import logout from './logout'
 import recoverPass from './recoverPassword'
+import  payment  from "./payment";
 const router = Router();
 
-// router.use('/', dataFake)
+
 
 
 router.use('/', carrierStatus)
@@ -42,5 +43,7 @@ router.use('/', logout)
 router.use('/', review)
 
 router.use('/',recoverPass)
+
+router.use('/', payment)
 
 export default router;
