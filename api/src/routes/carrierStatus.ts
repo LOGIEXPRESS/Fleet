@@ -13,6 +13,53 @@ const router=Router()
     // return res.send(carriers);
 
 // })
+router.post('/ChangeOn',async(req:Request,res:Response,next:NextFunction)=>{
+    let {id}=req.body;
+
+    let user = await Truck.findAll({where:{
+        SignupId: id, 
+    }})
+
+    if(user){
+
+        let upDateThis: any = {}
+        
+        if(user){upDateThis.status = true}
+        
+        //console.log(upDateThis)
+       const changeStatus = await Truck.update(upDateThis, {where:{
+           SignupId: id, 
+       }})
+
+    }
+
+
+})
+
+router.post('/ChangeOff',async(req:Request,res:Response,next:NextFunction)=>{
+    let {id}=req.body;
+
+    let user = await Truck.findAll({where:{
+        SignupId: id, 
+    }})
+
+    if(user){
+
+        let upDateThis: any = {}
+        
+        if(user){upDateThis.status = null}
+        
+        //console.log(upDateThis)
+       const changeStatus = await Truck.update(upDateThis, {where:{
+           SignupId: id, 
+       }})
+
+       return res.status(200).json({"msg":"Cambio el status", changeStatus})
+    }
+
+    
+})
+
 
 router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
 
@@ -44,7 +91,7 @@ router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
 
         let upDateThis: any = {}
         
-        if(userStatus){upDateThis.status = false}
+        if(userStatus){upDateThis.status = true}
         
         //console.log(upDateThis)
        const changeStatus = await Truck.update(upDateThis, {where:{
@@ -60,29 +107,6 @@ router.post('/StatusOn',async(req:Request,res:Response,next:NextFunction)=>{
     }
 
 
-    //-------------------->ESTO NO FUNCIONA<-----------------//
-
-    // if(user){
-
-    //     const userStatus = user[0].status
-    //     //console.log(userStatus)
-    //     //const changeStatus = !userStatus
-    //     //console.log(changeStatus)
-
-    //     let upDateThis: any = {}
-    //      //console.log(upDateThis)
-
-    //     if(userStatus){upDateThis.status = !userStatus}
-
-    //     const changeStatus = await Truck.update(upDateThis, {where:{
-    //         SignupId: id, 
-    //     }})
-
-    //     // const newStatus = changeStatus[0].status
-
-    //     return res.status(200).json({"msg":"Cambio el status", changeStatus})
-        
-    // }
 })
 
 router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunction) => {
@@ -133,10 +157,7 @@ router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=
     if(user){
         
         const userStatus = user[0].status
-        //console.log(userStatus)
-        //const changeStatus = !userStatus
-        //console.log(changeStatus)
-        
+
         let upDateThis: any = {}
         //console.log(upDateThis)
         
@@ -146,7 +167,7 @@ router.get('/StatusAvailable',async(req:Request,res:Response,next:NextFunction)=
             SignupId: id, 
         }})
         
-        // const newStatus = changeStatus[0].status
+
         
         return res.status(200).json({"msg":"Cambio el status", changeStatus})
         

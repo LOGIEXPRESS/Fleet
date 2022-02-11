@@ -52,6 +52,7 @@ router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunc
 	
 		// const carrierId = await Carrier.findOne({ where: { SignupId: id } })
 
+
 		let vehicle
 
 		if (brand || patent || model || color || capacity || status) {
