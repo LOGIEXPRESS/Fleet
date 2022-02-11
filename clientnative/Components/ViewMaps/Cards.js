@@ -12,7 +12,7 @@ const CARD_WIDTH = width * 0.8;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 import { useNavigation } from "@react-navigation/core";
 
-const Card = ({orig,destination,price,description,weight,business,photo}) => {
+const Card = ({orig,destination,price,description,weight,business,photo,id}) => {
 
   const props = {
     origen: orig,
@@ -20,6 +20,7 @@ const Card = ({orig,destination,price,description,weight,business,photo}) => {
     price: price,
     description: description,
     weight: weight,
+    id
 
   }
   const navigation = useNavigation()
@@ -37,7 +38,7 @@ const Card = ({orig,destination,price,description,weight,business,photo}) => {
                   <Text>Empresa: {business}</Text>
                 </View>
                 <View style={styles.textContent}>
-                  <Text>ID: </Text>
+                  <Text>ID: {id}</Text>
                   <Text>DESCRIPCION: {description} </Text>
                   <Text>ORIGEN: {orig.split("/")[2]}</Text>
                   <Text>DESTINO: {destination.split("/")[2]}</Text>

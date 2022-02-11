@@ -15,7 +15,7 @@ import recoverPass from './recoverPassword'
 import historyTravel from './historyTravel'
 const router = Router();
 
-// router.use('/', dataFake)
+
 
 router.use('/', historyTravel)
 

@@ -54,7 +54,7 @@ const HistorialDeViaje = () => {
                       ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
                       : e.carrier.photo
 
-                }} style={e.status === true ? styles.imgOn : styles.imgOff} />
+                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
                 <View style={styles.cardsText}>
                   <Text style={styles.cardsName}>{e.carrier.name} {e.carrier.lastName}</Text>
                   <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
@@ -117,7 +117,7 @@ const HistorialDeViaje = () => {
           <View style={styles.cards}>
             <View style={styles.insideCard}>
               {
-                user ? CarrierContainer(user.InService) : <ActivityIndicator size="large" color="#0000ff" />
+                user ? CarrierContainer(user.Ocupados) : <ActivityIndicator size="large" color="#0000ff" />
               }
 
             </View>
@@ -131,7 +131,7 @@ const HistorialDeViaje = () => {
             <View style={styles.cards}>
               <View style={styles.insideCard}>
                 {
-                  user ? CarrierContainer(user.On) : <ActivityIndicator size="large" color="#0000ff" />
+                  user ? CarrierContainer(user.Disponibles) : <ActivityIndicator size="large" color="#0000ff" />
                 }
               </View>
             </View>
@@ -145,7 +145,7 @@ const HistorialDeViaje = () => {
             <View style={styles.cards}>
               <View style={styles.insideCard}>
                 {
-                  user ? CarrierContainer(user.Off) : <ActivityIndicator size="large" color="#0000ff" />
+                  user ? CarrierContainer(user.Fuera_de_servicio) : <ActivityIndicator size="large" color="#0000ff" />
                 }
               </View>
             </View>

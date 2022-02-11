@@ -48,14 +48,14 @@ const router=Router()
 router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunction) => {
 	
 	try{
-		const { id, brand, patent, model, color, capacity, status} = req.body
+		const { id, brand, patent, model, color, capacity, status } = req.body
 	
 		// const carrierId = await Carrier.findOne({ where: { SignupId: id } })
 
 
 		let vehicle
 
-		if (brand || patent || model || color || capacity || status) {
+		if (brand || patent || model || color || capacity || status ) {
 
 			let upDateThis: any = {}
 
@@ -64,8 +64,8 @@ router.post('/updateVehicle', async (req: Request, res: Response, next: NextFunc
 			if(model){upDateThis.model = model}
 			if(color){upDateThis.color = color}
 			if(capacity){upDateThis.capacity = capacity}
-			if(status){upDateThis.status = status}
-			
+			if(status){upDateThis.status = status }
+
 			vehicle = await Truck.update(upDateThis, {
 				where: {
 					SignupId: id
