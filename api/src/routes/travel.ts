@@ -134,21 +134,21 @@ router.post('/requestTravel', async (req: Request, res: Response, next: NextFunc
  
 
 
-router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction) => {
+// router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction) => {
 
-  const { id } = req.body
-  let getTravel = await Travel.findAll({ where: { id: id } })
-  let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
- /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
-  let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
-  const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
-  if (getTravel.length === 0){
-    return res.send('Travel not found');
-  } 
-  else {
-    return res.send(travelFullData);}
-    /* res.send({varUser}) */
-});
+//   const { id } = req.body
+//   let getTravel = await Travel.findAll({ where: { id: id } })
+//   let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
+//  /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
+//   let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
+//   const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
+//   if (getTravel.length === 0){
+//     return res.send('Travel not found');
+//   } 
+//   else {
+//     return res.send(travelFullData);}
+//     /* res.send({varUser}) */
+// });
 
 
 
@@ -156,36 +156,7 @@ router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction
 
 router.get('/Travel/:latitude/:longitude', async (req: Request, res: Response, next: NextFunction) => {
 
-  const{latitude,longitude}=req.params
-  let origin=`${String(latitude)}`
-  // console.log(origin.split('.')[0])
-
-  // -34.6036844/-58.3815591/Buenos Aires, Argentina
-  // {
-  //   "latitude": -38.927636,
-  //   "latitudeDelta": 0.0922,
-  //   "longitude": -68.0710125,
-  //   "longitudeDelta": 0.0421,}
-
-  if(latitude){
-    try{
-        // console.log(origin)
-      let travel=await Travel.findAll({
-        where:{
-
-          [Op.and]:[{orig:{[Op.startsWith]:`${origin.split('.')[0]}`}},{carrierId:{[Op.eq]:null}}]
-
-        },
-        include:Signup
-      })
-      res.send(travel)
-
-    }catch(err){
-      next(err)
-    }
-
-  }else{
-      try {
+  try {
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
     /* let travel = await Travel.findAll() */
@@ -216,7 +187,7 @@ router.get('/Travel/:latitude/:longitude', async (req: Request, res: Response, n
   catch (err) {
     next(err)
   }
-  }
+  
 
 
 
@@ -309,20 +280,16 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
   //userId es id carrier de singup  
   const { userId, id } = req.body;
   try {
-    let idCarrier=await Carrier.findOne({
-      where:{
-        SignupId:userId
-      }
-    })
-    if(idCarrier){
-      let confirm = await Travel.update(
-      { finishedTravel: "process", carrierId: idCarrier.id },
-      { where: { id: id },
-      returning: true, }
+    if(userId){
+          let confirm = await Travel.update(
+      { finishedTravel: "process", truckId: userId },
+      { where: { id: id } }
     );
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
     return res.send(confirm);
     }
+    
+
     return res.send('not found carrier')
 
 

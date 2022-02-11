@@ -6,8 +6,8 @@ import { Signup } from './Signup'
 export class Carrier extends Model {
     @IsUUID(4)
     @Column({ primaryKey: true })
-    id!: string 
- 
+    id!: string
+
     @Column
     company!: string
 
@@ -22,8 +22,8 @@ export class Carrier extends Model {
     @ForeignKey(()=>Signup)
     SignupId!:string
 
-    @HasMany(()=>Travel)
-    travel!:Travel
+    // @HasMany(()=>Travel)
+    // travel!:Travel
 
 
 }
