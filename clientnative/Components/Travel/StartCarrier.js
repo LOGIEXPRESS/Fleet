@@ -25,6 +25,7 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from "../Utils/HeaderBar";
 import axios from "axios";
+import SimpleModalCarrier from "../Alerts/Travel/SimpleModalCarrier";
 
 import { API_URLS } from "@env"
 
@@ -40,17 +41,17 @@ const StartCarrier = (props) => {
 
 
  
-  /// --> ESTADO PARA EL MODAL <-- ///
-  // const [isModalVisible, setisModalVisible] = useState(false);
-  // const [chooseData, setchooseData] = useState();
+  / --> ESTADO PARA EL MODAL <-- ///
+  const [isModalVisible300, setisModalVisible300] = useState(false);
+  const [chooseData, setchooseData] = useState();
 
-  // const changeModalVisible = (bool) => {
-  //   setisModalVisible(bool);
-  // };
+  const changeModalVisible300 = (bool) => {
+    setisModalVisible300(bool);
+  };
 
-  // const setData = (data) => {
-  //   setchooseData(data);
-  // };
+  const setData300 = (data) => {
+    setchooseData300(data);
+  };
 
 
   // const handleSubmit = () => {
@@ -93,7 +94,8 @@ const StartCarrier = (props) => {
     let upDateTravel= await axios.post(`${ API_URLS }/api/confirmTravel`,payload)
     console.log(upDateTravel.data)
 
-    navigation.navigate('ProfileCarrier')
+      
+    changeModalVisible300(true);
 
 
 
@@ -263,17 +265,17 @@ const StartCarrier = (props) => {
             <TouchableOpacity style={styles.btn} onPress={handleSubmit} >
               <Text style={styles.aceptar}>Aceptar</Text>
               {/* MODAL */}
-              {/* <Modal
+              <Modal
                 transparent={true}
                 animationType="fade"
-                visible={isModalVisible}
-                nRequestClose={() => changeModalVisible(false)}
+                visible={isModalVisible300}
+                nRequestClose={() => changeModalVisible300(false)}
               >
                 <SimpleModalCarrier
-                  changeModalVisible={changeModalVisible}
+                  changeModalVisible300={changeModalVisible300}
                   setData={setData}
                 />
-              </Modal> */}
+              </Modal>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate('ScreenMap')}>
               <Text style={styles.rechazar}>Rechazar</Text>

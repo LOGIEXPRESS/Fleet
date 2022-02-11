@@ -29,7 +29,7 @@ import SimpleModal16 from "../Alerts/Complete/SimpleModalcolor.js";
 import SimpleModal17 from "../Alerts/Complete/SimpleModalcapacity.js";
 import SimpleModal7 from './../Alerts/SingUp/SimpleModalphone';
 import SimpleModal101 from "../Alerts/Complete/SimpleModalsecret.js";
-import SimpleModal102 from "../Alerts/Complete/SimpleModalcbu.js";
+
 // prueba para las screens responsive
 import {
 
@@ -101,18 +101,6 @@ const CompleteProfileCarrier = (props) => {
     const setData101 = (data) => {
       setchooseData101(data);
     };
-      // validaciones clave mercadopago
-
-  const [isModalVisible102, setisModalVisible102] = useState(false);
-  const [chooseData102, setchooseData102] = useState();
-
-  const changeModalVisible102 = (bool) => {
-    setisModalVisible102(bool);
-  };
-
-  const setData102 = (data) => {
-    setchooseData102(data);
-  };
 
   // validaciones licencia
 
@@ -212,7 +200,6 @@ const CompleteProfileCarrier = (props) => {
     identification:"",
     phone: "",
     secret:"",
-    cbu:"",
     locacion: "",
     //Datos del vehiculo//
     license: "",
@@ -343,12 +330,6 @@ const CompleteProfileCarrier = (props) => {
     });
   }
 
-  const handleChangeCbu=(cbu)=>{
-    setCarrier({
-      ...carrier,
-      cbu: cbu,
-    });
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -361,7 +342,6 @@ const CompleteProfileCarrier = (props) => {
       photo: selectedImage||'url',
       phone:carrier.phone,
       secret:carrier.secret,
-      cbu:carrier.cbu,
       // Vehicule //
       license: carrier.license,
       brand: carrier.brand,
@@ -389,10 +369,6 @@ const CompleteProfileCarrier = (props) => {
 
     if (!obj.secret) {
       changeModalVisible101(true);
-      return;
-    }
-    if (!obj.cbu) {
-      changeModalVisible102(true);
       return;
     }
     if (!obj.license) {
@@ -551,19 +527,6 @@ const CompleteProfileCarrier = (props) => {
                   placeholder="¿Cuál es tu color favorito?"
                   name="secret"
                   style={styles.textPlaceholder}
-                />
-              </View>
-              <View style={styles.viewsInputs}>
-                <Icon name="reader-outline"  style={styles.icons} />
-                <TextInput
-                  value={carrier.cbu}
-                  placeholder="Clave de MercadoPago"
-                  name="cbu"
-                  style={styles.textPlaceholder}
-                  onChangeText={(cbu) =>
-                    handleChangeCbu(cbu)
-                  }
-                  keyboardType="decimal-pad"
                 />
               </View>
 
@@ -761,17 +724,6 @@ const CompleteProfileCarrier = (props) => {
                   <SimpleModal101
                     changeModalVisible101={changeModalVisible101}
                     setData101={setData101}
-                  />
-                </Modal>
-                <Modal
-                  transparent={true}
-                  animationType="fade"
-                  visible={isModalVisible102}
-                  nRequestClose={() => changeModalVisible102(false)}
-                >
-                  <SimpleModal102
-                    changeModalVisible102={changeModalVisible102}
-                    setData102={setData102}
                   />
                 </Modal>
                 
