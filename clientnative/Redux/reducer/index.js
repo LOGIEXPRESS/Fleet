@@ -18,7 +18,8 @@ const initialState = {
   editVehicule: [],
   price: [],
   travels: [],
-  userStatus: null
+  userStatus: null,
+  confirmTravel: null,
 };
 console.log("ESTO ES EL INITAL STATE", initialState )
 
@@ -107,6 +108,11 @@ export default function rootReducer(state = initialState, action) {
             return {
               ...state,
               userStatus: action.payload
+            }
+          case "CONFIRME_REQUEST":
+            return {
+              ...state,
+              confirmTravel: action.payload
             }
     default:
       return state;
