@@ -28,6 +28,7 @@ import SimpleModal20 from "./MoldasTravel/SimpleModalorigin";
 import SimpleModal21 from "./MoldasTravel/SimpleModaldest";
 import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
+import SimpleModal1 from "../Alerts/Travel/SimpleModalok";
 import HeaderBar from "../Utils/HeaderBar";
 
 import { APIKEY_GOOGLE } from "@env"
@@ -128,6 +129,17 @@ const AddTravel = (props) => {
         setchooseData23(data);
     };
 
+    const [isModalVisible1, setisModalVisible1] = useState(false);
+    const [chooseData1, setchooseData1] = useState();
+
+    const changeModalVisible1 = (bool) => {
+        setisModalVisible1(bool);
+    };
+
+    const setData1 = (data) => {
+        setchooseData1(data);
+    };
+
     // const sendMessage = (props) => {
 
     //     socket.emit('message', props, (resp) => {
@@ -226,7 +238,7 @@ const AddTravel = (props) => {
                 }
          
         dispatch(sendMessage(travel))
-
+        changeModalVisible1(true)
         console.log("Estoy enviando:", travel)
     }
 
@@ -488,6 +500,17 @@ const AddTravel = (props) => {
                                         <SimpleModal23
                                             changeModalVisible23={changeModalVisible23}
                                             setData23={setData23}
+                                        />
+                                    </Modal>
+                                    <Modal
+                                        transparent={true}
+                                        animationType="fade"
+                                        visible={isModalVisible1}
+                                        nRequestClose={() => changeModalVisible1(false)}
+                                    >
+                                        <SimpleModal1
+                                            changeModalVisible1={changeModalVisible1}
+                                            setData1={setData1}
                                         />
                                     </Modal>
                   </TouchableOpacity>
