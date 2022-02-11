@@ -65,11 +65,7 @@ const App = () => {
             <Stack.Screen
               name="ProfileAdmin"
               component={ProfileAdmin}
-<<<<<<< HEAD
-              options={{ headerShown: false,gestureEnabled: false }}
-=======
               options={{ headerShown: false, gestureEnabled: false }}
->>>>>>> 05ad5c9e8b996e6a156f36fba3d19ae661c8237f
             />
             <Stack.Screen
               name="ProfileCarrier"
