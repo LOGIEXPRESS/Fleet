@@ -134,21 +134,21 @@ router.post('/requestTravel', async (req: Request, res: Response, next: NextFunc
  
 
 
-router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction) => {
+// router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction) => {
 
-  const { id } = req.body
-  let getTravel = await Travel.findAll({ where: { id: id } })
-  let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
- /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
-  let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
-  const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
-  if (getTravel.length === 0){
-    return res.send('Travel not found');
-  } 
-  else {
-    return res.send(travelFullData);}
-    /* res.send({varUser}) */
-});
+//   const { id } = req.body
+//   let getTravel = await Travel.findAll({ where: { id: id } })
+//   let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
+//  /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
+//   let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
+//   const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
+//   if (getTravel.length === 0){
+//     return res.send('Travel not found');
+//   } 
+//   else {
+//     return res.send(travelFullData);}
+//     /* res.send({varUser}) */
+// });
 
 
 
@@ -276,7 +276,7 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
   const { userId, id } = req.body;
   try {
     let confirm = await Travel.update(
-      { finishedTravel: "process", carrierId: userId },
+      { finishedTravel: "process", truckId: userId },
       { where: { id: id } }
     );
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);

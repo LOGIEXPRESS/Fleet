@@ -1,35 +1,26 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, IsUUID, BelongsTo, PrimaryKey, ForeignKey, HasMany, DataType} from 'sequelize-typescript'
-import { Travel } from './Travel'
-import { Signup } from './Signup'
-import { Carrier } from './Carrier'
+import { Truck } from './Truck'
+// import { Signup } from './Signup'
+// import { Carrier } from './Carrier'
 
 
 @Table
 export class Payment extends Model {
-    @IsUUID(4)
-    @Column({ primaryKey: true })
-    id!: string 
- 
-    @Column
-    amount!: number
+  @IsUUID(4)
+  @Column({ primaryKey: true })
+  id!: string;
 
-    @Column
-    status!: boolean
+  @Column
+  amount!: number;
 
-    // @BelongsTo(()=>Carrier)
-    // carrier!: Carrier
+  @Column
+  status!: boolean;
 
-    // @ForeignKey(()=>Carrier)
-    // CarrierId!: string
 
-    @BelongsTo(()=>Signup)
-    SignUp!: Signup
+  @BelongsTo(() => Truck)
+  Truck!: Truck;
 
-    @ForeignKey(()=>Signup)
-    SignupId!: string
-
-    @HasMany(()=>Travel)
-    travel!:Travel
-
+  @ForeignKey(() => Truck)
+  TruckId!: string;
 
 }
