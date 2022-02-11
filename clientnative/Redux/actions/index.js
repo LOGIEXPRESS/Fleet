@@ -42,11 +42,11 @@ export function updatePerfil (payload) {
   }
 }
 
-export function getTravels() {
+export function getTravels(latitude,longitude) {
   return async function (dispatch) {
     try {
-      const request = await axios.get(`${ API_URLS }/api/Travel`);
-      // console.log("LLEGANDO LOS VIJAES POR la accion getTravels",request.data);
+      const request = await axios.get(`${ API_URLS }/api/Travel/${latitude}/${longitude}`);
+      
       return dispatch({
         type: "GET_TRAVELS",
         payload: request.data,
