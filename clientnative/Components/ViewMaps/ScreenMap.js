@@ -83,8 +83,11 @@ export default function ScreenMap() {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
+      let origin={latitude: location.coords.latitude,longitude: location.coords.longitude}
+      console.log('MY PIN: ',origin)
+      dispatch(getTravels(origin.latitude,origin.longitude));
     })();
-    dispatch(getTravels());
+   
 
   }, [dispatch]);
   console.log("ESTO SON LOS VIAJES", travels);
@@ -105,8 +108,8 @@ export default function ScreenMap() {
       const regionTimeout = setTimeout(() => {
         if (mapIndex !== index) {
           mapIndex = index;
-          const { orig } = travels[index];
-          const origen = orig.split("/");
+          const { destination } = travels[index];
+          const origen = destination.split("/");
           const coordinate = {
             latitude: Number(origen[0]),
             longitude: Number(origen[1]),
@@ -170,7 +173,7 @@ export default function ScreenMap() {
             <View style={{ marginTop: 35, position: "absolute" }}></View>
             {travels !== 0 ? (
               travels?.map((point, index) => {
-                const orig = point.orig.split("/");
+                const orig = point.destination.split("/");
                 const lat = Number(orig[0]);
                 const lon = Number(orig[1]);
                 return (
@@ -246,7 +249,8 @@ export default function ScreenMap() {
                   weight={data.weight}
                   business={data.admin.business}
                   photo={data.admin.photo}
-                  random={index} />
+                  random={index}
+                  id={data.id} />
               )
             })
 
