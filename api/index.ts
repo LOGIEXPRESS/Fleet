@@ -4,6 +4,8 @@ import { sequelize } from "./src/db";
 import { uuid } from 'uuidv4';
 import { Travel } from './src/models/Travel';
 import { callbackify } from "util";
+import { Truck } from "./src/models/Truck";
+import { Signup } from "./src/models/Signup";
 const { Op } = require("sequelize");
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { cors: { origin: "*" } });
@@ -14,71 +16,64 @@ interface error {
 ///begin Sokets
 
 
-
 io.on("connection", (socket: any) => {
     console.log("User conneted: " + socket.id)
 
-    socket.on("message", async (data: any, callback: any) => {
-        console.log(data)
-
-        const { id, orig, destination, weight, price, description } = data
-
-
-             let TravelId = uuid();
-            var newViaje = {
-                id: TravelId,
-                orig,
-                destination,
-                weight,
-                price,
-                description,
-                adminId: id
-            }
-            let traveles = await Travel.create(newViaje)
-            // console.log('traveles: ',traveles);
-            socket.broadcast.emit('message', newViaje)
-            let travel = await Travel.findAll()
-            socket.broadcast.emit('Travel', travel)
-    
-            callback({
-                status: TravelId
+    ///codigo de chat    
+         //en este sockets creamos una sala solo para el User y Carrier que partician
+       //en un Travel, recibiendo por el parametro data id de la tabla travel
+       //creando un room con el nombre del id recibido paa que sea unico
+       socket.on("join_room",async (data:any, callback:any) => {
+        //Socket join es el que se encarga de drear el room  
+        socket.join(data);
+           //en la variable sizeRoom tenemos la cantidad de personas que estan conectadas 
+           //en esta sala, con esta variabel sabremos si ambos estan conectados
+         var sizeRoom = io.sockets.adapter.rooms.get(data)
+       
+          console.log(sizeRoom.size);
+      
+          console.log(`User with ID: ${socket.id} joined room: ${data}`);
+         // aqui me cree unos datos como si fuera el redux para controlar el chat 
+          let traveles = await Travel.findAll({where: {  truckId:{[Op.not]: null}}})
+         
+           let truck = await Truck.findAll({where: {id:traveles[0].truckId}})
+           let Us = await Signup.findAll({where: {id:truck[0].SignupId}})
+        
+      
+                
+           let adm = await Signup.findAll({where: {id:traveles[0].adminId}})
+           let obj={travelId:traveles[0].id,Us,adm}
+        /////////
+      
+          // por esta función callback podemos devolver información al front
+           callback({
+            status: obj
             });
       
-
-
-    })
-    socket.on("response", async (data: any) => {
-        console.log(data)
-        const upTravel = await Travel.update({ carrierId: data.carrierId }, { where: {id:data.idTravel} });
-        socket.broadcast.emit('response', data)
-    })
-
-
-    socket.on("delete", async (data: any , callback: any) => {
-        console.log('Esto es lo que se debe borrar', data)
-        const deltTravel = await Travel.destroy({ where: { id: data.id }});
+        });
       
-    })
-
-    socket.on("confirm_destination", async (data: any , callback: any) => {
-        console.log('Esto es el viaje que hay que updatear', data)
-        const confirm = await Travel.update({finishedTravel: 'at_destination' }, {where: { id: data}});
-        callback({
-            status: 'Viaje confirmado exitosamente'
-        })
-    })
-
-    socket.on("finished_travel", async (data: any , callback: any) => {
-        console.log('Esto es el viaje que hay que updatear', data)
-        const confirm = await Travel.update({finishedTravel: 'finish' }, {where: { id: data}});
-        callback({
-            status: 'Viaje confirmado exitosamente'
-        })
-    })
-
-    socket.on("disconnect", () => {
-        console.log("User Disconnected", socket.id)
-    })
+        // A traves de este socket se recibe y se envia la información
+        socket.on("send_message", (data:any, callback:any) => {
+          //esn esta variable tenemos cuantas personas hay en la sala,
+          //que deberian ser 2 para que esten tanto el carrier como el User
+          var sizeRoom = io.sockets.adapter.rooms.get(data.room)
+       
+          console.log(sizeRoom.size);
+      
+          socket.to(data.room).emit("receive_message", data);
+          
+          
+          //si el numero de participantes es 1 devolvemos un mensaje de Offline user
+          //que nos servira para validar los mensaje en el front.
+          if(sizeRoom.size===1) var status='offline user'; else var status=''
+          callback({
+           status:status
+           });
+        }); 
+            
+       
+      
+      // /////
 })
 
 

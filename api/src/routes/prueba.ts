@@ -5,6 +5,8 @@ import { v4 } from "uuid";
 import nodemailer from 'nodemailer'
 import { Travel } from '../models/Travel';
 import { Op } from 'sequelize';
+import { Truck } from '../models/Truck';
+import { Signup } from '../models/Signup';
 
 
 
@@ -127,18 +129,23 @@ router.get('/filterByWigth/:maxWigth',async(req:Request,res:Response,next:NextFu
 
 })
 
-// router.get('/include/:id',async(req:Request,res:Response,next:NextFunction)=>{
+router.get('/include/:id',async(req:Request,res:Response,next:NextFunction)=>{
 
-//     const{id}=req.params
+    const{id}=req.params
 
-//     try{
+    try{
 
-//     let response = await Travel.findAll(() => {})
+    let response = await Travel.findAll({
+        where: {
+          id: id
+        }, include: [ Truck , Signup]
+      })
 
-//     }catch(err){
-//         next(err)
-//     }
-// })
+      res.send(response)
+    }catch(err){
+        next(err)
+    }
+})
 
 
 export default router
