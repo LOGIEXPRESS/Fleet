@@ -127,6 +127,19 @@ router.get('/filterByWigth/:maxWigth',async(req:Request,res:Response,next:NextFu
 
 })
 
+// router.get('/include/:id',async(req:Request,res:Response,next:NextFunction)=>{
+
+//     const{id}=req.params
+
+//     try{
+
+//     let response = await Travel.findAll(() => {})
+
+//     }catch(err){
+//         next(err)
+//     }
+// })
+
 
 export default router
 

@@ -159,19 +159,17 @@ var carrierFake = [{
 	
 const router = Router()
  router.get('/uploadDataFake', async(req: Request, res: Response) => {
-             const signup= await Signup.bulkCreate(userFake);
+            const signup= await Signup.bulkCreate(userFake);
             let carrier = await Truck.bulkCreate(carrierFake);
-          
-  
-              const admin = await Carrier.create(idUser);  
-			 const obj={
-				signup,
-			      carrier, 
-			    admin
-
-			 }
+            const admin = await Carrier.create(idUser);  
+			const obj = {
+         signup,
+         //   carrier,
+         // admin
+       };
 	res.send(obj);
 });
+
 
 
 
