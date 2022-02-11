@@ -125,6 +125,11 @@ const AddTravel = (props) => {
     setisModalVisible23(bool);
   };
 
+      // const sendMessage = (props) => {
+        const setData23 = (data) => {
+          setchooseData23(data);
+        };
+
     const [isModalVisible1, setisModalVisible1] = useState(false);
     const [chooseData1, setchooseData1] = useState();
 
@@ -136,10 +141,7 @@ const AddTravel = (props) => {
         setchooseData1(data);
     };
 
-    // const sendMessage = (props) => {
-  const setData23 = (data) => {
-    setchooseData23(data);
-  };
+
 
 
 
@@ -226,6 +228,7 @@ const AddTravel = (props) => {
     };
     dispatch(sendMessage(travel))
     setModalSubmit(false)
+    changeModalVisible1(true)
     
   }
 
@@ -529,6 +532,17 @@ const AddTravel = (props) => {
                     />
                   </Modal>
                   <Modal
+                    transparent={true}
+                    animationType="fade"
+                    visible={isModalVisible1}
+                    nRequestClose={() => changeModalVisible1(false)}
+                  >
+                    <SimpleModal1
+                      changeModalVisible1={changeModalVisible1}
+                      setData1={setData1}
+                    />
+                  </Modal>
+                  <Modal
                     animationType="fade"
                     transparent
                     visible={modalSubmit}
@@ -536,8 +550,9 @@ const AddTravel = (props) => {
                     <View style={styles.containerModal}>
                       <View style={styles.viewModal}>
                         <View style={styles.textModal}>
+                        <Text style={{fontSize:hp("2.2%"), fontWeight:"bold"}}>Revisa si los datos son correctos!</Text>
                           <Icon name="checkmark-circle" style={styles.icon_modal} />
-                          <Text>Revisa si los datos a enviar estan bien</Text>
+                          
                           <Text>Origen: {origen.name}</Text>
                           <Text>Destino: {destino.name}</Text>
                           <Text>Peso: {weight} Toneladas</Text>
@@ -595,11 +610,13 @@ const styles = StyleSheet.create({
   textModal: {
     alignItems: 'center',
     alignContent: 'center',
-    paddingTop: hp('4%')
+    paddingTop: hp('4%'),
+    
   },
   icon_modal: {
-    fontSize: hp("5%"),
+    fontSize: hp("9%"),
     color: "#1DD135",
+
   },
   btnModal: {
     width: wp('20%'),
