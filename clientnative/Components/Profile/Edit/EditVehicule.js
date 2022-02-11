@@ -133,7 +133,9 @@ const EditVehicule = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <ScrollView 
+       showsVerticalScrollIndicator={false}
+      >
       <View style={{marginTop:hp("-1%"),marginLeft:wp("-2%"),}}>
       <HeaderBar  screen={'null'} />
       </View>
@@ -228,7 +230,7 @@ const EditVehicule = () => {
                 </Modal> */}
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -286,8 +288,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-between',
     marginTop: hp('8%'),
-    width: wp('90%')
-    
+    width: wp('90%'),
+    marginBottom: hp('10%')
   },
 });
 

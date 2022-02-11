@@ -28,6 +28,17 @@ export function userStatus () {
 } */
 
 
+/* export function updateAccesToken () {
+  return async function(dispatch) {
+    try {
+      const update = await axios.post()
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+} */
+
+
 export function requestCarrier (props) {
   return async function (dispatch) {
     try {
