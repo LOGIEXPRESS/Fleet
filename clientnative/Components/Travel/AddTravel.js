@@ -28,6 +28,7 @@ import SimpleModal20 from "./MoldasTravel/SimpleModalorigin";
 import SimpleModal21 from "./MoldasTravel/SimpleModaldest";
 import SimpleModal22 from "./MoldasTravel/SimpleModalweight";
 import SimpleModal23 from "./MoldasTravel/SimpleModalprice";
+import SimpleModal1 from "../Alerts/Travel/SimpleModalok";
 import HeaderBar from "../Utils/HeaderBar";
 
 import { APIKEY_GOOGLE } from "@env"
@@ -124,9 +125,23 @@ const AddTravel = (props) => {
     setisModalVisible23(bool);
   };
 
-  const setData23 = (data) => {
-    setchooseData23(data);
-  };
+      // const sendMessage = (props) => {
+        const setData23 = (data) => {
+          setchooseData23(data);
+        };
+
+    const [isModalVisible1, setisModalVisible1] = useState(false);
+    const [chooseData1, setchooseData1] = useState();
+
+    const changeModalVisible1 = (bool) => {
+        setisModalVisible1(bool);
+    };
+
+    const setData1 = (data) => {
+        setchooseData1(data);
+    };
+
+
 
 
 
@@ -201,6 +216,22 @@ const AddTravel = (props) => {
     })
   };
 
+  const handleDispach=()=>{
+    const travel = {
+      orig: `${origen.latitude}/${origen.longitude}/${origen.name}`,
+      destination: `${destino.latitude}/${destino.longitude}/${destino.name}`,
+      weight: parseFloat(weight),
+      price: price.price,
+      description: description,
+      id: data.id,
+      finishedTravel: 'earring',
+    };
+    dispatch(sendMessage(travel))
+    setModalSubmit(false)
+    changeModalVisible1(true)
+    
+  }
+
   const handleSubmit = () => {
     const travel = {
       orig: `${origen.latitude}/${origen.longitude}/${origen.name}`,
@@ -211,6 +242,7 @@ const AddTravel = (props) => {
       id: data.id,
       finishedTravel: 'earring',
     };
+
 
     //VALIDACIONES
 
@@ -232,8 +264,9 @@ const AddTravel = (props) => {
       changeModalVisible23(true)
       return
     }
-
-    dispatch(sendMessage(travel))
+    setModalSubmit(true)
+    
+    
 
     console.log("Estoy enviando:", travel)
   }
@@ -451,7 +484,7 @@ const AddTravel = (props) => {
                 <TouchableOpacity style={styles.btnEditar} onPress={handleQuote} >
                   <Text style={styles.textBtn}>Cotizar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnEditar} onPress={() => setModalSubmit(true)} >
+                <TouchableOpacity style={styles.btnEditar} onPress={() => handleSubmit()} >
                   <Text style={styles.textBtn}  >Agregar</Text>
                   {/* validaciones */}
                   <Modal
@@ -499,6 +532,17 @@ const AddTravel = (props) => {
                     />
                   </Modal>
                   <Modal
+                    transparent={true}
+                    animationType="fade"
+                    visible={isModalVisible1}
+                    nRequestClose={() => changeModalVisible1(false)}
+                  >
+                    <SimpleModal1
+                      changeModalVisible1={changeModalVisible1}
+                      setData1={setData1}
+                    />
+                  </Modal>
+                  <Modal
                     animationType="fade"
                     transparent
                     visible={modalSubmit}
@@ -506,8 +550,9 @@ const AddTravel = (props) => {
                     <View style={styles.containerModal}>
                       <View style={styles.viewModal}>
                         <View style={styles.textModal}>
+                        <Text style={{fontSize:hp("2.2%"), fontWeight:"bold"}}>Revisa si los datos son correctos!</Text>
                           <Icon name="checkmark-circle" style={styles.icon_modal} />
-                          <Text>Revisa si los datos a enviar estan bien</Text>
+                          
                           <Text>Origen: {origen.name}</Text>
                           <Text>Destino: {destino.name}</Text>
                           <Text>Peso: {weight} Toneladas</Text>
@@ -515,7 +560,7 @@ const AddTravel = (props) => {
                           <Text>Descripción: {description}</Text>
                           <View style={{ flexDirection: 'row' }}>
                             <TouchableOpacity style={styles.btnModal} >
-                              <Text style={styles.btnText} onPress={() => handleSubmit()} >
+                              <Text style={styles.btnText} onPress={() => handleDispach()} >
                                 Agregar
                               </Text>
                             </TouchableOpacity>
@@ -565,11 +610,13 @@ const styles = StyleSheet.create({
   textModal: {
     alignItems: 'center',
     alignContent: 'center',
-    paddingTop: hp('4%')
+    paddingTop: hp('4%'),
+    
   },
   icon_modal: {
-    fontSize: hp("5%"),
+    fontSize: hp("9%"),
     color: "#1DD135",
+
   },
   btnModal: {
     width: wp('20%'),

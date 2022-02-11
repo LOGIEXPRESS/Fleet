@@ -19,6 +19,7 @@ const initialState = {
   price: [],
   travels: [],
   userStatus: null,
+  confirmTravel: null,
   respStatus: null,
   userCarrier: null,
 };
@@ -126,6 +127,56 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userCarrier: action.payload
       }
+      case "DESMOUNT":
+        return {
+          ...state,
+          editPassword: [],
+          editarPerfilUser: [],
+          editarPerfilCarrier: [],
+          editVehicule: [],
+          price: []
+        };
+        case "CLEAN_TOKEN":
+          return {
+            ...state,        
+            token: ""
+          };
+        case "GET_PRICE_QUOTE":
+          return {
+            ...state,
+            price: action.payload,
+          };
+          case "COMPLETE_PROFILE_CARRIER":
+          return {
+            ...state,
+            responseLog: action.payload,
+          };
+          case "CHANGE_PASSWORD":
+          return {
+            ...state,
+            editPassword: action.payload,
+          }
+          case "GET_TRAVELS":
+            return {
+              ...state,
+              travels: action.payload,
+            };
+    
+          case "UPDATE_PERFIL":
+            return {
+              ...state,
+              editarPerfilUser: action.payload,
+            }
+          case "USER_STATUS":
+            return {
+              ...state,
+              userStatus: action.payload
+            }
+          case "CONFIRME_REQUEST":
+            return {
+              ...state,
+              confirmTravel: action.payload
+            }
     default:
       return state;
   }

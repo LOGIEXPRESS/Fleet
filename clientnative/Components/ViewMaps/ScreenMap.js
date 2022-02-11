@@ -120,8 +120,12 @@ export default function ScreenMap() {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
+      // let origin={latitude: location.coords.latitude,longitude: location.coords.longitude}
+      // console.log('MY PIN: ',origin)
+      // dispatch(getTravels(origin.latitude,origin.longitude));
     })();
     dispatch(getTravels());
+    
   }, [dispatch]);
   console.log("ESTO SON LOS VIAJES", travels);
 
@@ -233,6 +237,7 @@ export default function ScreenMap() {
             ) : (
               <ActivityIndicator size="large" color="#0000ff" />
             )}
+            
 
 
 
@@ -282,7 +287,8 @@ export default function ScreenMap() {
                   weight={data.weight}
                   business={data.admin.business}
                   photo={data.admin.photo}
-                  random={index} />
+                  random={index}
+                  id={data.id} />
               )
             })
 

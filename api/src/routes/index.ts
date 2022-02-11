@@ -15,7 +15,7 @@ import recoverPass from './recoverPassword'
 import  payment  from "./payment";
 const router = Router();
 
-// router.use('/', dataFake)
+
 
 
 router.use('/', carrierStatus)

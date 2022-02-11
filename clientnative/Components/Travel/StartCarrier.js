@@ -24,8 +24,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../Utils/HeaderBar";
+import axios from "axios";
+import SimpleModalCarrier from "../Alerts/Travel/SimpleModalCarrier";
 
-
+import { API_URLS } from "@env"
 
 
 
@@ -39,45 +41,72 @@ const StartCarrier = (props) => {
 
 
  
-  /// --> ESTADO PARA EL MODAL <-- ///
-  // const [isModalVisible, setisModalVisible] = useState(false);
-  // const [chooseData, setchooseData] = useState();
+  / --> ESTADO PARA EL MODAL <-- ///
+  const [isModalVisible300, setisModalVisible300] = useState(false);
+  const [chooseData300, setchooseData300] = useState();
 
-  // const changeModalVisible = (bool) => {
-  //   setisModalVisible(bool);
-  // };
+  const changeModalVisible300 = (bool) => {
+    setisModalVisible300(bool);
+  };
 
-  // const setData = (data) => {
-  //   setchooseData(data);
-  // };
+  const setData300 = (data) => {
+    setchooseData300(data);
+  };
 
 
-  const handleSubmit = () => {
-    const respMessage = () =>{
-      const aceparTravel={
-        carrierId: response?.idRole,
-        userId: data?.travel.userId
-      }
-      console.log("ESTO ENVIANDO ESTOOOOO", aceparTravel)
-      socket.emit('response',aceparTravel);
-    }
-    respMessage()
-    changeModalVisible(true)
-  }
+  // const handleSubmit = () => {
+  //   const respMessage = () =>{
+  //     const aceparTravel={
+  //       carrierId: response?.idRole,
+  //       userId: data?.travel.userId
+  //     }
+  //     console.log("ESTO ENVIANDO ESTOOOOO", aceparTravel)
+  //     socket.emit('response',aceparTravel);
+  //   }
+  //   respMessage()
+  //   changeModalVisible(true)
+  // }
 
 
 
   // socket
   const socket = useSelector((store) => store.socket)
   const response = useSelector((store) => store.responseLog)
+  const dataCarrier = useSelector((store) => store.responseLog)
 
   const navigation = useNavigation();
   const data = props.route.params
   const orig = data.origen.split("/")
   const dest = data.destination.split("/")
-
+  console.log('dataCarrier startCarrier: ',dataCarrier)
   console.log("Esto es lo que llega: ", data)
   // console.log("ESTE ES EL SOCKET", socket.id)
+
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    let payload={
+      userId:dataCarrier.id,
+      id:data.id
+    }
+
+    let upDateTravel= await axios.post(`${ API_URLS }/api/confirmTravel`,payload)
+    console.log(upDateTravel.data)
+
+      
+    changeModalVisible300(true);
+
+
+
+
+  }
+
+
+
+
+
+
   return (
     //Container Start
 
@@ -233,22 +262,22 @@ const StartCarrier = (props) => {
               justifyContent: "space-around",
             }}
           >
-            <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+            <TouchableOpacity style={styles.btn} onPress={handleSubmit} >
               <Text style={styles.aceptar}>Aceptar</Text>
               {/* MODAL */}
-              {/* <Modal
+              <Modal
                 transparent={true}
                 animationType="fade"
-                visible={isModalVisible}
-                nRequestClose={() => changeModalVisible(false)}
+                visible={isModalVisible300}
+                nRequestClose={() => changeModalVisible300(false)}
               >
                 <SimpleModalCarrier
-                  changeModalVisible={changeModalVisible}
-                  setData={setData}
+                  changeModalVisible300={changeModalVisible300}
+                  setData300={setData300}
                 />
-              </Modal> */}
+              </Modal>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ProfileScreenCarrier')}>
+            <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate('ScreenMap')}>
               <Text style={styles.rechazar}>Rechazar</Text>
             </TouchableOpacity>
           </View>

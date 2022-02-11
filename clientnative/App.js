@@ -57,15 +57,10 @@ const App = () => {
               component={Login}
               options={{ headerShown: false, gestureEnabled: false }}
             />
-             <Stack.Screen
-              name="RecoverPassword"
-              component={RecoverPassword}
-              options={{ headerShown: false }}
-            />
             <Stack.Screen
               name="SingUp"
               component={SingUp}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
               name="ProfileAdmin"
