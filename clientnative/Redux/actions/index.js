@@ -258,6 +258,20 @@ export function sendMessage (payload) {
   };
 }
 
+export function reqTravelConfirm (payload) {
+  return async function (dispatch) {
+    try {
+      const confirm = await axios.post(`${ API_URLS }/api/confirmTravel`, payload);
+      return dispatch({
+        type: "CONFIRME_REQUEST",
+        payload: confirm.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
 
 export function desmount() {
   return {
