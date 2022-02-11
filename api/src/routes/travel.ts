@@ -154,11 +154,38 @@ router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction
 
 
 
-router.get('/Travel', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/Travel/:latitude/:longitude', async (req: Request, res: Response, next: NextFunction) => {
 
+  const{latitude,longitude}=req.params
+  let origin=`${String(latitude)}`
+  // console.log(origin.split('.')[0])
 
+  // -34.6036844/-58.3815591/Buenos Aires, Argentina
+  // {
+  //   "latitude": -38.927636,
+  //   "latitudeDelta": 0.0922,
+  //   "longitude": -68.0710125,
+  //   "longitudeDelta": 0.0421,}
 
-  try {
+  if(latitude){
+    try{
+        // console.log(origin)
+      let travel=await Travel.findAll({
+        where:{
+
+          [Op.and]:[{orig:{[Op.startsWith]:`${origin.split('.')[0]}`}},{carrierId:{[Op.eq]:null}}]
+
+        },
+        include:Signup
+      })
+      res.send(travel)
+
+    }catch(err){
+      next(err)
+    }
+
+  }else{
+      try {
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
     /* let travel = await Travel.findAll() */
@@ -189,6 +216,11 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
   catch (err) {
     next(err)
   }
+  }
+
+
+
+
 });
 
  
@@ -274,15 +306,27 @@ router.get('/TravelOn/:idRole',async(req:Request,res:Response,next:NextFunction)
 
 router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction) => {
   //id es del travel 
-  //userId es id de admin es decir del trasportitas 
+  //userId es id carrier de singup  
   const { userId, id } = req.body;
   try {
-    let confirm = await Travel.update(
-      { finishedTravel: "process", carrierId: userId },
-      { where: { id: id } }
+    let idCarrier=await Carrier.findOne({
+      where:{
+        SignupId:userId
+      }
+    })
+    if(idCarrier){
+      let confirm = await Travel.update(
+      { finishedTravel: "process", carrierId: idCarrier.id },
+      { where: { id: id },
+      returning: true, }
     );
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
-    res.send(confirm);
+    return res.send(confirm);
+    }
+    return res.send('not found carrier')
+
+
+    
   } catch (error) {
     next(error);
   }
