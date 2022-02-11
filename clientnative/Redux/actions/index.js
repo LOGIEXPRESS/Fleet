@@ -103,10 +103,10 @@ export function updatePerfil (payload) {
   }
 }
 
-export function getTravels(latitude,longitude) {
+export function getTravels() {
   return async function (dispatch) {
     try {
-      const request = await axios.get(`${ API_URLS }/api/Travel/${latitude}/${longitude}`);
+      const request = await axios.get(`${ API_URLS }/api/Travel`);
       
       return dispatch({
         type: "GET_TRAVELS",
