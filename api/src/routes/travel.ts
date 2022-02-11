@@ -156,15 +156,44 @@ router.post('/requestTravel', async (req: Request, res: Response, next: NextFunc
 
 router.get('/Travel/:latitude/:longitude', async (req: Request, res: Response, next: NextFunction) => {
 
-  try {
+  const{latitude,longitude}=req.params
+  let origin=`${String(latitude)}`
+  // console.log(origin.split('.')[0])
+
+  // -34.6036844/-58.3815591/Buenos Aires, Argentina
+  // {
+  //   "latitude": -38.927636,
+  //   "latitudeDelta": 0.0922,
+  //   "longitude": -68.0710125,
+  //   "longitudeDelta": 0.0421,}
+
+  if(latitude){
+    try{
+        // console.log(origin)
+      let travel=await Travel.findAll({
+        where:{
+
+          [Op.and]:[{orig:{[Op.startsWith]:`${origin.split('.')[0]}`}},{truckId:{[Op.eq]:null}}]
+
+        },
+        include:Signup
+      })
+      res.send(travel)
+
+    }catch(err){
+      next(err)
+    }
+
+  }else{
+      try {
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
     /* let travel = await Travel.findAll() */
     const travel = await Travel.findAll({
       where:{
-        carrierId:{[Op.eq]:null}
+        truckId:{[Op.eq]:null}
       },
-      include:Signup
+      include:[Signup,Truck]
     }) 
 
   
@@ -187,7 +216,7 @@ router.get('/Travel/:latitude/:longitude', async (req: Request, res: Response, n
   catch (err) {
     next(err)
   }
-  
+  }
 
 
 
@@ -275,21 +304,26 @@ router.get('/TravelOn/:idRole',async(req:Request,res:Response,next:NextFunction)
 
 
 
+
 router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction) => {
   //id es del travel 
   //userId es id carrier de singup  
   const { userId, id } = req.body;
   try {
-    if(userId){
-          let confirm = await Travel.update(
-      { finishedTravel: "process", truckId: userId },
-      { where: { id: id } }
+    let idCarrier=await Truck.findOne({
+      where:{
+        SignupId:userId
+      }
+    })
+    if(idCarrier){
+      let confirm = await Travel.update(
+      { finishedTravel: "process", truckId: idCarrier.id },
+      { where: { id: id },
+      returning: true, }
     );
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
     return res.send(confirm);
     }
-    
-
     return res.send('not found carrier')
 
 
