@@ -22,6 +22,7 @@ const initialState = {
   confirmTravel: null,
   respStatus: null,
   userCarrier: null,
+  carrierTravel:null
 };
 console.log("ESTO ES EL INITAL STATE", initialState)
 
@@ -176,6 +177,11 @@ export default function rootReducer(state = initialState, action) {
             return {
               ...state,
               confirmTravel: action.payload
+            }
+          case "CARRIER_TRAVEL":
+            return{
+              ...state,
+              carrierTravel:action.payload
             }
     default:
       return state;

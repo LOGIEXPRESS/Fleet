@@ -12,7 +12,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
 // import { logiarUsuario } from "./../actions/index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // prueba para las screens responsive
 import {
   widthPercentageToDP as wp,
@@ -21,10 +21,17 @@ import {
 import HeaderBar from "../Utils/HeaderBar";
 import ModalAlert from "../Añadir Transportista/ModalAlert";
 
+import { getTravelCarrier } from "../../Redux/actions";
+
+
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
+  const dispatch=useDispatch()
+  const travelCarr=useSelector((store)=>store.carrierTravel)
+
+  console.log('TRAVEL CARRIER ', travelCarr)
 
   const handler = () => {
     navigation.navigate("ScreenMap");
@@ -38,6 +45,9 @@ const ProfileCarrier = () => {
 
   useEffect(() => {
     console.log("data", data);
+
+    dispatch(getTravelCarrier(data.id))
+  
 
   }, [data]);
 

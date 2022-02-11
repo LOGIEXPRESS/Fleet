@@ -282,27 +282,49 @@ router.put('/acceptTravel', async (req: Request, res: Response, next: NextFuncti
   
   });
 
-router.get('/userTravel/:idRole',async(req:Request,res:Response,next:NextFunction)=>{
+router.get('/carrierTravel/:idCarrier',async(req:Request,res:Response,next:NextFunction)=>{
 
-  const { idRole }=req.params
+  const { idCarrier }=req.params
   console.log("ESTO ES REQUEST PARAM",req.params)
   try{
 
-    let userTravel=await Travel.findAll({
+    let idTruck= await Truck.findOne({
       where:{
-        [Op.and]: [{userId:idRole }, { finishedTravel: null }],
-
+        SignupId:idCarrier
       }
     })
+    if(idTruck){
+      
+      let carrierTravel=await Travel.findAll({
+      where:{
+        [Op.and]: [{truckId:idTruck.id }, { finishedTravel: 'process' }],
 
-    if(!userTravel.length){
-      return res.send('user sin travel')
+      }})
+
+      if(!carrierTravel.length){
+        return res.json({menssage:'user travel',payload:carrierTravel})
+      }
+      
+      return res.json({menssage:'user travel',payload:carrierTravel})
+
+
+    
+
+
+
     }
-    res.json({menssage:'user travel',payload:userTravel})
+
+    return res.json({menssage:'user travel',payload:[]})
+
+    
+
+   
+    
 
 
 
   }catch(e){
+    
     next(e)
   }
 
