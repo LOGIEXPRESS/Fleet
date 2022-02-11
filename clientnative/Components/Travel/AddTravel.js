@@ -225,6 +225,8 @@ const AddTravel = (props) => {
       finishedTravel: 'earring',
     };
     dispatch(sendMessage(travel))
+    setModalSubmit(false)
+    
   }
 
   const handleSubmit = () => {
