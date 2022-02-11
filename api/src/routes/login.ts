@@ -19,7 +19,8 @@ function createToken(payload: any) {
 
 router.post('/login', async (req: Request, res: Response) => {
 	const { eMail, password } = req.body
-
+	console.log(req.body);
+	
 	const user = await Signup.findAll({ where: { eMail: eMail } })
 
 	if (user.length > 0) {
