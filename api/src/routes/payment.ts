@@ -7,6 +7,7 @@ import { Travel } from '../models/Travel';
 import { nextTick } from 'process';
 import { where } from 'sequelize/dist';
 import { uuid } from 'uuidv4';
+import { Truck } from '../models/Truck';
 const mercadopago = require('mercadopago');
 
 const router=Router()
@@ -16,8 +17,19 @@ const router=Router()
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { title, unit_price } = req.body;
-  console.log(req.body);
+  const { title, unit_price, id} = req.body;
+  //console.log(req.body);
+
+  let truck = await Truck.findAll({where:{
+    SignupId: id
+  }})
+
+  let paymentData = await Payment.findAll({where:{
+    TruckId: truck[0].id
+  }})
+
+  let amount = paymentData[0].amount
+
   try {
     mercadopago.configure({
       access_token:
@@ -31,7 +43,7 @@ router.post("/mercadopago", async (req, res) => {
                   "description": "Dummy Item Description",
                   "quantity": 1,
                   "currency_id": "ARS",
-                  "unit_price": 10.0
+                  "unit_price": amount
           }
       ],
       "payer": {
