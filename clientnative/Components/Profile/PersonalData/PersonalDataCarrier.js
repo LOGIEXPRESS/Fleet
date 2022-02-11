@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
-import { cleanToken } from "../../../Redux/actions";
+import { cleanToken, statusOff } from "../../../Redux/actions";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
@@ -26,11 +26,17 @@ const PersonalDataCarrier = () => {
     await SecureStore.setItemAsync(key, value);
   }
 
+  console.log("Esta es la data que llega al perfil data CArrier:", data)
+
   const cerrarsesion = () =>{
-    console.log("cerrar sesion")
-    save("token", "(result)")
-    dispatch(cleanToken())
-    navigation.navigate('Login')
+    const id = {
+      id : data.id
+    }
+    console.log("cerrar sesion");
+    save("token", "(result)");
+    dispatch(cleanToken());
+    dispatch(statusOff(id));
+    navigation.navigate('Login');
   }
 
   // useEffect(() => {
