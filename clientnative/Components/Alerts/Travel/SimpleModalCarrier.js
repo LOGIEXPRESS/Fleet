@@ -31,10 +31,10 @@ const SimpleModalCarrier = (props) => {
             />
           </View>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>
-          ¡Tu viaje acaba de comenzar!
+          ¡Felicitaciones!
           </Text>
           <Text style={{ fontSize: 16, margin: 3 }}>
-            ¡Tu petición fue enviada exitosamente!
+          ¡Tu viaje acaba de comenzar!
           </Text>
         </View>
         <View style={styles.containerBtn}>

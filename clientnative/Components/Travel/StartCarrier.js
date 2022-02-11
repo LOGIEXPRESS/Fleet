@@ -43,7 +43,7 @@ const StartCarrier = (props) => {
  
   / --> ESTADO PARA EL MODAL <-- ///
   const [isModalVisible300, setisModalVisible300] = useState(false);
-  const [chooseData, setchooseData] = useState();
+  const [chooseData300, setchooseData300] = useState();
 
   const changeModalVisible300 = (bool) => {
     setisModalVisible300(bool);
@@ -273,7 +273,7 @@ const StartCarrier = (props) => {
               >
                 <SimpleModalCarrier
                   changeModalVisible300={changeModalVisible300}
-                  setData={setData}
+                  setData300={setData300}
                 />
               </Modal>
             </TouchableOpacity>
