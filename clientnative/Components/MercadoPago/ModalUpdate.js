@@ -20,7 +20,7 @@ const ModalUpdate = (props) => {
     const navigation = useNavigation();
     const closeModal = () => {
         props.setModal(false);
-        navigation.navigate('PersonalDataCarrier')
+        navigation.navigate('Login')
     };
 
     return (

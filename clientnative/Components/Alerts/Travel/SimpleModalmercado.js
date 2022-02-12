@@ -51,7 +51,7 @@ const SimpleModalMercado = (props) => {
           
           <TouchableOpacity
            onPress={() => closeModal(false, "Aceptar",false)}
-           onPressIn={() => navigation.navigate("ScreenMap")}
+           onPressIn={() => navigation.navigate("ScreenAccessToken")}
             style={styles.btnAceptar}
           >
             <Text style={{ fontSize: 16, fontWeight: "bold", color:"white" }}>Ir ahora</Text>
