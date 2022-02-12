@@ -111,7 +111,7 @@ router.post('/login', async (req: Request, res: Response) => {
             TruckId : carrier[0].id
         }})
     
-        carrierPaymentData.amount = amount[0].amount
+        carrierPaymentData.amount = amount.length>0 ? amount[0].amount : 0;
     }    
 
 
