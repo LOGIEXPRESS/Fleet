@@ -124,7 +124,7 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
             where: { eMail: eMail },
             defaults: payload,
         })
-
+      
         const admin={
             id:uuid(),
             eMail:user.eMail,

@@ -13,12 +13,14 @@ import changePassword from './changePass'
 import logout from './logout'
 import payment from './payment'
 import recoverPass from './recoverPassword'
+import messaging  from './messaging';
 const router = Router();
 
 // router.use('/', dataFake)
 
 
 router.use('/', payment)
+router.use('/', messaging)
 router.use('/', carrierStatus)
 
 router.use('/', uploadDataFake)
