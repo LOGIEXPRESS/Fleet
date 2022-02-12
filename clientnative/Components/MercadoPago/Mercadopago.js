@@ -8,12 +8,12 @@ const FORM_ID = 'payment-form';
 
 import { API_URLS } from "@env"
 
-export default function Mercadopago() {
+export default function Mercadopago(propss) {
   const [link, setLink] = useState();
   const [render, setRender] = useState(null);
   const navigation = useNavigation();
 
-  
+  console.log("que llega en propps?",propss)
     
   const handleReset = () => {
     setLink("");
@@ -26,8 +26,9 @@ export default function Mercadopago() {
     axios
       .post(`${API_URLS}/api/mercadopago`, {
         title: "MercadoPago Fleet",
-        unit_price: 2000,
+        unit_price: propss.route.params.amount,
         quantity: 1,
+        access_token:propss.route.params.acesstoken,
       })
       .then((res) => {
         console.log(res.data);
@@ -52,15 +53,16 @@ export default function Mercadopago() {
         ?<WebView source={{uri: link}}   style={{width:400, height:500}}/>
         :"Estamos procesando su pago..."
       } */}
-          <WebView source={{ uri: link }} style={{ width: 350, height: 350 }} />
+          <WebView source={{ uri: link }} style={{ width: 350, height: 350}} />
           {/* {"\n"} */}
           <Button
             title="salir"
             onPress={handleReset}
+            style={{color: "#ff1c49"}}
           />
         </View>
       ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#ff1c49" />
       )}
     </View>
   );
@@ -69,7 +71,7 @@ export default function Mercadopago() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },

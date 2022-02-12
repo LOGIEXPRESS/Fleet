@@ -47,7 +47,7 @@ const App = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
-          <Stack.Screen
+            <Stack.Screen
               name="Home"
               component={Home}
               options={{ headerShown: false }}
@@ -137,20 +137,25 @@ const App = () => {
               component={VehiculeDetails}
               options={{ headerShown: false }}
             />
-              <Stack.Screen
+            <Stack.Screen
               name="StartCarrier"
               component={StartCarrier}
               options={{ headerShown: false }}
             />
-              <Stack.Screen
+            <Stack.Screen
               name="RecoverPassword"
               component={RecoverPassword}
               options={{ headerShown: false }}
-              />
+            />
             <Stack.Screen
-            name="ScreenAccessToken"
-            component={ScreenAccessToken}
-            options={{headerShown:false}}
+              name="ScreenAccessToken"
+              component={ScreenAccessToken}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Mercadopago"
+              component={Mercadopago}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

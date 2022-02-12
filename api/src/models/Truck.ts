@@ -1,6 +1,7 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, PrimaryKey, IsUUID, BelongsTo, ForeignKey , HasMany } from 'sequelize-typescript'
 import { Signup } from './Signup';
 import { Travel } from './Travel';
+import { Payment } from './Payment';
 
 @Table
 export class Truck extends Model{
@@ -38,6 +39,9 @@ export class Truck extends Model{
 
    @HasMany(() => Travel)
    travels!: string
+
+   @HasMany(() => Payment)
+   payment!: string
 
    @Column
    acesstoken!: string

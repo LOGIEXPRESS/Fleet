@@ -1,7 +1,11 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Truck } from '../models/Truck';
 import { Signup } from '../models/Signup';
+<<<<<<< HEAD
 import { Payment } from '../models/Payment';
+=======
+import { Payment } from "../models/Payment";
+>>>>>>> 2a41e40ad446eafbf0060d9dd7fb6023e40b77a8
 const router = Router()
 
 
@@ -166,8 +170,9 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
     },
     include: [{
       model: Signup
-    }
-  ],
+    }, {
+        model: Payment
+    }],
   });
   let inSevice = await Truck.findAll({
     where: {
@@ -175,6 +180,8 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
     },
     include: [{
       model: Signup
+    }, {
+        model: Payment
     }]
   });;
   let off = await Truck.findAll({
@@ -182,11 +189,12 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
       status: null
     },
     include: [{
-      model: Signup
+        model: Signup,
+    },{
+        model: Payment
     }]
   });
 
-  console.log("ESTO ES ON", on)
 
   return res.status(200).json({ "Fuera_de_servicio": off, "Disponibles": on, "Ocupados": inSevice })
 
