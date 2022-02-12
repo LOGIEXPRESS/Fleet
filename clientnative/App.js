@@ -142,9 +142,9 @@ const App = () => {
               component={StartCarrier}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="Mercadopago"
-              component={Mercadopago}
+              <Stack.Screen
+              name="RecoverPassword"
+              component={RecoverPassword}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
