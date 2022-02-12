@@ -17,7 +17,6 @@ interface error {
 ///begin Sokets
 
 
-
 io.on("connection", (socket: any) => {
     console.log("User conneted: " + socket.id)
    
@@ -111,60 +110,38 @@ io.on("connection", (socket: any) => {
                 status: TravelId
             });
       
-
-
-    })
-    socket.on("response", async (data: any) => {
-        console.log(data)
-        const upTravel = await Travel.update({ carrierId: data.carrierId }, { where: {id:data.idTravel} });
-        socket.broadcast.emit('response', data)
-    })
-
-
-    socket.on("delete", async (data: any , callback: any) => {
-        console.log('Esto es lo que se debe borrar', data)
-        const deltTravel = await Travel.destroy({ where: { id: data.id }});
+        });
       
-    })
-
-    socket.on("confirm_destination", async (data: any , callback: any) => {
-        console.log('Esto es el viaje que hay que updatear', data)
-        const confirm = await Travel.update({finishedTravel: 'at_destination' }, {where: { id: data}});
-        callback({
-            status: 'Viaje confirmado exitosamente'
-        })
-    })
-
-    socket.on("finished_travel", async (data: any , callback: any) => {
-        console.log('Esto es el viaje que hay que updatear', data)
-        const confirm = await Travel.update({finishedTravel: 'finish' }, {where: { id: data}});
-        callback({
-            status: 'Viaje confirmado exitosamente'
-        })
-    })
-
-    socket.on("disconnect", () => {
-        console.log("User Disconnected", socket.id)
-    })
+        // A traves de este socket se recibe y se envia la información
+        socket.on("send_message", (data:any, callback:any) => {
+          //esn esta variable tenemos cuantas personas hay en la sala,
+          //que deberian ser 2 para que esten tanto el carrier como el User
+          var sizeRoom = io.sockets.adapter.rooms.get(data.room)
+       
+          console.log(sizeRoom.size);
+      
+          socket.to(data.room).emit("receive_message", data);
+          
+          
+          //si el numero de participantes es 1 devolvemos un mensaje de Offline user
+          //que nos servira para validar los mensaje en el front.
+          if(sizeRoom.size===1) var status='offline user'; else var status=''
+          callback({
+           status:status
+           });
+        }); 
+            
+       
+      
+      // /////
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 ////end sokets
 
 
 sequelize
-    .sync({ force: true , logging: false })
+    .sync({ force: false , logging: false })
 
     .then(() => {
         console.log('base de datos conectada! :D')

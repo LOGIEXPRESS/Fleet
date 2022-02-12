@@ -203,7 +203,7 @@ const EditProfileCarrier = () => {
           </TouchableOpacity>
         </View> */}
         <HeaderBar screen={'null'} />
-        <Text style={{ fontWeight: "bold", alignSelf: "center", fontSize: hp("5%"), marginTop: hp("-4%"), }}>
+        <Text style={{ fontWeight: "bold", alignSelf: "center", fontSize: hp("5%"), }}>
           Editar perfil
         </Text>
         {/* Foto e iconito de agregar imagen */}
@@ -231,7 +231,7 @@ const EditProfileCarrier = () => {
         <View style={styles.containerInputs}
         // onSubmit={(e) => handleSubmit(e)}
         >
-          <Text style={{ fontSize: 19, fontWeight: "bold", marginBottom: 10 }}>
+          <Text style={{ fontSize: 19, fontWeight: "bold", marginBottom: 20, marginTop: hp("2%") }}>
             Datos personales
           </Text>
           <View style={styles.viewsInputs}>
@@ -383,14 +383,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
     alignSelf: "center",
     // marginBottom: 20,
-    marginRight: 30,
-    marginLeft: wp("2.5%"),
+    marginRight:wp("10%"),
+    marginLeft: wp("3.5%"),
   },
   textBtn: {
     color: "white",
-    fontSize: hp("3%"),
+    fontSize: hp("2.9%"),
     alignSelf: "center",
-    marginTop: 12,
+    marginTop: hp("1%"),
     fontWeight: "bold"
   },
   viewsInputs: {
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 15,
   },
-  btn2: { flexDirection: "row", },
+  btn2: { flexDirection: "row", marginTop:hp("7%"),   },
 });
 
 export default EditProfileCarrier;

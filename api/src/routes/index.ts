@@ -14,9 +14,10 @@ import logout from './logout'
 import payment from './payment'
 import recoverPass from './recoverPassword'
 import messaging  from './messaging';
+ 
 const router = Router();
 
-// router.use('/', dataFake)
+
 
 
 router.use('/', payment)
@@ -46,5 +47,7 @@ router.use('/', logout)
 router.use('/', review)
 
 router.use('/',recoverPass)
+
+router.use('/', payment)
 
 export default router;

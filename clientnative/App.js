@@ -24,7 +24,9 @@ import startCheckout from './Components/MercadoPago/startCheckout.js'
 import VehiculeDetails from './Components/Añadir Transportista/VehiculeDetails.js'
 import RecoverPassword from './Components/Home/RecoverPassword'
 import ScreenMap from "./Components/ViewMaps/ScreenMap";
-
+import Mercadopago from "./Components/MercadoPago/Mercadopago";
+import StartCarrier from './Components/Travel/StartCarrier';
+import ScreenAccessToken from './Components/MercadoPago/ScreenAccessToken.js'
 
 
 LogBox.ignoreLogs([
@@ -55,15 +57,10 @@ const App = () => {
               component={Login}
               options={{ headerShown: false, gestureEnabled: false }}
             />
-             <Stack.Screen
-              name="RecoverPassword"
-              component={RecoverPassword}
-              options={{ headerShown: false }}
-            />
             <Stack.Screen
               name="SingUp"
               component={SingUp}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
               name="ProfileAdmin"
@@ -139,6 +136,21 @@ const App = () => {
               name="VehiculeDetails"
               component={VehiculeDetails}
               options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="StartCarrier"
+              component={StartCarrier}
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="RecoverPassword"
+              component={RecoverPassword}
+              options={{ headerShown: false }}
+              />
+            <Stack.Screen
+            name="ScreenAccessToken"
+            component={ScreenAccessToken}
+            options={{headerShown:false}}
             />
           </Stack.Navigator>
         </NavigationContainer>

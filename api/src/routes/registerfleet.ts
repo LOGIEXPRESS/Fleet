@@ -33,51 +33,26 @@ router.get('/carriers', async (req: Request, res: Response, next: NextFunction) 
     }
 });
 
-router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunction) => {
-     
-    const { id} = req.query
-    if(id===''){return res.send('El id no puede estar vacio')}
-    try {
-        const carrier =  await Carrier.destroy({
-            where: {
-                SignupId:id
-            }
-        })
-      const signup =  await Signup.destroy({
-            where: {
-               id:id
-            }
-        })
-       
-        if(signup===1)return  res.send("Usuario eliminado")
-        else return  res.send("Error al eliminar usuario.")
-            
+router.get('/findFleet', async (req: Request, res: Response, next: NextFunction) => {
+
+    var fleet = await Signup.findAll({
+        where: { role: { [Op.eq]: false } },
+    });
+    if (fleet.length === 0) { return res.send(null); }
+    let arr: any = []; let carrier: any = [];
+    for (var i = 0; i < fleet.length; i++) {
+
+        carrier[i] = await Truck.findAll({
+            where: { SignupId: fleet[i].id }
+        }
+        )
+        arr[i] = { transportista: fleet[i], vehiculo: carrier[i].length === 0 ? "No tiene vehiculo registrado" : carrier[i][0] };
     }
-    catch (err) {
-        next(err)
-    }
+
+    res.send(arr);
 });
 
-router.get('/findFleet',async(req:Request,res:Response,next:NextFunction)=>{
- 
-     var fleet = await Signup.findAll({
-       where: { role: { [Op.eq]: false } },
-     });
-        if(fleet.length===0){return res.send(null);}
-        let arr:any=[]; let carrier:any=[];
-         for(var i=0;i < fleet.length;i++){
-           
-             carrier[i]=await Truck.findAll({
-                where: {SignupId:fleet[i].id }
-                    }
-                )
-                arr[i]={transportista:fleet[i],vehiculo: carrier[i].length === 0 ? "No tiene vehiculo registrado" : carrier[i][0] };
-         }
-    
-        res.send(arr);
-    });
 
-    
 router.post('/registerfleet', async (req: Request, res: Response, next: NextFunction) => {
 
     // const data1 = JSON.parse(req.body)
@@ -88,12 +63,12 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
     let passwordHash = await bcrypt.hash(password, 8)
 
     let payload = {
-      id: uuid(),
-      name,
-      lastName,
-      eMail,
-      password: passwordHash,
-      role: false,
+        id: uuid(),
+        name,
+        lastName,
+        eMail,
+        password: passwordHash,
+        role: false,
     };
     ////////<inicio formato> Este es el mensaje que se le va a enviar al usuario con formato html
     let contentHTML = `<h1>New user</h1>
@@ -124,12 +99,12 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
             where: { eMail: eMail },
             defaults: payload,
         })
-      
-        const admin={
-            id:uuid(),
-            eMail:user.eMail,
-            company:user.business,
-            SignupId:user.id
+
+        const admin = {
+            id: uuid(),
+            eMail: user.eMail,
+            company: user.business,
+            SignupId: user.id
 
         }
         await Carrier.create(admin)
@@ -208,21 +183,21 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
 router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunction) => {
 
     const { id } = req.query
-    if(id===''){return res.send('El id no puede estar vacio')}
+    if (id === '') { return res.send('El id no puede estar vacio') }
     try {
-        const carrier =  await Truck.destroy({
+        const carrier = await Truck.destroy({
             where: {
-                SignupId:id
+                SignupId: id
             }
         })
-      const signup =  await Signup.destroy({
+        const signup = await Signup.destroy({
             where: {
-               id:id
+                id: id
             }
         })
 
-        if(signup===1)return  res.send( { mensaje: "Usuario eliminado" })
-        else return  res.send({mensaje: "Error al eliminar usuario."})
+        if (signup === 1) return res.send({ mensaje: "Usuario eliminado" })
+        else return res.send({ mensaje: "Error al eliminar usuario." })
 
     }
     catch (err) {
@@ -232,28 +207,25 @@ router.get('/deleteFleet', async (req: Request, res: Response, next: NextFunctio
 
 
 
-router.get('/findCarrier/:eMail',async(req:Request,res:Response,next:NextFunction)=>{
+router.get('/findOneCarrier', async (req: Request, res: Response, next: NextFunction) => {
 
-    const{eMail}=req.params
+    const { id } = req.query
 
-    try{
-        let carrier= await Signup.findOne({
-            where:{
-
-                [Op.and]:[{eMail:eMail},{identification:null},{role:false}]
-
-                
-
-            }
+    try {
+        let carrier = await Signup.findOne({
+            where: { id: id }, 
+            include: [{
+                model: Truck
+            }]
 
         })
-        if(!carrier){
+        if (!carrier) {
             return res.send(false)//carrir ya completo su perfil
         }
-        return res.send(true)
+        return res.send(carrier)
 
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 

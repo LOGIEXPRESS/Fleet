@@ -29,6 +29,9 @@ export class Travel extends Model{
     @Column
     finishedTravel!: string
 
+    @Column
+    statusPay!: string
+
     @CreatedAt
     @Column
     createdAt!: Date
@@ -41,7 +44,7 @@ export class Travel extends Model{
     truck!: Truck
 
     @ForeignKey(() => Truck)
-    truckId!: any
+    truckId!: string
 
     @BelongsTo(() => Signup)
     admin!: Signup

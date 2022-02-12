@@ -17,6 +17,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import HeaderBar from "../Utils/HeaderBar";
 import { API_URLS } from "@env"
 import { useNavigation } from "@react-navigation/core";
+import ModalSuccess from '../Profile/Edit/ModalsPassword/ModalSuccess';
 
 
 export default function RecoverPassword(){
@@ -52,14 +53,25 @@ export default function RecoverPassword(){
         console.log('obj recover pass: ',obj)
         setColor('')
         setEmail('')
-        navigation.navigate('Login')
+        changeModalVisible2(true)
+        // navigation.navigate('Login')
 
     }
 
     console.log('email de recover: ', email)
     console.log('color de recover: ', color)
 
+      /// --> ESTADO PARA EL MODAL DE SUCCESS <-- ///
+    const [isModalVisible2, setisModalVisible2] = useState(false);
+    const [chooseData2, setchooseData2] = useState();
 
+    const changeModalVisible2 = (bool) => {
+      setisModalVisible2(bool);
+    };
+
+    const setData2 = (data) => {
+      setchooseData2(data);
+    };
 
 
 
@@ -69,7 +81,7 @@ export default function RecoverPassword(){
 
         <ScrollView style={{ flex: 1, backgroundColor: "#ffffffff" }}
             showsVerticalScrollIndicator={false}>
-         <View style={{marginTop:hp("-1%"),marginLeft:wp("-2%")}}> 
+         <View style={{marginTop:hp("-1%"),marginLeft:wp("-2%"), }}> 
         <HeaderBar  screen={'null'} />
          </View> 
             <ImageBackground
@@ -77,8 +89,8 @@ export default function RecoverPassword(){
                 resizeMode= "contain"
                 style={{
                     display:'flex',
-                    // marginTop:  hp('-7%'),
-                    height: hp('40%') ,
+                    marginTop:  hp('-1%'),
+                    height: hp('35%') ,
                     width: wp('110%') ,
                     alignSelf: "center",
                 }}>
@@ -89,9 +101,9 @@ export default function RecoverPassword(){
                 //   onSubmit={(e) => handleSubmit(e)}
             >
             <View style={{ padding: 20, display: "flex", alignItems: "center" }}>
-                <Text style={{ color: "#151f27", fontSize: 34,fontWeight: '600', }}>Recuperar Contraseña</Text>
+                <Text style={{ color: "#151f27", fontSize:hp("4%"),fontWeight: '600', }}>Recuperar Contraseña</Text>
             </View>
-            <Text>Ingrese su mail</Text>
+            <Text style={{ color: "#151f27", fontSize:hp("2.4%"),fontWeight: '600', }}>Ingrese su mail</Text>
             <TextInput
             value={email}
             onChangeText={(name) => handelChangeMail(name)}
@@ -109,13 +121,13 @@ export default function RecoverPassword(){
             
           ></TextInput>
 
-          <Text style={{marginTop:hp('5%')}}>¿Cual es su color preferido?</Text>
+          <Text style={{marginTop:hp('3%'),color: "#151f27", fontSize:hp("2.4%"),fontWeight: '600'}}>¿Cuál es su color preferido?</Text>
 
           <TextInput
             value={color}
             onChangeText={(name) => handelChangeColor(name)}
             name="secret"
-            placeholder="color preferido*"
+            placeholder="Color Preferido*"
             secureTextEntry={true}
             style={styles.TextInput}
         //     ref={lastNameRef} onSubmitEditing={() => {
@@ -129,6 +141,16 @@ export default function RecoverPassword(){
               Recuperar Contraseña
             </Text>
           </TouchableOpacity>
+          <Modal
+         transparent={true}
+         animationType="fade"
+         visible={isModalVisible2}
+         nRequestClose={() => changeModalVisible2(false)}
+        >
+        <ModalSuccess
+          changeModalVisible2={changeModalVisible2}
+          setData2={setData2} />
+        </Modal>
         </View>
 
             
@@ -180,12 +202,12 @@ const styles = StyleSheet.create({
     Button: {
       width: "90%",
       color: "#FFC107",
-      height: 52,
+      height: 62,
       backgroundColor: "#ff1c49",
       borderRadius: 10,
       borderColor: "black",
       // borderWidth:1,
-      marginTop: 20,
+      marginTop: hp("6%"),
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -193,8 +215,8 @@ const styles = StyleSheet.create({
       
     },
     ButtonText: {
-      fontWeight: "bold",
-      fontSize: 18,
+      // fontWeight: "bold",
+      fontSize: 21,
       color: "white",
     },
     SingUpText: {
@@ -206,6 +228,7 @@ const styles = StyleSheet.create({
       display: "flex",
       alignItems: "center",
       marginTop: 10,
+      
     },
     preg: {
       display: "flex",
