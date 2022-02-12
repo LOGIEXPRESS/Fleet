@@ -140,7 +140,7 @@ router.post('/oneTravel', async (req: Request, res: Response, next: NextFunction
   let getTravel = await Travel.findAll({ where: { id: id } })
   let varUser = await Carrier.findAll({ where: { id: getTravel[0].adminId } , include:[{ model: Signup }]  })
  /*  let varUserReg = await User_Reg.findOne({ where: { id: varUser[0].idUserReg } }); */
-  let varCarrier = await Carrier.findAll({where: { id: getTravel[0].carrierId}, include:[{ model: Signup }] })
+  let varCarrier = await Carrier.findAll({where: { id: getTravel[0].truckId}, include:[{ model: Signup }] })
   const travelFullData = { travel: getTravel[0], user: varUser[0], carrier: varCarrier[0] }
   if (getTravel.length === 0){
     return res.send('Travel not found');
@@ -202,11 +202,11 @@ router.post('/waitTravel', async (req: Request, res: Response, next: NextFunctio
 });
 router.put('/acceptTravel', async (req: Request, res: Response, next: NextFunction) => {
     //id=es el Id de travel que viene desde el front
-    const { carrierId, id } = req.body
+    const { truckId, id } = req.body
   
   
   
-    const upTravel = await Travel.update({ carrierId: carrierId }, { where: { id: id }, returning: true });
+    const upTravel = await Travel.update({ truckId: truckId }, { where: { id: id }, returning: true });
     if (upTravel[0] === 1) {
  
       

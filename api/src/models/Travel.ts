@@ -37,11 +37,11 @@ export class Travel extends Model{
     @Column
     updatedAt!: Date
 
-    @BelongsTo(() => Carrier)
-    truck!: Carrier
+    @BelongsTo(() => Truck)
+    truck!: Truck
 
-    @ForeignKey(() => Carrier)
-    carrierId!: any
+    @ForeignKey(() => Truck)
+    truckId!: any
 
     @BelongsTo(() => Signup)
     admin!: Signup
@@ -51,7 +51,5 @@ export class Travel extends Model{
 
     @HasOne(() => Review)
     rewiew!: Review
-
-
 
 }

@@ -21,9 +21,7 @@ export class Carrier extends Model {
 
     @ForeignKey(()=>Signup)
     SignupId!:string
-
-    @HasMany(()=>Travel)
-    travel!:Travel
+ 
 
 
 }
