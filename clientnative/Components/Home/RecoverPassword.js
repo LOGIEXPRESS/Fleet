@@ -54,7 +54,7 @@ export default function RecoverPassword(){
             return Alert.alert('Not found data')
           }
           if(!response.data.payload){
-            return Alert.alert(`not found user with email: ${email} and secret ${color}`)
+            return Alert.alert(`not found user with secret ${color}`)
 
           }
 
