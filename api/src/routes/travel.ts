@@ -8,6 +8,7 @@ import { Carrier } from '../models/Carrier';
 import { Truck } from '../models/Truck';
  
 import { Signup } from '../models/Signup';
+import { Payment } from '../models/Payment';
  
 
 const router = Router()
@@ -225,9 +226,6 @@ router.post('/requestTravel', async (req: Request, res: Response, next: NextFunc
 
 router.get('/Travel', async (req: Request, res: Response, next: NextFunction) => {
 
-  
-
-  
    try {
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
@@ -248,8 +246,28 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
   }
   
 
+});
 
+router.get('/alltraveltruck', async (req: Request, res: Response, next: NextFunction) => {
+  const {id } = req.body
+  try {
+   //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
+   //hay que corregir que es de tipo string 
+   /* let travel = await Travel.findAll() */
+   const travel = await Travel.findAll({
+     where:{
+       truckId:{[Op.eq]:id}
+     }
+   }) 
 
+ 
+  res.send(travel);
+
+ }
+ catch (err) {
+   next(err)
+ }
+ 
 
 });
 
@@ -352,6 +370,7 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
       { where: { id: id },
       returning: true, }
     );
+
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
     return res.send(confirm);
     }

@@ -113,9 +113,9 @@ const ProfileCarrier = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btnText}
-          // onPress={() => {
-          //   navigation.navigate("HistorialDeViajeCarrier");
-          // }}
+          onPress={() => {
+            navigation.navigate("HistoryCarrier");
+          }}
           >
             <Icon name="location-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Historial de viajes</Text>
