@@ -68,7 +68,7 @@ export default function ScreenMap() {
       }
     }
     return () => {
-      reset();
+      dispatch(reset());
     }
   }, [carrier])
 

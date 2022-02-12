@@ -50,8 +50,10 @@ const CompleteProfileCarrier = (props) => {
   
   useEffect(() => {
     console.log("SOY DATOS DEL CARRIER", datosCarrier);
-    if(datosCarrier.business !== null){
-    navigation.navigate('ProfileCarrier')
+    if(datosCarrier) {
+      if(datosCarrier.business !== null){
+      navigation.navigate('ProfileCarrier')
+      }
     }
   }, [datosCarrier]);
 
