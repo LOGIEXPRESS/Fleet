@@ -52,15 +52,16 @@ export default function Mercadopago() {
         ?<WebView source={{uri: link}}   style={{width:400, height:500}}/>
         :"Estamos procesando su pago..."
       } */}
-          <WebView source={{ uri: link }} style={{ width: 350, height: 350 }} />
+          <WebView source={{ uri: link }} style={{ width: 350, height: 350}} />
           {/* {"\n"} */}
           <Button
             title="salir"
             onPress={handleReset}
+            style={{color: "#ff1c49"}}
           />
         </View>
       ) : (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#ff1c49" />
       )}
     </View>
   );
@@ -69,7 +70,7 @@ export default function Mercadopago() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
