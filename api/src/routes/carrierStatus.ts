@@ -1,6 +1,7 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Truck } from '../models/Truck';
 import { Signup } from '../models/Signup';
+import { Payment } from "../models/Payment";
 const router = Router()
 
 
@@ -155,15 +156,15 @@ router.post('/StatusOn', async (req: Request, res: Response, next: NextFunction)
 
 router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunction) => {
 
-  // let {status}=req.params
+
 
   let on = await Truck.findAll({
     where: {
       status: true
     },
     include: [{
-      model: Signup
-    }]
+      model: Signup 
+    },{model: Payment}]
   });
   let inSevice = await Truck.findAll({
     where: {
@@ -171,15 +172,17 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
     },
     include: [{
       model: Signup
-    }]
+    },{model: Payment}]
   });;
   let off = await Truck.findAll({
     where: {
-      status: null
+      status: null,
     },
-    include: [{
-      model: Signup
-    }]
+    include: [
+      {
+        model: Signup,
+      },{model: Payment}
+    ],
   });
 
   return res.status(200).json({ "Fuera_de_servicio": off, "Disponibles": on, "Ocupados": inSevice })

@@ -16,7 +16,9 @@ const router=Router()
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { title, unit_price } = req.body;
+  const { SignupId } = req.body;
+
+  let carrier = await 
   console.log(req.body);
   try {
     mercadopago.configure({
