@@ -142,6 +142,11 @@ const App = () => {
               component={StartCarrier}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Mercadopago"
+              component={Mercadopago}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
