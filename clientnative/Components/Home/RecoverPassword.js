@@ -17,6 +17,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import HeaderBar from "../Utils/HeaderBar";
 import { API_URLS } from "@env"
 import { useNavigation } from "@react-navigation/core";
+import ModalSuccess from '../Profile/Edit/ModalsPassword/ModalSuccess';
 
 
 export default function RecoverPassword(){
@@ -52,14 +53,25 @@ export default function RecoverPassword(){
         console.log('obj recover pass: ',obj)
         setColor('')
         setEmail('')
-        navigation.navigate('Login')
+        changeModalVisible2(true)
+        // navigation.navigate('Login')
 
     }
 
     console.log('email de recover: ', email)
     console.log('color de recover: ', color)
 
+      /// --> ESTADO PARA EL MODAL DE SUCCESS <-- ///
+    const [isModalVisible2, setisModalVisible2] = useState(false);
+    const [chooseData2, setchooseData2] = useState();
 
+    const changeModalVisible2 = (bool) => {
+      setisModalVisible2(bool);
+    };
+
+    const setData2 = (data) => {
+      setchooseData2(data);
+    };
 
 
 
@@ -129,6 +141,16 @@ export default function RecoverPassword(){
               Recuperar Contraseña
             </Text>
           </TouchableOpacity>
+          <Modal
+         transparent={true}
+         animationType="fade"
+         visible={isModalVisible2}
+         nRequestClose={() => changeModalVisible2(false)}
+        >
+        <ModalSuccess
+          changeModalVisible2={changeModalVisible2}
+          setData2={setData2} />
+        </Modal>
         </View>
 
             
