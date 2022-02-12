@@ -46,14 +46,28 @@ export default function RecoverPassword(){
             secret:'color'
 
         }
+        
+          
+          let response=await axios.post(`${API_URLS}/api/recoverPass`,obj)
 
-        let response=await axios.post(`${API_URLS}/api/recoverPass`,obj)
+          if(response.data.menssage==='faltan datos'){
+            return Alert.alert('Not found data')
+          }
+          if(!response.data.payload){
+            return Alert.alert(`not found user with email: ${email} and secret ${color}`)
 
-        console.log('response.data: ',response.data)
-        console.log('obj recover pass: ',obj)
-        setColor('')
-        setEmail('')
-        changeModalVisible2(true)
+          }
+
+          console.log('response.data: ',response.data)
+          console.log('obj recover pass: ',obj)
+          setColor('')
+          setEmail('')
+          changeModalVisible2(true)
+
+        
+
+
+        
         // navigation.navigate('Login')
 
     }
