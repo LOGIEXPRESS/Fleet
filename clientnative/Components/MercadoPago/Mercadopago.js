@@ -57,7 +57,6 @@ export default function Mercadopago() {
           <Button
             title="salir"
             onPress={handleReset}
-            style={{ marginLeft: 300 }}
           />
         </View>
       ) : (

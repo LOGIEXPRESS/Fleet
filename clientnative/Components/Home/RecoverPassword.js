@@ -17,6 +17,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import HeaderBar from "../Utils/HeaderBar";
 import { API_URLS } from "@env"
 import { useNavigation } from "@react-navigation/core";
+import ModalSuccess from '../Profile/Edit/ModalsPassword/ModalSuccess';
 
 
 export default function RecoverPassword(){
@@ -45,21 +46,46 @@ export default function RecoverPassword(){
             secret:'color'
 
         }
+        
+          
+          let response=await axios.post(`${API_URLS}/api/recoverPass`,obj)
 
-        let response=await axios.post(`${API_URLS}/api/recoverPass`,obj)
+          if(response.data.menssage==='faltan datos'){
+            return Alert.alert('Not found data')
+          }
+          if(!response.data.payload){
+            return Alert.alert(`not found user with email: ${email} and secret ${color}`)
 
-        console.log('response.data: ',response.data)
-        console.log('obj recover pass: ',obj)
-        setColor('')
-        setEmail('')
-        navigation.navigate('Login')
+          }
+
+          console.log('response.data: ',response.data)
+          console.log('obj recover pass: ',obj)
+          setColor('')
+          setEmail('')
+          changeModalVisible2(true)
+
+        
+
+
+        
+        // navigation.navigate('Login')
 
     }
 
     console.log('email de recover: ', email)
     console.log('color de recover: ', color)
 
+      /// --> ESTADO PARA EL MODAL DE SUCCESS <-- ///
+    const [isModalVisible2, setisModalVisible2] = useState(false);
+    const [chooseData2, setchooseData2] = useState();
 
+    const changeModalVisible2 = (bool) => {
+      setisModalVisible2(bool);
+    };
+
+    const setData2 = (data) => {
+      setchooseData2(data);
+    };
 
 
 
@@ -129,6 +155,16 @@ export default function RecoverPassword(){
               Recuperar Contraseña
             </Text>
           </TouchableOpacity>
+          <Modal
+         transparent={true}
+         animationType="fade"
+         visible={isModalVisible2}
+         nRequestClose={() => changeModalVisible2(false)}
+        >
+        <ModalSuccess
+          changeModalVisible2={changeModalVisible2}
+          setData2={setData2} />
+        </Modal>
         </View>
 
             

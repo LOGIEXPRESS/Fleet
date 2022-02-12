@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 // import { logiarUsuario } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
@@ -56,7 +55,7 @@ const PersonalDataAdmin = () => {
             // marginLeft: wp('5%'),
           }}
         >
-          <View style={{ }}>
+          <View>
             <Image
             resizeMode="contain"
               source={{

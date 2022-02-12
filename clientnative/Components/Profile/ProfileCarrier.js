@@ -20,18 +20,42 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from "../Utils/HeaderBar";
 import ModalAlert from "../Añadir Transportista/ModalAlert";
+import SimpleModal70 from "../Alerts/Travel/SimpleModalmercado";
 
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
-  const handler = () => {
-    navigation.navigate("ScreenMap");
-    setModalAlert(false)
-  }
+
 
   const [modalAlert, setModalAlert] = useState(false)
+
+    // validacion mercadopago
+    const [isModalVisible70, setisModalVisible70] = useState(false);
+    const [chooseData70, setchooseData70] = useState();
+    const [activar70, setActivar70] = useState(false);
+  
+    const changeModalVisible70 = (bool) => {
+      setisModalVisible70(bool);
+    };
+  
+    const setData70 = (data) => {
+      setchooseData70(data);
+    };
+
+    const setActivacion70 = (boole) => {
+      setActivar70(boole);
+    };
+
+    const handler = () => {
+      console.log("mercadopago", data.carrierPaymentData.carrierToken)
+      if (data.carrierPaymentData.carrierToken === false) {
+        changeModalVisible70(true);
+        return;
+      }
+      navigation.navigate("ScreenMap");
+    }
 
   console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
@@ -73,7 +97,7 @@ const ProfileCarrier = () => {
             Transportista en {data?.business}
           </Text>
           <Text style={styles.saldo}>
-            Saldo:      $ 200.0000
+            Saldo:      $ {data?.carrierPaymentData.amount}
 
           </Text>
         </View>
@@ -109,13 +133,26 @@ const ProfileCarrier = () => {
 
           <TouchableOpacity
             style={styles.btn2}
-            onPress={()=> navigation.navigate("ScreenMap")}
+            onPress={handler}
           >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
               style={{ width: wp('15%'), height: hp('6%'), marginLeft: wp('2%'), marginTop: wp('-2%') }}
               source={require("./Utils/camion.png")}
             /> */}
+
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible70}
+                  nRequestClose={() => changeModalVisible70(false)}
+                >
+                  <SimpleModal70
+                    changeModalVisible70={changeModalVisible70}
+                    setData70={setData70}
+                    setActivacion70={setActivacion70}
+                  />
+                </Modal>
           </TouchableOpacity>
         </View>
        {/*  <Modal
