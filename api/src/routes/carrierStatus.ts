@@ -1,11 +1,7 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Truck } from '../models/Truck';
 import { Signup } from '../models/Signup';
-<<<<<<< HEAD
-import { Payment } from '../models/Payment';
-=======
 import { Payment } from "../models/Payment";
->>>>>>> 2a41e40ad446eafbf0060d9dd7fb6023e40b77a8
 const router = Router()
 
 
