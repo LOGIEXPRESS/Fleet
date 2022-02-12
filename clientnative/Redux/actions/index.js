@@ -264,7 +264,9 @@ export function completeProfileCarrier(payload) {
           payload
         );
         console.log('Soy el console.log de responsecomplete', response.data.payload2[1][0])
-       const newobj = {... response.data.payload[1][0], 
+
+
+       const newobj = {... response.data.payload2[1][0], 
         "carrierPaymentData" : {
         carrierToken : false, 
         amount: 0, 
