@@ -129,4 +129,31 @@ router.post('/updateUser', async (req: Request, res: Response, next: NextFunctio
 
 })
 
+router.post('/updateToken', async (req: Request, res: Response, next: NextFunction) => {
+	const { id, acesstoken } = req.body
+
+	let carrier = await Truck.findAll({where:{
+		SignupId : id
+	}})
+
+	if (carrier && acesstoken){
+
+		let upDateThis: any = {}
+
+		if(acesstoken){upDateThis.acesstoken = acesstoken}
+
+		let tokenUpdate = await Truck.update( upDateThis, {
+			where:{
+			
+				SignupId : id
+			},
+			returning: true,
+		})
+
+		return res.status(200).json({"msg": "Token actualizado", tokenUpdate})
+	}
+	return res.status(404).json({"msg": "No se encontro un usuario valido"})
+
+})
+
 export default router
