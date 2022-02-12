@@ -2,8 +2,8 @@ import { Response, Request, Router, NextFunction } from 'express';
 import { uuid } from 'uuidv4';
 import passport from 'passport';
 import { Signup } from '../models/Signup';
-// import { User } from '../models/User';
-// import { Carrier } from '../models/Carrier';
+import { Truck } from '../models/Truck';
+import { Payment } from '../models/Payment';
 import jwt from 'jsonwebtoken'
 import config from "../../config/config"
 const bcrypt = require("bcryptjs");
@@ -38,6 +38,35 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
     try {
         const decoded: any = jwt.verify(token, config.jwtSecret)
         const dataUser = await Signup.findByPk(decoded.id)
+            console.log("id.dataUser", dataUser)
+        // const user = await Signup.findAll({ where: { id: dataUser!.id } })
+
+        let carrierPaymentData = {
+            carrierToken : false, 
+            amount: 0, 
+
+        }
+        if(dataUser && dataUser.role === false && dataUser.phone){
+
+            let carrier = await Truck.findAll({where:{
+                SignupId: dataUser.id
+            }})
+            console.log(carrier[0].id, "este es el carrier")
+            let carrierToken = carrier[0].acesstoken
+
+            carrierPaymentData.carrierToken = carrierToken != null
+
+            let amount =  await Payment.findAll({where:{
+                TruckId : carrier[0].id
+            }})
+
+            console.log("amount", amount)
+            
+            carrierPaymentData.amount = amount.length>0 ? amount[0].amount : 0;
+            }    
+        
+
+
         if (dataUser) {
 
             const payload = {
@@ -51,6 +80,7 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
                 business:dataUser?.business,
                 saldo:dataUser?.saldo,
                 locacion:dataUser?.locacion,
+                carrierPaymentData: dataUser.role === false ? carrierPaymentData : {},
                 // idRole: dataUser.role,
                 mensaje: true
             }

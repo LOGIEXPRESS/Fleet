@@ -165,6 +165,7 @@ const QuotTravel = () => {
                 placeholder="Peso en Toneladas"
                 name="weight"
                 style={styles.textPlaceholder}
+                keyboardType="decimal-pad"
                 onChangeText={(text) => setWeight(text)}
               />
             </View>
