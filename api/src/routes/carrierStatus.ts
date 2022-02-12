@@ -158,7 +158,7 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
 
   // let {status}=req.params
 
-
+  
 
   let on = await Truck.findAll({
     where: {
@@ -168,7 +168,6 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
       model: Signup
     }
   ],
-   
   });
   let inSevice = await Truck.findAll({
     where: {
@@ -188,7 +187,7 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
   });
 
   console.log("ESTO ES ON", on)
-  
+
   return res.status(200).json({ "Fuera_de_servicio": off, "Disponibles": on, "Ocupados": inSevice })
 
   // if( on ){
