@@ -48,7 +48,7 @@ const HistorialDeViaje = () => {
           props.length !== 0 ? props.map((e, index) => {
 
             const propss = {
-              amount : e.payment[0].amount,
+              amount : e.payment[0]?.amount,
               acesstoken: e.acesstoken
 
             }
