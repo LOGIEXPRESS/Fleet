@@ -73,7 +73,7 @@ const ProfileCarrier = () => {
             Transportista en {data?.business}
           </Text>
           <Text style={styles.saldo}>
-            Saldo:      $ 200.0000
+            Saldo:      $ {data?.carrierPaymentData.amount}
 
           </Text>
         </View>

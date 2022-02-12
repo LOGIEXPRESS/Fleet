@@ -41,6 +41,6 @@ export class Truck extends Model{
    travels!: string
    
    @Column
-   cbu!: string
+   acesstoken!: string
 
 }
