@@ -156,15 +156,17 @@ router.post('/StatusOn', async (req: Request, res: Response, next: NextFunction)
 
 router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunction) => {
 
-
+  // let {status}=req.params
 
   let on = await Truck.findAll({
     where: {
       status: true
     },
     include: [{
-      model: Signup 
-    },{model: Payment}]
+      model: Signup
+    }, {
+        model: Payment
+    }],
   });
   let inSevice = await Truck.findAll({
     where: {
@@ -172,18 +174,22 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
     },
     include: [{
       model: Signup
-    },{model: Payment}]
+    }, {
+        model: Payment
+    }]
   });;
   let off = await Truck.findAll({
     where: {
-      status: null,
+      status: null
     },
-    include: [
-      {
+    include: [{
         model: Signup,
-      },{model: Payment}
-    ],
+    },{
+        model: Payment
+    }]
   });
+
+
 
   return res.status(200).json({ "Fuera_de_servicio": off, "Disponibles": on, "Ocupados": inSevice })
 

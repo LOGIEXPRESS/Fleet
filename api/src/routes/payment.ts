@@ -16,14 +16,14 @@ const router=Router()
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { SignupId } = req.body;
-
+  const { amount, acesstoken } = req.body;
+  
   let carrier = await 
   console.log(req.body);
   try {
     mercadopago.configure({
       access_token:
-        "TEST-4261065072334441-020320-579a9756136c4e30a0ce0b4f11322878-177928098",
+      acesstoken,
     });
 
     let preference = {
@@ -33,7 +33,7 @@ router.post("/mercadopago", async (req, res) => {
                   "description": "Dummy Item Description",
                   "quantity": 1,
                   "currency_id": "ARS",
-                  "unit_price": 10.0
+                  "unit_price": amount
           }
       ],
       "payer": {
