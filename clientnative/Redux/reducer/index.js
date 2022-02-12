@@ -22,7 +22,7 @@ const initialState = {
   confirmTravel: null,
   respStatus: null,
   userCarrier: null,
-  carrierTravel:null
+  respUpdateAccessToken: null,
 };
 console.log("ESTO ES EL INITAL STATE", initialState)
 
@@ -67,6 +67,7 @@ export default function rootReducer(state = initialState, action) {
         respDeleteUser: null,
         userStatus: null,
         userCarrier: null,
+        respUpdateAccessToken: null,
       }
     case "DESMOUNT":
       return {
@@ -178,10 +179,15 @@ export default function rootReducer(state = initialState, action) {
               ...state,
               confirmTravel: action.payload
             }
-          case "CARRIER_TRAVEL":
-            return{
+          case "UPDATE_ACCESS_TOKEN": 
+          return {
+            ...state,
+            respUpdateAccessToken: action.payload
+          }
+          case "CLEAR_RESP" :
+            return {
               ...state,
-              carrierTravel:action.payload
+              respUpdateAccessToken : null
             }
     default:
       return state;

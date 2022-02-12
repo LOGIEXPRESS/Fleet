@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, Modal } from 'react-native'
+import { StyleSheet, Text, View, ActivityIndicator, Modal , TouchableOpacity } from 'react-native'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../Utils/HeaderBar";
 import Icon from "react-native-vector-icons/Ionicons";
-import { TextInput, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import { TextInput, ScrollView } from "react-native-gesture-handler";
 import { addCarrier, registeredFleet, deleteFleet, reset } from '../../Redux/actions/index.js'
 import { useSelector, useDispatch } from "react-redux";
 import { set } from "react-native-reanimated";

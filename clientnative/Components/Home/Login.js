@@ -163,7 +163,7 @@ const Login = () => {
 
     //Validaciones:
 
-    if (!obj.eMail.includes(".com") || !obj.eMail.includes("@")) {
+    if (!obj.eMail.includes("@")) {
       changeModalVisible5(true)
       return;
     }
