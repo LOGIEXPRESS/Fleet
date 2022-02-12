@@ -46,6 +46,13 @@ const HistorialDeViaje = () => {
       <View>
         {
           props.length !== 0 ? props.map((e, index) => {
+
+            const propss = {
+              amount : e.payment[0].amount,
+              acesstoken: e.acesstoken
+
+            }
+            console.log("hola",propss)
             return (
               <View style={styles.viewUsers} key={index}>
                 <Image source={{
@@ -62,7 +69,7 @@ const HistorialDeViaje = () => {
                     <TouchableOpacity style={styles.btnText}>
                       <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago')}>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
                       <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
                     </TouchableOpacity>
                   </View>
