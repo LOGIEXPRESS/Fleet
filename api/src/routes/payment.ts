@@ -16,24 +16,23 @@ const router=Router()
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { amount, acesstoken } = req.body;
-  
+  const { unit_price, access_token, title, quantity } = req.body;
+  console.log("ESTO ES ACCES TOKEN" , access_token)
   let carrier = await 
-  console.log(req.body);
+  console.log("ESTO ES REQ.BODY", req.body);
   try {
     mercadopago.configure({
-      access_token:
-      acesstoken,
+      access_token: access_token,
     });
 
     let preference = {
       "items": [
           {
-             "title": "Dummy Item Title",
+             "title": title,
                   "description": "Dummy Item Description",
-                  "quantity": 1,
+                  "quantity": quantity,
                   "currency_id": "ARS",
-                  "unit_price": amount
+                  "unit_price": unit_price
           }
       ],
       "payer": {
