@@ -264,9 +264,21 @@ export function completeProfileCarrier(payload) {
           payload
         );
         console.log('Soy el console.log de responsecomplete', response.data.payload2[1][0])
+       const newobj = {... response.data.payload[1][0], 
+        "carrierPaymentData" : {
+        carrierToken : false, 
+        amount: 0, 
+    } 
+  }
+
+  console.log("newobj",newobj)
+
+
+
+
         return dispatch({
           type: "COMPLETE_PROFILE_CARRIER",
-          payload: response.data.payload2[1][0],
+          payload: newobj,
         });
       } catch (error) {
         console.log(error.response);
