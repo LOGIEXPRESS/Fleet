@@ -22,19 +22,56 @@ import {
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useDispatch, useSelector } from "react-redux";
-
-
+import { updateAccesToken, reset, requestCarrier } from "../../Redux/actions/index.js";
+import ModalUpdate from "../MercadoPago/ModalUpdate.js";
 
 const ScreenAccessToken = () => {
     ////--> HOOK PARA LA NAVEGACION <-- ////
     const navigation = useNavigation();
     const dispatch = useDispatch();
-
+    const carrier = useSelector((store) => store.userCarrier)
     const datosCarrier = useSelector((store) => store.responseLog)
+    const resp = useSelector((store) => store.respUpdateAccessToken)
+    const [accesToken, setAccessToken] = useState();
+    const [modalAlert, setModalAlert] = useState(false);
+    const [pass, setPass] = useState(true)
 
-    const [accesKey, setAccessKey] = useState();
 
-    console.log("Esto es accessKey", accesKey)
+
+
+    useEffect(() => {
+        const id = datosCarrier.id
+        dispatch(requestCarrier(id))
+    }, [dispatch])
+
+
+    useEffect(() => {
+        if (resp) {
+            if (resp.msg === 'Token actualizado') {
+                setModalAlert(true)
+            }
+        }
+        return () => {
+            dispatch(reset());
+        }
+    }, [resp])
+
+
+
+
+    function handleSubmit() {
+        const data = {
+            id: datosCarrier.id,
+            acesstoken: accesToken
+        }
+        dispatch(updateAccesToken(data))
+    }
+
+    console.log('ESTA SERIA LA RESPUESTA', resp)
+
+    console.log("ESTOS SON LOS DATOS DEL CARRIER", carrier)
+
+    console.log("Esto es accessKey", accesToken)
 
     return (
         <View style={styles.container}>
@@ -51,13 +88,21 @@ const ScreenAccessToken = () => {
                     <View style={styles.viewsInputs}>
                         <Icon name="key-outline" style={styles.icons} />
                         <TextInput
-                            placeholder="Acess Token"
+                            value={accesToken}
                             name="Access_token"
+                            defaultValue={carrier ? carrier.carrier.acesstoken : accesToken}
                             style={styles.textPlaceholder}
-                            onChangeText={(e) => setAccessKey(e)}
+                            onChangeText={(e) => setAccessToken(e)}
+                            secureTextEntry={pass}
                         />
+                        <TouchableOpacity onPress={() => setPass(!pass)}>
+                            <Icon name="eye" style={styles.icons} />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.btnEditar}>
+                    <TouchableOpacity
+                        style={styles.btnEditar}
+                        onPress={() => handleSubmit()}
+                    >
                         <Text style={styles.textBtn}>Guardar</Text>
                     </TouchableOpacity>
                     <View>
@@ -88,7 +133,16 @@ const ScreenAccessToken = () => {
                         <Text style={styles.textTutorial2}>Listo copia y pega tu ACCESS KEY y pegala arriba para poder empezar a recibir pagos!</Text>
                     </View>
                 </View>
-
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={modalAlert}
+                >
+                    <ModalUpdate
+                        text={'Acces Token registrado exitosamente'}
+                        setModal={setModalAlert}
+                    />
+                </Modal>
 
             </ScrollView>
         </View>
@@ -152,6 +206,7 @@ const styles = StyleSheet.create({
         marginBottom: wp('4.8%'),
     },
     textPlaceholder: {
+        flex: 1,
         marginLeft: 20,
         fontSize: hp('2.2%'),
         marginBottom: wp('0.25%'),

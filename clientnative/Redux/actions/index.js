@@ -28,15 +28,19 @@ export function userStatus () {
 } */
 
 
-/* export function updateAccesToken () {
+export function updateAccesToken (props) {
   return async function(dispatch) {
     try {
-      const update = await axios.post()
+      const update = await axios.post(`${API_URLS}/api/updateToken`, props)
+      return dispatch ({
+        type: 'UPDATE_ACCESS_TOKEN',
+        payload: update.data
+      })
     } catch (error) {
         console.log("Error", error)
     }
   }
-} */
+}
 
 
 export function requestCarrier (props) {
@@ -141,6 +145,17 @@ export function reset(){
   }
 }
 
+export function clearResp (){
+  return async function (dispatch){
+    try {
+      return dispatch({
+        type: 'CLEAR_RESP'
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
 export function deleteFleet (props) {
   return async function (dispatch) {
     try {
