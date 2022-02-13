@@ -254,14 +254,19 @@ router.get('/alltraveltruck', async (req: Request, res: Response, next: NextFunc
    //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
    //hay que corregir que es de tipo string 
    /* let travel = await Travel.findAll() */
-   const travel = await Travel.findAll({
+   let travelinprocess = await Travel.findAll({
      where:{
-       truckId:{[Op.eq]:id}
+       truckId:{[Op.eq]:id}, finishedTravel: "process"
      }
    }) 
 
- 
-  res.send(travel);
+  let travelfinished = await Travel.findAll({
+    where:{
+      truckId:{[Op.eq]:id}, finishedTravel: "finished"
+    }
+  })
+  
+  return res.status(200).json({ "travelinprocess":travelinprocess , "travelfinished": travelfinished });
 
  }
  catch (err) {
