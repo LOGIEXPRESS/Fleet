@@ -270,7 +270,7 @@ router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next
 
   console.log("ESTO ES EN /alltraveltruck", { "travelinprocess":travelinprocess , "travelfinished": travelfinished } )
   
-  return res.status(200).json({ "travelinprocess":travelinprocess , "travelfinished": travelfinished });
+  return res.status(200).json({ "travelinprocess":travelinprocess[0].id , "travelfinished": travelfinished });
 
  }
  catch (err) {

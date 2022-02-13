@@ -373,10 +373,10 @@ export function reqTravelConfirm (payload) {
   }
 }
 
-export function alltravelstruck (id) {
+export function alltravelstruck (signupId) {
   return async function (dispatch) {
     try {
-      const confirm = await axios.get(`${ API_URLS }/api/alltraveltruck/${id}`);
+      const confirm = await axios.get(`${ API_URLS }/api/alltraveltruck/${signupId}`);
       return dispatch({
         type: "ALL_TRAVELS_TRUCK",
         payload: confirm.data
