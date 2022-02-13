@@ -158,6 +158,8 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
 
   // let {status}=req.params
 
+  
+
   let on = await Truck.findAll({
     where: {
       status: true
@@ -188,7 +190,6 @@ router.get("/FleetStatus", async (req: Request, res: Response, next: NextFunctio
         model: Payment
     }]
   });
-
 
 
   return res.status(200).json({ "Fuera_de_servicio": off, "Disponibles": on, "Ocupados": inSevice })

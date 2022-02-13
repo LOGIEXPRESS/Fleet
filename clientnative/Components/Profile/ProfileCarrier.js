@@ -34,14 +34,13 @@ const ProfileCarrier = () => {
 
   console.log('TRAVEL CARRIER ', travelCarr)
 
-
-
   const [modalAlert, setModalAlert] = useState(false)
 
     // validacion mercadopago
     const [isModalVisible70, setisModalVisible70] = useState(false);
     const [chooseData70, setchooseData70] = useState();
     const [activar70, setActivar70] = useState(false);
+
   
     const changeModalVisible70 = (bool) => {
       setisModalVisible70(bool);
@@ -123,9 +122,9 @@ const ProfileCarrier = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btnText}
-          // onPress={() => {
-          //   navigation.navigate("HistorialDeViajeCarrier");
-          // }}
+          onPress={() => {
+            navigation.navigate("HistoryCarrier");
+          }}
           >
             <Icon name="location-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Historial de viajes</Text>

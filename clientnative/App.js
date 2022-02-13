@@ -27,6 +27,7 @@ import ScreenMap from "./Components/ViewMaps/ScreenMap";
 import Mercadopago from "./Components/MercadoPago/Mercadopago";
 import StartCarrier from './Components/Travel/StartCarrier';
 import ScreenAccessToken from './Components/MercadoPago/ScreenAccessToken.js'
+import HistoryCarrier from "./Components/Historial de viaje/HistoryCarrier"
 
 
 LogBox.ignoreLogs([
@@ -155,6 +156,11 @@ const App = () => {
             <Stack.Screen
               name="Mercadopago"
               component={Mercadopago}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="HistoryCarrier"
+              component={HistoryCarrier}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

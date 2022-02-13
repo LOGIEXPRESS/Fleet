@@ -390,6 +390,21 @@ export function reqTravelConfirm (payload) {
   }
 }
 
+export function alltravelstruck (signupId) {
+  return async function (dispatch) {
+    try {
+      const confirm = await axios.get(`${ API_URLS }/api/alltraveltruck/${signupId}`);
+      console.log("Leegando a la action alltravelstruck ",confirm.data);
+      return dispatch({
+        type: "ALL_TRAVELS_TRUCK",
+        payload: confirm.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
 
 export function desmount() {
   return {
