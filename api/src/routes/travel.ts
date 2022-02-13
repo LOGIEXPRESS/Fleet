@@ -248,8 +248,8 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
 
 });
 
-router.get('/alltraveltruck', async (req: Request, res: Response, next: NextFunction) => {
-  const {id } = req.body
+router.get('/alltraveltruck/:id', async (req: Request, res: Response, next: NextFunction) => {
+  const {id } = req.params
   
   
   try {
