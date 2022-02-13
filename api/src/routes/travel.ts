@@ -250,6 +250,8 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
 
 router.get('/alltraveltruck', async (req: Request, res: Response, next: NextFunction) => {
   const {id } = req.body
+  
+  
   try {
    //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
    //hay que corregir que es de tipo string 
@@ -265,6 +267,8 @@ router.get('/alltraveltruck', async (req: Request, res: Response, next: NextFunc
       truckId:{[Op.eq]:id}, finishedTravel: "finished"
     }
   })
+
+  console.log("ESTO ES EN /alltraveltruck", { "travelinprocess":travelinprocess , "travelfinished": travelfinished } )
   
   return res.status(200).json({ "travelinprocess":travelinprocess , "travelfinished": travelfinished });
 

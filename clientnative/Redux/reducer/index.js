@@ -23,6 +23,7 @@ const initialState = {
   respStatus: null,
   userCarrier: null,
   respUpdateAccessToken: null,
+  alltraveltruck:[],
 };
 console.log("ESTO ES EL INITAL STATE", initialState)
 
@@ -188,6 +189,12 @@ export default function rootReducer(state = initialState, action) {
             return {
               ...state,
               respUpdateAccessToken : null
+            }
+            
+          case "ALL_TRAVELS_TRUCK" :
+            return {
+              ...state,
+              alltraveltruck: action.payload
             }
     default:
       return state;
