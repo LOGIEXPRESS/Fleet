@@ -1,36 +1,57 @@
-import { View, Text } from 'react-native'
+import { View, Text, ActivityIndicator , FlatList , StyleSheet} from 'react-native'
 import React , {useEffect, useState} from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import { alltravelstruck, enviarToken } from '../../Redux/actions'
 import * as SecureStore from "expo-secure-store";
+import CardTravel from "./CardTravel";
 
 
 export default function HistoryCarrier() {
-
-    const responlog = useSelector((store) => store.responseLog)
-    const  travelstruck = useSelector((store) => store.alltravelstruck)
-    
     const dispatch = useDispatch();
-
-    const [idUser , setIdUser] = useState("")
+    const responlog = useSelector((store) => store.responseLog)
+    const travelstruck = useSelector((store) => store.alltraveltruck)
+    const [inProcess , setInprocess] = useState([])
+    const [inFinished, setInfinished] = useState([])
 
     useEffect(() => {
-        setIdUser(responlog.id)
-        console.log("ESTO es responlog BOOOMMMM", responlog.id);
-        
-        
+        dispatch(alltravelstruck(responlog.id))
     }, [])
 
     useEffect(() => {
-      console.log("idUser",idUser)
-      dispatch(alltravelstruck(idUser))
-      console.log("AQUI",travelstruck)
-  }, [dispatch])
+      setInprocess(travelstruck?.travelinprocess)
+      setInfinished(travelstruck?.travelfinished)
+  }, [travelstruck])
 
+    console.log("inProcess",inProcess);
     
   return (
-    <View>
+    <View style={styles.spinner}>
       <Text>HistoryCarrier</Text>
+      <View style={styles.Container}>
+        <FlatList
+          data={inProcess}
+          horizontal={false}
+          numColumns={1}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={() => String(Math.random())}
+          renderItem={({ item }) => <CardTravel travel={item} info={"Viaje en proceso"}/>}
+          contentContainerStyle={styles.flatListContentContainer}
+        />
+      </View>
     </View>
-  )
+  );
 }
+const styles = StyleSheet.create({
+  flatListContentContainer: {
+    paddingHorizontal: 5,
+    marginTop: Platform.OS === "android"? 30 : 0,
+  },
+  Container:{
+    borderColor: "black",
+    borderWidth: 2
+  },
+  spinner:{
+    marginTop: 20,
+    marginBottom: Platform.OS === "android"? 90 : 60,
+  }
+})

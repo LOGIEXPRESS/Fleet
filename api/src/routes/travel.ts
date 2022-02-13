@@ -379,7 +379,12 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
       { where: { id: id },
       returning: true, }
     );
-
+    let payment= await Payment.create({
+      id:uuid(),
+      amount:Number(confirm[1][0].price),
+      status:true,
+      TruckId:idCarrier.id
+    })
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
     return res.send(confirm);
     }

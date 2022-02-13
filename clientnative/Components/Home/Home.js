@@ -117,8 +117,6 @@ const Home = () => {
 
 
 
-
-
   return (
     //Container Start
     <View

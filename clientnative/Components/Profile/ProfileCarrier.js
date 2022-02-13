@@ -27,14 +27,13 @@ const ProfileCarrier = () => {
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
 
-
-
   const [modalAlert, setModalAlert] = useState(false)
 
     // validacion mercadopago
     const [isModalVisible70, setisModalVisible70] = useState(false);
     const [chooseData70, setchooseData70] = useState();
     const [activar70, setActivar70] = useState(false);
+
   
     const changeModalVisible70 = (bool) => {
       setisModalVisible70(bool);
