@@ -69,6 +69,8 @@ export default function rootReducer(state = initialState, action) {
         userStatus: null,
         userCarrier: null,
         respUpdateAccessToken: null,
+        responseLog: null,
+        respToken: null,
       }
     case "DESMOUNT":
       return {

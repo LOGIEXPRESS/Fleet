@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image , TouchableOpacity} from "rea
 // import { logiarUsuario } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
-import { cleanToken, statusOff } from "../../../Redux/actions";
+import { cleanToken, reset, statusOff } from "../../../Redux/actions";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
@@ -33,8 +33,10 @@ const PersonalDataCarrier = () => {
     }
     console.log("cerrar sesion");
     save("token", "(result)");
+    dispatch(reset())
     dispatch(cleanToken());
     dispatch(statusOff(id));
+    
     navigation.navigate('Login');
   }
 
@@ -84,7 +86,7 @@ const PersonalDataCarrier = () => {
             </Text>
             <Text style={{ fontSize: hp('2.3%'), marginTop: hp('0.3%') }}>
               {/* Buenos Aires */}
-              {data.locacion}
+              {data?.locacion}
             </Text>
           </View>
         </View>
