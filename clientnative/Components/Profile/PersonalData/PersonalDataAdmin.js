@@ -28,7 +28,6 @@ const PersonalDataAdmin = () => {
     console.log("cerrar sesion")
     dispatch(cleanToken())
     save("token", "(result)")
-    dispatch(reset())
     navigation.navigate('Login')
   }
 

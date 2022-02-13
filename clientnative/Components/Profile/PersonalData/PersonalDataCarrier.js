@@ -33,7 +33,6 @@ const PersonalDataCarrier = () => {
     }
     console.log("cerrar sesion");
     save("token", "(result)");
-    dispatch(reset())
     dispatch(cleanToken());
     dispatch(statusOff(id));
     
