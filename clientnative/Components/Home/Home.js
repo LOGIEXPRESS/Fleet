@@ -23,9 +23,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const resptoken = useSelector((store) => store.respToken);
   const adminreg = useSelector((store) => store.adminreg);
-    //TOKEN
-    const [result, onChangeResult] = useState("(result)");
-    // getValueFor(); // PRIMERO CORROBORAMOS SI HAY UN TOKEN GUARDADO
   console.log("llega adminreg", adminreg)
   console.log("llega respotoken", resptoken)
   useEffect(() => {
@@ -56,7 +53,9 @@ const Home = () => {
     }
   }
   
-
+  //TOKEN
+  const [result, onChangeResult] = useState("(result)");
+  // getValueFor(); // PRIMERO CORROBORAMOS SI HAY UN TOKEN GUARDADO
 
   console.log("result",result)
   useEffect(() => {

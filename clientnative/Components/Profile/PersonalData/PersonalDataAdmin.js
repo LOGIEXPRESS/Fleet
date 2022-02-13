@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/core";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
-import { cleanToken, reset } from "../../../Redux/actions";
+import { cleanToken } from "../../../Redux/actions";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -28,7 +28,7 @@ const PersonalDataAdmin = () => {
     console.log("cerrar sesion")
     dispatch(cleanToken())
     save("token", "(result)")
-    dispatch(reset())
+    
     navigation.navigate('Login')
   }
 
