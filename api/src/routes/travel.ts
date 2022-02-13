@@ -248,23 +248,23 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
 
 });
 
-router.get('/alltraveltruck/:id', async (req: Request, res: Response, next: NextFunction) => {
-  const {id } = req.params
+router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next: NextFunction) => {
+  const {signupId } = req.params
   
   
   try {
-   //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
-   //hay que corregir que es de tipo string 
-   /* let travel = await Travel.findAll() */
-   let travelinprocess = await Travel.findAll({
+
+    let truckId = await Truck.findOne({ where: { SignupId: signupId } });
+ 
+    let travelinprocess = await Travel.findAll({
      where:{
-       truckId:{[Op.eq]:id}, finishedTravel: "process"
+       truckId:{[Op.eq]:truckId?.id}, finishedTravel: "process"
      }
    }) 
 
   let travelfinished = await Travel.findAll({
     where:{
-      truckId:{[Op.eq]:id}, finishedTravel: "finished"
+      truckId:{[Op.eq]:truckId?.id}, finishedTravel: "finished"
     }
   })
 
@@ -274,7 +274,7 @@ router.get('/alltraveltruck/:id', async (req: Request, res: Response, next: Next
 
  }
  catch (err) {
-   next(err)
+   next(err);
  }
  
 
