@@ -23,6 +23,8 @@ import ModalAlert from "../Añadir Transportista/ModalAlert";
 import SimpleModal70 from "../Alerts/Travel/SimpleModalmercado";
 
 import { getTravelCarrier } from "../../Redux/actions";
+import axios from "axios";
+import { API_URLS } from "@env"
 
 
 const ProfileCarrier = () => {
@@ -30,9 +32,10 @@ const ProfileCarrier = () => {
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
   const dispatch=useDispatch()
-  const travelCarr=useSelector((store)=>store.carrierTravel)
+  const travelCarr=useSelector((store)=>store.carrierTravels)
+  const[saldo,setSaldo]=useState(0)
 
-  console.log('TRAVEL CARRIER ', travelCarr)
+  
 
   const [modalAlert, setModalAlert] = useState(false)
 
@@ -66,13 +69,21 @@ const ProfileCarrier = () => {
   console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
-  useEffect(() => {
+  useEffect(async() => {
     console.log("data", data);
 
+    let saldo=await axios.get(`${API_URLS}/api/amountCarrier/${data.id}`)
+    console.log('SALDOOOOOO: ',saldo.data.payload)
+    setSaldo(saldo.data.payload)
+
+   
     dispatch(getTravelCarrier(data.id))
+    // return()=>{dispatch(getTravelCarrier(data.id))} 
   
 
-  }, [data]);
+  }, [dispatch,data]);
+
+  console.log('travels carrier:',travelCarr)
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -106,7 +117,7 @@ const ProfileCarrier = () => {
             Transportista en {data?.business}
           </Text>
           <Text style={styles.saldo}>
-            Saldo:      $ {data?.carrierPaymentData.amount}
+            Saldo:      $ {saldo}
 
           </Text>
         </View>
@@ -140,6 +151,30 @@ const ProfileCarrier = () => {
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
 
+          {travelCarr?.payload?.length ?          
+          <TouchableOpacity
+            style={styles.btn2}
+            onPress={()=>navigation.push('MapTravel')}
+          >
+            <Text style={styles.userBtnTxt2}>Ver viaje en Proceso...</Text>
+            {/* <Image
+              style={{ width: wp('15%'), height: hp('6%'), marginLeft: wp('2%'), marginTop: wp('-2%') }}
+              source={require("./Utils/camion.png")}
+            /> */}
+
+                {/* <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible70}
+                  nRequestClose={() => changeModalVisible70(false)}
+                >
+                  <SimpleModal70
+                    changeModalVisible70={changeModalVisible70}
+                    setData70={setData70}
+                    setActivacion70={setActivacion70}
+                  />
+                </Modal> */}
+          </TouchableOpacity>:          
           <TouchableOpacity
             style={styles.btn2}
             onPress={handler}
@@ -162,7 +197,9 @@ const ProfileCarrier = () => {
                     setActivacion70={setActivacion70}
                   />
                 </Modal>
-          </TouchableOpacity>
+          </TouchableOpacity>}
+
+
         </View>
        {/*  <Modal
           animationType="slide"
