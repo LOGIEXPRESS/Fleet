@@ -233,6 +233,7 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
+            autoCapitalize = 'none'
             
             autoFocus={true}
 
@@ -250,6 +251,7 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
+            autoCapitalize = 'none'
             ref={lastNameRef} onSubmitEditing={() => {
               return console.log('done')
           }}
