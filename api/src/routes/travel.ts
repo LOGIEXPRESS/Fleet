@@ -8,6 +8,7 @@ import { Carrier } from '../models/Carrier';
 import { Truck } from '../models/Truck';
  
 import { Signup } from '../models/Signup';
+import { Payment } from '../models/Payment';
  
 
 const router = Router()
@@ -225,9 +226,6 @@ router.post('/requestTravel', async (req: Request, res: Response, next: NextFunc
 
 router.get('/Travel', async (req: Request, res: Response, next: NextFunction) => {
 
-  
-
-  
    try {
     //Importante en el modelo de travel hay un error en declaración de la relacion con user User_Reg
     //hay que corregir que es de tipo string 
@@ -248,8 +246,37 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
   }
   
 
+});
 
+router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next: NextFunction) => {
+  const {signupId } = req.params
+  
+  
+  try {
 
+    let truckId = await Truck.findOne({ where: { SignupId: signupId } });
+ 
+    let travelinprocess = await Travel.findAll({
+     where:{
+       truckId:{[Op.eq]:truckId?.id}, finishedTravel: "process"
+     }
+   }) 
+
+  let travelfinished = await Travel.findAll({
+    where:{
+      truckId:{[Op.eq]:truckId?.id}, finishedTravel: "finished"
+    }
+  })
+
+  console.log("ESTO ES EN /alltraveltruck", { "travelinprocess":travelinprocess[0].id , "travelfinished": travelfinished } )
+  
+  return res.status(200).json({ "travelinprocess":travelinprocess , "travelfinished": travelfinished });
+
+ }
+ catch (err) {
+   next(err);
+ }
+ 
 
 });
 
@@ -352,6 +379,12 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
       { where: { id: id },
       returning: true, }
     );
+    let payment= await Payment.create({
+      id:uuid(),
+      amount:Number(confirm[1][0].price),
+      status:true,
+      TruckId:idCarrier.id
+    })
     console.log("ESTO DEVUELVE CONFIRM TRAVEL,", confirm);
     return res.send(confirm);
     }

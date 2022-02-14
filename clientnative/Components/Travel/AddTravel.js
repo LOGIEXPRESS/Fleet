@@ -430,7 +430,6 @@ const AddTravel = (props) => {
                   placeholder="Carga en toneladas"
                   placeholderTextColor="#8a9096"
                   name="weight"
-                  keyboardType="decimal-pad"
                   onChangeText={(text) => setWeight(text)}
                 />
               </View>

@@ -75,22 +75,23 @@ router.get('/payment', async (req: Request, res: Response) => {
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { title, unit_price } = req.body;
-  console.log(req.body);
+  const { unit_price, access_token, title, quantity } = req.body;
+  console.log("ESTO ES ACCES TOKEN" , access_token)
+  let carrier = await 
+  console.log("ESTO ES REQ.BODY", req.body);
   try {
     mercadopago.configure({
-      access_token:
-        "TEST-4261065072334441-020320-579a9756136c4e30a0ce0b4f11322878-177928098",
+      access_token: access_token,
     });
 
     let preference = {
       "items": [
           {
-             "title": "Dummy Item Title",
+             "title": title,
                   "description": "Dummy Item Description",
-                  "quantity": 1,
+                  "quantity": quantity,
                   "currency_id": "ARS",
-                  "unit_price": 10.0
+                  "unit_price": unit_price
           }
       ],
       "payer": {
@@ -185,14 +186,14 @@ router.get('/render', (req: Request , res: Response, ) => {
 
   if(x==="2"){
     return   res.send(`
-    <body style="background-color:green; color: white " >
+    <body style="background-color:white; color: white " >
     <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
     margin-left: auto;
     margin-right: auto;
     width:300px;
     height:300px;
     " />
-      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago exitoso!</h1>
+      <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px; color: #009de2 ">Pago exitoso!</h1>
     </body>
   `)
   }
