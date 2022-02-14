@@ -18,7 +18,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
-import Checkout from "../MercadoPago/Checkout";
 import { userStatus, reset } from "../../Redux/actions/index.js";
 
 

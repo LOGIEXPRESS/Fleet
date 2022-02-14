@@ -142,7 +142,9 @@ export default function rootReducer(state = initialState, action) {
         case "CLEAN_TOKEN":
           return {
             ...state,        
-            token: ""
+            token: "",
+            login: null
+
           };
         case "GET_PRICE_QUOTE":
           return {
