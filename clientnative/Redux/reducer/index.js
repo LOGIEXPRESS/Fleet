@@ -143,8 +143,8 @@ export default function rootReducer(state = initialState, action) {
           return {
             ...state,        
             token: "",
-            login: null
-
+            responseLog: null
+            
           };
         case "GET_PRICE_QUOTE":
           return {

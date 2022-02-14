@@ -44,9 +44,9 @@ const SimpleModal = (props) => {
         </View>
         <View style={styles.containerBtn}>
           <TouchableOpacity
-            onPress={() => {
-              closeModal(false, "Aceptar")
-              save("token", "(result)")
+            onPress={async() => {
+              closeModal(false, "Aceptar");
+              await SecureStore.deleteItemAsync("token");
             }
         }
             onPressIn={() => navigation.navigate("Login")}
