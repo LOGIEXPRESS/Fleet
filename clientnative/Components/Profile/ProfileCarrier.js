@@ -109,8 +109,7 @@ const ProfileCarrier = () => {
 
           <TouchableOpacity
             style={styles.btn2}
-            onPress={() => setModalAlert(true)}
-            // onPress={()=> navigation.navigate("ScreenMap")}
+            onPress={()=> navigation.navigate("ScreenMap")}
           >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
@@ -119,7 +118,7 @@ const ProfileCarrier = () => {
             /> */}
           </TouchableOpacity>
         </View>
-        <Modal
+       {/*  <Modal
           animationType="slide"
           onDismiss={() => console.log("close")}
           onShow={() => console.log('open')}
@@ -148,7 +147,7 @@ const ProfileCarrier = () => {
               </View>
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </ScrollView>
     </View>
   );

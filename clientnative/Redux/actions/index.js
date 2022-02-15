@@ -3,7 +3,7 @@ import { API_URLS } from "@env"
 
 
 
-
+/* 
 export function userStatus () {
   return async function (dispatch) {
     try {
@@ -25,7 +25,68 @@ export function userStatus () {
       console.log("Error",error )
     }
   }
+} */
+
+
+export function requestCarrier (props) {
+  return async function (dispatch) {
+    try {
+      const carrier = await axios.get(`${API_URLS}/api/findOneCarrier?id=${props}`)
+      return dispatch ({
+        type: 'REQUEST_CARRIER',
+        payload: carrier.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
 }
+
+
+export function statusOff (props) {
+  return async function (dispatch){
+    try {
+      const update = await axios.post(`${API_URLS}/api/ChangeOff`, props )
+      return dispatch({
+        type: 'STATUS_OFF',
+        payload: update.data
+      })
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
+
+export function statusOn(props) {
+  return async function (dispatch){
+    try {
+      const update = await axios.post(`${API_URLS}/api/ChangeOn`, props )
+      return dispatch({
+        type: 'STATUS_ON',
+        payload: update.data
+      })
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
+
+
+export function userStatus () {
+  return async function(dispatch) {
+    try {
+      const users = await axios.get(`${API_URLS}/api/FleetStatus`)
+      return dispatch ({
+        type: 'USER_STATUS',
+        payload: users.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+}
+
+
 
 export function updatePerfil (payload) {
   return async function (dispatch) {
@@ -46,7 +107,7 @@ export function getTravels() {
   return async function (dispatch) {
     try {
       const request = await axios.get(`${ API_URLS }/api/Travel`);
-      // console.log("LLEGANDO LOS VIJAES POR la accion getTravels",request.data);
+      
       return dispatch({
         type: "GET_TRAVELS",
         payload: request.data,
@@ -256,6 +317,20 @@ export function sendMessage (payload) {
       console.log("Error", error);
     }
   };
+}
+
+export function reqTravelConfirm (payload) {
+  return async function (dispatch) {
+    try {
+      const confirm = await axios.post(`${ API_URLS }/api/confirmTravel`, payload);
+      return dispatch({
+        type: "CONFIRME_REQUEST",
+        payload: confirm.data
+      })
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
 }
 
 

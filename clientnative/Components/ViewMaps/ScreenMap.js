@@ -12,7 +12,9 @@ import {
   Animated,
   Platform,
   ActivityIndicator,
+  Modal,
 } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import { useState, useEffect } from "react";
 
@@ -22,7 +24,7 @@ import * as Location from "expo-location";
 
 import { useNavigation } from "@react-navigation/core";
 
-import { getTravels } from "../../Redux/actions";
+import { getTravels, requestCarrier, reset, statusOn } from "../../Redux/actions";
 import Card from "./Cards";
 // import Pointers from "./Pointers";
 
@@ -45,12 +47,47 @@ import CardWaiting from "./CardWaiting";
 
 export default function ScreenMap() {
 
+  const navigation = useNavigation();
   const dispatch = useDispatch()
 
   const travels = useSelector((state) => state.travels)
+  const data = useSelector((state) => state.responseLog)
+  const carrier = useSelector((state) => state.userCarrier)
+  const [modalAlert, setModalAlert] = useState(false)
+
+  useEffect(() => {
+    dispatch(requestCarrier(data.id))
+   
+  }, [dispatch])
 
 
+  useEffect(() => {
+    if (carrier) {
+      if (carrier.carrier.status === null) {
+        setModalAlert(true)
+      }
+    }
+    return () => {
+      reset();
+    }
+  }, [carrier])
 
+
+  const handlerOn = () => {
+    const id = {
+      id: data.id
+    }
+    dispatch(statusOn(id))
+    setModalAlert(false)
+  }
+
+  const handlerOff = () => {
+    navigation.navigate('ProfileCarrier')
+    setModalAlert(false)
+  }
+
+  console.log("Esto es lo que le llega al map desde el login", data)
+  console.log("Esto es la data del Carrier", carrier)
   const [pin, setPin] = useState({
     latitude: 0,
     longitude: 0,
@@ -83,9 +120,12 @@ export default function ScreenMap() {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
+      // let origin={latitude: location.coords.latitude,longitude: location.coords.longitude}
+      // console.log('MY PIN: ',origin)
+      // dispatch(getTravels(origin.latitude,origin.longitude));
     })();
     dispatch(getTravels());
-
+    
   }, [dispatch]);
   console.log("ESTO SON LOS VIAJES", travels);
 
@@ -142,7 +182,7 @@ export default function ScreenMap() {
 
   return (
     <View style={styles.container}>
-      {/*  <HeaderBar screen="null" style={styles.header} /> */}
+      <HeaderBar screen="null" style={styles.header} />
       {pin.latitude !== 0 ? (
         <View style={styles.container}>
           <MapView
@@ -152,8 +192,8 @@ export default function ScreenMap() {
             provider="google"
           >
             <Marker
-            title="Mi Ubicacion"
-            coordinate={pin} 
+              title="Mi Ubicacion"
+              coordinate={pin}
             // description='descrpcion'
             />
 
@@ -197,6 +237,7 @@ export default function ScreenMap() {
             ) : (
               <ActivityIndicator size="large" color="#0000ff" />
             )}
+            
 
 
 
@@ -246,7 +287,8 @@ export default function ScreenMap() {
                   weight={data.weight}
                   business={data.admin.business}
                   photo={data.admin.photo}
-                  random={index} />
+                  random={index}
+                  id={data.id} />
               )
             })
 
@@ -266,13 +308,86 @@ export default function ScreenMap() {
       ) : (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
-
+      <Modal
+        animationType="slide"
+        onDismiss={() => console.log("close")}
+        onShow={() => console.log('open')}
+        transparent
+        visible={modalAlert}
+      >
+        <View style={styles.containerModal}>
+          <View style={styles.DeleteModal}>
+            <View style={styles.textModal}>
+              <Icon name="checkmark-circle" style={styles.icon_modal} />
+              <Text style={styles.btnModalText2}>Estas listo para trabajar?</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
+                  style={styles.btnModal}
+                  onPress={() => handlerOn()}
+                >
+                  <Text style={styles.btnModalText}>Aceptar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.btnModal}
+                  onPress={() => handlerOff()}
+                >
+                  <Text style={styles.btnModalText}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 };
 
 
 const styles = StyleSheet.create({
+  containerModal: {
+    flex: 1,
+    backgroundColor: 'rgba(1,1,1, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+  DeleteModal: {
+    height: hp('26%'),
+    width: wp('70%'),
+    backgroundColor: '#fff'
+  },
+  textModal: {
+    alignItems: 'center',
+    alignContent: 'center',
+    paddingTop: hp('4%')
+  },
+  icon_modal: {
+    fontSize: hp("7%"),
+    color: "#1DD135",
+  },
+  btnModal: {
+    width: wp('20%'),
+    color: "black",
+    margin: hp('1%'),
+    height: hp('4%'),
+    backgroundColor: "#ff1c49",
+    borderRadius: hp('1%'),
+    marginTop: hp("3%"),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOpacity: 50,
+    elevation: 10,
+},
+btnModalText: {
+  fontSize: hp("2%"),
+  marginLeft: wp("2%"),
+  color: '#ffff'
+},
+btnModalText2: {
+  fontSize: hp("2.5%"),
+  color: '#000'
+},
   container: {
     marginTop: 0,
     flex: 1,

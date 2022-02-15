@@ -1,18 +1,35 @@
 import { Response, Request, Router, NextFunction } from 'express';
 import { Signup } from '../models/Signup';
 import { Carrier }  from '../models/Carrier';
+import {Payment} from '../models/Payment'
 import axios from 'axios';
+import { Travel } from '../models/Travel';
+import { nextTick } from 'process';
+import { where } from 'sequelize/dist';
+import { uuid } from 'uuidv4';
+import { Truck } from '../models/Truck';
 const mercadopago = require('mercadopago');
 
 const router=Router()
 
-router.get('/payment', async (req: Request, res: Response) => {
-    res.send('Allan Torres line 15');
-  });
+// router.get('/payment', async (req: Request, res: Response) => {
+//     res.send('Allan Torres line 15');
+//   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { title, unit_price } = req.body;
-  console.log(req.body);
+  const { title, unit_price, id} = req.body;
+  //console.log(req.body);
+
+  let truck = await Truck.findAll({where:{
+    SignupId: id
+  }})
+
+  let paymentData = await Payment.findAll({where:{
+    TruckId: truck[0].id
+  }})
+
+  let amount = paymentData[0].amount
+
   try {
     mercadopago.configure({
       access_token:
@@ -26,7 +43,7 @@ router.post("/mercadopago", async (req, res) => {
                   "description": "Dummy Item Description",
                   "quantity": 1,
                   "currency_id": "ARS",
-                  "unit_price": 10.0
+                  "unit_price": amount
           }
       ],
       "payer": {
@@ -135,5 +152,31 @@ router.get('/render', (req: Request , res: Response, ) => {
   res.send(`Error en el paramentro x = ${x}`)
 })
 
+router.get('/payment/:truckId', async (req: Request, res: Response , next: NextFunction) => {
+
+  const {truckId} = req.params
+  try {
+
+    let payment = await Travel.findAll({
+      where: {
+        finishedTravel: "process",
+        truckId: truckId
+      },attributes: [ 'price' ]
+    });
+
+    let amount=payment.map(p=>Number(p.price)).reduce((previousValue, currentValue) => previousValue + currentValue)
+
+    await Payment.create({ 
+      id:uuid(),
+      amount: amount , 
+      TruckId :truckId 
+    })
+
+    res.json({payment,amount})
+
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default router

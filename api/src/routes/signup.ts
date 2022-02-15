@@ -7,6 +7,8 @@ import { Signup } from '../models/Signup';
 import jwt from 'jsonwebtoken'
 import config from "../../config/config"
 const bcrypt = require("bcryptjs");
+import { Truck } from '../models/Truck';
+import { Payment } from '../models/Payment';
 
 const router = Router()
 
@@ -38,6 +40,34 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
     try {
         const decoded: any = jwt.verify(token, config.jwtSecret)
         const dataUser = await Signup.findByPk(decoded.id)
+
+        const user = await Signup.findAll({ where: { id: dataUser!.id } })
+
+        let carrierPaymentData = {
+            carrierToken : false, 
+            amount: 0, 
+
+        }
+        if(user && user[0].phone){
+        if(user && user[0].role === false){
+
+            let carrier = await Truck.findAll({where:{
+                SignupId: user[0].id
+            }})
+            console.log(carrier[0], "este es el carrier")
+            let carrierToken = carrier[0].acesstoken
+
+            carrierPaymentData.carrierToken = carrierToken != null
+
+            let amount =  await Payment.findAll({where:{
+                TruckId : carrier[0].id
+            }})
+        
+            carrierPaymentData.amount = amount[0].amount
+            }    
+        }
+
+
         if (dataUser) {
 
             const payload = {
@@ -51,6 +81,7 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
                 business:dataUser?.business,
                 saldo:dataUser?.saldo,
                 locacion:dataUser?.locacion,
+                carrierPaymentData: user[0].role === false ? carrierPaymentData : {},
                 // idRole: dataUser.role,
                 mensaje: true
             }
@@ -69,9 +100,6 @@ router.post('/verifytoken', async (req: Request, res: Response, next: NextFuncti
 router.post('/adminregister', async (req: Request, res: Response, next: NextFunction) => {
     // const data1 = JSON.parse(req.body)
     // console.log("Estes es el body", req.body);
-
-    
-    
 
     const { name, lastName, eMail,  password, phone, photo, secret , identification, business  } = req.body
 
