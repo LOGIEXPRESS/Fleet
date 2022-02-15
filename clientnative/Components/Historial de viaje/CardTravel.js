@@ -18,7 +18,7 @@ export default function CardTravel(props) {
               Origen: {travel.orig.split("/")[2]}
             </Text>
             <Text style={styles.name}>
-              Destino: {travel.destination.split("/")[2]}
+            Destino: {travel.destination.split("/")[2]}
             </Text>
             <Text style={styles.name}>
               Carga: {capitalize(travel.description)}

@@ -54,35 +54,58 @@ const HistorialDeViaje = () => {
             console.log("hola",propss)
             return (
               <View style={styles.viewUsers} key={index}>
-                <Image source={{
-                  uri:
-                    e.carrier.photo === null || e.carrier.photo === "url"
-                      ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
-                      : e.carrier.photo
-
-                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
+                <Image
+                  source={{
+                    uri:
+                      e.carrier.photo === null || e.carrier.photo === "url"
+                        ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                        : e.carrier.photo,
+                  }}
+                  style={
+                    e.status === true || e.status === false
+                      ? styles.imgOn
+                      : styles.imgOff
+                  }
+                />
                 <View style={styles.cardsText}>
-                  <Text style={styles.cardsName}>{e.carrier.name} {e.carrier.lastName}</Text>
+                  <Text style={styles.cardsName}>
+                    {e.carrier.name} {e.carrier.lastName}
+                  </Text>
                   <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
                   <View style={styles.flexbtn}>
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        HISTORIAL DE VIAJES{" "}
+                      </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
-                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
+                    <TouchableOpacity
+                      style={styles.btnText}
+                      onPress={() => navigation.navigate("Mercadopago", propss)}
+                    >
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        SALDO GENERADO{" "}
+                      </Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.flexbtn}>
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        VER VIAJE ACTUAL{" "}
+                      </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        ENVIAR MENSAJE
+                      </Text>
                     </TouchableOpacity>
                   </View>
                 </View>
               </View>
-            )
+            );
           }) : (<View style={{alignContent: 'center', alignItems:'center'}}>
               <Text style={{fontSize: hp('2%'), fontWeight:'400'}}>No hay transportistas disponibles</Text>
                </View>)

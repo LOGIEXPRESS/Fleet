@@ -161,7 +161,7 @@ const App = () => {
             <Stack.Screen
               name="HistoryCarrier"
               component={HistoryCarrier}
-              options={{ headerShown: false }}
+              // options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -22,7 +22,7 @@ export default function HistoryCarrier() {
       setInfinished(travelstruck?.travelfinished)
   }, [travelstruck])
 
-    console.log("inProcess",inProcess);
+    console.log("inProcess",inProcess, "inFinished", inFinished);
     
   return (
     <View style={styles.spinner}>
@@ -35,6 +35,17 @@ export default function HistoryCarrier() {
           showsVerticalScrollIndicator={false}
           keyExtractor={() => String(Math.random())}
           renderItem={({ item }) => <CardTravel travel={item} info={"Viaje en proceso"}/>}
+          contentContainerStyle={styles.flatListContentContainer}
+        />
+      </View>
+      <View style={styles.Container}>
+        <FlatList
+          data={inFinished}
+          horizontal={false}
+          numColumns={1}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={() => String(Math.random())}
+          renderItem={({ item }) => <CardTravel travel={item} info={"Viaje finalizado"}/>}
           contentContainerStyle={styles.flatListContentContainer}
         />
       </View>
