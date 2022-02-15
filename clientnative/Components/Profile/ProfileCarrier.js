@@ -66,6 +66,10 @@ const ProfileCarrier = () => {
 
   }, [data]);
 
+  const propsChat = { 
+    carrierId : "7fb2a6aa-b830-4f04-9761-cbe89107e96c",
+    userType : "Transportista"
+    }
 
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -131,6 +135,16 @@ const ProfileCarrier = () => {
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btnText}
+            onPress={() => navigation.navigate("Chat", propsChat) }
+          >
+            <Icon name="calculator-outline" style={styles.icons} />
+            <Text style={styles.userBtnTxt}>Chat</Text>
+            {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
+          </TouchableOpacity>
+
 
           <TouchableOpacity style={styles.btn2} onPress={handler}>
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>

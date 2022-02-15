@@ -38,6 +38,11 @@ const HistorialDeViaje = () => {
 
   console.log("Esto serian los users:", user)
 
+  const propsChat = { 
+    carrierId : "7fb2a6aa-b830-4f04-9761-cbe89107e96c",
+    userType : "Administrador"
+    }
+
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
 
@@ -45,6 +50,7 @@ const HistorialDeViaje = () => {
       <View>
         {
           props.length !== 0 ? props.map((e, index) => {
+
 
             const propss = {
               amount : e.payment[0]?.amount,
@@ -96,7 +102,7 @@ const HistorialDeViaje = () => {
                         VER VIAJE ACTUAL{" "}
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat")} >
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
                       <Text style={{ fontSize: wp("2.3%") }}>
                         {" "}
                         ENVIAR MENSAJE

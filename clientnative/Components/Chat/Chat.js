@@ -1,11 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity } from 'react-native';
+import io from "socket.io-client";
 import { useNavigation } from "@react-navigation/core";
 
 const socket = io.connect("https://superfleetback.herokuapp.com/");
                                 //setShowChat es para el funcionamiento de la prueba
-function Chat({ userType,carrierId}) {
+function Chat(propsChat) {
+
+  const userType = propsChat.route.params.userType
+
+  const carrierId =propsChat.route.params.carrierId
+
+  console.log("userType", userType);
 
   const navigation = useNavigation();
   //disconect esta variable donde vamos a guardar la resTextuesta del back
@@ -101,49 +108,108 @@ socket.emit("join_room", carrierId, (response) => {
   },[])
   
   useEffect(() => {
-    socket.on("receive_message", (data) => {
-      console.log(data);
-      setMessageList((list) => [...list, data]);
+
+    socket.on("receive_message", async(data) => {
+
+      try{
+          const resp= await   axios.get('https://superfleetback.herokuapp.com/api/findMessage?id=%27+carrierId')
+           .then((res) => {
+            //console.log(res.data)
+            setMessageList(res.data)
+ 
+           });
+
+         }
+      catch(err){
+         console.error(err)
+       }
+       i++;
+      data="";
     });
   }, [socket]);
+
  
   return (
     <View style={styles.chatWindow}>
-       <View  style={styles.chatHeader}>
-       <Text>
-              <TouchableOpacity style={{borderRadius: 6,width:45, height: 15, backgroundColor:"blue" }} 
-              onPress={()=>setFiltro(-5)}>
-                               <Text style={{fontSize:12,color:"white",marginLeft:10}} >ult.5</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{borderRadius: 6,width:45, height: 15, backgroundColor:"blue" }} 
-              onPress={()=>setFiltro(-15)}>
-                               <Text style={{fontSize:12,color:"white",marginLeft:7}} >ult.15</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{borderRadius: 6,width:45, height: 15, backgroundColor:"blue" }} 
-              onPress={()=>setFiltro()}>
-                               <Text style={{fontSize:12,color:"white",marginLeft:7}} >Todos</Text>
-              </TouchableOpacity>
-        
-            
-        
-        </Text><Text style={{marginLeft:180}}>Live Chat</Text>
+      <View style={styles.chatHeader}>
+        <Text>
+          <TouchableOpacity
+            style={{
+              borderRadius: 6,
+              width: 45,
+              height: 15,
+              backgroundColor: "blue",
+            }}
+            onPress={() => setFiltro(-5)}
+          >
+            <Text style={{ fontSize: 12, color: "white", marginLeft: 10 }}>
+              ult.5
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              borderRadius: 6,
+              width: 45,
+              height: 15,
+              backgroundColor: "blue",
+            }}
+            onPress={() => setFiltro(-15)}
+          >
+            <Text style={{ fontSize: 12, color: "white", marginLeft: 7 }}>
+              ult.15
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              borderRadius: 6,
+              width: 45,
+              height: 15,
+              backgroundColor: "blue",
+            }}
+            onPress={() => setFiltro()}
+          >
+            <Text style={{ fontSize: 12, color: "white", marginLeft: 7 }}>
+              Todos
+            </Text>
+          </TouchableOpacity>
+        </Text>
+        <Text style={{ marginLeft: 180 }}>Live Chat</Text>
       </View>
       <View style={styles.chatBody}>
-        <ScrollView style={styles.messageContainer}> 
-          {messageList.slice(filtro).map((messageContent) => {
+        <ScrollView style={styles.messageContainer}>
+          {messageList.slice(filtro).map((messageContent,index) => {
             return (
               <View
-              style={userType === messageContent.author || userType ===disconect ? styles.messageYou : styles.messageOther}
-                 /* aqui Textodemos controlar los estitilos segun el usuario*/
-                
+                style={
+                  userType === messageContent.author || userType === disconect
+                    ? styles.messageYou
+                    : styles.messageOther
+                }
+                /* aqui Textodemos controlar los estitilos segun el usuario*/
+                key={index}
               >
-                <View style={{width:500}} >
-                  <View style={userType === messageContent.author || userType ===disconect ? styles.messageContentYou : styles.messageContentOther}>
+                <View style={{ width: 500 }}>
+                  <View
+                    style={
+                      userType === messageContent.author ||
+                      userType === disconect
+                        ? styles.messageContentYou
+                        : styles.messageContentOther
+                    }
+                  >
                     <Text>{messageContent.message}</Text>
                   </View>
-                  <View style={userType === messageContent.author || userType ===disconect ? styles.messageMetaYou : styles.messageMetaOther}>
-                    <Text style={{fontSize:10}} >{messageContent.time} {messageContent.author}</Text>
-                    <Text ></Text>
+                  <View
+                    style={
+                      userType === messageContent.author ||
+                      userType === disconect
+                        ? styles.messageMetaYou
+                        : styles.messageMetaOther
+                    }
+                  >
+                    <Text style={{ fontSize: 10 }}>
+                      {messageContent.time} {messageContent.author}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -155,28 +221,25 @@ socket.emit("join_room", carrierId, (response) => {
         <TextInput
           style={styles.input}
           placeholder="Escriba aquí su mensaje..."
-          onChangeText={currentMessage=>setCurrentMessage(currentMessage)}
+          onChangeText={(currentMessage) => setCurrentMessage(currentMessage)}
           defaultValue={currentMessage}
           // onKeyTextress={(event) => {
           //   event.key === "Enter" && sendMessage();
           // }}
         />
-        { /* hacemos uso de la funcion sendMessage  */}
-        <Button title="Enviar" onPress={()=>sendMessage()} style={styles.button}>&#9658;</Button>
+        {/* hacemos uso de la funcion sendMessage  */}
+        <Button
+          title="Enviar"
+          onPress={() => sendMessage()}
+          style={styles.button}
+        >
+          &#9658;
+        </Button>
       </View>
-   {userType==="Transportista"?(
-    //  <Button title="Atras Index" onPress={()=>{setShowChat('');setUserType('')}} style={{}} />
-          <TouchableOpacity style={styles.Button} >
-            <Text style={styles.ButtonText} onPress={()=> navigation.navigate("ViewFleet")}>
-              Regresar a Perfil Administrador
-            </Text>
-          </TouchableOpacity>
- 
-   ):(userType==="Administrador"?(
-    <Button title="Atras Fleet" onPress={()=>{setShowChat('');}} style={{}} />
- 
-     ):"")}   
-       </View>
+
+
+    </View>
+    
   );
 }
 
