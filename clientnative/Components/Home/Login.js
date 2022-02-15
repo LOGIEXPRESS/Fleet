@@ -48,7 +48,6 @@ const Login = () => {
         return false
       }
     }
-    console.log("Por esas nalgas", await getValueFor());
     
     console.log("se activa el login?",login)
     if(await getValueFor()){

@@ -28,6 +28,7 @@ import Mercadopago from "./Components/MercadoPago/Mercadopago";
 import StartCarrier from './Components/Travel/StartCarrier';
 import ScreenAccessToken from './Components/MercadoPago/ScreenAccessToken.js'
 import HistoryCarrier from "./Components/Historial de viaje/HistoryCarrier"
+import Chat from "./Components/Chat/Chat"
 
 
 LogBox.ignoreLogs([
@@ -161,6 +162,11 @@ const App = () => {
             <Stack.Screen
               name="HistoryCarrier"
               component={HistoryCarrier}
+              // options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={Chat}
               // options={{ headerShown: false }}
             />
           </Stack.Navigator>

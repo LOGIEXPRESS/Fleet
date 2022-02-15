@@ -96,7 +96,7 @@ const HistorialDeViaje = () => {
                         VER VIAJE ACTUAL{" "}
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText}>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat")} >
                       <Text style={{ fontSize: wp("2.3%") }}>
                         {" "}
                         ENVIAR MENSAJE

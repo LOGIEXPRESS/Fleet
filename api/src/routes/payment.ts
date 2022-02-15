@@ -110,6 +110,8 @@ router.post("/mercadopago", async (req, res) => {
     const response = answer.body.id;
     const init_points = answer.body.init_point;
 
+    
+
     res.json({ response, init_points });
   } catch (err) {
     console.error(err);
