@@ -45,6 +45,7 @@ const PersonalDataCarrier = () => {
   // useEffect(() => {
   //   //console.log("data", data)
   // }, [data]);
+  
 
   return (
     <View style={styles.container}>
