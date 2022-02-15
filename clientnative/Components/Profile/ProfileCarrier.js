@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
-  Modal,
+  Modal,BackHandler,Alert
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
@@ -25,6 +25,7 @@ import SimpleModal70 from "../Alerts/Travel/SimpleModalmercado";
 import { getTravelCarrier } from "../../Redux/actions";
 import axios from "axios";
 import { API_URLS } from "@env"
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const ProfileCarrier = () => {
@@ -34,6 +35,8 @@ const ProfileCarrier = () => {
   const dispatch=useDispatch()
   const travelCarr=useSelector((store)=>store.carrierTravels)
   const[saldo,setSaldo]=useState(0)
+  const[travel,setTravel]=useState(null)
+  
 
   
 
@@ -63,25 +66,61 @@ const ProfileCarrier = () => {
         changeModalVisible70(true);
         return;
       }
-      navigation.navigate("ScreenMap");
+      navigation.push("ScreenMap");
     }
 
   console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
   // console.log("AQUI RESPTOKEN en PROFILEUSERScreen", resptoken);
 
-  useEffect(async() => {
+  useEffect(() => {
     console.log("data", data);
 
-    let saldo=await axios.get(`${API_URLS}/api/amountCarrier/${data.id}`)
-    console.log('SALDOOOOOO: ',saldo.data.payload)
-    setSaldo(saldo.data.payload)
+    const getsaldo=async()=>{
+
+      try{
+        let saldo=await axios.get(`${API_URLS}/api/amountCarrier/${data.id}`)
+        console.log('SALDOOOOOO: ',saldo.data.payload)
+        setSaldo(saldo.data.payload)
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    getsaldo()
+
+    
 
    
     dispatch(getTravelCarrier(data.id))
     // return()=>{dispatch(getTravelCarrier(data.id))} 
+
+    
   
 
-  }, [dispatch,data]);
+  }, [dispatch]);
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+
+
 
   console.log('travels carrier:',travelCarr)
 
@@ -154,7 +193,7 @@ const ProfileCarrier = () => {
           {travelCarr?.payload?.length ?          
           <TouchableOpacity
             style={styles.btn2}
-            onPress={()=>navigation.push('MapTravel')}
+            onPress={()=>navigation.navigate('MapTravel')}
           >
             <Text style={styles.userBtnTxt2}>Ver viaje en Proceso...</Text>
             {/* <Image

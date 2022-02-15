@@ -246,6 +246,7 @@ router.get('/carrierTravel/:idCarrier',async(req:Request,res:Response,next:NextF
 
   const { idCarrier }=req.params
   console.log("ESTO ES REQUEST PARAM",req.params)
+  
   try{
 
     let idTruck= await Truck.findOne({
@@ -263,18 +264,21 @@ router.get('/carrierTravel/:idCarrier',async(req:Request,res:Response,next:NextF
 
       if(!carrierTravel.length){
         return res.json({menssage:'user travel',payload:carrierTravel})
+      }else{
+        return res.json({menssage:'user travel',payload:carrierTravel})
       }
       
-      return res.json({menssage:'user travel',payload:carrierTravel})
+      
 
 
     
 
 
 
+    }else{
+      return res.json({menssage:'user travel',payload:[]})
     }
-
-    return res.json({menssage:'user travel',payload:[]})
+    
 
     
 
@@ -359,7 +363,7 @@ router.post('/finishTravel/:idTravel',async(req:Request,res:Response,next:NextFu
 
   try{
 
-    let finishTravel=await Travel.findOne({
+    let finishTravel=await Travel.findOne({//encuentro el travel
       where:{
         id:idTravel,
         finishedTravel:'process'
@@ -370,16 +374,38 @@ router.post('/finishTravel/:idTravel',async(req:Request,res:Response,next:NextFu
     if(!finishTravel){
       return res.json({menssage:`Not found Travel id:${idTravel}`})
     }
+
+    let payment= await Payment.findOne({
+      where:{
+        TruckId:finishTravel.truckId,
+        status:false
+      }
+    })
+
+    //si hay un payment para ese carrier q no esta pagado status:false
+    if(payment){
+      let amount=Number(payment.amount)
+      let price=Number(finishTravel.price)
+      let sum=amount+price
+
+      let paymentUpDateAmount= await payment.update({amount:sum})
+
+      let updateTravel= await finishTravel.update({finishedTravel:'pending',returning: true})
+
+      return res.json({menssje:'Finish travel',payload:updateTravel,paymentUpDateAmount})
+    }
+    
+    //si no hay payment lo creo
     let updateTravel= await finishTravel.update({finishedTravel:'pending',returning: true})
 
-    let payment= await Payment.create({
+    let newPayment= await Payment.create({
       id:uuid(),
       amount:Number(finishTravel.price),
       status:false,
       TruckId:finishTravel.truckId
     })
 
-    return res.json({menssje:'Finish travel',payload:updateTravel,payment})
+    return res.json({menssje:'Finish travel',payload:updateTravel,newPayment})
 
   }catch(err){
     next(err)
