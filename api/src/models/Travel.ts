@@ -55,6 +55,4 @@ export class Travel extends Model{
     @HasOne(() => Review)
     rewiew!: Review
 
-
-
 }

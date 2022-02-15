@@ -292,11 +292,11 @@ router.post('/waitTravel', async (req: Request, res: Response, next: NextFunctio
 });
 router.put('/acceptTravel', async (req: Request, res: Response, next: NextFunction) => {
     //id=es el Id de travel que viene desde el front
-    const { carrierId, id } = req.body
+    const { truckId, id } = req.body
   
   
   
-    const upTravel = await Travel.update({ carrierId: carrierId }, { where: { id: id }, returning: true });
+    const upTravel = await Travel.update({ truckId: truckId }, { where: { id: id }, returning: true });
     if (upTravel[0] === 1) {
  
       
