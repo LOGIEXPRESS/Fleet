@@ -70,7 +70,7 @@ const HistorialDeViaje = () => {
                       <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
-                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO </Text>
+                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO: ${propss.amount||0} </Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.flexbtn}>
