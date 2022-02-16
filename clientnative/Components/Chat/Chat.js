@@ -113,7 +113,7 @@ socket.emit("join_room", carrierId, (response) => {
     socket.on("receive_message", async(data) => {
 
       try{
-          const resp= await   axios.get(`${API_URLS}/api/findMessage?id=%27+carrierId`)
+          const resp= await   axios.get(`${API_URLS}/api/findMessage?id=`+carrierId)
            .then((res) => {
             //console.log(res.data)
             setMessageList(res.data)
@@ -124,7 +124,6 @@ socket.emit("join_room", carrierId, (response) => {
       catch(err){
          console.error(err)
        }
-       i++;
       data="";
     });
   }, [socket]);
@@ -167,7 +166,7 @@ socket.emit("join_room", carrierId, (response) => {
               height: 15,
               backgroundColor: "blue",
             }}
-            onPress={() => setFiltro()}
+            onPress={() => setFiltro(-100)}
           >
             <Text style={{ fontSize: 12, color: "white", marginLeft: 7 }}>
               Todos
@@ -178,7 +177,7 @@ socket.emit("join_room", carrierId, (response) => {
       </View>
       <View style={styles.chatBody}>
         <ScrollView style={styles.messageContainer}>
-          {messageList.slice(filtro).map((messageContent,index) => {
+          {messageList.slice(filtro?filtro:-5).map((messageContent,index) => {
             return (
               <View
                 style={
