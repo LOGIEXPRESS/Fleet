@@ -50,26 +50,25 @@ const Login = () => {
     }
     
     console.log("se activa el login?",login)
-    if (getValueFor()) {
     
-    if (login?.business !== undefined) {
-      console.log("que tiene loginbusiness", login?.business)
-      console.log(login,"login")
-      if(login.role === true){
-        navigation.navigate("ProfileAdmin");
-      }
-      if(login.role===false){
-        console.log(login,"login")
-        if (login.identification === null) {
-          navigation.navigate("CompleteProfileCarrier", { login });
-        } else {
-          navigation.navigate("ProfileCarrier", { login });
+    if (getValueFor()) {
+      if (login?.business !== undefined) {
+        console.log("que tiene loginbusiness", login?.business);
+        console.log(login, "login");
+        if (login.role === true) {
+          navigation.navigate("ProfileAdmin");
         }
-        // navigation.navigate("ProfileCarrier");
+        if (login.role === false) {
+          console.log(login, "login");
+          if (login.identification === null) {
+            navigation.navigate("CompleteProfileCarrier", { login });
+          } else {
+            navigation.navigate("ProfileCarrier", { login });
+          }
+          // navigation.navigate("ProfileCarrier");
+        }
       }
     }
-    
-  }
     if(login?.role === 1){
       console.log("llego acá al 1")
       changeModalVisible30(true)
