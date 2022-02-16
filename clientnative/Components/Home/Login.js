@@ -50,7 +50,8 @@ const Login = () => {
     }
     
     console.log("se activa el login?",login)
-    if(await getValueFor()){
+    if (getValueFor()) {
+    
     if (login?.business !== undefined) {
       console.log("que tiene loginbusiness", login?.business)
       console.log(login,"login")
@@ -67,6 +68,7 @@ const Login = () => {
         // navigation.navigate("ProfileCarrier");
       }
     }
+    
   }
     if(login?.role === 1){
       console.log("llego acá al 1")
