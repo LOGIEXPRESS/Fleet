@@ -227,6 +227,23 @@ export function logiar(payload) {
     };
 }
 
+export function getTravelCarrier(idCarrier) {
+  console.log("AAAAAAAAAAAAAAAAAAA",idCarrier)
+  return async function (dispatch) {
+    try {
+      const request = await axios.get(`${ API_URLS }/api/carrierTravel/${idCarrier}`);
+      return dispatch({
+        type: "CARRIER_TRAVEL",
+        payload: request.data,
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+}
+
+
+
 export function adminregister(payload) {
     return async function () {
       try {

@@ -8,6 +8,7 @@ import { Travel } from '../models/Travel';
 import { nextTick } from 'process';
 import { where } from 'sequelize/dist';
 import { uuid } from 'uuidv4';
+import { Truck } from '../models/Truck';
 const mercadopago = require('mercadopago');
 
 const router=Router()
@@ -223,6 +224,43 @@ router.get('/payment/:truckId', async (req: Request, res: Response , next: NextF
     })
 
     res.json({payment,amount})
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/amountCarrier/:idSignup', async (req: Request, res: Response , next: NextFunction) => {
+
+  const {idSignup} = req.params
+  try {
+
+    let truckId=await Truck.findOne({
+      where:{
+        SignupId:idSignup
+      }
+    })
+    if(truckId){
+      let payment = await Payment.findAll({
+        where: {
+          TruckId: truckId.id//falta ver el status
+        },attributes: [ 'amount' ]
+      });
+      if(payment.length){
+        let saldo=payment.map(p=>Number(p.amount)).reduce((previousValue, currentValue) => previousValue + currentValue)
+      
+      res.json({menssage:'Saldo',payload:saldo})
+      }
+         
+      res.json({menssage:'Saldo',payload:0})
+
+
+    }
+
+    
+
+
+  
 
   } catch (error) {
     next(error);

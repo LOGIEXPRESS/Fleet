@@ -40,7 +40,7 @@ const SimpleModalCarrier = (props) => {
         <View style={styles.containerBtn}>
           <TouchableOpacity
             onPress={() => closeModal(false, "Aceptar")}
-            onPressIn={() => navigation.navigate('ProfileCarrier')}
+            onPressIn={() => navigation.push('ProfileCarrier')}
             style={styles.btnAceptar}
           >
             <Text style={{ fontSize: 17, fontWeight: "bold", color: 'white' }}>Aceptar</Text>

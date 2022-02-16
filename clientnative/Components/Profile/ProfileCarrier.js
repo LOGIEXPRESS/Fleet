@@ -7,12 +7,12 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
-  Modal,
+  Modal,BackHandler,Alert
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
 // import { logiarUsuario } from "./../actions/index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // prueba para las screens responsive
 import {
   widthPercentageToDP as wp,
@@ -22,12 +22,23 @@ import HeaderBar from "../Utils/HeaderBar";
 import ModalAlert from "../Añadir Transportista/ModalAlert";
 import SimpleModal70 from "../Alerts/Travel/SimpleModalmercado";
 
+import { getTravelCarrier } from "../../Redux/actions";
+import axios from "axios";
+import { API_URLS } from "@env"
+import { useFocusEffect } from '@react-navigation/native';
+
+
 const ProfileCarrier = () => {
   // const resptoken = useSelector((store) => store.respToken);
-
-
   const data = useSelector((store) => store.responseLog);
   const navigation = useNavigation();
+  const dispatch=useDispatch()
+  const travelCarr=useSelector((store)=>store.carrierTravels)
+  const[saldo,setSaldo]=useState(0)
+  const[travel,setTravel]=useState(null)
+  
+
+  
 
   const [modalAlert, setModalAlert] = useState(false)
 
@@ -36,7 +47,7 @@ const ProfileCarrier = () => {
     const [chooseData70, setchooseData70] = useState();
     const [activar70, setActivar70] = useState(false);
 
-
+  
     const changeModalVisible70 = (bool) => {
       setisModalVisible70(bool);
     };
@@ -55,7 +66,7 @@ const ProfileCarrier = () => {
         changeModalVisible70(true);
         return;
       }
-      navigation.navigate("ScreenMap");
+      navigation.push("ScreenMap");
     }
 
   console.log("AQUI RESPONLOG EN PROFILEUSERScreen", data);
@@ -64,15 +75,61 @@ const ProfileCarrier = () => {
   useEffect(() => {
     console.log("data", data);
 
-  }, [data]);
+    const getsaldo=async()=>{
+
+      try{
+        let saldo=await axios.get(`${API_URLS}/api/amountCarrier/${data.id}`)
+        console.log('SALDOOOOOO: ',saldo.data.payload)
+        setSaldo(saldo.data.payload)
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    getsaldo()
+
+    
+
+   
+    dispatch(getTravelCarrier(data.id))
+    // return()=>{dispatch(getTravelCarrier(data.id))} 
+
+    
+  
+
+  }, [dispatch]);
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const propsChat = { 
     carrierId : "7fb2a6aa-b830-4f04-9761-cbe89107e96c",
     userType : "Transportista"
     }
 
+
+
+  console.log('travels carrier:',travelCarr)
+
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
         </View> */}
@@ -81,20 +138,21 @@ const ProfileCarrier = () => {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <View style={{ marginTop: wp("12%") }}>
+
             <Image
               source={{
                 uri:
                   data?.photo === null || data?.photo === "url"
                     ? "https://girbaud.vteximg.com.br/arquivos/ids/190690-500-500/Gorra-Para-Hombre-Marithe-Francois-Girbaud1217.jpg?v=637732022965400000"
-                    : data?.photo,
+                    : data?.photo
+
               }}
               style={styles.userImg}
             />
           </View>
 
           <Text style={styles.userName}>
-            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}{" "}
-            {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
+            {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             {/* {data.name} {data.lastName} */}
           </Text>
           <Text style={styles.empresaName}>
@@ -102,25 +160,25 @@ const ProfileCarrier = () => {
             Transportista en {data?.business}
           </Text>
           <Text style={styles.saldo}>
-            Saldo: $ {data?.carrierPaymentData.amount}
+            Saldo:      $ {saldo}
+
           </Text>
         </View>
-        <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%") }}>
+        <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"), }}>
           <TouchableOpacity
             style={styles.btnText}
             onPress={() => navigation.navigate("PersonalDataCarrier")}
-            // }}
+          // }}
           >
             <Icon name="person-circle-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Datos Personales</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.btnText}
-            onPress={() => {
-              navigation.navigate("HistoryCarrier");
-            }}
+          <TouchableOpacity style={styles.btnText}
+          onPress={() => {
+            navigation.navigate("HistoryCarrier");
+          }}
           >
             <Icon name="location-outline" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Historial de viajes</Text>
@@ -144,30 +202,58 @@ const ProfileCarrier = () => {
             <Text style={styles.userBtnTxt}>Chat</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
+                  
+          {travelCarr?.payload?.length ?          
+          <TouchableOpacity
+            style={styles.btn2}
+            onPress={()=>navigation.navigate('MapTravel')}
+          >
+            <Text style={styles.userBtnTxt2}>Ver viaje en Proceso...</Text>
+            {/* <Image
+              style={{ width: wp('15%'), height: hp('6%'), marginLeft: wp('2%'), marginTop: wp('-2%') }}
+              source={require("./Utils/camion.png")}
+            /> */}
 
-
-          <TouchableOpacity style={styles.btn2} onPress={handler}>
+                {/* <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible70}
+                  nRequestClose={() => changeModalVisible70(false)}
+                >
+                  <SimpleModal70
+                    changeModalVisible70={changeModalVisible70}
+                    setData70={setData70}
+                    setActivacion70={setActivacion70}
+                  />
+                </Modal> */}
+          </TouchableOpacity>:          
+          <TouchableOpacity
+            style={styles.btn2}
+            onPress={handler}
+          >
             <Text style={styles.userBtnTxt2}>Comenzar viaje</Text>
             {/* <Image
               style={{ width: wp('15%'), height: hp('6%'), marginLeft: wp('2%'), marginTop: wp('-2%') }}
               source={require("./Utils/camion.png")}
             /> */}
 
-            <Modal
-              transparent={true}
-              animationType="fade"
-              visible={isModalVisible70}
-              nRequestClose={() => changeModalVisible70(false)}
-            >
-              <SimpleModal70
-                changeModalVisible70={changeModalVisible70}
-                setData70={setData70}
-                setActivacion70={setActivacion70}
-              />
-            </Modal>
-          </TouchableOpacity>
+                <Modal
+                  transparent={true}
+                  animationType="fade"
+                  visible={isModalVisible70}
+                  nRequestClose={() => changeModalVisible70(false)}
+                >
+                  <SimpleModal70
+                    changeModalVisible70={changeModalVisible70}
+                    setData70={setData70}
+                    setActivacion70={setActivacion70}
+                  />
+                </Modal>
+          </TouchableOpacity>}
+
+
         </View>
-        {/*  <Modal
+       {/*  <Modal
           animationType="slide"
           onDismiss={() => console.log("close")}
           onShow={() => console.log('open')}
