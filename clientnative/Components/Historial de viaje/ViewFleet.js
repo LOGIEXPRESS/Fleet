@@ -38,14 +38,14 @@ const HistorialDeViaje = () => {
 
   console.log("Esto serian los users:", user)
 
-  const propsChat = { 
-    carrierId : "7fb2a6aa-b830-4f04-9761-cbe89107e96c",
-    userType : "Administrador"
-    }
 
+
+  
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
 
+  
+  
     return (
       <View>
         {
@@ -57,7 +57,12 @@ const HistorialDeViaje = () => {
               acesstoken: e.acesstoken
 
             }
-            console.log("hola",propss)
+
+            const propsChat = { 
+              carrierId : e.SignupId,
+              userType : "Administrador"
+              }
+            
             return (
               <View style={styles.viewUsers} key={index}>
                 <Image
