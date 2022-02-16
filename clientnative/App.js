@@ -31,6 +31,7 @@ import HistoryCarrier from "./Components/Historial de viaje/HistoryCarrier"
 import Chat from "./Components/Chat/Chat"
 import MapTravel from './Components/ViewMaps/MapTravel'
 
+import TravelOn from "./Components/Historial de viaje/TravelOn.js"
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -174,6 +175,11 @@ const App = () => {
               name="Chat"
               component={Chat}
               // options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="TravelOn"
+              component={TravelOn}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -4,6 +4,10 @@ import { useSelector , useDispatch} from 'react-redux'
 import { alltravelstruck, enviarToken } from '../../Redux/actions'
 import * as SecureStore from "expo-secure-store";
 import CardTravel from "./CardTravel";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 
 export default function HistoryCarrier() {
@@ -59,7 +63,8 @@ const styles = StyleSheet.create({
   },
   Container:{
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
+    height: hp('40%')
   },
   spinner:{
     marginTop: 20,
