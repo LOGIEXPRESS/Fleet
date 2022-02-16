@@ -78,7 +78,6 @@ router.get('/payment', async (req: Request, res: Response) => {
 router.post("/mercadopago", async (req, res) => {
   const { unit_price, access_token, title, quantity } = req.body;
   console.log("ESTO ES ACCES TOKEN" , access_token)
-  let carrier = await 
   console.log("ESTO ES REQ.BODY", req.body);
   try {
     mercadopago.configure({
@@ -160,6 +159,9 @@ router.get('/render', (req: Request , res: Response, ) => {
   // const {id} = req.params
 
   if(x === "0"){
+
+
+
       return   res.send(`
       <body style="background-color:red; color: white " >
       <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
@@ -171,6 +173,7 @@ router.get('/render', (req: Request , res: Response, ) => {
         <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px">Pago fallido!</h1>
       </body>
     `);
+
   }
   if (x==="1") {
     return res.send(`
@@ -246,7 +249,7 @@ router.get('/amountCarrier/:idSignup', async (req: Request, res: Response , next
           TruckId: truckId.id//falta ver el status
         },attributes: [ 'amount' ]
       });
-      if(payment.length){
+      if(payment.length > 0){
         let saldo=payment.map(p=>Number(p.amount)).reduce((previousValue, currentValue) => previousValue + currentValue)
       
       res.json({menssage:'Saldo',payload:saldo})
