@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity, ViewPropTypes } from 'react-native';
+import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity, ViewPropTypes , KeyboardAvoidingView } from 'react-native';
 import io from "socket.io-client";
 import { useNavigation } from "@react-navigation/core";
 import { API_URLS } from "@env"
@@ -9,6 +9,8 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../Utils/HeaderBar";
+import {KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 const socket = io.connect(`${API_URLS}/`);
                                 //setShowChat es para el funcionamiento de la prueba
 function Chat(propsChat) {
@@ -138,6 +140,7 @@ socket.emit("join_room", carrierId, (response) => {
 
  
   return (
+    <KeyboardAwareScrollView>
     <View style={styles.chatWindow}>
         <View style={{marginTop:hp("-2%")}}>
         <HeaderBar  screen={'null'}/>
@@ -247,7 +250,7 @@ socket.emit("join_room", carrierId, (response) => {
           // }}
         />
         {/* hacemos uso de la funcion sendMessage  */}
-        <View style={{marginTop:hp("0.7%")}}>
+        <View style={{marginTop:hp("0.7%"), marginLeft:wp("-2%")}}>
         <Button
           title="Enviar"
           color="#ff1c49"
@@ -260,7 +263,7 @@ socket.emit("join_room", carrierId, (response) => {
 
 
     </View>
-    
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -324,6 +327,7 @@ const styles = StyleSheet.create({
       messageContentYou: {
         width: "auto",
        // height: "auto",
+       maxWidth: hp ("80%"),
         minHeight: 40,
         minWidth: wp("20%"),
         alignItems:"center",
@@ -346,15 +350,15 @@ const styles = StyleSheet.create({
       messageContentOther: {
        // height: "auto",
         minHeight: 40,
-        maxWidth: 200,
+        maxWidth: hp ("80%"),
         backgroundColor: "#6935d0",
         borderRadius: 15,
         color: "white",
-        
+        marginTop: 5 ,
         //display: "flex",
         alignItems: "center",
         alignSelf:"flex-end",
-        // marginRight:5,
+        marginRight:5,
         // marginLeft: 5,
         // paddingRight: 5,
         // paddingLeft: 5,
@@ -411,7 +415,7 @@ const styles = StyleSheet.create({
        // borderRight: "1px dotted #607d8b",
       
        // outline: "none",
-        fontFamily: "Avenir-Book",
+        // fontFamily: "Avenir-Book",
         fontSize:hp("2.4%")
       },
       orden:{

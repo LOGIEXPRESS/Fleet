@@ -484,11 +484,11 @@ const styles = StyleSheet.create({
     fontSize: hp("6%"),
     color: "#ff1c49",
     // padding: wp("1.30%"),
-    marginRight: wp("3%"),
+    marginRight: wp("5%"),
     marginLeft: wp('1%'),
     backgroundColor: 'white',
     // borderRadius: wp('%'),
-    width: wp('10%'),
+    width: wp('12%'),
     height: hp('7%'),
     // marginTop: wp('-1%')
   },
