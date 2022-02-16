@@ -179,7 +179,7 @@ const App = () => {
             <Stack.Screen
               name="TravelOn"
               component={TravelOn}
-              options={{ headerShown: false }}
+              // options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>
