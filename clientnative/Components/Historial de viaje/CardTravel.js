@@ -1,13 +1,26 @@
-import { View, Text , StyleSheet , Image , TouchableWithoutFeedback } from 'react-native';
+import { View, Text , StyleSheet , Image , TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { capitalize } from "lodash";
 import { Button } from 'react-native-elements';
 import { color } from 'react-native-reanimated';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/core";
+
+
+
+
 
 
 export default function CardTravel(props) {
+
+  const navigation = useNavigation()
+
   const{travel , info} = props
-  
+  console.log("Esto es Travel:", travel)
+  console.log("Esto es Info:", info)
   return (
     <TouchableWithoutFeedback>
       <View style={styles.card}>
@@ -26,6 +39,13 @@ export default function CardTravel(props) {
             <Text style={styles.name}>
               Peso: {capitalize(travel.weight)}
             </Text>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate('TravelOn', travel) }
+            >
+              <Text style={styles.btn}>
+                Ver Viaje Actual
+              </Text>
+            </TouchableOpacity>
             <Button title={"Finalizar viaje"}>
                 
             </Button>
@@ -40,7 +60,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "green",
     flex: 1,
-    height: 130,
+    height: hp('25%'),
     borderRadius: 9,
   },
   spacing: {
@@ -74,5 +94,8 @@ const styles = StyleSheet.create({
   },
   container: {
       marginTop: 5
+  }, 
+  btn: {
+    color: '#ffff'
   },
 });

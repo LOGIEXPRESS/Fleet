@@ -28,7 +28,7 @@ import Mercadopago from "./Components/MercadoPago/Mercadopago";
 import StartCarrier from './Components/Travel/StartCarrier';
 import ScreenAccessToken from './Components/MercadoPago/ScreenAccessToken.js'
 import HistoryCarrier from "./Components/Historial de viaje/HistoryCarrier"
-
+import TravelOn from "./Components/Historial de viaje/TravelOn.js"
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -161,6 +161,11 @@ const App = () => {
             <Stack.Screen
               name="HistoryCarrier"
               component={HistoryCarrier}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="TravelOn"
+              component={TravelOn}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
