@@ -50,7 +50,7 @@ router.post("/mercadopago", async (req, res) => {
     let answer = await mercadopago.preferences.create(preference);
 
     const response = answer.body.id;
-    const init_points = answer.body.init_point;
+    const init_points = answer.body.sandbox_init_point;
 
     res.json({ response, init_points });
   } catch (err) {
