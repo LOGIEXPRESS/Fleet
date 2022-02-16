@@ -174,7 +174,7 @@ const App = () => {
             <Stack.Screen
               name="Chat"
               component={Chat}
-              // options={{ headerShown: false }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TravelOn"
