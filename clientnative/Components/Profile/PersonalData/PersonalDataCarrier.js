@@ -34,7 +34,7 @@ const PersonalDataCarrier = () => {
     console.log("cerrar sesion");
     save("token", "(result)");
     dispatch(cleanToken());
-    dispatch(statusOff(id));
+    // dispatch(statusOff(id));
     navigation.navigate('Login');
   }
 
