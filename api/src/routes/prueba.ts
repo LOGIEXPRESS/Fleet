@@ -228,3 +228,28 @@ export default router
 
 //   var randPassword = Array(5).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('').toLocaleLowerCase();
 //   console.log(randPassword)
+
+
+
+// let payment=  [
+//      {
+//       TruckId: "9d8a33fa-842e-44d5-a15c-61613512a41a",
+//       amount: 325835,
+//       createdAt: "2022-02-16T17:25:32.921Z",        
+//       id: "91d063c8-87ed-49aa-af4b-86045db6b31e",   
+//       status: true,
+//       updatedAt: "2022-02-16T17:25:32.921Z",        
+//     },
+//     {
+//         TruckId: "9d8a33fa-842e-44d5-a15c-61613512a41a",
+//         amount: 40000,
+//         createdAt: "2022-02-16T17:25:32.921Z",        
+//         id: "91d063c8-87ed-49aa-af4b-86045db6b31e",   
+//         status: false,
+//         updatedAt: "2022-02-16T17:25:32.921Z",        
+//     }
+// ]
+
+// let filter= payment.filter(e=>e.status===false)
+
+// console.log(filter)

@@ -17,11 +17,28 @@ const router=Router()
 //   });
 
 router.post("/mercadopago", async (req, res) => {
-  const { unit_price, access_token, title, quantity } = req.body;
+  const { unit_price, access_token, title, quantity,id } = req.body;
   console.log("ESTO ES ACCES TOKEN" , access_token)
-  let carrier = await 
+  // let carrier = await 
   console.log("ESTO ES REQ.BODY", req.body);
   try {
+
+    let idTruck= await Truck.findOne({
+      where:{
+        SignupId:id
+      }
+    })
+
+    console.log('TRUCK',idTruck)
+    if(idTruck){
+      await Payment.update({status:true},{where:{TruckId:idTruck.id}})
+      await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
+
+    }
+
+
+
+
     mercadopago.configure({
       access_token: access_token,
     });
@@ -29,6 +46,7 @@ router.post("/mercadopago", async (req, res) => {
     let preference = {
       "items": [
           {
+            "id":id,
              "title": title,
                   "description": "Dummy Item Description",
                   "quantity": quantity,
@@ -41,9 +59,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": "https://superfleetback.herokuapp.com/api/render?x=0",
-          "pending": "https://superfleetback.herokuapp.com/api/render?x=1",
-          "success": "https://superfleetback.herokuapp.com/api/render?x=2"
+          "failure": `https://superfleetback.herokuapp.com/api/render?x=0`,
+          "pending": `https://superfleetback.herokuapp.com/api/render?x=1`,
+          "success": `https://superfleetback.herokuapp.com/api/render?x=2`
       }
   }
 
@@ -93,12 +111,17 @@ catch(err){
 //   }
 // })
 
-router.get('/render', (req: Request , res: Response, ) => {
+router.get('/render', async(req: Request , res: Response, ) => {
 
   let {x} = req.query
   // const {id} = req.params
 
+  
+
   if(x === "0"){
+
+
+    
       return   res.send(`
       <body style="background-color:red; color: white " >
       <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
@@ -182,6 +205,7 @@ router.get('/amountCarrier/:idSignup', async (req: Request, res: Response , next
     if(truckId){
       let payment = await Payment.findAll({
         where: {
+          status:false,
           TruckId: truckId.id//falta ver el status
         },attributes: [ 'amount' ]
       });

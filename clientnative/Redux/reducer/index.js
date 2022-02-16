@@ -171,11 +171,7 @@ export default function rootReducer(state = initialState, action) {
               ...state,
               editarPerfilUser: action.payload,
             }
-          case "USER_STATUS":
-            return {
-              ...state,
-              userStatus: action.payload
-            }
+
           case "CONFIRME_REQUEST":
             return {
               ...state,
