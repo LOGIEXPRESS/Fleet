@@ -198,6 +198,11 @@ export default function rootReducer(state = initialState, action) {
               ...state,
               alltraveltruck:action.payload
             }
+          case "UPDATE_VEHICULE":
+            return {
+              ...state,
+              editVehicule : action.payload
+            }
     default:
       return state;
   }

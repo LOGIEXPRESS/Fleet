@@ -388,6 +388,21 @@ export function alltravelstruck (signupId) {
   }
 }
 
+export function updateVehicle (payload) {
+  return async function (dispatch) {
+    try {
+      const update = await axios.post(`${API_URLS}/api/updateVehicle`, payload)
+      return dispatch({
+        type: 'UPDATE_VEHICULE',
+        payload: update.data
+      })
+
+    } catch (error) {
+        console.log("Error", error)
+    }
+  }
+}
+
 
 export function desmount() {
   return {
