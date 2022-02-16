@@ -37,10 +37,12 @@ const HistorialDeViaje = () => {
     }
   }, [dispatch])
 
-  console.log("Esto serian los users:", user)
+  console.log("Esto serian los usersWWWWWWWWWWW:", user)
 
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
+  
+
 
     return (
       <View>
@@ -48,8 +50,9 @@ const HistorialDeViaje = () => {
           props.length !== 0 ? props.map((e, index) => {
 
             const propss = {
-              amount : e.payment[0]?.amount,
-              acesstoken: e.acesstoken
+              amount : e.payment.length?e.payment.filter(p=>p.status===false)[0]?.amount:0,
+              acesstoken: e.acesstoken,
+              id:e.SignupId
 
             }
             console.log("hola",propss)
@@ -70,7 +73,7 @@ const HistorialDeViaje = () => {
                       <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
-                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO: ${propss.amount||0} </Text>
+                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO: ${e.payment.length?e.payment.filter(p=>p.status===false)[0]?.amount:0||0} </Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.flexbtn}>
