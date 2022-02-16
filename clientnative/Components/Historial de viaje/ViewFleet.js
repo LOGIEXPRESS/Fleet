@@ -53,7 +53,7 @@ const HistorialDeViaje = () => {
 
 
             const propss = {
-              amount : e.payment[0]?.amount,
+              amount : e.payment.length?e.payment.filter(p=>p.status===false)[0]?.amount:0 ,
               acesstoken: e.acesstoken
 
             }
@@ -65,6 +65,7 @@ const HistorialDeViaje = () => {
             
             return (
               <View style={styles.viewUsers} key={index}>
+                {console.log( "PROPS AMUNT",propss.amount)}
                 <Image
                   source={{
                     uri:
@@ -95,8 +96,7 @@ const HistorialDeViaje = () => {
                       onPress={() => navigation.navigate("Mercadopago", propss)}
                     >
                       <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        SALDO GENERADO{" "}
+                        SALDO GENERADO: ${propss.amount||0}
                       </Text>
                     </TouchableOpacity>
                   </View>

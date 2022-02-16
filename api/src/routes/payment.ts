@@ -246,6 +246,7 @@ router.get('/amountCarrier/:idSignup', async (req: Request, res: Response , next
     if(truckId){
       let payment = await Payment.findAll({
         where: {
+          status: false,
           TruckId: truckId.id//falta ver el status
         },attributes: [ 'amount' ]
       });
