@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity } from 'react-native';
 import io from "socket.io-client";
 import { useNavigation } from "@react-navigation/core";
+import { API_URLS } from "@env"
 
-const socket = io.connect("https://superfleetback.herokuapp.com/");
+const socket = io.connect(`${API_URLS}/`);
                                 //setShowChat es para el funcionamiento de la prueba
 function Chat(propsChat) {
 
@@ -92,7 +93,7 @@ socket.emit("join_room", carrierId, (response) => {
   
       
       const resp= await   axios
-             .get('https://superfleetback.herokuapp.com/api/findMessage?id='+carrierId, {
+             .get(`${API_URLS}/api/findMessage?id=`+carrierId, {
              
          })
          .then((res) => {
@@ -112,7 +113,7 @@ socket.emit("join_room", carrierId, (response) => {
     socket.on("receive_message", async(data) => {
 
       try{
-          const resp= await   axios.get('https://superfleetback.herokuapp.com/api/findMessage?id=%27+carrierId')
+          const resp= await   axios.get(`${API_URLS}/api/findMessage?id=%27+carrierId`)
            .then((res) => {
             //console.log(res.data)
             setMessageList(res.data)

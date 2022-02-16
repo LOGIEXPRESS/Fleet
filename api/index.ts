@@ -31,7 +31,7 @@ io.on("connection", (socket: any) => {
          //en esta sala, con esta variabel sabremos si ambos estan conectados
        var sizeRoom = io.sockets.adapter.rooms.get(data)
      
-        console.log(sizeRoom.size);
+        console.log("sizeRoom en el backend",sizeRoom.size);
     
         console.log(`User with ID: ${socket.id} joined room: ${data}`);
         /////////

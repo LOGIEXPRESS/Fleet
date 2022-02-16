@@ -38,7 +38,7 @@ const ProfileCarrier = () => {
   const[travel,setTravel]=useState(null)
   
 
-  
+  console.log("ID CARRIER ?", data.id);
 
   const [modalAlert, setModalAlert] = useState(false)
 
@@ -120,7 +120,7 @@ const ProfileCarrier = () => {
   }, []);
 
   const propsChat = { 
-    carrierId : "7fb2a6aa-b830-4f04-9761-cbe89107e96c",
+    carrierId : data.id,
     userType : "Transportista"
     }
 
