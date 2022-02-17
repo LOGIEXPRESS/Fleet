@@ -177,6 +177,7 @@ router.get('/render', async(req: Request , res: Response, ) => {
   let {x , id} = req.query
   // const {id} = req.params
 
+  console.log("req.query",req.query);
   
 
   if(x === "0"){
