@@ -7,6 +7,10 @@ import { cleanToken, statusOff } from "../../../Redux/actions";
 // import StarRating from "../StarRating";
 // import HeaderBar from "../Utils/HeaderBar";
 // prueba para las screens responsive
+import Icon from "react-native-vector-icons/Ionicons";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
+import Icon3 from "react-native-vector-icons/FontAwesome";
+import Icon4 from "react-native-vector-icons/FontAwesome5"
 import * as SecureStore from "expo-secure-store";
 import {
   widthPercentageToDP as wp,
@@ -88,37 +92,54 @@ const PersonalDataCarrier = () => {
             </Text>
           </View>
         </View>
-        <View style={styles.botones}>
+        <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%"), }}>
           <TouchableOpacity
-            style={styles.btn}
+
+            style={styles.btnText}
             onPress={() => navigation.navigate("EditProfileCarrier")}
           >
-            <Text style={styles.textBtn}>Editar perfil</Text>
+            <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
+              <Icon4 name="user-edit" style={styles.icons} />
+              <Text style={styles.textBtn}>Editar perfil</Text>
+            </View>
+
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.btnText}
             onPress={() => navigation.navigate("EditVehicule")}
           >
+            <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
+            <Icon3 name="truck" style={styles.icons} />
             <Text style={styles.textBtn}>Editar Vehículo</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.btnText}
             onPress={() => navigation.navigate("ScreenAccessToken")}
           >
+            <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
+            <Icon2 name="payments" style={styles.icons} />
             <Text style={styles.textBtn}>Preferencia de pago</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.btnText}
             onPress={() => navigation.navigate("ChangePassword")}
           >
+            <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
+            <Icon name="key" style={styles.icons} />
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
+            </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
+          <TouchableOpacity style={styles.btnText} onPress={cerrarsesion}>
+          <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
+          <Icon name="log-out" style={styles.icons} />
             <Text style={styles.textBtn}>Cerrar sesión</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -136,6 +157,32 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white'
+  },
+  icons: {
+    alignContent: "center",
+    fontSize: hp("3.5%"),
+    color: "#ff1c49",
+    padding: wp("1.30%"),
+    // marginRight: wp("4%"),
+    // marginLeft: wp('1%'),
+    backgroundColor: 'white',
+    borderRadius: wp('7%'),
+    width: wp('10%'),
+    height: hp('5.2%'),
+    // marginTop: wp('-1%')
+  },
+  btnText: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    width: wp("88%"),
+    height: hp("7%"),
+    padding: wp('2.5%'),
+    borderRadius: wp('3%'),
+    shadowOpacity: 80,
+    elevation: 16,
+    marginTop: wp("7%"),
+    borderColor: "#E1E8EB",
+    borderWidth: 1.75,
   },
   perfilTex: {
     alignSelf: 'center',
@@ -191,5 +238,6 @@ const styles = StyleSheet.create({
     // marginTop: 5,
     fontSize: hp('2.9%'),
     fontWeight: "bold",
+    marginLeft:hp('3%')
   },
 });
