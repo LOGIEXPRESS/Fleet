@@ -37,12 +37,7 @@ LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 ]);
 
-
-
 const Stack = createStackNavigator();
-
-
-
 
 const App = () => {
 
@@ -174,7 +169,7 @@ const App = () => {
             <Stack.Screen
               name="Chat"
               component={Chat}
-              // options={{ headerShown: false }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TravelOn"

@@ -1,13 +1,21 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, useRef } from "react";
+import {ScrollView, StyleSheet, Text,TextInput, View, Image,Button, TouchableOpacity, ViewPropTypes , KeyboardAvoidingView } from 'react-native';
 import io from "socket.io-client";
 import { useNavigation } from "@react-navigation/core";
 import { API_URLS } from "@env"
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import HeaderBar from "../Utils/HeaderBar";
+import {KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const socket = io.connect(`${API_URLS}/`);
                                 //setShowChat es para el funcionamiento de la prueba
 function Chat(propsChat) {
+
+  const scrollViewRef = useRef();
 
   const userType = propsChat.route.params.userType
 
@@ -28,8 +36,10 @@ function Chat(propsChat) {
   const [messageList, setMessageList] = useState([]);
  
   const [filtro, setFiltro] = useState("");
+  useEffect(() => {
+    setFiltro(-100)
+  }, []);
   
-   
  
 
 socket.emit("join_room", carrierId, (response) => {
@@ -113,7 +123,7 @@ socket.emit("join_room", carrierId, (response) => {
     socket.on("receive_message", async(data) => {
 
       try{
-          const resp= await   axios.get(`${API_URLS}/api/findMessage?id=%27+carrierId`)
+          const resp= await   axios.get(`${API_URLS}/api/findMessage?id=`+carrierId)
            .then((res) => {
             //console.log(res.data)
             setMessageList(res.data)
@@ -124,16 +134,21 @@ socket.emit("join_room", carrierId, (response) => {
       catch(err){
          console.error(err)
        }
-       i++;
       data="";
     });
   }, [socket]);
 
  
   return (
+    <KeyboardAwareScrollView>
     <View style={styles.chatWindow}>
+        <View style={{marginTop:hp("-2%")}}>
+        <HeaderBar  screen={'null'}/>
+        </View>
+        <Text style={{alignSelf:"center", fontSize:hp("2.89%"), marginTop:hp("-4.5%"), marginBottom:hp("2%"), color:"#ff1c49", fontWeight:"bold"}}>Chat</Text>
       <View style={styles.chatHeader}>
-        <Text>
+      
+        {/* <View style={styles.orden}>
           <TouchableOpacity
             style={{
               borderRadius: 6,
@@ -167,18 +182,20 @@ socket.emit("join_room", carrierId, (response) => {
               height: 15,
               backgroundColor: "blue",
             }}
-            onPress={() => setFiltro()}
+            onPress={() => setFiltro(-100)}
           >
             <Text style={{ fontSize: 12, color: "white", marginLeft: 7 }}>
               Todos
             </Text>
           </TouchableOpacity>
-        </Text>
-        <Text style={{ marginLeft: 180 }}>Live Chat</Text>
+        </View> */}
       </View>
       <View style={styles.chatBody}>
-        <ScrollView style={styles.messageContainer}>
-          {messageList.slice(filtro).map((messageContent,index) => {
+        <ScrollView 
+        ref={scrollViewRef}
+        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+        style={styles.messageContainer}>
+          {messageList.slice(filtro?filtro:-5).map((messageContent,index) => {
             return (
               <View
                 style={
@@ -189,7 +206,7 @@ socket.emit("join_room", carrierId, (response) => {
                 /* aqui Textodemos controlar los estitilos segun el usuario*/
                 key={index}
               >
-                <View style={{ width: 500 }}>
+                <View style={{ width: wp("100%") }}>
                   <View
                     style={
                       userType === messageContent.author ||
@@ -198,7 +215,7 @@ socket.emit("join_room", carrierId, (response) => {
                         : styles.messageContentOther
                     }
                   >
-                    <Text>{messageContent.message}</Text>
+                    <Text style={{color:"white", fontSize:hp("2.4%"), paddingHorizontal:wp("3%"), paddingVertical:hp("2%")}}>{messageContent.message}</Text>
                   </View>
                   <View
                     style={
@@ -208,8 +225,12 @@ socket.emit("join_room", carrierId, (response) => {
                         : styles.messageMetaOther
                     }
                   >
+                    <Text style={{ fontSize: 10, alignSelf:"flex-start", marginLeft:wp("2%"), marginBottom:hp("-1%") }}>
+                      {messageContent.time} 
+                   
+                    </Text>
                     <Text style={{ fontSize: 10 }}>
-                      {messageContent.time} {messageContent.author}
+                      {/* {messageContent.author}  */}
                     </Text>
                   </View>
                 </View>
@@ -229,18 +250,20 @@ socket.emit("join_room", carrierId, (response) => {
           // }}
         />
         {/* hacemos uso de la funcion sendMessage  */}
+        <View style={{marginTop:hp("0.7%"), marginLeft:wp("-2%")}}>
         <Button
           title="Enviar"
+          color="#ff1c49"
           onPress={() => sendMessage()}
-          style={styles.button}
         >
           &#9658;
         </Button>
+        </View>
       </View>
 
 
     </View>
-    
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -248,30 +271,38 @@ export default Chat;
 
 const styles = StyleSheet.create({
     chatWindow: {
-        width: 400,
+      width: wp("100%"),
+        backgroundColor:"white"
       //  height: 420
-      marginTop:50
+      // marginTop:50
       },
       chatHeader: {
+        display:"flex",
+        flexDirection:"row",
+        alignContent:"space-around",
        // height: 45,
         borderRadius: 6,
-        backgroundColor: "steelblue",
+        // backgroundColor: "steelblue",
         color:"#000",
-        position: "relative",
-       // alignItems:"center"
+        backgroundColor:"yellow",
+        // position: "relative",
+       
       },
       chatBody: {
       //  height: "calc(450 - (45 + 70))",
         // border: "1px solid #263238",
-        backgroundColor: "#fff",
-      
-        position: "relative"
+        borderTopWidth:2,
+        borderTopColor:"lightgrey",
+        backgroundColor: "white",
+        width: wp("100%"),
+        position: "relative",
+        justifyContent:"center"
       },
       messageContainer: {
-        width: 400,
-       height: 400,
-       borderWidth:  1,
-       borderColor:"steelblue",
+        
+       height: hp("83%"),
+      //  borderWidth:  1,
+      //  borderColor:"steelblue",
        borderRadius: 4,
       //  overflowY: "scroll",
        // overflowX: "hidden"
@@ -280,7 +311,7 @@ const styles = StyleSheet.create({
      //   height: "auto",
         // padding: "10px",
         //display: "flex",
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         borderColor:"black"
 
     },
@@ -296,39 +327,45 @@ const styles = StyleSheet.create({
       messageContentYou: {
         width: "auto",
        // height: "auto",
+       maxWidth: hp ("80%"),
         minHeight: 40,
-        maxWidth: 200,
-        backgroundColor: "#43a047",
-        borderRadius: 5,
+        minWidth: wp("20%"),
+        alignItems:"center",
+      //  width:auto,
+        backgroundColor: "black",
+        borderRadius: 15,
         color: "white",
       //  display: "flex",
-        alignItems: "center",
+        alignSelf: "flex-start",
+        // marginTop:hp("1%"),
         marginRight: 5,
         marginLeft: 5,
         paddingRight: 5,
         paddingLeft: 5,
         //overflowWrap: "break-word",
        // wordBreak: "break-word",
-        justifyContent: "flex-start"  
+        justifyContent: "center" ,
+        
     },
       messageContentOther: {
-        width: "auto",
        // height: "auto",
         minHeight: 40,
-        maxWidth: 200,
-        backgroundColor: "#43a047",
-        borderRadius: 5,
+        maxWidth: hp ("80%"),
+        backgroundColor: "#6935d0",
+        borderRadius: 15,
         color: "white",
+        marginTop: 5 ,
         //display: "flex",
         alignItems: "center",
+        alignSelf:"flex-end",
         marginRight:5,
-        marginLeft: 200,
-        paddingRight: 5,
-        paddingLeft: 5,
+        // marginLeft: 5,
+        // paddingRight: 5,
+        // paddingLeft: 5,
       //  overflowWrap: "break-word",
         // wordBreak: "break-word",
          
-        backgroundColor: "cornflowerblue"
+        // backgroundColor: "cornflowerblue"
       
       },
       messageMetaYou: {
@@ -355,56 +392,49 @@ const styles = StyleSheet.create({
     
     },
     chatFooter: {
+      display:"flex",
+      flexDirection:"row",
+      borderTopWidth:  2,
+      borderTopColor:"lightgrey",
       //  height: 40,
       //  border: "1px solid #263238",
       //  borderTop: "none",
       //  display: "flex"
-      marginBottom:20
+      // marginBottom:20
       },
       input: {
-      //  height: "100%",
-      borderWidth:  1,
-      borderColor:"steelblue",
+       height: hp("7%"),
+       width:wp("80%"),
+       backgroundColor:"white",
+      
         color:'black',
         borderRadius: 4,
+        marginLeft:10,
         //border: 0,
        // paddSize: "1em",
        // borderRight: "1px dotted #607d8b",
       
        // outline: "none",
-        fontFamily: "sans-serif",
+        // fontFamily: "Avenir-Book",
+        fontSize:hp("2.4%")
+      },
+      orden:{
+        height:30,
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"space-between"
       },
       button: {
        // border: 0,
         //display: "grid",
         //placeItems: "center",
        // cursor: "pointer",
-        flex: 20,
+        // alignItems:"center",
        // height: "100%",
         //background: "transparent",
         //outline: "none",
-        fontSize: 25,
-        color: "lightgray"
-      },
-      Button: {
-        width: "90%",
-        color: "#FFC107",
-        height: 52,
-        backgroundColor: "#ff1c49",
-        borderRadius: 10,
-        borderColor: "black",
-        // borderWidth:1,
-        marginTop: 20,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        shadowOpacity: 80,
-        elevation: 15,
-      },
-      ButtonText: {
-        fontWeight: "bold",
-        fontSize: 18,
-        color: "white",
+        fontSize: 15,
+        color: "red"
       },
       
   });

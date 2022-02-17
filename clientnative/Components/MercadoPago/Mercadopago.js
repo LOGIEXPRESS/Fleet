@@ -18,7 +18,7 @@ export default function Mercadopago(propss) {
   const handleReset = () => {
     setLink("");
     setRender("");
-    navigation.navigate('ViewFleet')
+    navigation.push('ViewFleet')
   };
 
   const handlePago = () => {
@@ -29,6 +29,7 @@ export default function Mercadopago(propss) {
         unit_price: propss.route.params.amount,
         quantity: 1,
         access_token:propss.route.params.acesstoken,
+        id:propss.route.params.id
       })
       .then((res) => {
         console.log(res.data);

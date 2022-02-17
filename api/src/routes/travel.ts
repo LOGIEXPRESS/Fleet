@@ -337,7 +337,13 @@ router.post('/confirmTravel', async (req:Request,res:Response,next:NextFunction)
       { finishedTravel: "process", truckId: idCarrier.id },
       { where: { id: id },
       returning: true, }
+
+      
     );
+    let changeStatusTruck= await Truck.update({status:false},{where:{
+      SignupId:userId
+
+    }})
     // let payment= await Payment.create({
     //   id:uuid(),
     //   amount:Number(confirm[1][0].price),
@@ -381,6 +387,8 @@ router.post('/finishTravel/:idTravel',async(req:Request,res:Response,next:NextFu
         status:false
       }
     })
+
+    let statusTruck=await Truck.update({status:true},{where:{id:finishTravel.truckId}})
 
     //si hay un payment para ese carrier q no esta pagado status:false
     if(payment){

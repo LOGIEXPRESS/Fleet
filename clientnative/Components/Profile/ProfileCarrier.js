@@ -141,6 +141,15 @@ const ProfileCarrier = () => {
       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
         </View> */}
+           <TouchableOpacity
+            style={styles.chat}
+            onPress={() => navigation.navigate("Chat", propsChat) }
+          >
+            <Icon name="chatbox-ellipses-outline" style={styles.iconss} />
+            {/* <Text style={styles.userBtnTxt}>Chat</Text> */}
+
+            {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
+          </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -201,15 +210,8 @@ const ProfileCarrier = () => {
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.btnText}
-            onPress={() => navigation.navigate("Chat", propsChat) }
-          >
-            <Icon name="calculator-outline" style={styles.icons} />
-            <Text style={styles.userBtnTxt}>Chat</Text>
-            {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
-          </TouchableOpacity>
+          {/* <Icon name="calculator-outline" style={styles.icons} /> */}
+       
                   
           {travelCarr?.payload?.length ?          
           <TouchableOpacity
@@ -396,7 +398,7 @@ const styles = StyleSheet.create({
     marginTop: wp('7.5%'),
   },
   userImg: {
-    marginTop: wp('-3%'),
+    marginTop: wp('-8%'),
     height: wp('50%'),
     width: wp('50%'),
     borderRadius: wp('40%'),
@@ -478,5 +480,24 @@ const styles = StyleSheet.create({
   btnModalText2: {
     fontSize: hp("2.5%"),
     color: '#000'
-  }
+  },
+  chat:{
+    marginTop:hp("3%"),
+    marginBottom:hp("-3%"),
+    alignSelf: "flex-end",
+
+  },
+  iconss: {
+    alignContent: "flex-end",
+    fontSize: hp("6%"),
+    color: "#ff1c49",
+    // padding: wp("1.30%"),
+    marginRight: wp("5%"),
+    marginLeft: wp('1%'),
+    backgroundColor: 'white',
+    // borderRadius: wp('%'),
+    width: wp('12%'),
+    height: hp('7%'),
+    // marginTop: wp('-1%')
+  },
 });
