@@ -18,7 +18,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
-import Checkout from "../MercadoPago/Checkout";
 import { userStatus, reset } from "../../Redux/actions/index.js";
 
 
@@ -41,15 +40,21 @@ const HistorialDeViaje = () => {
 
   console.log("Esto serian los usersWWWWWWWWWWW:", user)
 
+
+
+  
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
   
 
 
+  
+  
     return (
       <View>
         {
           props.length !== 0 ? props.map((e, index) => {
+
 
             const propss = {
               amount : e.payment.length?e.payment.filter(p=>p.status===false)[0]?.amount:0,
@@ -57,22 +62,39 @@ const HistorialDeViaje = () => {
               id:e.SignupId
 
             }
-            console.log("hola",propss)
+
+            const propsChat = { 
+              carrierId : e.SignupId,
+              userType : "Administrador"
+              }
+            
             return (
               <View style={styles.viewUsers} key={index}>
-                <Image source={{
-                  uri:
-                    e.carrier.photo === null || e.carrier.photo === "url"
-                      ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
-                      : e.carrier.photo
-
-                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
+                {console.log( "PROPS AMUNT",propss.amount)}
+                <Image
+                  source={{
+                    uri:
+                      e.carrier.photo === null || e.carrier.photo === "url"
+                        ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                        : e.carrier.photo,
+                  }}
+                  style={
+                    e.status === true || e.status === false
+                      ? styles.imgOn
+                      : styles.imgOff
+                  }
+                />
                 <View style={styles.cardsText}>
-                  <Text style={styles.cardsName}>{e.carrier.name} {e.carrier.lastName}</Text>
+                  <Text style={styles.cardsName}>
+                    {e.carrier.name} {e.carrier.lastName}
+                  </Text>
                   <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
                   <View style={styles.flexbtn}>
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> HISTORIAL DE VIAJES  </Text>
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        HISTORIAL DE VIAJES{" "}
+                      </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
                       <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO: ${propss.amount||0} </Text>
@@ -80,15 +102,21 @@ const HistorialDeViaje = () => {
                   </View>
                   <View style={styles.flexbtn}>
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> VER VIAJE ACTUAL </Text>
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        VER VIAJE ACTUAL{" "}
+                      </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp('2.3%') }}> ENVIAR MENSAJE</Text>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
+                      <Text style={{ fontSize: wp("2.3%") }}>
+                        {" "}
+                        ENVIAR MENSAJE
+                      </Text>
                     </TouchableOpacity>
                   </View>
                 </View>
               </View>
-            )
+            );
           }) : (<View style={{alignContent: 'center', alignItems:'center'}}>
               <Text style={{fontSize: hp('2%'), fontWeight:'400'}}>No hay transportistas disponibles</Text>
                </View>)

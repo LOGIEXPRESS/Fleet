@@ -8,17 +8,22 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import * as SecureStore from "expo-secure-store";
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGTH_MODAL = 220;
 
 const SimpleModal = (props) => {
   const navigation = useNavigation();
-
   let closeModal = (bool, data) => {
     props.changeModalVisible(bool);
     props.setData(data);
   };
+
+  async function save(key, value) {
+    //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
+    await SecureStore.setItemAsync(key, value);
+  }
 
   return (
     <TouchableOpacity disabled={true} style={styles.container}>
@@ -39,7 +44,11 @@ const SimpleModal = (props) => {
         </View>
         <View style={styles.containerBtn}>
           <TouchableOpacity
-            onPress={() => closeModal(false, "Aceptar")}
+            onPress={async() => {
+              closeModal(false, "Aceptar");
+              await SecureStore.deleteItemAsync("token");
+            }
+        }
             onPressIn={() => navigation.navigate("Login")}
             style={styles.btnAceptar}
           >

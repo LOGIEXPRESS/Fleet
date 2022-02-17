@@ -22,8 +22,6 @@ export default function MapTravel() {
 
     navigation.push('ProfileCarrier')
 
-
-
   }
   console.log('VIAJES DEL CARRIER EN PROCESS: ',travelCarrier)
 

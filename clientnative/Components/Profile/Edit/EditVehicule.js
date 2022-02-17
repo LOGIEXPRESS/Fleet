@@ -22,6 +22,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { useDispatch, useSelector } from "react-redux";
+import { updateVehicle } from "../../../Redux/actions";
 // import { editVehicule } from "../../actions";
 // import ModalVehicule from "./ModalVehicule";
 // import { desmount  } from "../../actions";
@@ -115,21 +116,21 @@ const EditVehicule = () => {
   }
 
    //// --> HANDLE SUBMIT <-- ////
-//  function handleSubmit(e) {
-//   e.preventDefault();
-//   const edit= {
-//     brand : vehiculo.brand,
-//     patent : vehiculo.patent,
-//     model : vehiculo.model,
-//     color : vehiculo.color,
-//     capacity : vehiculo.capacity,
-//     license : vehiculo.license,
-//     id: datosCarrier.id
-//   }
-//   dispatch(editVehicule(edit))
-//   console.log("soy lo que se envia el front", edit);
-//  // changeModalVisible(true)
-// }
+ function handleSubmit(e) {
+  e.preventDefault();
+  const edit= {
+    brand : vehiculo.brand,
+    patent : vehiculo.patent,
+    model : vehiculo.model,
+    color : vehiculo.color,
+    capacity : vehiculo.capacity,
+    license : vehiculo.license,
+    id: datosCarrier.id
+  }
+  dispatch(updateVehicle(edit))
+  console.log("soy lo que se envia el front", edit);
+ // changeModalVisible(true)
+}
 
   return (
     <View style={styles.container}>
@@ -213,7 +214,7 @@ const EditVehicule = () => {
 
           <TouchableOpacity
             style={styles.btnEditar}
-            // onPress={handleSubmit}
+            onPress={handleSubmit}
           >
             <Text style={styles.textBtn}>Editar</Text>
             {/* MODAL */}

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef,useMemo } from "react";
-
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useNavigation } from "@react-navigation/core";
 import {
@@ -35,25 +33,41 @@ const Login = () => {
   const login = useSelector((store) => store.responseLog);
   const lastNameRef = useRef();
 
+
+
   
-  useEffect(() => {
-    console.log("se activa el login?",login)
-    if (login?.business !== undefined) {
-      console.log("que tiene loginbusiness", login?.business)
-      console.log(login,"login")
-      if(login.role === true){
-        navigation.navigate("ProfileAdmin");
-      }if(login.role===false){
-        console.log(login,"login")
-        if (login.identification === null) {
-          navigation.navigate("CompleteProfileCarrier", { login });
-        } else {
-          navigation.navigate("ProfileCarrier", { login });
-        }
-        // navigation.navigate("ProfileCarrier");
+  useEffect(async() => {
+
+      async function getValueFor() {
+      // SE CONSULTA EL VALUE DEL STORE, CON EL KEY
+      let result = await SecureStore.getItemAsync("token");
+      if (result !== "(result)") {
+        return true
+       
+      } else {
+        return false
       }
-     
+    }
     
+    console.log("se activa el login?",login)
+    
+    if (getValueFor()) {
+      if (login?.business !== undefined) {
+        console.log("que tiene loginbusiness", login?.business);
+        console.log(login, "login");
+        if (login.role === true) {
+          navigation.navigate("ProfileAdmin");
+        }
+        if (login.role === false) {
+          console.log(login, "login");
+          if (login.identification === null) {
+            navigation.navigate("CompleteProfileCarrier", { login });
+          } else {
+            navigation.navigate("ProfileCarrier", { login });
+          }
+          // navigation.navigate("ProfileCarrier");
+        }
+      }
     }
     if(login?.role === 1){
       console.log("llego acá al 1")

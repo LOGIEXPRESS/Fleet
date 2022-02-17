@@ -23,7 +23,7 @@ const PersonalDataAdmin = () => {
     //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
     await SecureStore.setItemAsync(key, value);
   }
-
+  
   const cerrarsesion = () =>{
     console.log("cerrar sesion")
     dispatch(cleanToken())

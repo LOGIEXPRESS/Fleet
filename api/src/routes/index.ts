@@ -11,13 +11,17 @@ import travel from './travel'
 import edits from './edits'
 import changePassword from './changePass'
 import logout from './logout'
+import payment from './payment'
 import recoverPass from './recoverPassword'
-import  payment  from "./payment";
+import messaging  from './messaging';
+ 
 const router = Router();
 
 
 
 
+router.use('/', payment)
+router.use('/', messaging)
 router.use('/', carrierStatus)
 
 router.use('/', uploadDataFake)

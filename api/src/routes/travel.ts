@@ -182,9 +182,9 @@ router.get('/Travel', async (req: Request, res: Response, next: NextFunction) =>
 });
 
 router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next: NextFunction) => {
-  const {signupId } = req.params
+  const { signupId } = req.params
   
-  
+  console.log("EStos es req.params:" , req.params)
   try {
 
     let truckId = await Truck.findOne({ where: { SignupId: signupId } });
@@ -201,10 +201,9 @@ router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next
     }
   })
 
-  console.log("ESTO ES EN /alltraveltruck", { "travelinprocess":travelinprocess[0].id , "travelfinished": travelfinished } )
+  /* console.log("ESTO ES EN /alltraveltruck", { "travelinprocess":travelinprocess[0].id , "travelfinished": travelfinished } ) */
   
   return res.status(200).json({ "travelinprocess":travelinprocess , "travelfinished": travelfinished });
-
  }
  catch (err) {
    next(err);
@@ -225,11 +224,11 @@ router.post('/waitTravel', async (req: Request, res: Response, next: NextFunctio
 });
 router.put('/acceptTravel', async (req: Request, res: Response, next: NextFunction) => {
     //id=es el Id de travel que viene desde el front
-    const { carrierId, id } = req.body
+    const { truckId, id } = req.body
   
   
   
-    const upTravel = await Travel.update({ carrierId: carrierId }, { where: { id: id }, returning: true });
+    const upTravel = await Travel.update({ truckId: truckId }, { where: { id: id }, returning: true });
     if (upTravel[0] === 1) {
  
       
@@ -378,7 +377,7 @@ router.post('/finishTravel/:idTravel',async(req:Request,res:Response,next:NextFu
     })
 
     if(!finishTravel){
-      return res.json({menssage:`Not found Travel id:${idTravel}`})
+      return res.json({menssage:`Not found Travel id: ${idTravel}`})
     }
 
     let payment= await Payment.findOne({

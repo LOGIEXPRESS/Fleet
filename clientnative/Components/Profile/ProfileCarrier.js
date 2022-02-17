@@ -38,7 +38,7 @@ const ProfileCarrier = () => {
   const[travel,setTravel]=useState(null)
   
 
-  
+  console.log("ID CARRIER ?", data.id);
 
   const [modalAlert, setModalAlert] = useState(false)
 
@@ -87,17 +87,12 @@ const ProfileCarrier = () => {
       }
     }
     getsaldo()
-
-    
-
-   
     dispatch(getTravelCarrier(data.id))
     // return()=>{dispatch(getTravelCarrier(data.id))} 
-
-    
-  
-
   }, [dispatch]);
+
+
+
   useEffect(() => {
     const backAction = () => {
       Alert.alert("Hold on!", "Are you sure you want to go back?", [
@@ -116,9 +111,26 @@ const ProfileCarrier = () => {
       backAction
     );
 
-    return () => backHandler.remove();
+    return () => {
+      backHandler.remove();
+    }
   }, []);
 
+/*   useEffect(() => {
+    first
+  
+    return () => {
+      second
+    }
+  }, [third])
+   */
+
+
+
+  const propsChat = { 
+    carrierId : data.id,
+    userType : "Transportista"
+    }
 
 
 
@@ -129,6 +141,15 @@ const ProfileCarrier = () => {
       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
         </View> */}
+           <TouchableOpacity
+            style={styles.chat}
+            onPress={() => navigation.navigate("Chat", propsChat) }
+          >
+            <Icon name="chatbox-ellipses-outline" style={styles.iconss} />
+            {/* <Text style={styles.userBtnTxt}>Chat</Text> */}
+
+            {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
+          </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -189,11 +210,13 @@ const ProfileCarrier = () => {
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
-
+          {/* <Icon name="calculator-outline" style={styles.icons} /> */}
+       
+                  
           {travelCarr?.payload?.length ?          
           <TouchableOpacity
             style={styles.btn2}
-            onPress={()=>navigation.navigate('MapTravel')}
+            onPress={()=>navigation.navigate('TravelOn', travelCarr?.payload[0])}
           >
             <Text style={styles.userBtnTxt2}>Ver viaje en Proceso...</Text>
             {/* <Image
@@ -375,7 +398,7 @@ const styles = StyleSheet.create({
     marginTop: wp('7.5%'),
   },
   userImg: {
-    marginTop: wp('-3%'),
+    marginTop: wp('-8%'),
     height: wp('50%'),
     width: wp('50%'),
     borderRadius: wp('40%'),
@@ -457,5 +480,24 @@ const styles = StyleSheet.create({
   btnModalText2: {
     fontSize: hp("2.5%"),
     color: '#000'
-  }
+  },
+  chat:{
+    marginTop:hp("3%"),
+    marginBottom:hp("-3%"),
+    alignSelf: "flex-end",
+
+  },
+  iconss: {
+    alignContent: "flex-end",
+    fontSize: hp("6%"),
+    color: "#ff1c49",
+    // padding: wp("1.30%"),
+    marginRight: wp("5%"),
+    marginLeft: wp('1%'),
+    backgroundColor: 'white',
+    // borderRadius: wp('%'),
+    width: wp('12%'),
+    height: hp('7%'),
+    // marginTop: wp('-1%')
+  },
 });

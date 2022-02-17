@@ -66,7 +66,6 @@ const ProfileAdmin = () => {
       {/* <View style={{marginTop:hp("-2%"),marginLeft:wp("0%"),marginBottom:hp("-4%")}}>
         <HeaderBar  screen={'null'} style={{color:"white"}}/>
         </View> */}
-      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
@@ -93,7 +92,7 @@ const ProfileAdmin = () => {
           </Text>
         </View>
 
-        <View style={{ flex: 1, marginBottom: wp("60%"), padding: wp("5.5%") }}>
+        <View style={{ padding: wp("5.5%") }}>
           {/* BOTÓN DE DATOS PERSONALES */}
           <TouchableOpacity
             style={styles.btnText}
@@ -140,7 +139,7 @@ const ProfileAdmin = () => {
             <Text style={styles.userBtnTxt2}>Agregar Viaje</Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      
     </View>
   );
 };

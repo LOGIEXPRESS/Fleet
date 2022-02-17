@@ -1,13 +1,26 @@
-import { View, Text , StyleSheet , Image , TouchableWithoutFeedback } from 'react-native';
+import { View, Text , StyleSheet , Image , TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { capitalize } from "lodash";
 import { Button } from 'react-native-elements';
 import { color } from 'react-native-reanimated';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/core";
+
+
+
+
 
 
 export default function CardTravel(props) {
+
+  const navigation = useNavigation()
+
   const{travel , info} = props
-  
+  console.log("Esto es Travel:", travel)
+  console.log("Esto es Info:", info)
   return (
     <TouchableWithoutFeedback>
       <View style={styles.card}>
@@ -18,7 +31,7 @@ export default function CardTravel(props) {
               Origen: {travel.orig.split("/")[2]}
             </Text>
             <Text style={styles.name}>
-              Destino: {travel.destination.split("/")[2]}
+            Destino: {travel.destination.split("/")[2]}
             </Text>
             <Text style={styles.name}>
               Carga: {capitalize(travel.description)}
@@ -26,9 +39,14 @@ export default function CardTravel(props) {
             <Text style={styles.name}>
               Peso: {capitalize(travel.weight)}
             </Text>
-            <Button title={"Finalizar viaje"}>
-                
-            </Button>
+      {   travel.finishedTravel === 'process' ?   <TouchableOpacity 
+            onPress={() => navigation.navigate('TravelOn', travel) }
+            >
+              <Text style={styles.btn}>
+                Ver Viaje Actual
+              </Text>
+            </TouchableOpacity> : <Text> Viaje Finalizado</Text> }
+          
           </View>
         </View>
       </View>
@@ -38,41 +56,45 @@ export default function CardTravel(props) {
 
 const styles = StyleSheet.create({
   card: {
+    marginTop: hp('2%'),
     backgroundColor: "green",
     flex: 1,
-    height: 130,
-    borderRadius: 9,
+    height: hp('20%'),
+    borderRadius: wp('3.3%'),
   },
   spacing: {
     flex: 1,
-    padding: 5,
+    padding: wp('4%'),
   },
-  bgStyles: {
+ /*  bgStyles: {
     flex: 1,
     borderRadius: 15,
     padding: 10,
-  },
-  image: {
+  }, */
+  /* image: {
     position: "absolute",
     bottom: 2,
     right: 2,
     width: 90,
     height: 90,
-  },
+  }, */
   name: {
     color: "black",
     fontWeight: "700",
-    fontSize: 15,
-    paddingTop: 3
+    fontSize: wp('3.3%'),
+    paddingTop: hp('0.5%')
   },
   number: {
     position: "absolute",
-    right: 10,
-    top: 0,
+    right: hp('3%'),
+    top: hp('1%'),
     color: "#fff",
-    fontSize: 11,
+    fontSize: hp('1.6%'),
   },
   container: {
-      marginTop: 5
+      marginTop: hp('1%')
+  }, 
+  btn: {
+    color: '#ffff'
   },
 });

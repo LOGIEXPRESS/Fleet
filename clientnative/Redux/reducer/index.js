@@ -143,7 +143,9 @@ export default function rootReducer(state = initialState, action) {
         case "CLEAN_TOKEN":
           return {
             ...state,        
-            token: ""
+            token: "",
+            responseLog: null
+            
           };
         case "GET_PRICE_QUOTE":
           return {
@@ -193,7 +195,11 @@ export default function rootReducer(state = initialState, action) {
               ...state,
               alltraveltruck:action.payload
             }
-                        
+          case "UPDATE_VEHICULE":
+            return {
+              ...state,
+              editVehicule : action.payload
+            }             
           case "CARRIER_TRAVEL" :
             return {
               ...state,

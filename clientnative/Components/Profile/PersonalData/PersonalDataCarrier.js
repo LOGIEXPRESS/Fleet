@@ -26,9 +26,12 @@ const PersonalDataCarrier = () => {
 
   async function save(key, value) {
     //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
+    try{
     await SecureStore.setItemAsync(key, value);
+    } catch(error){
+      console.log('error', error.response)
+    }
   }
-
   console.log("Esta es la data que llega al perfil data CArrier:", data)
 
   const cerrarsesion = () => {
@@ -45,6 +48,7 @@ const PersonalDataCarrier = () => {
   // useEffect(() => {
   //   //console.log("data", data)
   // }, [data]);
+  
 
   return (
     <View style={styles.container}>
