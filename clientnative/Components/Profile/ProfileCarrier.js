@@ -93,7 +93,7 @@ const ProfileCarrier = () => {
 
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     const backAction = () => {
       Alert.alert("Hold on!", "Are you sure you want to go back?", [
         {
@@ -114,7 +114,7 @@ const ProfileCarrier = () => {
     return () => {
       backHandler.remove();
     }
-  }, []);
+  }, []); */
 
 /*   useEffect(() => {
     first

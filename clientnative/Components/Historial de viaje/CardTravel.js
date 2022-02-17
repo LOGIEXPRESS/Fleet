@@ -45,7 +45,7 @@ export default function CardTravel(props) {
               <Text style={styles.btn}>
                 Ver Viaje Actual
               </Text>
-            </TouchableOpacity> : <Text> Viaje Finalizado</Text> }
+            </TouchableOpacity> : <Text>Viaje Finalizado</Text> }
           
           </View>
         </View>
