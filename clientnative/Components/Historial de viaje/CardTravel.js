@@ -39,16 +39,14 @@ export default function CardTravel(props) {
             <Text style={styles.name}>
               Peso: {capitalize(travel.weight)}
             </Text>
-            <TouchableOpacity 
+      {   travel.finishedTravel === 'process' ?   <TouchableOpacity 
             onPress={() => navigation.navigate('TravelOn', travel) }
             >
               <Text style={styles.btn}>
                 Ver Viaje Actual
               </Text>
-            </TouchableOpacity>
-            <Button title={"Finalizar viaje"}>
-                
-            </Button>
+            </TouchableOpacity> : <Text> Viaje Finalizado</Text> }
+          
           </View>
         </View>
       </View>
@@ -58,42 +56,43 @@ export default function CardTravel(props) {
 
 const styles = StyleSheet.create({
   card: {
+    marginTop: hp('2%'),
     backgroundColor: "green",
     flex: 1,
-    height: hp('25%'),
-    borderRadius: 9,
+    height: hp('20%'),
+    borderRadius: wp('3.3%'),
   },
   spacing: {
     flex: 1,
-    padding: 5,
+    padding: wp('4%'),
   },
-  bgStyles: {
+ /*  bgStyles: {
     flex: 1,
     borderRadius: 15,
     padding: 10,
-  },
-  image: {
+  }, */
+  /* image: {
     position: "absolute",
     bottom: 2,
     right: 2,
     width: 90,
     height: 90,
-  },
+  }, */
   name: {
     color: "black",
     fontWeight: "700",
-    fontSize: 15,
-    paddingTop: 3
+    fontSize: wp('3.3%'),
+    paddingTop: hp('0.5%')
   },
   number: {
     position: "absolute",
-    right: 10,
-    top: 0,
+    right: hp('3%'),
+    top: hp('1%'),
     color: "#fff",
-    fontSize: 11,
+    fontSize: hp('1.6%'),
   },
   container: {
-      marginTop: 5
+      marginTop: hp('1%')
   }, 
   btn: {
     color: '#ffff'

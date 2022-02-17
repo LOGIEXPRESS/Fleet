@@ -11,91 +11,30 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/core";
 import HeaderBar from '../Utils/HeaderBar.js'
-
-
+import axios from 'axios';
+import { API_URLS } from "@env"
 
 
 export default function TravelOn(props) {
 
     const navigation = useNavigation();
     const travel = props.route.params
-
+    console.log("Esto es travel que llega al componente: ", travel)
     /*    const socket = useSelector((store) => store.socket)
        console.log("ESTO SON LAS PROPS", props.route.params.userId) */
     const dispatch = useDispatch();
 
-    /* 
-        const sendConfirmation = (props) => {
-            // alert('me estoy precionando')
-            console.log("ESTAS SON LAS PROPS QUE ENVIO", props)
-            const id = props
-            socket.emit('confirm_destination', id, (resp) => {
-                console.log(resp.status); // ok
-                setResponse(resp.status);
-            });
-            navigation.navigate("ReviewCarrier")
-    
-        }
-    
-        const sendFinishedTravel = (props) => {
-            // alert('me estoy precionando')
-            console.log("ESTAS SON LAS PROPS QUE ENVIO", props)
-            const id = props
-            socket.emit('finished_travel', id, (resp) => {
-                console.log(resp.status); // ok
-                setResponse2(resp.status);
-            });
-            navigation.navigate("ReviewUser", data.id)
-        }
-     */
-    /* let [response, setResponse] = useState(null);
-    let [response2, setResponse2] = useState(null);
 
-    console.log("esta es la respuesta", response)
-    const data = props.route.params
- */
-    /* const id = {
-        id: props.route.params.id
+    const handelFinishTravel = async (e) => {
+        e.preventDefault()
+
+        let finishTravel = await axios.post(`${API_URLS}/api/finishTravel/${travel.id}`)
+
+        console.log('FNISH TRAVEL: ', finishTravel.data)
+
+        navigation.goBack();
+
     }
-    const travel = useSelector((store) => store.travel)
-    console.log("ESTA ES LA ID", travel)
-    useEffect(() => {
-        dispatch(getTravelID(id))
-    }, [dispatch, response]);
-
- */
-    /*    const [usersIds, setUsersIds] = useState({
-           userId: null,
-           carrierId: null,
-       })
-    */
-
-    /* useEffect(() => {
-        if (data) {
-            if (data.userId) {
-                setUsersIds({
-                    userId: data.userId,
-                    carrierId: null,
-                })
-            } else {
-                setUsersIds({
-                    userId: null,
-                    carrierId: data.carrierId,
-                })
-            }
-        }
-
-        return () => {
-            setUsersIds({
-                userId: null,
-                carrierId: null,
-            })
-        };
-    }, []); */
-
-
-    /* 
-        console.log("ESTAS SON LAS IDS PARA EL CONDICIONAL", usersIds) */
 
     const [state, setState] = useState({
         origen: {
@@ -143,79 +82,68 @@ export default function TravelOn(props) {
     const _map = useRef();
     return (
         <View style={styles.container}>
-{/* 
-            <View style={{ position: 'absolute', marginTop: '10%' }}>
-                <HeaderBar screen={'null'} />
-            </View> */}
-            {
-                travel !== null ?
 
-                    <MapView
-                        ref={_map}
-                        style={StyleSheet.absoluteFill}
-                        initialRegion={origen}
+
+            <HeaderBar screen={'null'} />
+
+            <View style={styles.container}>
+                {
+                    travel !== null ?
+
+                        <MapView
+                            ref={_map}
+                            style={StyleSheet.absoluteFill}
+                            initialRegion={origen}
+                        >
+
+                            <Marker
+                                coordinate={origen}
+                            />
+                            <Marker
+                                coordinate={destino}
+                            />
+                            <MapViewDirections
+                                origin={origen}
+                                destination={destino}
+                                apikey={APIKEY_GOOGLE}
+                                strokeWidth={3}
+                                strokeColor='hotpink'
+                                optimizeWaypoints={true}
+                                onReady={result => {
+                                    _map.current.fitToCoordinates(result.coordinates, {
+                                        edgePadding: {
+                                            right: 30,
+                                            bottom: 300,
+                                            left: 30,
+                                            top: 100,
+                                        }
+                                    })
+                                }}
+                            />
+
+                        </MapView> : <ActivityIndicator size="large" color="#0000ff" />
+                }
+                <View style={styles.btn2}>
+                    <TouchableOpacity 
+                    style={styles.btnText}
+                    onPress={(e) =>  handelFinishTravel(e)}
                     >
+                        <Text style={styles.userBtnTxt}>Terminar Viaje</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
 
-                        <Marker
-                            coordinate={origen}
-                        />
-                        <Marker
-                            coordinate={destino}
-                        />
-                        <MapViewDirections
-                            origin={origen}
-                            destination={destino}
-                            apikey={APIKEY_GOOGLE}
-                            strokeWidth={3}
-                            strokeColor='hotpink'
-                            optimizeWaypoints={true}
-                            onReady={result => {
-                                _map.current.fitToCoordinates(result.coordinates, {
-                                    edgePadding: {
-                                        right: 30,
-                                        bottom: 300,
-                                        left: 30,
-                                        top: 100,
-                                    }
-                                })
-                            }}
-                        />
-
-                    </MapView> : <ActivityIndicator size="large" color="#0000ff" />
-            }
-      {/*       {
-                usersIds.userId ?
-                    <View style={styles.btn2}>
-                        <TouchableOpacity
-                            style={styles.btnText}
-                            onPress={() => sendFinishedTravel(data.id)}
-                        >
-                            <Text style={styles.userBtnTxt}>CONFIRMAR SOLICITUD</Text>
-                        </TouchableOpacity>
-                    </View> :
-                    <View style={styles.btn2}>
-                        <TouchableOpacity
-                            style={styles.btnText2}
-                            onPress={() => sendConfirmation(data.id)}
-                        >
-                            <Text style={styles.userBtnTxt}>LLEGUE A DESTINO</Text>
-                        </TouchableOpacity>
-                    </View>
-            } */}
 
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     btn2: {
         flex: 1,
         marginBottom: wp("20%"),
         padding: wp("5.5%"),
-        marginTop: wp("90%")
+        marginTop: hp("70%")
     },
     btnText2: {
         backgroundColor: "#7952B3",
@@ -248,8 +176,11 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 'bold',
         textAlign: "center",
-        fontSize: hp('2.2%'),
+        fontSize: hp('2.5%'),
         marginTop: wp('0.9%'),
+    },
+    container: {
+        flex: 1,
     },
 
 

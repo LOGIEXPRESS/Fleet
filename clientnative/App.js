@@ -169,7 +169,7 @@ const App = () => {
             <Stack.Screen
               name="HistoryCarrier"
               component={HistoryCarrier}
-              // options={{ headerShown: false }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Chat"
@@ -179,7 +179,7 @@ const App = () => {
             <Stack.Screen
               name="TravelOn"
               component={TravelOn}
-              // options={{ headerShown: false }}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

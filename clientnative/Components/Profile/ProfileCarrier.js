@@ -87,17 +87,12 @@ const ProfileCarrier = () => {
       }
     }
     getsaldo()
-
-    
-
-   
     dispatch(getTravelCarrier(data.id))
     // return()=>{dispatch(getTravelCarrier(data.id))} 
-
-    
-  
-
   }, [dispatch]);
+
+
+
   useEffect(() => {
     const backAction = () => {
       Alert.alert("Hold on!", "Are you sure you want to go back?", [
@@ -116,8 +111,21 @@ const ProfileCarrier = () => {
       backAction
     );
 
-    return () => backHandler.remove();
+    return () => {
+      backHandler.remove();
+    }
   }, []);
+
+/*   useEffect(() => {
+    first
+  
+    return () => {
+      second
+    }
+  }, [third])
+   */
+
+
 
   const propsChat = { 
     carrierId : data.id,
@@ -206,7 +214,7 @@ const ProfileCarrier = () => {
           {travelCarr?.payload?.length ?          
           <TouchableOpacity
             style={styles.btn2}
-            onPress={()=>navigation.navigate('MapTravel')}
+            onPress={()=>navigation.navigate('TravelOn', travelCarr?.payload[0])}
           >
             <Text style={styles.userBtnTxt2}>Ver viaje en Proceso...</Text>
             {/* <Image
