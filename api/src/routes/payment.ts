@@ -220,7 +220,8 @@ router.get('/render', async(req: Request , res: Response, ) => {
       }
     })
 
-    console.log('TRUCK',idTruck)
+    console.log('REALMENTE ESTOY ENTRANDO EN ESTA RUTA DE RENDER con x=2')
+
     if(idTruck){
       await Payment.update({status:true},{where:{TruckId:idTruck.id}})
       await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
