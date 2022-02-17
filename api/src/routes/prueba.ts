@@ -17,7 +17,7 @@ router.get('/prueba', async (req: Request, res: Response, next: NextFunction) =>
     
     
     try {
-            res.send("ESTO ES UNA PRUEBA")
+            res.send("ESTO ES UNA PRUEBA dos")
     }
     catch (err) {
         next(err)
