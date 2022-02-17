@@ -118,9 +118,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": `https://superfleetback.herokuapp.com/api/render?x=0&id=${id}`,
-          "pending": `https://superfleetback.herokuapp.com/api/render?x=1&id=${id}`,
-          "success": `https://superfleetback.herokuapp.com/api/render?x=2&id=${id}`
+          "failure": `https://fleet20.herokuapp.com/api/render?x=0&id=${id}`,
+          "pending": `https://fleet20.herokuapp.com/api/render?x=1&id=${id}`,
+          "success": `https://fleet20.herokuapp.com/api/render?x=2&id=${id}`
       }
   }
 
