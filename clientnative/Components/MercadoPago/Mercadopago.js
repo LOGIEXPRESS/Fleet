@@ -18,7 +18,7 @@ export default function Mercadopago(propss) {
   const handleReset = () => {
     setLink("");
     setRender("");
-    navigation.navigate('ProfileAdmin')
+    navigation.push('ViewFleet')
   };
 
   const handlePago = () => {

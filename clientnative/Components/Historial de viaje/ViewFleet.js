@@ -28,6 +28,8 @@ const HistorialDeViaje = () => {
   const user = useSelector((store) => store.userStatus)
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  
+  
 
   useEffect(() => {
     dispatch(userStatus())
@@ -101,7 +103,7 @@ const HistorialDeViaje = () => {
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <HeaderBar screen={"null"} />
+        <HeaderBar screen={"ProfileAdmin"} />
         <View style={styles.containerHeaders}>
           <View style={{ flexDirection: 'row' }}>
             <Text style={{ fontSize: hp("2.5%"), fontWeight: "bold" }}>
