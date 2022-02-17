@@ -82,18 +82,18 @@ router.post("/mercadopago", async (req, res) => {
   console.log("ESTO ES REQ.BODY", req.body);
   try {
 
-    let idTruck= await Truck.findOne({
-      where:{
-        SignupId:id
-      }
-    })
+    // let idTruck= await Truck.findOne({
+    //   where:{
+    //     SignupId:id
+    //   }
+    // })
 
-    console.log('TRUCK',idTruck)
-    if(idTruck){
-      await Payment.update({status:true},{where:{TruckId:idTruck.id}})
-      await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
+    // console.log('TRUCK',idTruck)
+    // if(idTruck){
+    //   await Payment.update({status:true},{where:{TruckId:idTruck.id}})
+    //   await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
 
-    }
+    // }
 
 
 
@@ -120,7 +120,7 @@ router.post("/mercadopago", async (req, res) => {
       "back_urls" : {
           "failure": `https://superfleetback.herokuapp.com/api/render?x=0`,
           "pending": `https://superfleetback.herokuapp.com/api/render?x=1`,
-          "success": `https://superfleetback.herokuapp.com/api/render?x=2`
+          "success": `https://superfleetback.herokuapp.com/api/render?x=2&id=${id}`
       }
   }
 
@@ -174,7 +174,7 @@ catch(err){
 
 router.get('/render', async(req: Request , res: Response, ) => {
 
-  let {x} = req.query
+  let {x , id} = req.query
   // const {id} = req.params
 
   
@@ -212,6 +212,20 @@ router.get('/render', async(req: Request , res: Response, ) => {
   }
 
   if(x==="2"){
+
+    let idTruck= await Truck.findOne({
+      where:{
+        SignupId:id
+      }
+    })
+
+    console.log('TRUCK',idTruck)
+    if(idTruck){
+      await Payment.update({status:true},{where:{TruckId:idTruck.id}})
+      await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
+
+    }
+
     return   res.send(`
     <body style="background-color:white; color: white " >
     <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
