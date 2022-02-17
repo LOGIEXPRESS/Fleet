@@ -105,7 +105,7 @@ router.post("/mercadopago", async (req, res) => {
     let preference = {
       "items": [
           {
-            "id":id,
+            // "id":id,
              "title": title,
                   "description": "Dummy Item Description",
                   "quantity": quantity,
@@ -118,8 +118,8 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": `https://superfleetback.herokuapp.com/api/render?x=0`,
-          "pending": `https://superfleetback.herokuapp.com/api/render?x=1`,
+          "failure": `https://superfleetback.herokuapp.com/api/render?x=0&id=${id}`,
+          "pending": `https://superfleetback.herokuapp.com/api/render?x=1&id=${id}`,
           "success": `https://superfleetback.herokuapp.com/api/render?x=2&id=${id}`
       }
   }
@@ -127,7 +127,7 @@ router.post("/mercadopago", async (req, res) => {
     let answer = await mercadopago.preferences.create(preference);
 
     const response = answer.body.id;
-    const init_points = answer.body.sandbox_init_point;
+    const init_points = answer.body.init_point;
 
     
 
@@ -224,7 +224,7 @@ router.get('/render', async(req: Request , res: Response, ) => {
       await Payment.update({status:true},{where:{TruckId:idTruck.id}})
       await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
 
-    }
+    
 
     return   res.send(`
     <body style="background-color:white; color: white " >
@@ -237,6 +237,7 @@ router.get('/render', async(req: Request , res: Response, ) => {
       <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px; color: #009de2 ">Pago exitoso!</h1>
     </body>
   `)
+    }
   }
   res.send(`Error en el paramentro x = ${x}`)
 })
