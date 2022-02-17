@@ -32,7 +32,8 @@ export default function TravelOn(props) {
 
         console.log('FNISH TRAVEL: ', finishTravel.data)
 
-        navigation.goBack();
+        // navigation.goBack();
+        navigation.push('ProfileCarrier')
 
     }
 
