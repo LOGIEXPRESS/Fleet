@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  ImageBackground,
 } from "react-native";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -69,9 +70,15 @@ const HistorialDeViaje = () => {
               }
             
             return (
-              <View style={styles.viewUsers} key={index}>
+              <View  style={
+                 
+                    
+                e.status === true || e.status === false
+                  ? styles.viewUsers
+                  : styles.viewUsers2
+              } key={index}>
                 {console.log( "PROPS AMUNT",propss.amount)}
-                <Image
+                <ImageBackground
                 resizeMode="contain"
                   source={{
                     uri:
@@ -79,11 +86,15 @@ const HistorialDeViaje = () => {
                         ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
                         : e.carrier.photo,
                   }}
+        
                   style={
+                 
+                    
                     e.status === true || e.status === false
-                      ? styles.imgOn
-                      : styles.imgOff
+                      ? {borderRadius:hp("6.5%"), width:hp("12%"), height:hp("12%"), borderWidth:1.5,borderColor:"green"}
+                      : {borderRadius:hp("6.5%"), width:hp("12%"), height:hp("12%"), borderWidth:1.5, borderColor:"red"}
                   }
+                  
                 />
                 <View style={styles.cardsText}>
                   <Text style={styles.cardsName}>
@@ -124,16 +135,18 @@ const HistorialDeViaje = () => {
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{marginBottom:hp("-2%")}}>
         <HeaderBar screen={"ProfileAdmin"} />
+        </View>
         <View style={styles.containerHeaders}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontSize: hp("2.8%"), fontWeight: "bold" }}>
+          <View style={{ flexDirection: 'row', marginBottom:hp("-2.6%") }}>
+            <Text style={{ fontSize: hp("2.8%"), fontWeight: "bold", marginTop:hp("2%") }}>
               Controla tu Flota
             </Text>
             <Icon name='stats-chart-outline' style={styles.iconn} size={hp('2.8%')} />
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('NewCarrier')}>
-            <View style={{ flexDirection: 'row', alignSelf:"flex-end", marginTop:hp("-4.8%"), marginRight:wp("4%") }}>
+          <TouchableOpacity onPress={() => navigation.navigate('NewCarrier')} >
+            <View style={{ flexDirection: 'row', alignSelf:"flex-end", marginTop:hp("-2%"), marginRight:wp("4%") }}>
               <Icon name='person-add-outline' style={styles.iconAdd} size={hp('4.5%')} />
             </View>
           </TouchableOpacity>
@@ -197,19 +210,21 @@ const styles = StyleSheet.create({
     marginBottom:hp("-1%"),
     width:wp("80%"),
     alignContent:"space-between",
-    marginLeft:wp("-10%")
+    marginLeft:wp("-7%")
   },
   iconn: {
     marginLeft: hp('1%'),
+    marginTop:hp("2.2%")
 
   },
   iconAdd: {
-    marginLeft: hp('1%'),
-    color: '#ff1c02'
+    marginRight: hp('1%'),
+    color: '#ff1c02',
+   
   },
   imgOn: {
-    width: hp('13%'),
-    height: hp('13%'),
+    width: hp('12%'),
+    height: wp('23%'),
     borderRadius: hp('10%'),
     borderColor: '#49B145',
     borderWidth: wp('0.8%')
@@ -217,7 +232,7 @@ const styles = StyleSheet.create({
   imgOff: {
     width: hp('13%'),
     height: hp('13%'),
-    borderRadius: hp('13%'),
+    borderRadius: hp('2%'),
     borderColor: '#808080',
     borderWidth: wp('0.8%')
   },
@@ -307,14 +322,30 @@ const styles = StyleSheet.create({
   viewUsers: {
     flexDirection: 'row',
     padding: wp("4%"),
-    backgroundColor: "#EAB6AD", //"#FFC107",
+    backgroundColor: "lightgrey", //"#FFC107",
     marginTop: wp("1%"),
     marginBottom: wp("2.5%"),
     marginLeft:wp("-1.7%"),
-    borderColor: "grey",
+    borderColor:"green",
     width: wp('90%'),
-    borderWidth: hp('0.15%'),
+    borderWidth: hp('0.35%'),
+    shadowOpacity: 80,
+    // shadowColor:"black",
+    elevation: 20,
+    borderRadius: wp('2.5%')
+  },
+  viewUsers2: {
+    flexDirection: 'row',
+    padding: wp("4%"),
+    backgroundColor: "lightgrey", //"#FFC107",
+    marginTop: wp("1%"),
+    marginBottom: wp("2.5%"),
+    marginLeft:wp("-1.7%"),
+    borderColor: "red",
+    width: wp('90%'),
+    borderWidth: hp('0.35%'),
     shadowOpacity: 5,
+    shadowColor:"red",
     elevation: 15,
     borderRadius: wp('2.5%')
   },

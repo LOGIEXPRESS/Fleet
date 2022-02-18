@@ -43,7 +43,7 @@ export default function CardTravel(props) {
               Peso: {capitalize(travel.weight)} Toneladas
             </Text>
             <View style={{height:hp("0.1%"), backgroundColor:"grey", width:wp("70%")}}></View>
-            <View style={{display:"flex", flexDirection:"row", marginTop:hp("2%")}}>
+            <View style={{display:"flex", flexDirection:"row", marginTop:hp("3%")}}>
       {   travel.finishedTravel === 'process' ?   <TouchableOpacity 
             onPress={() => navigation.navigate('TravelOn', travel) }
             >
@@ -104,12 +104,13 @@ const styles = StyleSheet.create({
     fontSize: hp('2.1%'),
     fontWeight:"bold",
     color:"#E1E2EF",
+
     
 
     
   },
   container: {
-      marginTop: hp('1%')
+      marginTop: hp('3%')
   }, 
   btn: {
     backgroundColor:"#0d1317",
