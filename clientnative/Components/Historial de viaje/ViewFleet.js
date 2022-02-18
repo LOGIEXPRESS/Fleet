@@ -72,6 +72,7 @@ const HistorialDeViaje = () => {
               <View style={styles.viewUsers} key={index}>
                 {console.log( "PROPS AMUNT",propss.amount)}
                 <Image
+                resizeMode="contain"
                   source={{
                     uri:
                       e.carrier.photo === null || e.carrier.photo === "url"
@@ -89,31 +90,23 @@ const HistorialDeViaje = () => {
                     {e.carrier.name} {e.carrier.lastName}
                   </Text>
                   <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
+                  <Text style={styles.cardsSubtitle2}>Saldo = ${propss.amount||0}</Text>
                   <View style={styles.flexbtn}>
-                    <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        HISTORIAL DE VIAJES{" "}
-                      </Text>
+                  <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
+                    <Icon name='chatbox-ellipses-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.btnText}>
+                    <Icon name='navigate-outline' style={styles.icon} size={hp('3.5%')} />
+                    </TouchableOpacity>                   
                     <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
-                      <Text style={{ fontSize: wp('2.3%') }}> SALDO GENERADO: ${propss.amount||0} </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.flexbtn}>
+                    <Icon name='card-outline' style={styles.icon} size={hp('3.5%')} />
+                    </TouchableOpacity>                                
                     <TouchableOpacity style={styles.btnText}>
-                      <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        VER VIAJE ACTUAL{" "}
-                      </Text>
+                      <Icon name='newspaper-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
-                      <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        ENVIAR MENSAJE
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                    
+                    </View>
+                  
                 </View>
               </View>
             );
@@ -134,17 +127,14 @@ const HistorialDeViaje = () => {
         <HeaderBar screen={"ProfileAdmin"} />
         <View style={styles.containerHeaders}>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontSize: hp("2.5%"), fontWeight: "bold" }}>
+            <Text style={{ fontSize: hp("2.8%"), fontWeight: "bold" }}>
               Controla tu Flota
             </Text>
-            <Icon name='stats-chart-outline' style={styles.icon} size={hp('2.4%')} />
+            <Icon name='stats-chart-outline' style={styles.iconn} size={hp('2.8%')} />
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('NewCarrier')}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.textViajes}>
-                Añade un nuevo transportista
-              </Text>
-              <Icon name='person-add-outline' style={styles.iconAdd} size={hp('2%')} />
+            <View style={{ flexDirection: 'row', alignSelf:"flex-end", marginTop:hp("-4.8%"), marginRight:wp("4%") }}>
+              <Icon name='person-add-outline' style={styles.iconAdd} size={hp('4.5%')} />
             </View>
           </TouchableOpacity>
 
@@ -200,10 +190,16 @@ export default HistorialDeViaje;
 
 const styles = StyleSheet.create({
   flexbtn: {
+    display:"flex",
     flexDirection: 'row',
-    margin: wp('0.5%')
+    // margin: wp('0.5%'),
+    marginTop:hp("1%"),
+    marginBottom:hp("-1%"),
+    width:wp("80%"),
+    alignContent:"space-between",
+    marginLeft:wp("-10%")
   },
-  icon: {
+  iconn: {
     marginLeft: hp('1%'),
 
   },
@@ -212,16 +208,16 @@ const styles = StyleSheet.create({
     color: '#ff1c02'
   },
   imgOn: {
-    width: hp('12%'),
-    height: wp('23%'),
+    width: hp('13%'),
+    height: hp('13%'),
     borderRadius: hp('10%'),
     borderColor: '#49B145',
     borderWidth: wp('0.8%')
   },
   imgOff: {
-    width: hp('12%'),
-    height: wp('23%'),
-    borderRadius: hp('10%'),
+    width: hp('13%'),
+    height: hp('13%'),
+    borderRadius: hp('13%'),
     borderColor: '#808080',
     borderWidth: wp('0.8%')
   },
@@ -314,32 +310,43 @@ const styles = StyleSheet.create({
     backgroundColor: "#EAB6AD", //"#FFC107",
     marginTop: wp("1%"),
     marginBottom: wp("2.5%"),
-    borderColor: "#ff1c02",
-    width: wp('87%'),
+    marginLeft:wp("-1.7%"),
+    borderColor: "grey",
+    width: wp('90%'),
     borderWidth: hp('0.15%'),
-    shadowOpacity: 80,
+    shadowOpacity: 5,
     elevation: 15,
-    borderRadius: wp('4%')
+    borderRadius: wp('2.5%')
   },
   cardsName: {
-    fontSize: hp('2%'),
+    fontSize: hp('2.8%'),
+    fontWeight:"bold"
   },
   cardsSubtitle: {
-    fontSize: hp('1.5%'),
+    fontSize: hp('1.8%'),
     color: '#808080'
+  },
+  cardsSubtitle2: {
+    fontSize: hp('2.5%'),
+    marginTop:hp("0.5%")
   },
   cardsText: {
     position: "relative",
     marginLeft: wp('5%')
   },
   btnText: {
-    padding: wp("2%"),
-    backgroundColor: "#fff", //"#FFC107",
-    marginTop: wp("1%"),
-    width: wp('25%'),
-    shadowOpacity: 80,
+    // padding: wp("2%"),
+    backgroundColor: "whitesmoke", //"#FFC107",
+    // marginTop: wp("1%"),
+    width: wp('10%'),
+    height:wp('10%'),
+    // shadowOpacity: 80,
     elevation: 15,
-    marginRight: wp('0.6')
+    marginLeft: wp("5%"),
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius:wp("5%"),
+    borderWidth:2
   },
 
 });

@@ -102,14 +102,14 @@ const NewCarrier = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <HeaderBar screen="null" />
         <View style={styles.containerHeaders}>
-          <Text style={{ fontSize: 20 }}>
-            AÑADE TRANSPORSTISTAS A TU FLOTA
+          <Text style={{ fontSize: hp("2.5%"), fontWeight:"bold" }}>
+            AÑADE TRANSPORTISTAS A TU FLOTA
           </Text>
           <Icon name="bus-outline" style={styles.icons} />
         </View>
         <View style={styles.viewAnterior}>
           <Text style={styles.textAnterior}>
-            AÑADE UN NUEVO TRANSPORSTISTA
+            AÑADE UN NUEVO TRANSPORTISTA
           </Text>
         </View>
         <View style={styles.containerCards}>
@@ -154,7 +154,7 @@ const NewCarrier = () => {
           </View>
         </View>
         <View style={styles.viewAnterior}>
-          <Text style={styles.textAnterior}>TUS TRANSPORSTISTAS</Text>
+          <Text style={styles.textAnterior}>TUS TRANSPORTISTAS</Text>
         </View>
         <View style={styles.containerCards}>
           <View style={styles.cards}>
@@ -219,12 +219,12 @@ const NewCarrier = () => {
                 <Text>Email: {eMail}</Text>
                 <View style={{ flexDirection: 'row' }}>
                   <TouchableOpacity style={styles.btnModal} >
-                    <Text style={styles.btnText} onPress={() => handleSubmit()} >
+                    <Text style={styles.btnText2} onPress={() => handleSubmit()} >
                       Agregar
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.btnModal} >
-                    <Text style={styles.btnText} onPress={() => setModalView(false)} >
+                    <Text style={styles.btnText2} onPress={() => setModalView(false)} >
                       Cancelar
                     </Text>
                   </TouchableOpacity>
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     marginLeft: wp("5%"),
     paddingBottom: wp("2%"),
     flexDirection: 'row',
-    marginTop: wp("5%")
+    
   },
   icons: {
     fontSize: hp("3.5}%"),
@@ -462,11 +462,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     shadowOpacity: 80,
     elevation: 15,
-    marginLeft: hp('8%')
+    marginLeft: wp('18%')
   },
   btnText: {
-    fontSize: hp("2%"),
+    fontSize: hp("2.5%"),
+    fontWeight:"bold",
     marginLeft: wp("2%"),
     color: '#ffff'
+  },
+  btnText2: {
+    fontSize: hp("2%"),
+    fontWeight:"bold",
+    marginLeft: wp("0.8%"),
+    color: 'white'
   }
 })

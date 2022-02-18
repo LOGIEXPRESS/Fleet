@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
         alignContent: "center",
     },
     btnText: {
-        backgroundColor: "#FFC107",
+        backgroundColor: "#ff1c49",
         width: wp("88%"),
         height: hp("7%"),
         padding: wp('2.5%'),

@@ -85,8 +85,9 @@ const styles = StyleSheet.create({
         elevation: 10,
     },
     btnText: {
-        fontSize: hp("2%"),
-        marginLeft: wp("2%"),
-        color: '#ffff'
+        fontSize: hp("2.2%"),
+        fontWeight:"bold",
+        marginLeft: wp("0.8%"),
+        color: 'white'
     }
 });

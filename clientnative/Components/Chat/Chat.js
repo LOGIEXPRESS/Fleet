@@ -76,19 +76,19 @@ socket.emit("join_room", carrierId, (response) => {
         //este envio nos devolvera una resTextuesta quenos servira Textara valiar 
         //si el otro usuario esta conectado y crear la resTextuesta de usuario offline user
         console.log(response.status);
-        if(response.status!==''){ 
-          let messageData = {
-            room: room,
-            author: response.status,//agregar nombre de usuario
-            message: "I'm Sorry",
-            time:
-              new Date(Date.now()).getHours() +
-              ":" +
-              new Date(Date.now()).getMinutes(),
-          };
+        // if(response.status!==''){ 
+        //   let messageData = {
+        //     room: room,
+        //     author: response.status,//agregar nombre de usuario
+        //     message: "I'm Sorry",
+        //     time:
+        //       new Date(Date.now()).getHours() +
+        //       ":" +
+        //       new Date(Date.now()).getMinutes(),
+        //   };
           
-          setMessageList((list) => [...list, messageData])
-        }
+        //   setMessageList((list) => [...list, messageData])
+        // }
         });
 
 
