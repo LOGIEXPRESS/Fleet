@@ -90,8 +90,8 @@ const HistorialDeViaje = () => {
                   source={{
                     uri:
                       e.carrier.photo === null || e.carrier.photo === "url"
-                        ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
-                        // "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                        ? 
+                      "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
                         : e.carrier.photo,
                   }}
         
@@ -117,7 +117,7 @@ const HistorialDeViaje = () => {
                     <TouchableOpacity style={styles.btnText}>
                     <Icon name='navigate-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>                   
-                    <TouchableOpacity style={styles.btnText} onPress={Pagar(propss)}>
+                    <TouchableOpacity style={styles.btnText} onPress={()=>Pagar(propss)}>
                     <Icon name='card-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>                                
                     <TouchableOpacity style={styles.btnText}>
