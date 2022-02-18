@@ -16,7 +16,6 @@ const router=Router()
 router.get('/payment', async (req: Request, res: Response) => {
     res.send('Allan Torres line 15');
   });
-//QUE ES ESTOOOO??
 
   // router.post('/mercadopago', async (req, res) => {
   //   const { title, unit_price } = req.body;
@@ -49,8 +48,6 @@ router.get('/payment', async (req: Request, res: Response) => {
   //   console.error(err)
   // }
   // });
-
-
 //   router.get('/checkout', async (req, res) => {
 //     let {id}=req.query;
 //     console.log("#####line 46#####");
@@ -121,9 +118,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": `https://superfleetback.herokuapp.com/api/render?x=0&id=${id}`,
-          "pending": `https://superfleetback.herokuapp.com/api/render?x=1&id=${id}`,
-          "success": `https://superfleetback.herokuapp.com/api/render?x=2&id=${id}`
+          "failure": `https://fleet20.herokuapp.com/api/render?x=0&id=${id}`,
+          "pending": `https://fleet20.herokuapp.com/api/render?x=1&id=${id}`,
+          "success": `https://fleet20.herokuapp.com/api/render?x=2&id=${id}`
       }
   }
 
@@ -141,28 +138,28 @@ router.post("/mercadopago", async (req, res) => {
 });
 
   
-// router.get('/checkout', async (req: Request, res: Response) => {
-//   let {id}=req.query;
-//   console.log("#####line 46#####");
-//   console.log(id);
-//   let status:any;
-//   try{
+router.get('/checkout', async (req: Request, res: Response) => {
+  let {id}=req.query;
+  console.log("#####line 46#####");
+  console.log(id);
+  let status:any;
+  try{
 
 
-//   const resp= await   axios
-//         .get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
+  const resp= await   axios
+        .get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
 
-//     })
-//     .then((res) => {
-//       console.log(res.statusText)
-//         status=res.statusText;
-//     });
-//     res.send(status);
-//   }
-// catch(err){
-//   console.error(err)
-// }
-// });
+    })
+    .then((res) => {
+      console.log(res.statusText)
+        status=res.statusText;
+    });
+    res.send(status);
+  }
+catch(err){
+  console.error(err)
+}
+});
 
 // router.get('totalprice',(req: Request, res: Response, next: NextFunction) => {
 //   let {id} = req.query
@@ -177,7 +174,7 @@ router.post("/mercadopago", async (req, res) => {
 
 router.get('/render', async(req: Request , res: Response, ) => {
 
-  let {x , id} = req.query
+  let {x,id} = req.query
   // const {id} = req.params
 
   console.log("req.query",req.query);
@@ -223,14 +220,12 @@ router.get('/render', async(req: Request , res: Response, ) => {
       }
     })
 
-    console.log('REALMENTE ESTOY ENTRANDO EN ESTA RUTA DE RENDER con x=2')
-
+    console.log('TRUCK',idTruck)
     if(idTruck){
       await Payment.update({status:true},{where:{TruckId:idTruck.id}})
       await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
 
     
-
     return   res.send(`
     <body style="background-color:white; color: white " >
     <img src="https://user-images.githubusercontent.com/70895686/153325791-f3df7c3a-84d1-4d71-a35a-96f6be0f611e.png" style="display: block;
@@ -241,8 +236,7 @@ router.get('/render', async(req: Request , res: Response, ) => {
     " />
       <h1 style="text-align:center ; margin-top: 15vh ; font-size: 70px; color: #009de2 ">Pago exitoso!</h1>
     </body>
-  `)
-    }
+  `)}
   }
   res.send(`Error en el paramentro x = ${x}`)
 })
@@ -302,6 +296,10 @@ router.get('/amountCarrier/:idSignup', async (req: Request, res: Response , next
 
     }
 
+    
+
+
+  
 
   } catch (error) {
     next(error);
