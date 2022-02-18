@@ -85,25 +85,13 @@ const HistorialDeViaje = () => {
                   : styles.viewUsers2
               } key={index}>
                 {console.log( "PROPS AMUNT",propss.amount)}
-                <ImageBackground
-                resizeMode="contain"
-                  source={{
-                    uri:
-                      e.carrier.photo === null || e.carrier.photo === "url"
-                        ? 
-                      "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
-                        : e.carrier.photo,
-                  }}
-        
-                  style={
-                 
-                    
-                    e.status === true || e.status === false
-                      ? {borderRadius:hp("6.5%"), width:hp("12%"), height:hp("12%"), borderWidth:1.5,borderColor:"green"}
-                      : {borderRadius:hp("6.5%"), width:hp("12%"), height:hp("12%"), borderWidth:1.5, borderColor:"red"}
-                  }
-                  
-                />
+                <Image source={{
+                  uri:
+                    e.carrier.photo === null || e.carrier.photo === "url"
+                      ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                      : e.carrier.photo
+
+                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
                 <View style={styles.cardsText}>
                   <Text style={styles.cardsName}>
                     {e.carrier.name} {e.carrier.lastName}

@@ -69,9 +69,9 @@ const ProfileAdmin = () => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("12%") }}>
+          <View style={styles.containerImg}>
             <Image
-              resizeMode="contain"
+              // resizeMode="contain"
               source={{
                 uri:
                   data?.photo === null || data?.photo === "url"
@@ -147,32 +147,49 @@ const ProfileAdmin = () => {
 export default ProfileAdmin;
 
 const styles = StyleSheet.create({
+  containerImg: {
+    marginTop: wp("12%"),
+    width: 170,
+    height: 170,
+    borderRadius: 85,
+    overflow: "hidden",
+    marginTop: 80,
+    borderColor: "#E1E8EB",
+    borderWidth: 1,
+    //Properties to setup your Shadow
+
+    shadowOffset: { width: 10, height: 10 },
+    shadowColor: "#000",
+    shadowOpacity: 5,
+    elevation: 10,
+    backgroundColor: "#000",
+  },
   icons: {
     alignContent: "center",
     fontSize: hp("3.5%"),
     color: "#ff1c49",
     padding: wp("1.30%"),
     marginRight: wp("4%"),
-    marginLeft: wp('1%'),
-    backgroundColor: 'white',
-    borderRadius: wp('7%'),
-    width: wp('10%'),
-    height: hp('5.2%'),
-    marginTop: wp('-1%')
+    marginLeft: wp("1%"),
+    backgroundColor: "white",
+    borderRadius: wp("7%"),
+    width: wp("10%"),
+    height: hp("5.2%"),
+    marginTop: wp("-1%"),
   },
   icons3: {
     fontSize: hp("2.70%"),
     alignContent: "flex-end",
     alignItems: "flex-end",
-    marginTop: wp('1%'),
-    marginLeft: wp('22%')
+    marginTop: wp("1%"),
+    marginLeft: wp("22%"),
   },
   icons4: {
     fontSize: hp("2.70%"),
     alignContent: "flex-end",
     alignItems: "flex-end",
-    marginTop: wp('1%'),
-    marginLeft: wp('33.5%')
+    marginTop: wp("1%"),
+    marginLeft: wp("33.5%"),
   },
   perfilTex: {
     fontSize: hp("2.6%"),
@@ -186,8 +203,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: wp("88%"),
     height: hp("8%"),
-    padding: wp('2.5%'),
-    borderRadius: wp('3%'),
+    padding: wp("2.5%"),
+    borderRadius: wp("3%"),
     shadowOpacity: 5,
     elevation: 2,
     marginTop: wp("7%"),
@@ -202,67 +219,72 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff1c49",
     width: wp("88%"),
     height: hp("8.5%"),
-    padding: wp('5%'),
-    borderRadius: wp('4%'),
+    padding: wp("5%"),
+    borderRadius: wp("4%"),
     shadowOpacity: 5,
     elevation: 2,
-    marginTop: wp('7.5%'),
+    marginTop: wp("7.5%"),
   },
   userImg: {
-    height: hp('30%'),
-    width: wp('100%'),
-    // borderRadius: wp('3%'),
-    borderWidth: wp('0.6%'),
-    borderColor: "black",
+    // height: hp('30%'),
+    // width: wp('100%'),
+    // borderRadius: wp('40%'),
+    // borderWidth: wp('0.6%'),
+    // borderColor: "black",
+    // marginTop: wp('-8%'),
+    height: "100%",
+    width: "100%",
+    // borderRadius: wp('40%'),
+    // borderWidth: wp('0.5%'),
+    // borderColor: "#ff1c49",
   },
   userName: {
     fontSize: 26,
     // fontWeight: "bold",
     marginTop: hp("1%"),
     // marginBottom: wp("3%"),
-    
   },
   userName2: {
     fontSize: hp("2.24%"),
-  
+
     // marginTop: 7,
     // marginBottom: wp("3%"),
-    color: "#ff1c49"
+    color: "#ff1c49",
   },
   userBtnTxt: {
-    marginTop: wp('1%'),
+    marginTop: wp("1%"),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.8%'),
-    marginLeft: wp('7.3%'),
-    marginTop: wp('0.9%'),
-    fontWeight: '600'
+    fontSize: hp("2.8%"),
+    marginLeft: wp("7.3%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
   },
   userBtnTxt4: {
-    marginTop: wp('1%'),
+    marginTop: wp("1%"),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.8%'),
-    marginLeft: wp('14.3%'),
-    marginTop: wp('0.9%'),
-    fontWeight: '600'
+    fontSize: hp("2.8%"),
+    marginLeft: wp("14.3%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
   },
   userBtnTxt2: {
     color: "white",
     textAlign: "center",
-    fontSize: hp('3.5%'),
-    height: hp('9.5%'),
-    fontWeight: '600',
-    paddingVertical: hp('2%'),
+    fontSize: hp("3.5%"),
+    height: hp("9.5%"),
+    fontWeight: "600",
+    paddingVertical: hp("2%"),
   },
   userBtnTxt3: {
-    marginTop: wp('1%'),
+    marginTop: wp("1%"),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.8%'),
-    marginLeft: wp('11.5%'),
-    marginTop: wp('0.9%'),
-    fontWeight: '600'
+    fontSize: hp("2.8%"),
+    marginLeft: wp("11.5%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
   },
   userInfoWrapper: {
     flexDirection: "row",
