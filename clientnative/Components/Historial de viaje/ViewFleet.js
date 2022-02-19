@@ -33,9 +33,9 @@ const HistorialDeViaje = () => {
   useEffect(() => {
     dispatch(userStatus())
 
-    return () => {
-      dispatch(reset())
-    }
+    // return () => {
+    //   dispatch(reset())
+    // }
   }, [dispatch])
 
   console.log("Esto serian los usersWWWWWWWWWWW:", user)
