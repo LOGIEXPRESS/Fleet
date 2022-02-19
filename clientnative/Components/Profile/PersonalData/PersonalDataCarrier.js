@@ -242,6 +242,6 @@ const styles = StyleSheet.create({
     // marginTop: 5,
     fontSize: hp('2.9%'),
     fontWeight: "bold",
-    marginLeft:hp('3%')
+    marginLeft:hp('4%')
   },
 });

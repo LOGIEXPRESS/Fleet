@@ -71,11 +71,12 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
         role: false,
     };
     ////////<inicio formato> Este es el mensaje que se le va a enviar al usuario con formato html
-    let contentHTML = `<h1>New user</h1>
-               <ul>
-                  <li>${name} ${lastName}</li>
-                  <li>email: ${eMail}</li>
-                  <li>password:${password}</li>    
+    let contentHTML = `<h1>Bienvenido a Fleet ${name} ${lastName}!</h1>
+                        <h2>Has sido añadido a la Flota</h2>
+                        <h2>Estas son tus credenciales para ingresar a Fleet:</h2>
+               <ul>                  
+                  <li>Mail: ${eMail}</li>
+                  <li>Contraseña: ${password}</li>    
                </ul> `;
 
     //////</fin formato>
@@ -117,9 +118,9 @@ router.post('/registerfleet', async (req: Request, res: Response, next: NextFunc
         }
 
         let info = await transporter.sendMail({
-            from: '"Logiexpress Fleet" <logiexpressfleet@gmail.com>', // sender address
+            from: '"Fleet" <logiexpressfleet@gmail.com>', // sender address
             to: eMail, // list of receivers
-            subject: "Inicio seccion Fleet", // Subject line
+            subject: "Ingresa a Fleet", // Subject line
             text: "Hello world?", // plain text body
             html: contentHTML, // html body
         });

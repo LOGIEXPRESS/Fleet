@@ -380,12 +380,12 @@ const styles = StyleSheet.create({
     elevation: 10,
 },
 btnModalText: {
-  fontSize: hp("2%"),
-  marginLeft: wp("2%"),
+  fontSize: hp("2.2%"),
+  marginLeft: wp("0.8%"),
   color: '#ffff'
 },
 btnModalText2: {
-  fontSize: hp("2.5%"),
+  fontSize: hp("2.8%"),
   color: '#000'
 },
   container: {

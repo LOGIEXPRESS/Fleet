@@ -49,15 +49,15 @@ const PersonalDataAdmin = () => {
       </View>
         
         <View    
-          style={{
-            flexDirection: "column",
-            alignContent: "flex-start",
-            // marginLeft: wp('5%'),
-          }}
+          // style={{
+          //   flexDirection: "column",
+          //   alignContent: "center",
+          //   // marginLeft: wp('5%'),
+          //}}
         >
-          <View>
+          <View style={styles.containerImg} >
             <Image
-            resizeMode="contain"
+            // resizeMode="contain"
               source={{
                 uri:
                   data?.photo === null || data?.photo === "url"
@@ -108,6 +108,23 @@ const PersonalDataAdmin = () => {
 export default PersonalDataAdmin;
 
 const styles = StyleSheet.create({
+  containerImg: {
+    width: 170,
+    height: 170,
+    borderRadius: 85,
+    overflow: "hidden",
+    marginLeft: wp ("22%"),
+    marginTop: 8,
+    borderColor: "#E1E8EB",
+    borderWidth: 1,
+    //Properties to setup your Shadow
+
+    shadowOffset: { width: 10, height: 10 },
+    shadowColor: "#E1E8EB",
+    shadowOpacity: 80,
+    elevation: 15,
+    backgroundColor: "#E1E8EB",
+  },
   container: { 
     flex: 1,
     justifyContent: 'center',
@@ -124,11 +141,11 @@ const styles = StyleSheet.create({
     marginBottom:hp("2%"),
   },
   userImg: {
-    height: hp('30%'),
-    width: wp('100%'),
+    height: '100%',
+    width: '100%',
     // borderRadius: wp('3%'),
-    borderWidth: wp('0.9%'),
-    borderColor: "black",
+    // borderWidth: wp('0.9%'),
+    // borderColor: "black",
   },
   userName: {
     fontSize: hp('3.5%'),
@@ -159,8 +176,6 @@ const styles = StyleSheet.create({
     height: hp("8%"),
     padding: wp('2.5%'),
     borderRadius: wp('3%'),
-    shadowOpacity: 5,
-    elevation: 2,
     marginTop: wp("7%"),
     shadowOpacity: 80,
     elevation: 15,
