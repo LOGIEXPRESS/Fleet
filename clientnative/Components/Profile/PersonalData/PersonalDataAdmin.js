@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 85,
     overflow: "hidden",
     marginLeft: wp ("22%"),
-    marginTop: 10,
+    marginTop: 8,
     borderColor: "#E1E8EB",
     borderWidth: 1,
     //Properties to setup your Shadow
