@@ -154,7 +154,7 @@ const ProfileCarrier = () => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("12%") }}>
+          <View style={styles.containerImg}>
 
             <Image
               source={{
@@ -301,6 +301,22 @@ const ProfileCarrier = () => {
 export default ProfileCarrier;
 
 const styles = StyleSheet.create({
+  containerImg: {
+    marginTop: wp("12%"),
+    width: 170,
+    height: 170,
+    borderRadius: 85,
+    overflow: "hidden",
+    borderColor: "#E1E8EB",
+    borderWidth: 1,
+    //Properties to setup your Shadow
+
+    shadowOffset: { width: 10, height: 10 },
+    shadowColor: "#000",
+    shadowOpacity: 5,
+    elevation: 10,
+    backgroundColor: "#000",
+  },
   containerModal: {
     flex: 1,
     backgroundColor: 'rgba(1,1,1, 0.5)',
@@ -398,12 +414,14 @@ const styles = StyleSheet.create({
     marginTop: wp('7.5%'),
   },
   userImg: {
-    marginTop: wp('-8%'),
-    height: wp('50%'),
-    width: wp('50%'),
-    borderRadius: wp('40%'),
-    borderWidth: wp('1.20%'),
-    borderColor: "#ff1c49",
+    // marginTop: wp('-8%'),
+    // height: wp('50%'),
+    // width: wp('50%'),
+    // borderRadius: wp('40%'),
+    // borderWidth: wp('1.20%'),
+    // borderColor: "#ff1c49",
+    height: "100%",
+    width: "100%",
   },
   userName: {
     fontSize: 26,
