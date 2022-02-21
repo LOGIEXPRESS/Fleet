@@ -10,6 +10,7 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from '../Utils/HeaderBar';
 import Icon from "react-native-vector-icons/Ionicons";
+import { LogBox } from 'react-native';
 
 
 export default function HistoryCarrier() {
@@ -18,6 +19,10 @@ export default function HistoryCarrier() {
   const travelstruck = useSelector((store) => store.alltraveltruck)
   const [inProcess, setInprocess] = useState([])
   const [inFinished, setInfinished] = useState([])
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
 
   useEffect(() => {
     dispatch(alltravelstruck(responlog.id))
@@ -31,32 +36,6 @@ export default function HistoryCarrier() {
   console.log("inProcess", inProcess, "inFinished", inFinished);
 
   return (
-    /*  <View style={styles.spinner}>
-       <HeaderBar screen={'null'} />
-       <Text>HistoryCarrier</Text>
-       <View style={styles.Container}>
-         <FlatList
-           data={inProcess}
-           horizontal={false}
-           numColumns={1}
-           showsVerticalScrollIndicator={false}
-           keyExtractor={() => String(Math.random())}
-           renderItem={({ item }) => <CardTravel travel={item} info={"Viaje en proceso"}/>}
-           contentContainerStyle={styles.flatListContentContainer}
-         />
-       </View>
-       <View style={styles.Container}>
-         <FlatList
-           data={inFinished}
-           horizontal={false}
-           numColumns={1}
-           showsVerticalScrollIndicator={false}
-           keyExtractor={() => String(Math.random())}
-           renderItem={({ item }) => <CardTravel travel={item} info={"Viaje finalizado"}/>}
-           contentContainerStyle={styles.flatListContentContainer}
-         />
-       </View>
-     </View> */
     <View style={{ backgroundColor: "white", flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <HeaderBar screen={"null"} />
