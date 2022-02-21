@@ -50,7 +50,7 @@ export default function CardTravel(props) {
               <Text style={styles.btn}>
                 Ver Viaje Actual
               </Text>
-            </TouchableOpacity> : <Text> Viaje Finalizado</Text> }
+            </TouchableOpacity> : <Text></Text> }
             <Text style={{alignSelf:"center", fontSize:hp("2.8%"), color:"white", marginLeft:wp("4%"), fontWeight:"bold"}}>
               Total: ${capitalize(travel.price)}
             </Text>
