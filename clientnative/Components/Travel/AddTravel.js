@@ -604,7 +604,8 @@ const styles = StyleSheet.create({
 
   },
   viewModal: {
-    height: hp('40%'),
+    minHeight: hp('30%'),
+    maxHeight: hp('50%'),
     width: wp('70%'),
     backgroundColor: '#fff'
   },
