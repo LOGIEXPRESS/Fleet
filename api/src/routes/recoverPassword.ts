@@ -42,11 +42,12 @@ router.post('/recoverPass',async(req:Request,res:Response,next:NextFunction)=>{
 
 
             let contentHTML =
-            `<h1>New password</h1>
+            `<h1>${user.name} ${user.lastName}:</h1>
+            <h1>Esta es tu nueva contraseña para ingresar a Fleet! </h1>
                    <ul>
-                      <li>${user.name} ${user.lastName}</li>
-                      <li>email: ${eMail}</li>
-                      <li>New password:${password}</li>    
+                      <li></li>
+                      <li>Mail: ${eMail}</li>
+                      <li>Nueva Contraseña: ${password}</li>    
                    </ul> 
             `
             let transporter = nodemailer.createTransport({
@@ -62,10 +63,10 @@ router.post('/recoverPass',async(req:Request,res:Response,next:NextFunction)=>{
                 }
             });
             let info = await transporter.sendMail({
-                from: '"Logiexpress Fleet" <logiexpressfleet@gmail.com>', // sender address
+                from: '"Fleet" <logiexpressfleet@gmail.com>', // sender address
                 to: eMail, // list of receivers
-                subject: "New Password Fleet", // Subject line
-                text: "Hello world?", // plain text body
+                subject: "Nueva contraseña Fleet", // Subject line
+                text: "Hola Mundo?", // plain text body
                 html: contentHTML, // html body
             });
         
