@@ -187,7 +187,7 @@ const ProfileCarrier = () => {
             onPress={() => navigation.navigate("PersonalDataCarrier")}
           // }}
           >
-            <Icon name="person-circle-outline" style={styles.icons} />
+            <Icon name="person" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Datos Personales</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -197,7 +197,7 @@ const ProfileCarrier = () => {
             navigation.navigate("HistoryCarrier");
           }}
           >
-            <Icon name="location-outline" style={styles.icons} />
+            <Icon name="location" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Historial de viajes</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -206,7 +206,7 @@ const ProfileCarrier = () => {
             style={styles.btnText}
             onPress={() => navigation.navigate("QuotTravel")}
           >
-            <Icon name="calculator-outline" style={styles.icons} />
+            <Icon name="calculator" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
