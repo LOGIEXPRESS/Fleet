@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Modal
 } from "react-native";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -18,38 +19,58 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
-import { userStatus, reset } from "../../Redux/actions/index.js";
-
+import { userStatus, reset, alltravelstruck } from "../../Redux/actions/index.js";
+import ModalAlert from '../Añadir Transportista/ModalAlert.js'
 
 
 const HistorialDeViaje = () => {
 
+
+
+  const responlog = useSelector((store) => store.responseLog)
+  const travelstruck = useSelector((store) => store.alltraveltruck)
   const user = useSelector((store) => store.userStatus)
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  
-  
+  const [modalView, SetModalView] = useState(false);
+
+  const handleTravelOn = (id) => {
+    dispatch(alltravelstruck(id))
+  }
+
+
+/* 
+  useEffect(() => {
+    if (travelstruck) {
+      console.log("ESTO SERIAN LOS TRAVELSTRUCK", travelstruck)
+      if (travelstruck.travelinprocess.length === 0) {
+        SetModalView(true)
+      } else {
+        navigation.navigate('AdmTravelOn', travelstruck.travelinprocess[0])
+      }
+    }
+  }, [travelstruck]) */
+
+
 
   useEffect(() => {
     dispatch(userStatus())
-
     return () => {
       dispatch(reset())
     }
   }, [dispatch])
 
   console.log("Esto serian los usersWWWWWWWWWWW:", user)
+ /*  console.log("Esto serian los users:", user) */
 
 
 
-  
+
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
   
 
 
-  
-  
     return (
       <View>
         {
@@ -63,11 +84,11 @@ const HistorialDeViaje = () => {
 
             }
 
-            const propsChat = { 
-              carrierId : e.SignupId,
-              userType : "Administrador"
-              }
-            
+            const propsChat = {
+              carrierId: e.SignupId,
+              userType: "Administrador"
+            }
+
             return (
               <View style={styles.viewUsers} key={index}>
                 {console.log( "PROPS AMUNT",propss.amount)}
@@ -90,10 +111,12 @@ const HistorialDeViaje = () => {
                   </Text>
                   <Text style={styles.cardsSubtitle}>{e.carrier.eMail}</Text>
                   <View style={styles.flexbtn}>
-                    <TouchableOpacity style={styles.btnText}>
+                    <TouchableOpacity 
+                    style={styles.btnText}
+                    onPress={() => navigation.navigate('AdmHistoryCarrier', e.SignupId)}
+                    >
                       <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        HISTORIAL DE VIAJES{" "}
+                        HISTORIAL DE VIAJES
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('Mercadopago',propss)}>
@@ -101,15 +124,15 @@ const HistorialDeViaje = () => {
                     </TouchableOpacity>
                   </View>
                   <View style={styles.flexbtn}>
-                    <TouchableOpacity style={styles.btnText}>
+                    <TouchableOpacity style={styles.btnText}
+                      onPress={() => navigation.navigate("AdmTravelOn", e.SignupId)}
+                    >
                       <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
-                        VER VIAJE ACTUAL{" "}
+                        VER VIAJE ACTUAL
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat)} >
                       <Text style={{ fontSize: wp("2.3%") }}>
-                        {" "}
                         ENVIAR MENSAJE
                       </Text>
                     </TouchableOpacity>
@@ -117,9 +140,9 @@ const HistorialDeViaje = () => {
                 </View>
               </View>
             );
-          }) : (<View style={{alignContent: 'center', alignItems:'center'}}>
-              <Text style={{fontSize: hp('2%'), fontWeight:'400'}}>No hay transportistas disponibles</Text>
-               </View>)
+          }) : (<View style={{ alignContent: 'center', alignItems: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: '400' }}>No hay transportistas disponibles</Text>
+          </View>)
         }
 
       </View>
@@ -191,6 +214,16 @@ const HistorialDeViaje = () => {
             </View>
           </View>
         </View>
+        <Modal
+          animationType="fade"
+          transparent
+          visible={modalView}
+        >
+                <ModalAlert
+                text={'El usuario no tiene un viaje en curso'}
+                setModal={SetModalView}
+                />
+        </Modal>
       </ScrollView>
     </View>
   );
