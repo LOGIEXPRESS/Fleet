@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
+  Modal
 } from "react-native";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -19,38 +20,58 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import Icon from "react-native-vector-icons/Ionicons";
-import { userStatus, reset } from "../../Redux/actions/index.js";
-
+import { userStatus, reset, alltravelstruck } from "../../Redux/actions/index.js";
+import ModalAlert from '../Añadir Transportista/ModalAlert.js'
 
 
 const HistorialDeViaje = () => {
 
+
+
+  const responlog = useSelector((store) => store.responseLog)
+  const travelstruck = useSelector((store) => store.alltraveltruck)
   const user = useSelector((store) => store.userStatus)
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  
-  
+  const [modalView, SetModalView] = useState(false);
+
+  const handleTravelOn = (id) => {
+    dispatch(alltravelstruck(id))
+  }
+
+
+/* 
+  useEffect(() => {
+    if (travelstruck) {
+      console.log("ESTO SERIAN LOS TRAVELSTRUCK", travelstruck)
+      if (travelstruck.travelinprocess.length === 0) {
+        SetModalView(true)
+      } else {
+        navigation.navigate('AdmTravelOn', travelstruck.travelinprocess[0])
+      }
+    }
+  }, [travelstruck]) */
+
+
 
   useEffect(() => {
     dispatch(userStatus())
-
-    // return () => {
-    //   dispatch(reset())
-    // }
+    return () => {
+      dispatch(reset())
+    }
   }, [dispatch])
 
   console.log("Esto serian los usersWWWWWWWWWWW:", user)
+ /*  console.log("Esto serian los users:", user) */
 
 
 
-  
+
   const CarrierContainer = (props) => {
     console.log("ESTO ES LO QUE LE VA A LLEGAR AL COMPONENTE", props)
   
 
 
-  
-  
     return (
       <View>
         {
@@ -102,13 +123,13 @@ const HistorialDeViaje = () => {
                   <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("Chat", propsChat) } >
                     <Icon name='chatbox-ellipses-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnText}>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate("AdmTravelOn", e.SignupId)}>
                     <Icon name='navigate-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>                   
                     <TouchableOpacity style={styles.btnText} onPress={()=>Pagar(propss)}>
                     <Icon name='card-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>                                
-                    <TouchableOpacity style={styles.btnText}>
+                    <TouchableOpacity style={styles.btnText} onPress={() => navigation.navigate('AdmHistoryCarrier', e.SignupId)} >
                       <Icon name='newspaper-outline' style={styles.icon} size={hp('3.5%')} />
                     </TouchableOpacity>
                     
@@ -117,9 +138,9 @@ const HistorialDeViaje = () => {
                 </View>
               </View>
             );
-          }) : (<View style={{alignContent: 'center', alignItems:'center'}}>
-              <Text style={{fontSize: hp('2%'), fontWeight:'400'}}>No hay transportistas disponibles</Text>
-               </View>)
+          }) : (<View style={{ alignContent: 'center', alignItems: 'center' }}>
+            <Text style={{ fontSize: hp('2%'), fontWeight: '400' }}>No hay transportistas disponibles</Text>
+          </View>)
         }
 
       </View>
@@ -190,6 +211,16 @@ const HistorialDeViaje = () => {
             </View>
           </View>
         </View>
+        <Modal
+          animationType="fade"
+          transparent
+          visible={modalView}
+        >
+                <ModalAlert
+                text={'El usuario no tiene un viaje en curso'}
+                setModal={SetModalView}
+                />
+        </Modal>
       </ScrollView>
     </View>
   );

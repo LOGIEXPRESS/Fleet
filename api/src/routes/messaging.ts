@@ -14,7 +14,6 @@ router.post('/messaging',async(req: Request, res: Response) => {
  router.get('/findMessage', async(req: Request, res: Response) => {
      let {id}=req.query;
 
-
     let messageX=await Messaging.findAll({//tengo el id de la tabla Carrier
         where:{
             room:id

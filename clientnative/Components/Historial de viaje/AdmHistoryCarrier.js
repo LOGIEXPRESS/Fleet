@@ -1,8 +1,7 @@
 import { View, Text, ActivityIndicator, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { alltravelstruck, enviarToken } from '../../Redux/actions'
-import * as SecureStore from "expo-secure-store";
+import { alltravelstruck, desmount } from '../../Redux/actions'
 import CardTravel from "./CardTravel";
 import {
   widthPercentageToDP as wp,
@@ -12,35 +11,51 @@ import HeaderBar from '../Utils/HeaderBar';
 import Icon from "react-native-vector-icons/Ionicons";
 import { LogBox } from 'react-native';
 
-export default function HistoryCarrier() {
+
+export default function AdmHistoryCarrier(props) {
+
+
+  const id = props.route.params
   const dispatch = useDispatch();
-  const responlog = useSelector((store) => store.responseLog)
   const travelstruck = useSelector((store) => store.alltraveltruck)
   const [inProcess, setInprocess] = useState([])
   const [inFinished, setInfinished] = useState([])
-
-
+  
+  
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
+  
+  console.log("Esta es el id que mando, ", id)
+
+  console.log("ESTO ES LO QUE LLEGA DEL ACTION:", travelstruck )
+    useEffect(() => {
+      if (travelstruck) {
+        setInfinished(travelstruck.travelfinished)
+      }
+      
+      return () => {
+        setInfinished([])
+      }
+    }, [travelstruck])
+   
 
 
   useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
+    dispatch(alltravelstruck(id))
 
-  useEffect(() => {
-    dispatch(alltravelstruck(responlog.id))
+    return () => {
+      dispatch(desmount())
+    }
   }, [dispatch])
 
-  useEffect(() => {
-    setInprocess(travelstruck?.travelinprocess)
-    setInfinished(travelstruck?.travelfinished)
-  }, [travelstruck])
-  
-  console.log("ESTO ES LO QUE LLEGA DEL ACTION:", travelstruck?.travelinprocess.length )
+  /*   useEffect(() => {
+      setInprocess(travelstruck?.travelinprocess)
+      setInfinished(travelstruck?.travelfinished)
+    }, [travelstruck]) */
 
-/*   console.log("inProcess", inProcess, "inFinished", inFinished); */
+
+  /*   console.log("inProcess", inProcess, "inFinished", inFinished); */
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
@@ -52,25 +67,6 @@ export default function HistoryCarrier() {
               Historial de Viaje
             </Text>
             <Icon name='document-text-outline' style={styles.icon} size={hp('3.2%')} />
-          </View>
-        </View>
-        <View style={styles.viewAnterior}>
-          <Text style={styles.textAnterior}>VIAJE ACTUAL</Text>
-        </View>
-
-        <View style={styles.containerCards}>
-          <View style={styles.cards}>
-            <View style={styles.insideCard}>
-              <FlatList
-                data={inProcess}
-                horizontal={false}
-                numColumns={1}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={() => String(Math.random())}
-                renderItem={({ item }) => <CardTravel travel={item} info={"Viaje en proceso"} />}
-                contentContainerStyle={styles.flatListContentContainer}
-              />
-            </View>
           </View>
         </View>
         <View style={styles.viewAnterior}>

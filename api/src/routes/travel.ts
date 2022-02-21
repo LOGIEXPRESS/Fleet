@@ -197,7 +197,7 @@ router.get('/alltraveltruck/:signupId', async (req: Request, res: Response, next
 
   let travelfinished = await Travel.findAll({
     where:{
-      truckId:{[Op.eq]:truckId?.id}, finishedTravel: "finished"
+      truckId:{[Op.eq]:truckId?.id}, finishedTravel: "finish"
     }
   })
 
