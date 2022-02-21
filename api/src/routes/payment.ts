@@ -67,9 +67,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": `${API_URLS}/render?x=0&id=${id}`,
-          "pending": `${API_URLS}/api/render?x=1&id=${id}`,
-          "success": `${API_URLS}/api/render?x=2&id=${id}`
+          "failure": `https://fleet20.herokuapp.com/api/render?x=0&id=${id}`,
+          "pending": `https://fleet20.herokuapp.com/api/render?x=1&id=${id}`,
+          "success": `https://fleet20.herokuapp.com/api/render?x=2&id=${id}`
       }
   }
 

@@ -17,7 +17,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import HeaderBar from "../Utils/HeaderBar";
 import { API_URLS } from "@env"
 import { useNavigation } from "@react-navigation/core";
-import ModalSuccess from '../Profile/Edit/ModalsPassword/ModalSuccess';
+import ModalSuccess from '../Profile/Edit/ModalsPassword/ModalSuccess2';
+import SimpleModal400 from './../Alerts/Login/SimpleModallog2';
 
 
 export default function RecoverPassword(){
@@ -47,22 +48,38 @@ export default function RecoverPassword(){
 
         }
         
+        
           
           let response=await axios.post(`${API_URLS}/api/recoverPass`,obj)
-
+        try {
           if(response.data.menssage==='faltan datos'){
-            return Alert.alert('Not found data')
+            changeModalVisible400(true)
+            setColor('')
+            setEmail('')
           }
           if(!response.data.payload){
-            return Alert.alert(`not found user with secret ${color}`)
+            changeModalVisible400(true)
+            setColor('')
+            setEmail('')
 
           }
+          if(response.data.menssage.charAt(0)==='n'){
+            console.log('response.data: ',response.data)
+            console.log('obj recover pass: ',obj)
+            setColor('')
+            setEmail('')
+            changeModalVisible2(true)
 
-          console.log('response.data: ',response.data)
-          console.log('obj recover pass: ',obj)
-          setColor('')
-          setEmail('')
-          changeModalVisible2(true)
+          }
+          
+        } catch (error) {
+          console.log(error)
+          
+        }
+
+
+
+         
 
         
 
@@ -85,6 +102,17 @@ export default function RecoverPassword(){
 
     const setData2 = (data) => {
       setchooseData2(data);
+    };
+
+    const [isModalVisible400, setisModalVisible400] = useState(false);
+    const [chooseData400, setchooseData400] = useState();
+
+    const changeModalVisible400 = (bool) => {
+      setisModalVisible400(bool);
+    };
+
+    const setData400 = (data) => {
+      setchooseData400(data);
     };
 
 
@@ -154,7 +182,6 @@ export default function RecoverPassword(){
             <Text style={styles.ButtonText} >
               Recuperar Contraseña
             </Text>
-          </TouchableOpacity>
           <Modal
          transparent={true}
          animationType="fade"
@@ -165,6 +192,20 @@ export default function RecoverPassword(){
           changeModalVisible2={changeModalVisible2}
           setData2={setData2} />
         </Modal>
+        <Modal
+         transparent={true}
+         animationType="fade"
+         visible={isModalVisible400}
+         nRequestClose={() => changeModalVisible400(false)}
+        >
+        <SimpleModal400
+          changeModalVisible400={changeModalVisible400}
+          setData400={setData400} />
+        </Modal>
+
+
+          </TouchableOpacity>
+
         </View>
 
             
