@@ -23,8 +23,8 @@ const initialState = {
   respStatus: null,
   userCarrier: null,
   respUpdateAccessToken: null,
-  alltraveltruck:null,
-  carrierTravels:null
+  alltraveltruck: null,
+  carrierTravels: null
 };
 console.log("ESTO ES EL INITAL STATE", initialState)
 
@@ -74,6 +74,7 @@ export default function rootReducer(state = initialState, action) {
     case "DESMOUNT":
       return {
         ...state,
+        alltraveltruck: null,
         editPassword: [],
         editarPerfilUser: [],
         editarPerfilCarrier: [],
@@ -131,80 +132,84 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userCarrier: action.payload
       }
-      case "DESMOUNT":
-        return {
-          ...state,
-          editPassword: [],
-          editarPerfilUser: [],
-          editarPerfilCarrier: [],
-          editVehicule: [],
-          price: []
-        };
-        case "CLEAN_TOKEN":
-          return {
-            ...state,        
-            token: "",
-            responseLog: null
-            
-          };
-        case "GET_PRICE_QUOTE":
-          return {
-            ...state,
-            price: action.payload,
-          };
-          case "COMPLETE_PROFILE_CARRIER":
-          return {
-            ...state,
-            responseLog: action.payload,
-          };
-          case "CHANGE_PASSWORD":
-          return {
-            ...state,
-            editPassword: action.payload,
-          }
-          case "GET_TRAVELS":
-            return {
-              ...state,
-              travels: action.payload,
-            };
-    
-          case "UPDATE_PERFIL":
-            return {
-              ...state,
-              editarPerfilUser: action.payload,
-            }
+    case "DESMOUNT":
+      return {
+        ...state,
+        editPassword: [],
+        editarPerfilUser: [],
+        editarPerfilCarrier: [],
+        editVehicule: [],
+        price: []
+      };
+    case "CLEAN_TOKEN":
+      return {
+        ...state,
+        token: "",
+        responseLog: null
 
-          case "CONFIRME_REQUEST":
-            return {
-              ...state,
-              confirmTravel: action.payload
-            }
-          case "UPDATE_ACCESS_TOKEN": 
-          return {
-            ...state,
-            respUpdateAccessToken: action.payload
-          }
-          case "CLEAR_RESP" :
-            return {
-              ...state,
-              respUpdateAccessToken : null
-            }
-            
-          case "ALL_TRAVELS_TRUCK" :
-            return {
-              ...state,
-              alltraveltruck:action.payload
-            }
-          case "UPDATE_VEHICULE":
-            return {
-              ...state,
-              editVehicule : action.payload
-            }             
-          case "CARRIER_TRAVEL" :
-            return {
-              ...state,
-              carrierTravels:action.payload
-            }
+      };
+    case "GET_PRICE_QUOTE":
+      return {
+        ...state,
+        price: action.payload,
+      };
+    case "COMPLETE_PROFILE_CARRIER":
+      return {
+        ...state,
+        responseLog: action.payload,
+      };
+    case "CHANGE_PASSWORD":
+      return {
+        ...state,
+        editPassword: action.payload,
+      }
+    case "GET_TRAVELS":
+      return {
+        ...state,
+        travels: action.payload,
+      };
+
+    case "UPDATE_PERFIL":
+      return {
+        ...state,
+        editarPerfilUser: action.payload,
+      }
+    case "USER_STATUS":
+      return {
+        ...state,
+        userStatus: action.payload
+      }
+    case "CONFIRME_REQUEST":
+      return {
+        ...state,
+        confirmTravel: action.payload
+      }
+    case "UPDATE_ACCESS_TOKEN":
+      return {
+        ...state,
+        respUpdateAccessToken: action.payload
+      }
+    case "CLEAR_RESP":
+      return {
+        ...state,
+        respUpdateAccessToken: null
+      }
+
+    case "ALL_TRAVELS_TRUCK":
+      return {
+        ...state,
+        alltraveltruck: action.payload
+      }
+    case "UPDATE_VEHICULE":
+      return {
+        ...state,
+        editVehicule: action.payload
+      }
+    case "CARRIER_TRAVEL":
+      return {
+        ...state,
+        carrierTravels: action.payload
+      }
     default:
       return state;
   }
