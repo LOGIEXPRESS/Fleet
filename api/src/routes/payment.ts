@@ -10,9 +10,7 @@ import { where } from 'sequelize/dist';
 import { uuid } from 'uuidv4';
 import { Truck } from '../models/Truck';
 
-const {
-	API_URLS
-  } = process.env;
+const {	API_URLS} = process.env;
 
 
 const mercadopago = require('mercadopago');
@@ -67,9 +65,9 @@ router.post("/mercadopago", async (req, res) => {
       },
       "auto_return": "all",
       "back_urls" : {
-          "failure": `https://fleet20.herokuapp.com/api/render?x=0&id=${id}`,
-          "pending": `https://fleet20.herokuapp.com/api/render?x=1&id=${id}`,
-          "success": `https://fleet20.herokuapp.com/api/render?x=2&id=${id}`
+          "failure": `${API_URLS}/api/render?x=0&id=${id}`,
+          "pending": `${API_URLS}/api/render?x=1&id=${id}`,
+          "success": `${API_URLS}/api/render?x=2&id=${id}`
       }
   }
 
