@@ -302,18 +302,18 @@ export default ProfileCarrier;
 
 const styles = StyleSheet.create({
   containerImg: {
-    marginTop: wp("12%"),
+    marginTop: hp("2%"),
     width: 170,
     height: 170,
     borderRadius: 85,
     overflow: "hidden",
-    borderColor: "#E1E8EB",
-    borderWidth: 1,
+    borderColor: "#ff1c49",
+    borderWidth: 3,
     //Properties to setup your Shadow
 
     shadowOffset: { width: 10, height: 10 },
     shadowColor: "#000",
-    shadowOpacity: 5,
+    shadowOpacity: 80,
     elevation: 10,
     backgroundColor: "#000",
   },
@@ -431,11 +431,11 @@ const styles = StyleSheet.create({
     // color: "grey"
   },
   empresaName: {
-    fontSize: 21,
+    fontSize: 18,
     // fontWeight: "bold",
     // marginTop: hp("5%"),
     // marginBottom: hp("-7%"),
-    color: "grey",
+    color: "#ff1c49",
   },
   saldo: {
     fontSize: 30,
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     marginTop: wp('1%'),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.5%'),
+    fontSize: hp('2.8%'),
     marginLeft: wp('5.9%'),
     marginTop: wp('0.9%'),
     fontWeight: '700'

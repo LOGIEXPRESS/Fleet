@@ -108,12 +108,12 @@ const styles = StyleSheet.create({
   name: {
     color: "#E6E1C5",
     fontWeight: "400",
-    fontSize: wp('2.7%'),
+    fontSize: wp('3%'),
     paddingTop: hp('0.8%')
   },
   number: {
     position: "absolute",
-    top: hp('1.4%'),
+    top: hp('1%'),
     color: "#000",
     fontSize: hp('2%'),
     fontWeight: "bold",
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: "#0d1317",
-    // marginTop:hp("1.2%"),
-    paddingTop: hp("0.2%"),
+    // marginTop:hp("20%"),
+    // paddingTop: hp("0.2%"),
     color: 'white',
     borderWidth: hp('0.1%'),
     width: wp("26"),
@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
   },
   txt: {
     color: '#fff',
-    fontSize: wp('3%')
+    fontSize: wp('2.8'),
+    marginTop:hp("0.3%"),
+    marginStart:wp("1%")
   },
 });

@@ -27,7 +27,7 @@ const Card = ({ orig, destination, price, description, weight, business, photo, 
         <Text style={styles.textTop}>{business}</Text>
       </View>
       <View style={styles.textContent}>
-        <View style={styles.textBanner}>
+        <View style={styles.textBanner2}>
         <Text style={styles.text1 }>ORIGEN:</Text>
         <Text style={styles.text2}>{orig.split("/")[2]}</Text>
         </View>
@@ -69,16 +69,28 @@ const styles = StyleSheet.create({
   },
   text1:{
     fontWeight: 'bold',
-    fontSize: hp('2%')
+    fontSize: hp('2%'),
+    color: '#fff',
+   
+    
   },  
   text2:{
     color: '#fff',
     fontSize: hp('2%'),
     marginLeft: wp('2%'),
-    marginRight: hp('5%')
+    marginRight: hp('5%'),
+    
   },
   textBanner: {
     flexDirection: 'row',
+    marginBottom:hp("0.5%")
+    
+  },
+  textBanner2: {
+    flexDirection: 'row',
+    marginTop:hp("-3%"),
+    marginBottom:hp("0.5%")
+    
   },
   textTop: {
     padding: hp('1%'),
@@ -100,17 +112,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 80,
     elevation: 16,
     width: wp('35%'),
-    height: hp('6%'),
+    height: hp('5.5%'),
     borderColor: "#fff",
-    borderWidth: hp('0.1%'),
+    borderWidth: hp('0.2%'),
     marginTop: hp("0.7%"),
     alignSelf: "center",
   },
   textBtn: {
     color: "white",
-    fontSize: 17,
+    fontSize: 15,
     alignSelf: "center",
-    marginTop: hp("1.7%"),
+    marginTop: hp("1%"),
   },
   textContent: {
     padding: hp('3%'),
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
   card: {
     // padding: 10,
     elevation: hp('2%'),
-    backgroundColor: 'rgba(255, 0, 4, 0.7)',
+    backgroundColor: 'rgba(40, 0, 4, 0.85)',
     borderRadius: hp('2%'),
     marginHorizontal: hp('1.3%'),
     height: hp('35%'),

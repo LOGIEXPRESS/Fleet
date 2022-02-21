@@ -100,10 +100,16 @@ const HistorialDeViaje = () => {
             return (
               <View  style={
                  
-                    
-                e.status === true || e.status === false
-                  ? styles.viewUsers
-                  : styles.viewUsers2
+                e.status === true 
+                ? styles.viewUsers
+                :
+                 e.status === false
+                ?styles.viewUsers3
+                :styles.viewUsers2
+
+                // e.status === true || e.status === false
+                //   ? styles.viewUsers
+                //   : styles.viewUsers2
               } key={index}>
                 {console.log( "PROPS AMUNT",propss.amount)}
                 <Image source={{
@@ -112,7 +118,14 @@ const HistorialDeViaje = () => {
                       ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
                       : e.carrier.photo
 
-                }} style={e.status === true || e.status === false ? styles.imgOn : styles.imgOff} />
+                }} style={
+                  e.status === true 
+                  ?  styles.imgOn
+                  :
+                   e.status === false  
+                  ?styles.imgOffff
+                  : styles.imgOff
+                } />
                 <View style={styles.cardsText}>
                   <Text style={styles.cardsName}>
                     {e.carrier.name} {e.carrier.lastName}
@@ -259,8 +272,15 @@ const styles = StyleSheet.create({
   imgOff: {
     width: hp('13%'),
     height: hp('13%'),
-    borderRadius: hp('2%'),
-    borderColor: '#808080',
+    borderRadius: hp('10%'),
+    borderColor: 'red',
+    borderWidth: wp('0.8%')
+  },
+  imgOffff: {
+    width: hp('13%'),
+    height: hp('13%'),
+    borderRadius: hp('10%'),
+    borderColor: 'purple',
     borderWidth: wp('0.8%')
   },
   containerCards: {
@@ -369,6 +389,21 @@ const styles = StyleSheet.create({
     marginBottom: wp("2.5%"),
     marginLeft:wp("-1.7%"),
     borderColor: "red",
+    width: wp('90%'),
+    borderWidth: hp('0.35%'),
+    shadowOpacity: 5,
+    shadowColor:"red",
+    elevation: 15,
+    borderRadius: wp('2.5%')
+  },
+  viewUsers3: {
+    flexDirection: 'row',
+    padding: wp("4%"),
+    backgroundColor: "lightgrey", //"#FFC107",
+    marginTop: wp("1%"),
+    marginBottom: wp("2.5%"),
+    marginLeft:wp("-1.7%"),
+    borderColor: "purple",
     width: wp('90%'),
     borderWidth: hp('0.35%'),
     shadowOpacity: 5,
