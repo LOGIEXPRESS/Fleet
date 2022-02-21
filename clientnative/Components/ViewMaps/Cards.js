@@ -83,13 +83,16 @@ const styles = StyleSheet.create({
   textTop: {
     padding: hp('1%'),
     fontSize: hp('2%'),
-    marginLeft: hp('26%'),
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
+    marginRight: hp('1%')
   },
   bannerTop: {
     backgroundColor: '#ff1c49',
-    height: hp('4.5%')
+    height: hp('4.5%'),
+    alignContent: 'flex-end',
+    alignItems: 'flex-end',
+   
   },
   btnEditar: {
     backgroundColor: "#ff1c49",
@@ -110,7 +113,8 @@ const styles = StyleSheet.create({
     marginTop: hp("1.7%"),
   },
   textContent: {
-    padding: hp('2%'),
+    padding: hp('3%'),
+    marginTop: hp('2%')
   },
   card: {
     // padding: 10,
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 0, 4, 0.7)',
     borderRadius: hp('2%'),
     marginHorizontal: hp('1.3%'),
-    height: hp('30%'),
+    height: hp('35%'),
     width: CARD_WIDTH,
     overflow: "hidden",
     borderWidth: 0.4,
