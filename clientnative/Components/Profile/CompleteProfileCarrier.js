@@ -469,7 +469,7 @@ const CompleteProfileCarrier = (props) => {
                 Datos personales
               </Text>
               <View style={styles.viewsInputs}>
-                <Icon name="person-circle-outline" style={styles.icons} />
+                <Icon name="person" style={styles.icons} />
                 <Text style={{ fontSize: 18, marginLeft: 15 }}>
                   {/* Santiago */}
                   {datosCarrier?.name}

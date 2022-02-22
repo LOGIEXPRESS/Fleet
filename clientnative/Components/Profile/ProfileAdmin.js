@@ -100,7 +100,7 @@ const ProfileAdmin = () => {
               navigation.navigate("PersonalDataAdmin");
             }}
           >
-            <Icon name="person-outline" style={styles.icons} />
+            <Icon name="person" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Datos Personales</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -111,7 +111,7 @@ const ProfileAdmin = () => {
               navigation.navigate("ViewFleet");
             }}
           >
-            <Icon name="bus-outline" style={styles.icons} />
+            <Icon name="bus" style={styles.icons} />
             <Text style={styles.userBtnTxt4}>Mi Flota</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -120,7 +120,7 @@ const ProfileAdmin = () => {
             style={styles.btnText}
             onPress={() => navigation.navigate("QuotTravel")}
           >
-            <Icon name="calculator-outline" style={styles.icons} />
+            <Icon name="calculator" style={styles.icons} />
             <Text style={styles.userBtnTxt3}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>

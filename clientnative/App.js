@@ -160,7 +160,7 @@ const App = () => {
             <Stack.Screen
               name="Mercadopago"
               component={Mercadopago}
-              options={{ headerShown: false }}
+              // options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HistoryCarrier"

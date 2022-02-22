@@ -154,7 +154,7 @@ const ProfileCarrier = () => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <View style={{ marginTop: wp("12%") }}>
+          <View style={styles.containerImg}>
 
             <Image
               source={{
@@ -187,7 +187,7 @@ const ProfileCarrier = () => {
             onPress={() => navigation.navigate("PersonalDataCarrier")}
           // }}
           >
-            <Icon name="person-circle-outline" style={styles.icons} />
+            <Icon name="person" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Datos Personales</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -197,7 +197,7 @@ const ProfileCarrier = () => {
             navigation.navigate("HistoryCarrier");
           }}
           >
-            <Icon name="location-outline" style={styles.icons} />
+            <Icon name="location" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Historial de viajes</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
@@ -206,7 +206,7 @@ const ProfileCarrier = () => {
             style={styles.btnText}
             onPress={() => navigation.navigate("QuotTravel")}
           >
-            <Icon name="calculator-outline" style={styles.icons} />
+            <Icon name="calculator" style={styles.icons} />
             <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
@@ -301,6 +301,22 @@ const ProfileCarrier = () => {
 export default ProfileCarrier;
 
 const styles = StyleSheet.create({
+  containerImg: {
+    marginTop: hp("2%"),
+    width: 170,
+    height: 170,
+    borderRadius: 85,
+    overflow: "hidden",
+    borderColor: "#ff1c49",
+    borderWidth: 3,
+    //Properties to setup your Shadow
+
+    shadowOffset: { width: 10, height: 10 },
+    shadowColor: "#000",
+    shadowOpacity: 80,
+    elevation: 10,
+    backgroundColor: "#000",
+  },
   containerModal: {
     flex: 1,
     backgroundColor: 'rgba(1,1,1, 0.5)',
@@ -398,12 +414,14 @@ const styles = StyleSheet.create({
     marginTop: wp('7.5%'),
   },
   userImg: {
-    marginTop: wp('-8%'),
-    height: wp('50%'),
-    width: wp('50%'),
-    borderRadius: wp('40%'),
-    borderWidth: wp('1.20%'),
-    borderColor: "#ff1c49",
+    // marginTop: wp('-8%'),
+    // height: wp('50%'),
+    // width: wp('50%'),
+    // borderRadius: wp('40%'),
+    // borderWidth: wp('1.20%'),
+    // borderColor: "#ff1c49",
+    height: "100%",
+    width: "100%",
   },
   userName: {
     fontSize: 26,
@@ -413,11 +431,11 @@ const styles = StyleSheet.create({
     // color: "grey"
   },
   empresaName: {
-    fontSize: 21,
+    fontSize: 18,
     // fontWeight: "bold",
     // marginTop: hp("5%"),
     // marginBottom: hp("-7%"),
-    color: "grey",
+    color: "#ff1c49",
   },
   saldo: {
     fontSize: 30,
@@ -430,7 +448,7 @@ const styles = StyleSheet.create({
     marginTop: wp('1%'),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.5%'),
+    fontSize: hp('2.8%'),
     marginLeft: wp('5.9%'),
     marginTop: wp('0.9%'),
     fontWeight: '700'
