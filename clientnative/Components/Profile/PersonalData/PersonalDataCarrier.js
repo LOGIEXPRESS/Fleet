@@ -160,10 +160,10 @@ export default PersonalDataCarrier;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
   },
   icons: {
     alignContent: "center",
@@ -183,8 +183,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff1c49",
     width: wp("88%"),
     height: hp("8%"),
-    padding: wp('2.5%'),
-    borderRadius: wp('3%'),
+    padding: wp("2.5%"),
+    borderRadius: wp("3%"),
     shadowOpacity: 10,
     elevation: 4,
     marginTop: wp("7%"),
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.75,
   },
   perfilTex: {
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: hp("4.8%"),
     fontWeight: "bold",
     marginTop: hp("3%"),
@@ -207,15 +207,14 @@ const styles = StyleSheet.create({
     borderColor: "#ff1c49",
   },
   userName: {
-    fontSize: hp('3.75%'),
+    fontSize: hp("3.75%"),
     fontWeight: "bold",
-    marginBottom: hp('0.5%'),
+    marginBottom: hp("0.5%"),
   },
   boxDatos: {
     flexDirection: "column",
     marginTop: 45,
     marginLeft: 10,
-
   },
   estrellitas: {
     marginTop: 30,
@@ -225,7 +224,7 @@ const styles = StyleSheet.create({
   botones: {
     alignContent: "center",
     alignItems: "center",
-    marginTop: wp('10%')
+    marginTop: wp("10%"),
   },
   btn: {
     borderWidth: 4,
@@ -233,18 +232,17 @@ const styles = StyleSheet.create({
     borderColor: "#ff1c49",
     width: wp("82%"),
     height: hp("8%"),
-    marginBottom: wp('8%'),
-    borderRadius: wp('3%'),
-    justifyContent: 'center',
+    marginBottom: wp("8%"),
+    borderRadius: wp("3%"),
+    justifyContent: "center",
     shadowOpacity: 80,
     elevation: 13,
-
   },
   textBtn: {
     textAlign: "center",
     // marginTop: 5,
-    fontSize: hp('2.9%'),
-    marginLeft:hp('4%'),
+    fontSize: hp("2.9%"),
+    marginLeft: hp("4%"),
     color: "white",
   },
 });

@@ -13,6 +13,8 @@ import {
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
 import * as SecureStore from "expo-secure-store";
+import Icon4 from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
@@ -87,16 +89,19 @@ const PersonalDataAdmin = () => {
             style={styles.btn}
             onPress={() => navigation.navigate("EditProfileCarrier")}
           >
+            <Icon4 name="user-edit" style={styles.icons} />
             <Text style={styles.textBtn}>Editar perfil</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate("ChangePassword")}
           >
+            <Icon name="key" style={styles.icons} />
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
+          <Icon name="log-out" style={styles.icons} />
             <Text style={styles.textBtn}>Cerrar sesión</Text>
           </TouchableOpacity>
         </View>
@@ -124,6 +129,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 80,
     elevation: 15,
     backgroundColor: "#E1E8EB",
+  },
+  icons: {
+    alignContent: "flex-start",
+    fontSize: hp("3.5%"),
+    color: "white",
+    paddingTop: wp("1.3%"),
+    //marginRight: wp("0.1%"),
+    //marginLeft: wp('-1%'),
+    // backgroundColor: 'white',
+    // borderRadius: wp('7%'),
+    width: wp('12%'),
+    // height: hp('5.2%'),
+    // marginTop: wp('-1%')
   },
   container: { 
     flex: 1,
@@ -158,11 +176,6 @@ const styles = StyleSheet.create({
     marginTop: hp("1%"),
     
   },
-  estrellitas: {
-    marginTop: 30,
-    textAlign: "center",
-    fontSize: 20,
-  },
   botones: {
     alignContent: "center",
     alignItems: "center",
@@ -174,22 +187,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff1c49",
     width: wp("88%"),
     height: hp("8%"),
-    padding: wp('2.5%'),
+    //padding: wp('2.5%'),
     borderRadius: wp('3%'),
     marginTop: wp("7%"),
     shadowOpacity: 80,
     elevation: 15,
     // borderColor: "black",
     // borderWidth: hp("0.5%"),
+    alignItems: "center"
   },
   textBtn: {
-    marginTop: wp('1%'),
     color: "white",
-    justifyContent:"center",
+    //justifyContent:"center",
     textAlign: "center",
-    fontSize: hp('3%'),
-    marginTop: wp('0.9%'),
-    fontWeight: '600'
+    //alignContent: "center",
+    //marginHorizontal: 55,
+    // paddingLeft: wp("7%"),
+    fontSize: hp('2.7%'),
+    //marginTop: wp('0.9%'),
+    fontWeight: '600',
+    width: wp("55%"),
   },
   
   userName2: {
