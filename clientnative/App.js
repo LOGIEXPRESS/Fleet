@@ -44,7 +44,7 @@ const App = () => {
 
   return (
     <StripeProvider publishableKey="pk_test_51KHwMJH58Ljah9wGjMPQ9Os5fhEj5awCKf7ARtjrqcwUFGAVniXX5CTP3fP492gqrJv3MerKLDbnAByXzpPkYWsC00P8X1yX8l">
-      <Provider store={store}>
+      <Provider store={store} >
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen

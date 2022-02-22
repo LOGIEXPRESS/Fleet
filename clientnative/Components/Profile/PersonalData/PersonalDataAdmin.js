@@ -15,6 +15,7 @@ import HeaderBar from "../../Utils/HeaderBar";
 import * as SecureStore from "expo-secure-store";
 import Icon4 from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Ionicons";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
@@ -39,6 +40,7 @@ const PersonalDataAdmin = () => {
   // }, [data]);
 
   return (
+  <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
     <View style={styles.container}>
       <View showsVerticalScrollIndicator={false}>
         <View style={{marginTop:hp("-10%"),}}>
@@ -107,6 +109,7 @@ const PersonalDataAdmin = () => {
         </View>
       </View>
     </View>
+    </LinearGradient>
   );
 };
 
@@ -118,7 +121,8 @@ const styles = StyleSheet.create({
     height: 170,
     borderRadius: 85,
     overflow: "hidden",
-    marginLeft: wp ("22%"),
+    marginLeft: "auto",
+    marginRight: "auto",
     marginTop: 8,
     borderColor: "#E1E8EB",
     borderWidth: 1,
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    //backgroundColor: 'linear-gradient(207.8deg, #201E1C 16.69%, #325e8f 100%);'
    },
   perfilTex: {
     // marginTop:hp("2%"),
