@@ -40,7 +40,11 @@ const PersonalDataAdmin = () => {
   // }, [data]);
 
   return (
-  <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
+  <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={{    position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  height: "100%",}}>
     <View style={styles.container}>
       <View showsVerticalScrollIndicator={false}>
         <View style={{marginTop:hp("-10%"),}}>
