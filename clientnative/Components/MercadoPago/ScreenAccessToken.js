@@ -74,78 +74,150 @@ const ScreenAccessToken = () => {
     console.log("Esto es accessKey", accesToken)
 
     return (
-        <View style={styles.container}>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
+      <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ marginTop: hp("-1%"), marginLeft: wp("-2%") }}>
+            <HeaderBar screen={"null"} />
+          </View>
+          <Text style={styles.textEditar}>Configura tu Mercadopago</Text>
+          <View style={styles.containerInputs}>
+            <Text style={styles.textSubtitle}>
+              Para poder recibir pagos en la aplicacion, sera necesario que nos
+              brindes tu "Acces Token" de MercadoPago.{" "}
+            </Text>
+            <Text style={styles.textSubtitle}>
+              Ingresa tus credenciales aca:
+            </Text>
+            <View style={styles.viewsInputs}>
+              <Icon name="key-outline" style={styles.icons} />
+              <TextInput
+                value={accesToken}
+                name="Access_token"
+                defaultValue={carrier ? carrier.carrier.acesstoken : accesToken}
+                style={styles.textPlaceholder}
+                onChangeText={(e) => setAccessToken(e)}
+                secureTextEntry={pass}
+              />
+              <TouchableOpacity onPress={() => setPass(!pass)}>
+                <Icon name="eye" style={styles.icons} />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.btnEditar}
+              onPress={() => handleSubmit()}
             >
-                <View style={{ marginTop: hp("-1%"), marginLeft: wp("-2%"), }}>
-                    <HeaderBar screen={'null'} />
-                </View>
-                <Text style={styles.textEditar}>Configura tu Mercadopago</Text>
-                <View style={styles.containerInputs}>
-                    <Text style={styles.textSubtitle}>Para poder recibir pagos en la aplicacion, sera necesario que nos brindes tu "Acces Token" de MercadoPago. </Text>
-                    <Text style={styles.textSubtitle}>Ingresa tus credenciales aca:</Text>
-                    <View style={styles.viewsInputs}>
-                        <Icon name="key-outline" style={styles.icons} />
-                        <TextInput
-                            value={accesToken}
-                            name="Access_token"
-                            defaultValue={carrier ? carrier.carrier.acesstoken : accesToken}
-                            style={styles.textPlaceholder}
-                            onChangeText={(e) => setAccessToken(e)}
-                            secureTextEntry={pass}
-                        />
-                        <TouchableOpacity onPress={() => setPass(!pass)}>
-                            <Icon name="eye" style={styles.icons} />
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity
-                        style={styles.btnEditar}
-                        onPress={() => handleSubmit()}
-                    >
-                        <Text style={styles.textBtn}>Guardar</Text>
-                    </TouchableOpacity>
-                    <View>
-                        <Text style={styles.textSubtitle}>Aca tienes un pequeño tutorial de como conseguirla!</Text>
-                        <Text style={styles.textTutorial}>1- Ingresar en el navegador https://www.mercadopago.com.ar</Text>
-                        <Text style={styles.textTutorial}>2- Una vez allí, ir a la solapa superior donde está el nombre de usuario, y en desplegable ir a Mi Cuenta.</Text>
-                        <Text style={styles.textTutorial}>3- Cuando ingresamos, ir hacia la izquierda y en la parte del medio buscar {">"} Tu negocio, desplegar e ir a Configuración y hacer click (Foto) </Text>
-                        <Image source={require('../Utils/mercadopago-1.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>4- Luego de ingresar a Configuración deslizar hacia abajo hasta el pié hasta encontrar CREDENCIALES (foto) y dar click en {">"} Acceder.</Text>
-                        <Image source={require('../Utils/mercadopago-2.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>5- Verificar la cuenta por cualquiera de los 3 medios.</Text>
-                        <Image source={require('../Utils/mercadopago-3.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>6- Una vez listo, ingresas a Mis Credenciales.</Text>
-                        <Text style={styles.textTutorial}>7- Hay dos tipos de Credenciales, Las de Prueba, que son para simular y testear las plataformas. y La de Producción que ahí tenemos que ir a ACTIVAR CREDENCIALES.</Text>
-                        <Image source={require('../Utils/mercadopago-4.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>8- Una Vez allí dentro, completar la informacion que nos indica, seleccionar el tipo de categoría de negocio, autorizar terminos y condiciones y tildar el CAPTCHA.</Text>
-                        <Image source={require('../Utils/mercadopago-5.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>9- Puedes decidir Completar ahora o mas tarde.</Text>
-                        <Text style={styles.textTutorial}>10- Luego te piden verificar tu identidad mediante un código que envían a tu celular asociado a mercadopago.</Text>
-                        <Image source={require('../Utils/mercadopago-6.jpg')} style={styles.img2} />
-                        <Image source={require('../Utils/mercadopago-7.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>11- Ingresas el código enviado por SMS</Text>
-                        <Image source={require('../Utils/mercadopago-8.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>12- Te aparece la pantalla verde clásica de mercadopago con el mensaje de Listo! Le das Click en Finalizar.</Text>
-                        <Image source={require('../Utils/mercadopago-9.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial}>13- Vuelves a la pantalla de MIS CREDENCIALES, pero esta vez ya no está naranja las credenciales de producción y haciendo click allí podras ver las mismas.</Text>
-                        <Image source={require('../Utils/mercadopago-10.jpg')} style={styles.img2} />
-                        <Text style={styles.textTutorial2}>Listo copia y pega tu ACCESS KEY y pegala arriba para poder empezar a recibir pagos!</Text>
-                    </View>
-                </View>
-                <Modal
-                    animationType="slide"
-                    transparent
-                    visible={modalAlert}
-                >
-                    <ModalUpdate
-                        text={'Acces Token registrado exitosamente'}
-                        setModal={setModalAlert}
-                    />
-                </Modal>
-
-            </ScrollView>
-        </View>
+              <Text style={styles.textBtn}>Guardar</Text>
+            </TouchableOpacity>
+            <View>
+              <Text style={styles.textSubtitle}>
+                Aca tienes un pequeño tutorial de como conseguirla!
+              </Text>
+              <Text style={styles.textTutorial}>
+                1- Ingresar en el navegador https://www.mercadopago.com.ar
+              </Text>
+              <Text style={styles.textTutorial}>
+                2- Una vez allí, ir a la solapa superior donde está el nombre de
+                usuario, y en desplegable ir a Mi Cuenta.
+              </Text>
+              <Text style={styles.textTutorial}>
+                3- Cuando ingresamos, ir hacia la izquierda y en la parte del
+                medio buscar {">"} Tu negocio, desplegar e ir a Configuración y
+                hacer click (Foto){" "}
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-1.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                4- Luego de ingresar a Configuración deslizar hacia abajo hasta
+                el pié hasta encontrar CREDENCIALES (foto) y dar click en {">"}{" "}
+                Acceder.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-2.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                5- Verificar la cuenta por cualquiera de los 3 medios.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-3.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                6- Una vez listo, ingresas a Mis Credenciales.
+              </Text>
+              <Text style={styles.textTutorial}>
+                7- Hay dos tipos de Credenciales, Las de Prueba, que son para
+                simular y testear las plataformas. y La de Producción que ahí
+                tenemos que ir a ACTIVAR CREDENCIALES.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-4.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                8- Una Vez allí dentro, completar la informacion que nos indica,
+                seleccionar el tipo de categoría de negocio, autorizar terminos
+                y condiciones y tildar el CAPTCHA.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-5.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                9- Puedes decidir Completar ahora o mas tarde.
+              </Text>
+              <Text style={styles.textTutorial}>
+                10- Luego te piden verificar tu identidad mediante un código que
+                envían a tu celular asociado a mercadopago.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-6.jpg")}
+                style={styles.img2}
+              />
+              <Image
+                source={require("../Utils/mercadopago-7.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                11- Ingresas el código enviado por SMS
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-8.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                12- Te aparece la pantalla verde clásica de mercadopago con el
+                mensaje de Listo! Le das Click en Finalizar.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-9.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial}>
+                13- Vuelves a la pantalla de MIS CREDENCIALES, pero esta vez ya
+                no está naranja las credenciales de producción y haciendo click
+                allí podras ver las mismas.
+              </Text>
+              <Image
+                source={require("../Utils/mercadopago-10.jpg")}
+                style={styles.img2}
+              />
+              <Text style={styles.textTutorial2}>
+                Listo copia y pega tu ACCESS KEY y pegala arriba para poder
+                empezar a recibir pagos!
+              </Text>
+            </View>
+          </View>
+          <Modal animationType="slide" transparent visible={modalAlert}>
+            <ModalUpdate
+              text={"Acces Token registrado exitosamente"}
+              setModal={setModalAlert}
+            />
+          </Modal>
+        </ScrollView>
+      </View>
     );
 };
 

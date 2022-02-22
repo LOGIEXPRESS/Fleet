@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   SafeAreaView,
-  Modal,BackHandler,Alert
+  Modal,BackHandler,Alert, LogBox
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/core";
@@ -37,7 +37,9 @@ const ProfileCarrier = () => {
   const[saldo,setSaldo]=useState(0)
   const[travel,setTravel]=useState(null)
   
-
+  useEffect(() => {
+    LogBox.ignoreLogs([`Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function`]);
+  }, []);
   console.log("ID CARRIER ?", data.id);
 
   const [modalAlert, setModalAlert] = useState(false)
@@ -198,7 +200,7 @@ const ProfileCarrier = () => {
           }}
           >
             <Icon name="location" style={styles.icons} />
-            <Text style={styles.userBtnTxt}>Historial de viajes</Text>
+            <Text style={styles.userBtnTxt8}>Historial de viajes</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons3} /> */}
           </TouchableOpacity>
 
@@ -207,7 +209,7 @@ const ProfileCarrier = () => {
             onPress={() => navigation.navigate("QuotTravel")}
           >
             <Icon name="calculator" style={styles.icons} />
-            <Text style={styles.userBtnTxt}>Cotizar viaje</Text>
+            <Text style={styles.userBtnTxt9}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
           {/* <Icon name="calculator-outline" style={styles.icons} /> */}
@@ -307,7 +309,7 @@ const styles = StyleSheet.create({
     height: 170,
     borderRadius: 85,
     overflow: "hidden",
-    borderColor: "#ff1c49",
+    borderColor: "#E1E8EB",
     borderWidth: 3,
     //Properties to setup your Shadow
 
@@ -387,17 +389,29 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   btnText: {
+    // flexDirection: "row",
+    // backgroundColor: "#fff",
+    // width: wp("88%"),
+    // height: hp("8%"),
+    // padding: wp('2.5%'),
+    // borderRadius: wp('3%'),
+    // shadowOpacity: 5,
+    // elevation: 2,
+    // marginTop: wp("7%"),
+    // borderColor: "#E1E8EB",
+    // borderWidth: 1.75,
     flexDirection: "row",
     backgroundColor: "#fff",
     width: wp("88%"),
-    height: hp("7%"),
-    padding: wp('2.5%'),
-    borderRadius: wp('3%'),
-    shadowOpacity: 80,
-    elevation: 16,
+    height: hp("8%"),
+    padding: wp("2.5%"),
+    borderRadius: wp("3%"),
+    shadowOpacity: 5,
+    elevation: 2,
     marginTop: wp("7%"),
     borderColor: "#E1E8EB",
-    borderWidth: 1.75,
+    borderWidth: 1.75
+
   },
   btn2: {
     alignContent: "center",
@@ -445,13 +459,39 @@ const styles = StyleSheet.create({
 
   },
   userBtnTxt: {
-    marginTop: wp('1%'),
+    // marginTop: wp('1%'),
+    // color: "black",
+    // textAlign: "center",
+    // fontSize: hp('2.8%'),
+    // marginLeft: wp('5.9%'),
+    // marginTop: wp('0.9%'),
+    // fontWeight: '700',
+    marginTop: wp("1%"),
     color: "black",
     textAlign: "center",
-    fontSize: hp('2.8%'),
-    marginLeft: wp('5.9%'),
-    marginTop: wp('0.9%'),
-    fontWeight: '700'
+    fontSize: hp("2.8%"),
+    marginLeft: wp("7.3%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
+    
+  },
+  userBtnTxt8:{
+    marginTop: wp("1%"),
+    color: "black",
+    textAlign: "center",
+    fontSize: hp("2.8%"),
+    marginLeft: wp("7%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
+  },
+  userBtnTxt9:{
+    marginTop: wp("1%"),
+    color: "black",
+    textAlign: "center",
+    fontSize: hp("2.8%"),
+    marginLeft: wp("12.5%"),
+    marginTop: wp("0.9%"),
+    fontWeight: "600",
   },
   userBtnTxt2: {
     color: "white",

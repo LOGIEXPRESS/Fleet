@@ -26,10 +26,6 @@ export default function HistoryCarrier() {
 
 
   useEffect(() => {
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, []);
-
-  useEffect(() => {
     dispatch(alltravelstruck(responlog.id))
   }, [dispatch])
 

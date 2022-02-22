@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
-  Modal
+  Modal,
+  LogBox
 } from "react-native";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -38,7 +39,9 @@ const HistorialDeViaje = () => {
   const handleTravelOn = (id) => {
     dispatch(alltravelstruck(id))
   }
-
+  useEffect(() => {
+    LogBox.ignoreLogs([`Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function`]);
+  }, []);
 
 /* 
   useEffect(() => {

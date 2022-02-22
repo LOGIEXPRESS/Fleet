@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2%'),
     fontWeight: "bold",
     left: hp('1%')
+    
   },
   container: {
     marginTop: hp('1%')

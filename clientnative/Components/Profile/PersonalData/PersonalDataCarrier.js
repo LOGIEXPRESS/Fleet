@@ -17,6 +17,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import HeaderBar from "../../Utils/HeaderBar";
+import { color } from "react-native-reanimated";
 
 const PersonalDataCarrier = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const PersonalDataCarrier = () => {
     showsVerticalScrollIndicator={false}
     >
       <View showsVerticalScrollIndicator={false} >
-        <View style={{ marginTop: hp("1%"), marginBottom: hp("-3%"), marginLeft: wp('-4%')}}>
+        <View style={{ marginTop: hp("1%"), marginBottom: hp("-3%"), marginLeft: wp('-2%')}}>
           <HeaderBar screen={'null'} />
         </View>
         <View>
@@ -135,7 +136,9 @@ const PersonalDataCarrier = () => {
           >
             <View style={{flexDirection:'row', alignContent:'center',alignItems:'center',justifyContent:'center'}}>
             <Icon name="key" style={styles.icons} />
+            <View style={{alignItems:"center"}}>
             <Text style={styles.textBtn}>Cambiar contraseña</Text>
+            </View>
             </View>
           </TouchableOpacity>
 
@@ -165,25 +168,25 @@ const styles = StyleSheet.create({
   icons: {
     alignContent: "center",
     fontSize: hp("3.5%"),
-    color: "#ff1c49",
+    color: "white",
     padding: wp("1.30%"),
     // marginRight: wp("4%"),
     // marginLeft: wp('1%'),
-    backgroundColor: 'white',
-    borderRadius: wp('7%'),
-    width: wp('10%'),
-    height: hp('5.2%'),
+    // backgroundColor: 'white',
+    // borderRadius: wp('7%'),
+    // width: wp('10%'),
+    // height: hp('5.2%'),
     // marginTop: wp('-1%')
   },
   btnText: {
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#ff1c49",
     width: wp("88%"),
-    height: hp("7%"),
+    height: hp("8%"),
     padding: wp('2.5%'),
     borderRadius: wp('3%'),
-    shadowOpacity: 80,
-    elevation: 16,
+    shadowOpacity: 10,
+    elevation: 4,
     marginTop: wp("7%"),
     borderColor: "#E1E8EB",
     borderWidth: 1.75,
@@ -241,7 +244,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     // marginTop: 5,
     fontSize: hp('2.9%'),
-    fontWeight: "bold",
-    marginLeft:hp('4%')
+    marginLeft:hp('4%'),
+    color: "white",
   },
 });

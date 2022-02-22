@@ -226,7 +226,7 @@ router.post('/updateToken', async (req: Request, res: Response, next: NextFuncti
 
         let upDateThis: any = {}
 
-        if (acesstoken) { upDateThis.acesstoken = acesstoken }
+        if (acesstoken) { upDateThis.acesstoken = acesstoken.trim() }
 
         let tokenUpdate = await Truck.update(upDateThis, {
             where: {
