@@ -2,6 +2,10 @@
   "expo": {
     "name": "Fleet",
     "slug": "Fleet",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon2.png",
@@ -21,8 +25,15 @@
     },
     "android": {
       "adaptiveIcon": {
+        "package":"com.loricode.fleet",
+        "versionCode": 1,
         "foregroundImage": "./assets/icon2.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps":{
+          "apiKey":"AIzaSyCctmpoWkqc4Te99YNkI0hgsyVfpbEci5M"
+        }
       }
     },
     "web": {
