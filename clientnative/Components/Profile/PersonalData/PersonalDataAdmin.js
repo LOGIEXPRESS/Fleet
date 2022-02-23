@@ -40,79 +40,111 @@ const PersonalDataAdmin = () => {
   // }, [data]);
 
   return (
-  <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={{    position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  height: "100%",}}>
-    <View style={styles.container}>
-      <View showsVerticalScrollIndicator={false}>
-        <View style={{marginTop:hp("-10%"),}}>
-      <HeaderBar  screen={'null'} />
-      </View>
-      <View>
-        
-      {/* <HeaderBar  screen={'null'}/> */}
-        <Text style={styles.perfilTex}>Datos personales</Text>
-      </View>
-        
-        <View    
+    <LinearGradient
+      colors={["rgba(41,63,173,1)", "rgba(12,0,58,1)"]}
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        height: "100%",
+      }}
+      start={{ x: 1, y: 0.5 }}
+      end={{ x: 0, y: 0.5 }}
+    >
+      <View style={styles.container}>
+        <View showsVerticalScrollIndicator={false}>
+          <View
           // style={{
           //   flexDirection: "column",
           //   alignContent: "center",
           //   // marginLeft: wp('5%'),
           //}}
-        >
-          <View style={styles.containerImg} >
-            <Image
-            // resizeMode="contain"
-              source={{
-                uri:
-                  data?.photo === null || data?.photo === "url"
-                    // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
-                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png" 
-                    : data?.photo
-                    
-                    
-              }}
-              style={styles.userImg}
-            />
-          </View>
-          <View style={styles.boxDatos} >
-            <Text style={styles.userName}>
-              {/* Matias Vila */}
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
-            </Text>
-            <Text style={styles.userName2}>
-            {/* Administrador de RadioTruck */}
-            Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)} 
-            
-          </Text>
-          </View>
-        </View>
-        <View style={styles.botones}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("EditProfileCarrier")}
           >
-            <Icon4 name="user-edit" style={styles.icons} />
-            <Text style={styles.textBtn}>Editar perfil</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate("ChangePassword")}
-          >
-            <Icon name="key" style={styles.icons} />
-            <Text style={styles.textBtn}>Cambiar contraseña</Text>
-          </TouchableOpacity>
+            <View style={styles.containerImg}>
+              <Image
+                // resizeMode="contain"
+                source={{
+                  uri:
+                    data?.photo === null || data?.photo === "url"
+                      ? // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                        "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                      : data?.photo,
+                }}
+                style={styles.userImg}
+              />
+            </View>
+            <View style={styles.boxDatos}>
+              <Text style={styles.userName}>
+                {/* Matias Vila */}
+                {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}{" "}
+                {data?.lastName.charAt(0).toUpperCase() +
+                  data?.lastName.slice(1)}
+              </Text>
+              <Text style={styles.userName2}>
+                {/* Administrador de RadioTruck */}
+                Administrador de{" "}
+                {data?.business.charAt(0).toUpperCase() +
+                  data?.business.slice(1)}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.botones}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate("EditProfileCarrier")}
+            >
+              <LinearGradient
+                colors={["transparent", "#ff1c49"]}
+                style={{
+                  ...styles.btn,
+                  width: "100%",
+                  height: "100%",
+                }}
+                start={{ x: 1, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+              >
+                <Icon4 name="user-edit" style={styles.icons} />
+                <Text style={styles.textBtn}>Editar perfil</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigation.navigate("ChangePassword")}
+            >
+              <LinearGradient
+                colors={["transparent", "#ff1c49"]}
+                style={{
+                  ...styles.btn,
+                  width: "100%",
+                  height: "100%",
+                }}
+                start={{ x: 1, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+              >
+                <Icon name="key" style={styles.icons} />
+                <Text style={styles.textBtn}>Cambiar contraseña</Text>
+              </LinearGradient>
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
-          <Icon name="log-out" style={styles.icons} />
-            <Text style={styles.textBtn}>Cerrar sesión</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
+            <LinearGradient
+                colors={["transparent", "#ff1c49"]}
+                style={{
+                  ...styles.btn,
+                  width: "100%",
+                  height: "100%",
+                }}
+                start={{ x: 1, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+              >
+              <Icon name="log-out" style={styles.icons} />
+              <Text style={styles.textBtn}>Cerrar sesión</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
     </LinearGradient>
   );
 };
@@ -163,7 +195,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     fontSize: hp("4.8%"),
     fontWeight: "bold",
-    textDecorationColor: "#ff1c49",
+    textDecorationColor: "#ada012",
     marginBottom:hp("2%"),
   },
   userImg: {
@@ -177,6 +209,7 @@ const styles = StyleSheet.create({
     fontSize: hp('3.5%'),
     // fontWeight: "bold",
     alignSelf:'center',
+    color:"white",
   },
   boxDatos: {
     // flexDirection: "column",
@@ -192,7 +225,7 @@ const styles = StyleSheet.create({
   btn: {
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "#ff1c49",
+    //backgroundColor: "#ada012",
     width: wp("88%"),
     height: hp("8%"),
     //padding: wp('2.5%'),
@@ -222,6 +255,6 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     // marginTop: 7,
     // marginBottom: wp("3%"),
-    color: "#ff1c49"
+    color: "#ada012"
   },
 });
