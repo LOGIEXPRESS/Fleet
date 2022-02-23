@@ -24,15 +24,15 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.loricode.fleet",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "package":"com.loricode.fleet",
-        "versionCode": 1,
         "foregroundImage": "./assets/icon2.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {
-        "googleMaps":{
-          "apiKey":"AIzaSyCctmpoWkqc4Te99YNkI0hgsyVfpbEci5M"
+        "googleMaps": {
+          "apiKey": "AIzaSyCctmpoWkqc4Te99YNkI0hgsyVfpbEci5M"
         }
       }
     },
