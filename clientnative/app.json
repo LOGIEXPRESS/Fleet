@@ -38,6 +38,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "This is an app mobile which it was design to management trucks into a company.",
+    "githubUrl": "https://github.com/LOGIEXPRESS/Fleet"
   }
 }
