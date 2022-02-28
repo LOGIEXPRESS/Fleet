@@ -4,6 +4,7 @@ import { StripeProvider } from "@stripe/stripe-react-native";
 import { store } from "./Redux/store/index.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import  Header  from "./Components/Header/Header";
 import Login from "./Components/Home/Login";
 import SingUp from "./Components/Home/SingUp";
 import ProfileCarrier from "./Components/Profile/ProfileCarrier";
@@ -37,6 +38,7 @@ import AdmHistoryCarrier from "./Components/Historial de viaje/AdmHistoryCarrier
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 ]);
+
 
 const Stack = createStackNavigator();
 
@@ -115,7 +117,12 @@ const App = () => {
             <Stack.Screen
               name="PersonalDataAdmin"
               component={PersonalDataAdmin}
-              options={{ headerShown: false }}
+              options={{
+                headerTitle: () => <Header />,
+                headerStyle: {
+                  backgroundColor: "#ff1c49",
+                },
+              }}
             />
             <Stack.Screen
               name="QuotTravel"

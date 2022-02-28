@@ -15,6 +15,7 @@ import HeaderBar from "../../Utils/HeaderBar";
 import * as SecureStore from "expo-secure-store";
 import Icon4 from "react-native-vector-icons/FontAwesome5";
 import Icon from "react-native-vector-icons/Ionicons";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PersonalDataAdmin = () => {
   const data = useSelector((store) => store.responseLog);
@@ -41,47 +42,37 @@ const PersonalDataAdmin = () => {
   return (
     <View style={styles.container}>
       <View showsVerticalScrollIndicator={false}>
-        <View style={{marginTop:hp("-10%"),}}>
-      <HeaderBar  screen={'null'} />
-      </View>
-      <View>
-        
-      {/* <HeaderBar  screen={'null'}/> */}
-        <Text style={styles.perfilTex}>Datos personales</Text>
-      </View>
-        
-        <View    
-          // style={{
-          //   flexDirection: "column",
-          //   alignContent: "center",
-          //   // marginLeft: wp('5%'),
-          //}}
+        <View
+        // style={{
+        //   flexDirection: "column",
+        //   alignContent: "center",
+        //   // marginLeft: wp('5%'),
+        //}}
         >
-          <View style={styles.containerImg} >
+          <View style={styles.containerImg}>
             <Image
-            // resizeMode="contain"
+              // resizeMode="contain"
               source={{
                 uri:
                   data?.photo === null || data?.photo === "url"
-                    // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
-                    ? "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png" 
-                    : data?.photo
-                    
-                    
+                    ? // ? "https://memoriamanuscrita.bnp.gob.pe/img/default-user.jpg"
+                      "https://www.radiotruck.sk/wp-content/uploads/2021/05/cropped-logo-radio-truckmale-1.png"
+                    : data?.photo,
               }}
               style={styles.userImg}
             />
           </View>
-          <View style={styles.boxDatos} >
+          <View style={styles.boxDatos}>
             <Text style={styles.userName}>
               {/* Matias Vila */}
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)} {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1)}{" "}
+              {data?.lastName.charAt(0).toUpperCase() + data?.lastName.slice(1)}
             </Text>
             <Text style={styles.userName2}>
-            {/* Administrador de RadioTruck */}
-            Administrador de {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)} 
-            
-          </Text>
+              {/* Administrador de RadioTruck */}
+              Administrador de{" "}
+              {data?.business.charAt(0).toUpperCase() + data?.business.slice(1)}
+            </Text>
           </View>
         </View>
         <View style={styles.botones}>
@@ -89,20 +80,41 @@ const PersonalDataAdmin = () => {
             style={styles.btn}
             onPress={() => navigation.navigate("EditProfileCarrier")}
           >
-            <Icon4 name="user-edit" style={styles.icons} />
-            <Text style={styles.textBtn}>Editar perfil</Text>
+            <LinearGradient
+              colors={["#f595a7", "#f04363", "#ff1c49"]}
+              style={styles.btn}
+              start={{ x: 1, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+            >
+              <Icon4 name="user-edit" style={styles.icons} />
+              <Text style={styles.textBtn}>Editar perfil</Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate("ChangePassword")}
           >
-            <Icon name="key" style={styles.icons} />
-            <Text style={styles.textBtn}>Cambiar contraseña</Text>
+            <LinearGradient
+              colors={["#f595a7", "#f04363", "#ff1c49"]}
+              style={styles.btn}
+              start={{ x: 1, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+            >
+              <Icon name="key" style={styles.icons} />
+              <Text style={styles.textBtn}>Cambiar contraseña</Text>
+            </LinearGradient>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btn} onPress={cerrarsesion}>
-          <Icon name="log-out" style={styles.icons} />
-            <Text style={styles.textBtn}>Cerrar sesión</Text>
+            <LinearGradient
+              colors={["#f595a7", "#f04363", "#ff1c49"]}
+              style={styles.btn}
+              start={{ x: 1, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+            >
+              <Icon name="log-out" style={styles.icons} />
+              <Text style={styles.textBtn}>Cerrar sesión</Text>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
@@ -118,7 +130,8 @@ const styles = StyleSheet.create({
     height: 170,
     borderRadius: 85,
     overflow: "hidden",
-    marginLeft: wp ("22%"),
+    marginLeft: "auto",
+    marginRight: "auto",
     marginTop: 8,
     borderColor: "#E1E8EB",
     borderWidth: 1,
@@ -155,7 +168,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     fontSize: hp("4.8%"),
     fontWeight: "bold",
-    textDecorationColor: "#ff1c49",
+    textDecorationColor: "#ada012",
     marginBottom:hp("2%"),
   },
   userImg: {
@@ -169,6 +182,7 @@ const styles = StyleSheet.create({
     fontSize: hp('3.5%'),
     // fontWeight: "bold",
     alignSelf:'center',
+    color:"black",
   },
   boxDatos: {
     // flexDirection: "column",
@@ -184,7 +198,7 @@ const styles = StyleSheet.create({
   btn: {
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "#ff1c49",
+    //backgroundColor: "#ada012",
     width: wp("88%"),
     height: hp("8%"),
     //padding: wp('2.5%'),
@@ -194,7 +208,7 @@ const styles = StyleSheet.create({
     elevation: 15,
     // borderColor: "black",
     // borderWidth: hp("0.5%"),
-    alignItems: "center"
+    alignItems: "center",
   },
   textBtn: {
     color: "white",

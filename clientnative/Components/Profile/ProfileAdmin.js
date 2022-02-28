@@ -20,6 +20,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import * as SecureStore from "expo-secure-store";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ProfileAdmin = () => {
   // const login = useSelector((store) => store.login);
@@ -124,7 +125,12 @@ const ProfileAdmin = () => {
             <Text style={styles.userBtnTxt3}>Cotizar viaje</Text>
             {/* <Icon name="chevron-forward-outline" style={styles.icons4} /> */}
           </TouchableOpacity>
-
+          <LinearGradient
+              colors={["#f595a7", "#f04363", "#ff1c49"]}
+              style={styles.btnText}
+              start={{ x: 1, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+            >
           <TouchableOpacity
             style={styles.btn2}
             // onPress={() => handleRequest(data?.idRole)}
@@ -138,8 +144,9 @@ const ProfileAdmin = () => {
             /> */}
             <Text style={styles.userBtnTxt2}>Agregar Viaje</Text>
           </TouchableOpacity>
+          </LinearGradient>
         </View>
-      
+
     </View>
   );
 };
@@ -212,18 +219,18 @@ const styles = StyleSheet.create({
     borderWidth: 1.75,
   },
   btn2: {
-    alignContent: "center",
+    //alignContent: "center",
     alignSelf: "center",
-    // flexDirection: "row",
-    justifyContent: "center",
-    backgroundColor: "#ff1c49",
+    // // flexDirection: "row",
+    // justifyContent: "center",
+    // backgroundColor: "#ff1c49",
     width: wp("88%"),
     height: hp("8.5%"),
-    padding: wp("5%"),
+    // padding: wp("5%"),
     borderRadius: wp("4%"),
-    shadowOpacity: 5,
-    elevation: 2,
-    marginTop: wp("7.5%"),
+    // shadowOpacity: 5,
+    // elevation: 2,
+    // marginTop: wp("7.5%"),
   },
   userImg: {
     // height: hp('30%'),

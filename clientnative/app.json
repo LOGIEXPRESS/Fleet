@@ -2,6 +2,10 @@
   "expo": {
     "name": "Fleet",
     "slug": "Fleet",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon2.png",
@@ -20,15 +24,22 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.loricode.fleet",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon2.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCctmpoWkqc4Te99YNkI0hgsyVfpbEci5M"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "",
-    "githubUrl": "https://github.com/LOGIEXPRESS/Fleet/tree/Luis"
+    "description": "This is an app mobile which it was design to management trucks into a company.",
+    "githubUrl": "https://github.com/LOGIEXPRESS/Fleet"
   }
 }
