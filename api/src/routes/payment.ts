@@ -30,23 +30,6 @@ router.post("/mercadopago", async (req, res) => {
   // let carrier = await 
   console.log("ESTO ES REQ.BODY", req.body);
   try {
-
-    // let idTruck= await Truck.findOne({
-    //   where:{
-    //     SignupId:id
-    //   }
-    // })
-
-    // console.log('TRUCK',idTruck)
-    // if(idTruck){
-    //   await Payment.update({status:true},{where:{TruckId:idTruck.id}})
-    //   await Travel.update({finishedTravel:'finish',statusPay:'pay'},{where:{truckId:idTruck.id}})
-
-    // }
-
-
-
-
     mercadopago.configure({
       access_token: access_token,
     });
@@ -87,28 +70,28 @@ router.post("/mercadopago", async (req, res) => {
 });
 
   
-router.get('/checkout', async (req: Request, res: Response) => {
-  let {id}=req.query;
-  console.log("#####line 46#####");
-  console.log(id);
-  let status:any;
-  try{
+// router.get('/checkout', async (req: Request, res: Response) => {
+//   let {id}=req.query;
+//   console.log("#####line 46#####");
+//   console.log(id);
+//   let status:any;
+//   try{
 
 
-  const resp= await   axios
-        .get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
+//   const resp= await   axios
+//         .get('https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js?data-preference-id='+id, {
 
-    })
-    .then((res) => {
-      console.log(res.statusText)
-        status=res.statusText;
-    });
-    res.send(status);
-  }
-catch(err){
-  console.error(err)
-}
-});
+//     })
+//     .then((res) => {
+//       console.log(res.statusText)
+//         status=res.statusText;
+//     });
+//     res.send(status);
+//   }
+// catch(err){
+//   console.error(err)
+// }
+// });
 
 
 
