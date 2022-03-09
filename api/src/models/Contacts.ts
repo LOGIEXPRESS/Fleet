@@ -5,8 +5,8 @@ import {DataType} from 'sequelize-typescript';
 @Table
 export class Contacts extends Model {
   @IsUUID(4)
-  @Column({ primaryKey: true , autoIncrement: true})
-  id!: string;
+  @Column({ type: DataType.INTEGER, primaryKey: true , autoIncrement: true})
+  id!: number;
 
   @Column
   name!: string;
