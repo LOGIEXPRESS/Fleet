@@ -14,6 +14,7 @@ import logout from './logout'
 import payment from './payment'
 import recoverPass from './recoverPassword'
 import messaging  from './messaging';
+import contact  from './contacts';
  
 const router = Router();
 
@@ -49,5 +50,7 @@ router.use('/', review)
 router.use('/',recoverPass)
 
 router.use('/', payment)
+
+router.use('/', contact )
 
 export default router;
