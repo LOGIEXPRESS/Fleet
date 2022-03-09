@@ -1,6 +1,6 @@
 import { Model, Column, Table, IsUUID} from 'sequelize-typescript'
 
-
+import {DataType} from 'sequelize-typescript';
 
 @Table
 export class Payment extends Model {
@@ -14,7 +14,7 @@ export class Payment extends Model {
   @Column
   email!: string;
 
-  @Column
-  description!: Text;
+  @Column(DataType.TEXT)
+  description!: string;
 
 }
