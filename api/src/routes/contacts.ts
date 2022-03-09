@@ -17,7 +17,7 @@ router.post(
         description: description,
       });
 
-      let contentHTML = `<h1>Nuevo contacto en el portafoli !</h1>
+      let contentHTML = `<h1>Nuevo contacto en el portafolio !</h1>
         <h2>${name} te ha escrito</h2> 
         <p> Este es su mensaje: ${description}</p>
         <h2>Escribele a su correo ${email}</h2>`               
