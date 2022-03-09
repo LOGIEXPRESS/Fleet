@@ -1,21 +1,53 @@
-import { Response , Request , Router , NextFunction } from "express";
-
+import { Response, Request, Router, NextFunction } from "express";
+const nodemailer = require("nodemailer");
 import { Contacts } from "../models/Contacts";
 
-const router = Router()
+const router = Router();
 
-router.post('/contact',async (req:Request , res: Response, next: NextFunction) => {
+router.post(
+  "/contact",
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const { name, email, description } = req.body;
+      console.log("REQ.Body", req.body);
 
-        const { name , email , description} = req.body
-        console.log("REQ.Body", req.body);
-        
-        await Contacts.create({ name: name , email: email , description: description})
+      await Contacts.create({
+        name: name,
+        email: email,
+        description: description,
+      });
 
-        res.json({menssage:'contact created'})
+      let contentHTML = `<h1>Nuevo contacto en el portafoli !</h1>
+        <h2>${name} te ha escrito</h2> 
+        <p> Este es su mensaje: ${description}</p>
+        <h2>Escribele a su correo ${email}</h2>`               
+
+
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true, // upgrade later with STARTTLS
+            auth: {
+                user: "rluis747@gmail.com",
+                pass: "ilidanstomrage3",
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+
+        await transporter.sendMail({
+            from: `${email}`, // sender address
+            to: 'rluis747@gmail.com', // list of receivers
+            subject: "Correo de contacto en portafolio", // Subject line
+            text: "Hello world?", // plain text body
+            html: contentHTML, // html body
+        });
+      res.json({ menssage: "contact created" });
     } catch (error) {
-        next(error)
+      next(error);
     }
-})
+  }
+);
 
-export default router
+export default router;
