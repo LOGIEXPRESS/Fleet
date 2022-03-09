@@ -28,8 +28,8 @@ router.post(
             port: 465,
             secure: true, // upgrade later with STARTTLS
             auth: {
-                user: "rluis747@gmail.com",
-                pass: "ilidanstomrage3",
+                user: "logiexpressfleet@gmail.com",
+                pass: "boilbfullbjrotpf",
             },
             tls: {
                 rejectUnauthorized: false
