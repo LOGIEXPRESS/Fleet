@@ -3,7 +3,7 @@ import { Model, Column, Table, IsUUID} from 'sequelize-typescript'
 import {DataType} from 'sequelize-typescript';
 
 @Table
-export class Payment extends Model {
+export class Contacts extends Model {
   @IsUUID(4)
   @Column({ primaryKey: true })
   id!: string;
