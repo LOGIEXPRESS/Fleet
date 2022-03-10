@@ -8,18 +8,18 @@ router.post(
   "/contact",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { name, email, description } = req.body;
+      const { name, email, message } = req.body;
       console.log("REQ.Body", req.body);
 
       await Contacts.create({
         name: name,
         email: email,
-        description: description,
+        description: message,
       });
 
       let contentHTML = `<h1>Nuevo contacto en el portafolio !</h1>
         <h2>${name} te ha escrito</h2> 
-        <p> Este es su mensaje: ${description}</p>
+        <p> Este es su mensaje: ${message}</p>
         <h2>Escribele a su correo ${email}</h2>`               
 
 
