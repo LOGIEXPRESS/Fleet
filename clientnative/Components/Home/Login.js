@@ -1,5 +1,8 @@
-import React, { useState, useEffect, useRef,useMemo } from "react";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/core";
 import {
   Text,
@@ -13,15 +16,14 @@ import {
   Button,
   Modal,
   Alert,
-  BackHandler
+  BackHandler,
 } from "react-native";
 import { logiar } from "../../Redux/actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import * as SecureStore from "expo-secure-store";
-import SimpleModal5 from './../Alerts/Login/SimpleModalmail';
-import SimpleModal6 from './../Alerts/Login/SimpleModalpass';
-import SimpleModal30 from './../Alerts/Login/SimpleModallog';
-
+import SimpleModal5 from "./../Alerts/Login/SimpleModalmail";
+import SimpleModal6 from "./../Alerts/Login/SimpleModalpass";
+import SimpleModal30 from "./../Alerts/Login/SimpleModallog";
 
 const Login = () => {
   const [log, setLog] = useState({
@@ -33,24 +35,19 @@ const Login = () => {
   const login = useSelector((store) => store.responseLog);
   const lastNameRef = useRef();
 
-
-
-  
-  useEffect(async() => {
-
-      async function getValueFor() {
+  useEffect(async () => {
+    async function getValueFor() {
       // SE CONSULTA EL VALUE DEL STORE, CON EL KEY
       let result = await SecureStore.getItemAsync("token");
       if (result !== "(result)") {
-        return true
-       
+        return true;
       } else {
-        return false
+        return false;
       }
     }
-    
-    console.log("se activa el login?",login)
-    
+
+    console.log("se activa el login?", login);
+
     if (getValueFor()) {
       if (login?.business !== undefined) {
         console.log("que tiene loginbusiness", login?.business);
@@ -69,13 +66,12 @@ const Login = () => {
         }
       }
     }
-    if(login?.role === 1){
-      console.log("llego acá al 1")
-      changeModalVisible30(true)
+    if (login?.role === 1) {
+      console.log("llego acá al 1");
+      changeModalVisible30(true);
       // Alert.alert('Debe ingresar datos')
       // navigation.navigate('Login')
     }
-    
   }, [login]);
 
   //para desavilitar volver atras del cel
@@ -84,76 +80,71 @@ const Login = () => {
   //   return () => backHandler.remove()
   // }, [])
 
-
   async function save(key, value) {
     //FUNCION PARA GUARDAR LA INFO EN EL STORE, KEY = token , VALUE=el string del token
-    try{
+    try {
       await SecureStore.setItemAsync(key, value);
-    } catch(error){
-      console.log('error', error.response)
+    } catch (error) {
+      console.log("error", error.response);
     }
-    }  
+  }
   const nuevotoken = useSelector((store) => store.token);
   useEffect(() => {
-    if(nuevotoken !== ""){
-    console.log("verificando, que se envia", nuevotoken); 
-    save("token", nuevotoken);
-    console.log("se guarda el token?", nuevotoken)
+    if (nuevotoken !== "") {
+      console.log("verificando, que se envia", nuevotoken);
+      save("token", nuevotoken);
+      console.log("se guarda el token?", nuevotoken);
     }
   }, [nuevotoken]);
 
   const disabledSummit = useMemo(() => {
-    if (
-      log.contraseña < 0 && log.mail<0
-    ) {
+    if (log.contraseña < 0 && log.mail < 0) {
       return true;
     } else {
       return false;
     }
-  }, [log])
+  }, [log]);
 
-      // COMBINACION MAIL Y PASS MAL
-      const [isModalVisible30, setisModalVisible30] = useState(false);
-      const [chooseData30, setchooseData30] = useState();
-    
-      const changeModalVisible30 = (bool) => {
-        setisModalVisible30(bool);
-      };
-    
-      const setData30 = (data) => {
-        setchooseData30(data);
-      };
-    
-       //MAIL MAL INGRESADO
-       const [isModalVisible5, setisModalVisible5] = useState(false);
-       const [chooseData5, setchooseData5] = useState();
-     
-       const changeModalVisible5 = (bool) => {
-         setisModalVisible5(bool);
-       };
-     
-       const setData5 = (data) => {
-         setchooseData5(data);
-       };
-     
-        // CONTRASEÑA MAL INGRESADA
-      
-        const [isModalVisible6, setisModalVisible6] = useState(false);
-        const [chooseData6, setchooseData6] = useState();
-      
-        const changeModalVisible6 = (bool) => {
-          setisModalVisible6(bool);
-        };
-        const setData6 = (data) => {
-          setchooseData6(data);
-        };
-    
-  
+  // COMBINACION MAIL Y PASS MAL
+  const [isModalVisible30, setisModalVisible30] = useState(false);
+  const [chooseData30, setchooseData30] = useState();
 
-  const navegar = () =>{
-    navigation.navigate("RecoverPassword")
-  }
-    
+  const changeModalVisible30 = (bool) => {
+    setisModalVisible30(bool);
+  };
+
+  const setData30 = (data) => {
+    setchooseData30(data);
+  };
+
+  //MAIL MAL INGRESADO
+  const [isModalVisible5, setisModalVisible5] = useState(false);
+  const [chooseData5, setchooseData5] = useState();
+
+  const changeModalVisible5 = (bool) => {
+    setisModalVisible5(bool);
+  };
+
+  const setData5 = (data) => {
+    setchooseData5(data);
+  };
+
+  // CONTRASEÑA MAL INGRESADA
+
+  const [isModalVisible6, setisModalVisible6] = useState(false);
+  const [chooseData6, setchooseData6] = useState();
+
+  const changeModalVisible6 = (bool) => {
+    setisModalVisible6(bool);
+  };
+  const setData6 = (data) => {
+    setchooseData6(data);
+  };
+
+  const navegar = () => {
+    navigation.navigate("RecoverPassword");
+  };
+
   const handelChangeMail = (email) => {
     setLog({
       ...log,
@@ -166,7 +157,7 @@ const Login = () => {
       contraseña: pass,
     });
   };
-      
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // en un objeto pongo lo que tengo en el estado inicial
@@ -178,11 +169,11 @@ const Login = () => {
     //Validaciones:
 
     if (!obj.eMail.includes("@")) {
-      changeModalVisible5(true)
+      changeModalVisible5(true);
       return;
     }
     if (!obj.password) {
-      changeModalVisible6(true)
+      changeModalVisible6(true);
       return;
     }
 
@@ -195,8 +186,6 @@ const Login = () => {
 
     //cuando se cumpla que respuesta != null
     //haga un console.log(respuesta)
-
-  
   };
 
   useEffect(() => {
@@ -210,7 +199,7 @@ const Login = () => {
     getValueFor();
   }, []);
 
-return (
+  return (
     //Container Start
     <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffffff" }}
@@ -219,27 +208,28 @@ return (
       {/* Brand View */}
       <ImageBackground
         source={require("./logo.png")}
-        resizeMode= "contain"
+        resizeMode="contain"
         style={{
-            display:'flex',
-            marginTop:  hp('-13%'),
-          height: hp('60%') ,
-          width: wp('110%') ,
+          display: "flex",
+          marginTop: hp("-13%"),
+          height: hp("60%"),
+          width: wp("110%"),
           alignSelf: "center",
         }}
-      >
-      </ImageBackground>
+      ></ImageBackground>
       {/* Botton View */}
       <View style={styles.bottonView}>
         {/* Welcome View */}
         <View style={{ padding: 20, display: "flex", alignItems: "center" }}>
-          <Text style={{ color: "#151f27", fontSize: 34,fontWeight: '600', }}>Bienvenido</Text>
+          <Text style={{ color: "#151f27", fontSize: 34, fontWeight: "600" }}>
+            Bienvenido
+          </Text>
         </View>
         {/* inputs */}
         <View
           style={styles.FormView}
           // onChange={(e) => ChangeInput(e)}
-        //   onSubmit={(e) => handleSubmit(e)}
+          //   onSubmit={(e) => handleSubmit(e)}
         >
           <TextInput
             value={log.mail}
@@ -247,16 +237,13 @@ return (
             name="mail"
             placeholder="Dirección de Mail*"
             style={styles.TextInput}
-            autoCapitalize = 'none'
-            
+            autoCapitalize="none"
             autoFocus={true}
-
             returnKeyType="next"
             onSubmitEditing={() => {
               lastNameRef.current.focus();
             }}
             blurOnSubmit={false}
-            
           ></TextInput>
           <TextInput
             value={log.contraseña}
@@ -265,64 +252,60 @@ return (
             placeholder="Contraseña*"
             secureTextEntry={true}
             style={styles.TextInput}
-            autoCapitalize = 'none'
-            ref={lastNameRef} onSubmitEditing={() => {
-              return console.log('done')
-          }}
-           
-          
+            autoCapitalize="none"
+            ref={lastNameRef}
+            onSubmitEditing={() => {
+              return console.log("done");
+            }}
           ></TextInput>
           <TouchableOpacity style={styles.Button} disabled={disabledSummit}>
             <Text style={styles.ButtonText} onPress={handleSubmit}>
               Iniciar Sesión
             </Text>
             <Modal
-                  transparent={true}
-                  animationType="fade"
-                  visible={isModalVisible5}
-                  nRequestClose={() => changeModalVisible5(false)}
-                >
-                  <SimpleModal5
-                    changeModalVisible5={changeModalVisible5}
-                    setData5={setData5}
-                  />                  
-                  </Modal>
-                  <Modal
-                  transparent={true}
-                  animationType="fade"
-                  visible={isModalVisible6}
-                  nRequestClose={() => changeModalVisible6(false)}
-                >
-                  <SimpleModal6
-                    changeModalVisible6={changeModalVisible6}
-                    setData6={setData6}
-                  />                  
-                  </Modal>
+              transparent={true}
+              animationType="fade"
+              visible={isModalVisible5}
+              nRequestClose={() => changeModalVisible5(false)}
+            >
+              <SimpleModal5
+                changeModalVisible5={changeModalVisible5}
+                setData5={setData5}
+              />
+            </Modal>
             <Modal
-                  transparent={true}
-                  animationType="fade"
-                  visible={isModalVisible30}
-                  nRequestClose={() => changeModalVisible30(false)}
-                >
-                  <SimpleModal30
-                    changeModalVisible30={changeModalVisible30}
-                    setData30={setData30}
-                  />
-                  
-                  </Modal>
-
-
+              transparent={true}
+              animationType="fade"
+              visible={isModalVisible6}
+              nRequestClose={() => changeModalVisible6(false)}
+            >
+              <SimpleModal6
+                changeModalVisible6={changeModalVisible6}
+                setData6={setData6}
+              />
+            </Modal>
+            <Modal
+              transparent={true}
+              animationType="fade"
+              visible={isModalVisible30}
+              nRequestClose={() => changeModalVisible30(false)}
+            >
+              <SimpleModal30
+                changeModalVisible30={changeModalVisible30}
+                setData30={setData30}
+              />
+            </Modal>
           </TouchableOpacity>
         </View>
         <View style={styles.preg}>
           <Text style={styles.pregunta}>Olvidaste tu contraseña? </Text>
         </View>
 
-        <TouchableOpacity style={styles.TextButton}  onPress={navegar}>
+        <TouchableOpacity style={styles.TextButton} onPress={navegar}>
           <Text style={styles.SingUpText}>Recuperarla Ahora</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView> 
+    </ScrollView>
     // Container End
   );
 };
